@@ -12,8 +12,10 @@ extension BuildContextExtansion on BuildContext {
 
   //TextStyles
   TextStyle? get headLineLarge => textTheme.headlineLarge;
+  TextStyle? get headLineSmall => textTheme.headlineSmall;
   TextStyle? get labelLarge => textTheme.labelLarge;
   TextStyle? get labelMedium => textTheme.labelMedium;
   TextStyle? get labelSmall => textTheme.labelSmall;
   TextStyle? get clickableLabelSmall => textTheme.titleSmall;
+  TextStyle? get errorLabelSmall => textTheme.bodySmall;
 }

@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/core/constants/app_string.dart';
+import 'package:take_data_and_update_project/core/route/app_router.dart';
 import 'package:take_data_and_update_project/core/util/app_padding.dart';
 import 'package:take_data_and_update_project/core/util/app_spacer.dart';
 import 'package:take_data_and_update_project/core/util/extensions/build_context_extension.dart';
@@ -8,6 +10,7 @@ import 'package:take_data_and_update_project/src/features/auth/presentation/auth
 import 'package:take_data_and_update_project/src/features/auth/presentation/logo_divider_view.dart';
 import 'package:take_data_and_update_project/src/features/common/main_container_decoration.dart';
 
+@RoutePage()
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -39,10 +42,11 @@ class _LoginPageState extends State<LoginPage> {
                   const LogoDividerView(),
                   AppSpacer.vertical.space100,
                   Text(
-                    AppString.login,
+                    AppString.loginUpperCase,
                     style: context.headLineLarge,
                   ),
                   AppSpacer.vertical.space20,
+                  //TODO: EmailAndPhoneNumber validate and controller config
                   AuthTextFormField(
                     hintText: AppString.emailPhonenumber,
                     validator: (value) {
@@ -54,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                   AppSpacer.vertical.space20,
+                  //TODO: Password validate and controller config
                   AuthTextFormField(
                       hintText: AppString.password,
                       validator: (value) {
@@ -68,10 +73,12 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       if (!LoginPage._formKey.currentState!.validate()) {
                         return debugPrint("Olmadı");
+                      } else {
+                        context.router.replace(const HomeRoute());
                       }
                     },
                     child: const Text(
-                      AppString.login,
+                      AppString.loginUpperCase,
                     ),
                   ),
                   AppSpacer.vertical.space10,
@@ -85,6 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             SizedBox(
                               width: Checkbox.width.w,
+                              //TODO: CheckBox func
                               child: Checkbox(
                                 value: value,
                                 onChanged: (bool? value) {
@@ -124,10 +132,10 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          //TODO: Sign Up route
+                          context.router.replace(const RegisterRoute());
                         },
                         child: Text(
-                          AppString.singUp,
+                          AppString.signUp,
                           style: context.clickableLabelSmall,
                         ),
                       ),

@@ -30,31 +30,42 @@ class LightTheme {
   static String get _appFont => "Inter";
 
   static TextTheme get _appTextTheme => const TextTheme(
-      headlineLarge: TextStyle(
-        color: blackColor,
-        fontSize: 32,
-        fontWeight: FontWeight.w500,
-      ),
-      labelLarge: TextStyle(
-        color: secondaryColor,
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-      ),
-      labelMedium: TextStyle(
-        color: whiteColor,
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
-      labelSmall: TextStyle(
-        color: tertiarityColor,
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-      ),
-      titleSmall: TextStyle(
-        color: clickebleColor,
-        fontSize: 13,
-        fontWeight: FontWeight.w400,
-      ));
+        headlineLarge: TextStyle(
+          color: blackColor,
+          fontSize: 32,
+          fontWeight: FontWeight.w500,
+        ),
+        headlineSmall: TextStyle(
+          color: whiteColor,
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
+        labelLarge: TextStyle(
+          color: secondaryColor,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
+        labelMedium: TextStyle(
+          color: whiteColor,
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+        ),
+        labelSmall: TextStyle(
+          color: tertiarityColor,
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+        ),
+        titleSmall: TextStyle(
+          color: clickebleColor,
+          fontSize: 13,
+          fontWeight: FontWeight.w400,
+        ),
+        bodySmall: TextStyle(
+          color: errorColor,
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+        ),
+      );
 
   static OutlineInputBorder _outlineInputBorder(Color color) {
     return OutlineInputBorder(
@@ -68,6 +79,7 @@ class LightTheme {
       focusedBorder: _outlineInputBorder(tertiarityColor),
       errorBorder: _outlineInputBorder(errorColor),
       focusedErrorBorder: _outlineInputBorder(onErrorColor),
+      errorStyle: _appTextTheme.bodySmall,
       filled: true,
       fillColor: fourthColor,
       labelStyle: _appTextTheme.labelLarge,
@@ -97,9 +109,27 @@ class LightTheme {
         ),
       );
 
+  static AppBarTheme get _appBarTheme => AppBarTheme(
+        color: homeBackgroundColor,
+        titleTextStyle: _appTextTheme.headlineSmall,
+        centerTitle: true,
+        actionsIconTheme: IconThemeData(color: secondaryColor, size: 30.sp),
+        iconTheme: IconThemeData(color: secondaryColor, size: 30.sp),
+      );
+
+  static DrawerThemeData get _drawerThemeData => DrawerThemeData(
+        backgroundColor: homeBackgroundColor,
+        width: 242.w,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(width: 10.sp, color: secondaryColor),
+        ),
+      );
+
   static ThemeData get themeData {
     return ThemeData(
         scaffoldBackgroundColor: homeBackgroundColor,
+        appBarTheme: _appBarTheme,
+        drawerTheme: _drawerThemeData,
         colorScheme: _colorScheme,
         fontFamily: _appFont,
         textTheme: _appTextTheme,

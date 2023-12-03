@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:take_data_and_update_project/core/route/app_router.dart';
 import 'package:take_data_and_update_project/core/theme/app_theme.dart';
-import 'package:take_data_and_update_project/src/features/auth/presentation/login_page/login_page.dart';
 
 class AppWidget extends StatelessWidget {
-  const AppWidget({super.key});
+  AppWidget({super.key});
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +17,11 @@ class AppWidget extends StatelessWidget {
         SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.dark));
-        return MaterialApp(
+        return MaterialApp.router(
           title: "Graduating Project",
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
-          home: LoginPage(),
+          routerConfig: _appRouter.config(),
         );
       },
     );
