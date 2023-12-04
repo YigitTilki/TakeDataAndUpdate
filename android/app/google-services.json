@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "283933501608",
+    "project_id": "takedataandupdateproject",
+    "storage_bucket": "takedataandupdateproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283933501608:android:cc03dca819869c0c2efa9d",
+        "android_client_info": {
+          "package_name": "com.example.take_data_and_update_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSg2JFxCoK8eDYN1KxJ4807SOBQBLn7vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
