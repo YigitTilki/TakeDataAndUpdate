@@ -6,6 +6,7 @@ import 'package:take_data_and_update_project/core/route/app_router.dart';
 import 'package:take_data_and_update_project/core/util/app_padding.dart';
 import 'package:take_data_and_update_project/core/util/app_spacer.dart';
 import 'package:take_data_and_update_project/core/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/src/features/auth/implementation/naninani.dart';
 import 'package:take_data_and_update_project/src/features/auth/presentation/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/src/features/auth/presentation/logo_divider_view.dart';
 import 'package:take_data_and_update_project/src/features/common/main_container_decoration.dart';
@@ -21,6 +22,15 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool value = false;
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailTextController.dispose();
+    _passwordTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,23 +59,29 @@ class _LoginPageState extends State<LoginPage> {
                   //TODO: EmailAndPhoneNumber validate and controller config
                   AuthTextFormField(
                     hintText: AppString.emailPhonenumber,
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _emailTextController,
                     validator: (value) {
-                      if (value!.isNotEmpty && value.length > 5) {
+                      if (value!.isNotEmpty && value.length > 7) {
                         return null;
                       } else {
-                        return "Too short";
+                        return "Invalid E-Mail or Password";
                       }
                     },
                   ),
+
                   AppSpacer.vertical.space20,
                   //TODO: Password validate and controller config
                   AuthTextFormField(
                       hintText: AppString.password,
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
+                      controller: _passwordTextController,
                       validator: (value) {
-                        if (value!.isNotEmpty && value.length > 5) {
+                        if (value!.isNotEmpty && value.length > 8) {
                           return null;
                         } else {
-                          return "Too short";
+                          return "Invalid E-Mail or Password";
                         }
                       }),
                   AppSpacer.vertical.space20,
@@ -74,8 +90,13 @@ class _LoginPageState extends State<LoginPage> {
                       if (!LoginPage._formKey.currentState!.validate()) {
                         return debugPrint("Olmadı");
                       } else {
-                        context.router.replace(const HomeRoute());
+                        FirebaseInteractions().loginAdmin(
+                          context,
+                          _emailTextController.text,
+                          _passwordTextController.text,
+                        );
                       }
+                      setState(() {});
                     },
                     child: const Text(
                       AppString.loginUpperCase,

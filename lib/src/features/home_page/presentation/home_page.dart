@@ -9,7 +9,8 @@ import 'package:take_data_and_update_project/src/features/common/main_container_
 
 @RoutePage()
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final String displayName;
+  const HomePage({super.key, required this.displayName});
 
   @override
   Widget build(BuildContext context) {
@@ -49,36 +50,46 @@ class HomePage extends StatelessWidget {
       ),
       backgroundColor: context.secondaryColor,
       appBar: AppBar(
-        title: const Text("${AppString.welcome} Yiğit Tilki"),
+        title: Text("${AppString.welcome} $displayName"),
       ),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppSpacer.vertical.space30,
-            Container(
-              width: bigContainerWidth.w,
-              height: bigConttainerHeight.h,
-              decoration: containerDecoration(context.primaryColor),
+            Expanded(
+              flex: 2,
+              child: Container(
+                width: bigContainerWidth.w,
+                height: bigConttainerHeight.h,
+                decoration: containerDecoration(context.primaryColor),
+              ),
             ),
             AppSpacer.vertical.space30,
-            Container(
-              width: bigContainerWidth.w,
-              height: smallConttainerHeight.h,
-              decoration: containerDecoration(context.primaryColor),
+            Expanded(
+              child: Container(
+                width: bigContainerWidth.w,
+                height: smallConttainerHeight.h,
+                decoration: containerDecoration(context.primaryColor),
+              ),
             ),
             AppSpacer.vertical.space30,
-            Container(
-              width: mediumContainerWidth.w,
-              height: smallConttainerHeight.h,
-              decoration: containerDecoration(context.primaryColor),
+            Expanded(
+              child: Container(
+                width: mediumContainerWidth.w,
+                height: smallConttainerHeight.h,
+                decoration: containerDecoration(context.primaryColor),
+              ),
             ),
             AppSpacer.vertical.space30,
-            Container(
-              width: smallContainerWidth.w,
-              height: smallConttainerHeight.h,
-              decoration: containerDecoration(context.primaryColor),
+            Expanded(
+              child: Container(
+                width: smallContainerWidth.w,
+                height: smallConttainerHeight.h,
+                decoration: containerDecoration(context.primaryColor),
+              ),
             ),
+            AppSpacer.vertical.space30,
           ],
         ),
       ),

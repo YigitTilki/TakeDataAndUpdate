@@ -9,6 +9,9 @@ extension BuildContextExtansion on BuildContext {
   Color get secondaryColor => colorScheme.secondary;
   Color get blackColor => colorScheme.surface;
   Color get tertiarityColor => colorScheme.tertiary;
+  Color get fourthColor => colorScheme.onPrimary;
+  Color get errorColor => colorScheme.error;
+  Color get onErrorColor => colorScheme.onError;
 
   //TextStyles
   TextStyle? get headLineLarge => textTheme.headlineLarge;

@@ -6,8 +6,16 @@ import 'package:take_data_and_update_project/core/util/extensions/build_context_
 class AuthTextFormField extends StatelessWidget {
   final String hintText;
   final String? Function(String?)? validator;
+  final TextEditingController controller;
+  final TextInputType keyboardType;
+  final bool? obscureText;
   const AuthTextFormField(
-      {super.key, required this.hintText, required this.validator});
+      {super.key,
+      required this.hintText,
+      required this.validator,
+      required this.controller,
+      required this.keyboardType,
+      this.obscureText});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +25,9 @@ class AuthTextFormField extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: AppPadding.horizontal.largePadding),
         child: TextFormField(
+          keyboardType: keyboardType,
+          controller: controller,
+          obscureText: obscureText ?? false,
           style: context.labelLarge,
           decoration: InputDecoration(
             hintText: hintText,

@@ -17,11 +17,11 @@ class LightTheme {
   static ColorScheme get _colorScheme => const ColorScheme(
       brightness: Brightness.light,
       primary: homeBackgroundColor,
-      onPrimary: homeBackgroundColor,
+      onPrimary: fourthColor,
       secondary: secondaryColor,
       onSecondary: homeBackgroundColor,
-      error: homeBackgroundColor,
-      onError: homeBackgroundColor,
+      error: errorColor,
+      onError: onErrorColor,
       background: homeBackgroundColor,
       onBackground: homeBackgroundColor,
       surface: blackColor,
@@ -125,11 +125,16 @@ class LightTheme {
         ),
       );
 
+  static SnackBarThemeData get _snackBarThemeData => SnackBarThemeData(
+      actionTextColor: fourthColor,
+      backgroundColor: homeBackgroundColor,
+      contentTextStyle: _appTextTheme.labelMedium);
   static ThemeData get themeData {
     return ThemeData(
         scaffoldBackgroundColor: homeBackgroundColor,
         appBarTheme: _appBarTheme,
         drawerTheme: _drawerThemeData,
+        snackBarTheme: _snackBarThemeData,
         colorScheme: _colorScheme,
         fontFamily: _appFont,
         textTheme: _appTextTheme,
