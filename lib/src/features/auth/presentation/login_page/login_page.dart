@@ -1,14 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:take_data_and_update_project/core/constants/app_colors.dart';
 import 'package:take_data_and_update_project/core/constants/app_string.dart';
 import 'package:take_data_and_update_project/core/route/app_router.dart';
 import 'package:take_data_and_update_project/core/util/app_padding.dart';
 import 'package:take_data_and_update_project/core/util/app_spacer.dart';
 import 'package:take_data_and_update_project/core/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/src/features/auth/implementation/naninani.dart';
-import 'package:take_data_and_update_project/src/features/auth/presentation/auth_text_form_field.dart';
-import 'package:take_data_and_update_project/src/features/auth/presentation/logo_divider_view.dart';
+import 'package:take_data_and_update_project/src/features/auth/presentation/widgets/auth_text_form_field.dart';
+import 'package:take_data_and_update_project/src/features/auth/presentation/widgets/logo_divider_view.dart';
 import 'package:take_data_and_update_project/src/features/common/main_container_decoration.dart';
 
 @RoutePage()
@@ -53,35 +54,33 @@ class _LoginPageState extends State<LoginPage> {
                   AppSpacer.vertical.space100,
                   Text(
                     AppString.loginUpperCase,
-                    style: context.headLineLarge,
+                    style: context.displayMedium
+                        ?.copyWith(color: AppColors.blackColor),
                   ),
                   AppSpacer.vertical.space20,
-                  //TODO: EmailAndPhoneNumber validate and controller config
                   AuthTextFormField(
-                    hintText: AppString.emailPhonenumber,
+                    hintText: AppString.eMail,
                     keyboardType: TextInputType.emailAddress,
                     controller: _emailTextController,
                     validator: (value) {
                       if (value!.isNotEmpty && value.length > 7) {
                         return null;
                       } else {
-                        return "Invalid E-Mail or Password";
+                        return AppString.invalidEmailPassword;
                       }
                     },
                   ),
-
                   AppSpacer.vertical.space20,
-                  //TODO: Password validate and controller config
                   AuthTextFormField(
                       hintText: AppString.password,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       controller: _passwordTextController,
                       validator: (value) {
-                        if (value!.isNotEmpty && value.length > 8) {
+                        if (value!.isNotEmpty && value.length >= 8) {
                           return null;
                         } else {
-                          return "Invalid E-Mail or Password";
+                          return AppString.invalidEmailPassword;
                         }
                       }),
                   AppSpacer.vertical.space20,
@@ -98,8 +97,9 @@ class _LoginPageState extends State<LoginPage> {
                       }
                       setState(() {});
                     },
-                    child: const Text(
+                    child: Text(
                       AppString.loginUpperCase,
+                      style: context.bodyMedium,
                     ),
                   ),
                   AppSpacer.vertical.space10,
@@ -128,17 +128,22 @@ class _LoginPageState extends State<LoginPage> {
                             AppSpacer.horizontal.space5,
                             Text(
                               AppString.rememberMe,
-                              style: context.labelSmall,
+                              style: context.titleLarge
+                                  ?.copyWith(color: AppColors.tertiarityColor),
                             )
                           ],
                         ),
                         TextButton(
                           onPressed: () {
                             //TODO: Forgot Password Route
+                            context.router.replace(
+                              HomeRoute(displayName: "displayName"),
+                            );
                           },
                           child: Text(
                             AppString.forgotPassWord,
-                            style: context.clickableLabelSmall,
+                            style: context.titleLarge
+                                ?.copyWith(color: AppColors.tertiarityColor),
                           ),
                         ),
                       ],
@@ -149,7 +154,8 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Text(
                         AppString.notAMemberYet,
-                        style: context.labelSmall,
+                        style: context.titleLarge
+                            ?.copyWith(color: AppColors.tertiarityColor),
                       ),
                       TextButton(
                         onPressed: () {
@@ -157,7 +163,8 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         child: Text(
                           AppString.signUp,
-                          style: context.clickableLabelSmall,
+                          style: context.titleLarge
+                              ?.copyWith(color: AppColors.clickebleColor),
                         ),
                       ),
                     ],

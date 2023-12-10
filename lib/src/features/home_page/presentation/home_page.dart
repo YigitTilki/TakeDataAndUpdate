@@ -37,9 +37,12 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     AppSpacer.vertical.space5,
-                    Text(
-                      "Yiğit Tilki",
-                      style: context.headLineSmall,
+                    Expanded(
+                      child: Text(
+                        displayName,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.headlineLarge,
+                      ),
                     ),
                   ],
                 ),

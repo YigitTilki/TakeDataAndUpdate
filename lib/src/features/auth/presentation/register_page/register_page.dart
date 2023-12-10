@@ -1,13 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:take_data_and_update_project/core/constants/app_colors.dart';
 import 'package:take_data_and_update_project/core/constants/app_string.dart';
 import 'package:take_data_and_update_project/core/route/app_router.dart';
 import 'package:take_data_and_update_project/core/util/app_spacer.dart';
 import 'package:take_data_and_update_project/core/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/src/features/auth/implementation/naninani.dart';
-import 'package:take_data_and_update_project/src/features/auth/presentation/auth_text_form_field.dart';
-import 'package:take_data_and_update_project/src/features/auth/presentation/logo_divider_view.dart';
+import 'package:take_data_and_update_project/src/features/auth/presentation/widgets/auth_text_form_field.dart';
+import 'package:take_data_and_update_project/src/features/auth/presentation/widgets/logo_divider_view.dart';
 import 'package:take_data_and_update_project/src/features/common/main_container_decoration.dart';
 
 @RoutePage()
@@ -58,10 +59,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     AppSpacer.vertical.space20,
                     Text(
                       AppString.signUpUpperCase,
-                      style: context.headLineLarge,
+                      style: context.displayMedium
+                          ?.copyWith(color: AppColors.blackColor),
                     ),
                     AppSpacer.vertical.space20,
-                    //TODO: FirstName validate and controller config
                     AuthTextFormField(
                       controller: _firstNameController,
                       keyboardType: TextInputType.name,
@@ -70,12 +71,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         if (value!.isNotEmpty) {
                           return null;
                         } else {
-                          return "* Required form";
+                          return AppString.requiredForm;
                         }
                       },
                     ),
                     AppSpacer.vertical.space20,
-                    //TODO: LastName validate and controller config
                     AuthTextFormField(
                       controller: _lastNameController,
                       keyboardType: TextInputType.name,
@@ -84,12 +84,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         if (value!.isNotEmpty && value.length >= 2) {
                           return null;
                         } else {
-                          return "* Required form";
+                          return AppString.requiredForm;
                         }
                       },
                     ),
                     AppSpacer.vertical.space20,
-                    //TODO: Password validate and controller config
                     AuthTextFormField(
                       controller: _passwordTextController,
                       keyboardType: TextInputType.visiblePassword,
@@ -99,12 +98,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         if (value!.isNotEmpty && value.length >= 8) {
                           return null;
                         } else {
-                          return "Password length must be 8 or higher";
+                          return AppString.passwordMust8;
                         }
                       },
                     ),
                     AppSpacer.vertical.space20,
-                    //TODO: RePassword validate and controller config
                     AuthTextFormField(
                       controller: _rePasswordTextController,
                       keyboardType: TextInputType.visiblePassword,
@@ -112,24 +110,22 @@ class _RegisterPageState extends State<RegisterPage> {
                       hintText: AppString.rePassword,
                       validator: (value) {
                         if (value != _passwordTextController.text) {
-                          return "Passwords doesn't match";
+                          return AppString.passwordDoesntMatch;
                         } else {
                           return null;
                         }
                       },
                     ),
                     AppSpacer.vertical.space20,
-                    //TODO: Email / PhoneNumber validate and controller config
                     AuthTextFormField(
                       controller: _emailTextController,
                       keyboardType: TextInputType.emailAddress,
-                      hintText: AppString.emailPhonenumber,
+                      hintText: AppString.eMail,
                       validator: (value) {
                         if (value!.isNotEmpty && value.length > 7) {
                           return null;
                         } else {
-                          //TODO: email validator
-                          return "Invalid Email";
+                          return AppString.invalidEmail;
                         }
                       },
                     ),
@@ -148,8 +144,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               "${_lastNameController.text}");
                         }
                       },
-                      child: const Text(
+                      child: Text(
                         AppString.signUpUpperCase,
+                        style: context.bodyMedium,
                       ),
                     ),
                     Row(
@@ -157,7 +154,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       children: [
                         Text(
                           AppString.alreadyHaveAnAcc,
-                          style: context.labelSmall,
+                          style: context.titleLarge
+                              ?.copyWith(color: AppColors.tertiarityColor),
                         ),
                         TextButton(
                           onPressed: () {
@@ -165,7 +163,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           },
                           child: Text(
                             AppString.logIn,
-                            style: context.clickableLabelSmall,
+                            style: context.titleLarge
+                                ?.copyWith(color: AppColors.clickebleColor),
                           ),
                         ),
                       ],

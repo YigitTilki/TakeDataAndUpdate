@@ -1,69 +1,100 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:take_data_and_update_project/core/constants/app_colors.dart';
 
 class LightTheme {
   LightTheme._();
 
-  static const Color homeBackgroundColor = Color(0xFFB68C6D);
-  static const Color secondaryColor = Color(0xFFE5B18C);
-  static const Color blackColor = Colors.black;
-  static const Color whiteColor = Colors.white;
-  static const Color tertiarityColor = Color(0xFF855D40);
-  static const Color onErrorColor = Color(0xFFE3242B);
-  static const Color errorColor = Color(0xFF990F02);
-  static const Color fourthColor = Color(0xFFFFD4B6);
-  static const Color clickebleColor = Color(0xFFA15C1C);
-
   static ColorScheme get _colorScheme => const ColorScheme(
       brightness: Brightness.light,
-      primary: homeBackgroundColor,
-      onPrimary: fourthColor,
-      secondary: secondaryColor,
-      onSecondary: homeBackgroundColor,
-      error: errorColor,
-      onError: onErrorColor,
-      background: homeBackgroundColor,
-      onBackground: homeBackgroundColor,
-      surface: blackColor,
-      onSurface: homeBackgroundColor);
+      primary: AppColors.homeBackgroundColor,
+      onPrimary: AppColors.fourthColor,
+      secondary: AppColors.secondaryColor,
+      onSecondary: AppColors.homeBackgroundColor,
+      error: AppColors.errorColor,
+      onError: AppColors.onErrorColor,
+      background: AppColors.homeBackgroundColor,
+      onBackground: AppColors.homeBackgroundColor,
+      surface: AppColors.blackColor,
+      onSurface: AppColors.defaultTextColor);
 
   static String get _appFont => "Inter";
 
-  static TextTheme get _appTextTheme => const TextTheme(
-        headlineLarge: TextStyle(
-          color: blackColor,
-          fontSize: 32,
+  static TextTheme get _appTextTheme => TextTheme(
+        labelSmall: TextStyle(
+          fontSize: 7.sp,
+          color: AppColors.defaultTextColor,
           fontWeight: FontWeight.w500,
         ),
-        headlineSmall: TextStyle(
-          color: whiteColor,
-          fontSize: 20,
+        labelMedium: TextStyle(
+          fontSize: 8.sp,
+          color: AppColors.defaultTextColor,
           fontWeight: FontWeight.w500,
         ),
         labelLarge: TextStyle(
-          color: secondaryColor,
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-        ),
-        labelMedium: TextStyle(
-          color: whiteColor,
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-        ),
-        labelSmall: TextStyle(
-          color: tertiarityColor,
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
+          fontSize: 9.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
         ),
         titleSmall: TextStyle(
-          color: clickebleColor,
-          fontSize: 13,
-          fontWeight: FontWeight.w400,
+          fontSize: 10.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
+        ),
+        titleMedium: TextStyle(
+          fontSize: 11.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
+        ),
+        titleLarge: TextStyle(
+          fontSize: 12.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
         ),
         bodySmall: TextStyle(
-          color: errorColor,
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
+          fontSize: 13.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
+        ),
+        bodyMedium: TextStyle(
+          fontSize: 14.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
+        ),
+        bodyLarge: TextStyle(
+          fontSize: 15.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
+        ),
+        headlineSmall: TextStyle(
+          fontSize: 16.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
+        ),
+        headlineMedium: TextStyle(
+          fontSize: 18.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
+        ),
+        headlineLarge: TextStyle(
+          fontSize: 20.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
+        ),
+        displaySmall: TextStyle(
+          fontSize: 24.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
+        ),
+        displayMedium: TextStyle(
+          fontSize: 32.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
+        ),
+        displayLarge: TextStyle(
+          fontSize: 36.sp,
+          color: AppColors.defaultTextColor,
+          fontWeight: FontWeight.w500,
         ),
       );
 
@@ -75,21 +106,23 @@ class LightTheme {
   }
 
   static InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
-      enabledBorder: _outlineInputBorder(homeBackgroundColor),
-      focusedBorder: _outlineInputBorder(tertiarityColor),
-      errorBorder: _outlineInputBorder(errorColor),
-      focusedErrorBorder: _outlineInputBorder(onErrorColor),
-      errorStyle: _appTextTheme.bodySmall,
-      filled: true,
-      fillColor: fourthColor,
-      labelStyle: _appTextTheme.labelLarge,
-      hintStyle: _appTextTheme.labelLarge);
+        enabledBorder: _outlineInputBorder(AppColors.homeBackgroundColor),
+        focusedBorder: _outlineInputBorder(AppColors.tertiarityColor),
+        errorBorder: _outlineInputBorder(AppColors.errorColor),
+        focusedErrorBorder: _outlineInputBorder(AppColors.onErrorColor),
+        errorStyle:
+            _appTextTheme.titleLarge?.copyWith(color: AppColors.errorColor),
+        filled: true,
+        fillColor: AppColors.fourthColor,
+        hintStyle: _appTextTheme.headlineSmall
+            ?.copyWith(color: AppColors.secondaryColor),
+      );
 
   static ElevatedButtonThemeData get _elevatedButtonTheme =>
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-            foregroundColor: whiteColor,
-            backgroundColor: tertiarityColor,
+            foregroundColor: AppColors.whiteColor,
+            backgroundColor: AppColors.tertiarityColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.sp),
             ),
@@ -97,41 +130,54 @@ class LightTheme {
       );
 
   static CheckboxThemeData get _checkBoxThemeData => CheckboxThemeData(
-        fillColor:
-            MaterialStateProperty.resolveWith((states) => secondaryColor),
-        checkColor:
-            MaterialStateProperty.resolveWith((states) => tertiarityColor),
+        fillColor: MaterialStateProperty.resolveWith(
+            (states) => AppColors.secondaryColor),
+        checkColor: MaterialStateProperty.resolveWith(
+            (states) => AppColors.tertiarityColor),
         side: MaterialStateBorderSide.resolveWith(
           (states) => BorderSide(
-            color: tertiarityColor,
+            color: AppColors.tertiarityColor,
             width: 1.sp,
           ),
         ),
       );
 
   static AppBarTheme get _appBarTheme => AppBarTheme(
-        color: homeBackgroundColor,
-        titleTextStyle: _appTextTheme.headlineSmall,
+        color: AppColors.homeBackgroundColor,
+        titleTextStyle: _appTextTheme.headlineLarge,
         centerTitle: true,
-        actionsIconTheme: IconThemeData(color: secondaryColor, size: 30.sp),
-        iconTheme: IconThemeData(color: secondaryColor, size: 30.sp),
+        actionsIconTheme:
+            IconThemeData(color: AppColors.secondaryColor, size: 30.sp),
+        iconTheme: IconThemeData(color: AppColors.secondaryColor, size: 30.sp),
       );
 
   static DrawerThemeData get _drawerThemeData => DrawerThemeData(
-        backgroundColor: homeBackgroundColor,
+        backgroundColor: AppColors.homeBackgroundColor,
         width: 242.w,
         shape: RoundedRectangleBorder(
-          side: BorderSide(width: 10.sp, color: secondaryColor),
+          side: BorderSide(width: 10.sp, color: AppColors.secondaryColor),
         ),
       );
 
   static SnackBarThemeData get _snackBarThemeData => SnackBarThemeData(
-      actionTextColor: fourthColor,
-      backgroundColor: homeBackgroundColor,
+      actionTextColor: AppColors.fourthColor,
+      backgroundColor: AppColors.homeBackgroundColor,
       contentTextStyle: _appTextTheme.labelMedium);
+
+  static ListTileThemeData get _listTileThemeData => ListTileThemeData(
+        subtitleTextStyle: _appTextTheme.titleLarge,
+        titleTextStyle: _appTextTheme.bodyMedium,
+      );
+
+  static FloatingActionButtonThemeData get _floatingActionButtonThemeData =>
+      FloatingActionButtonThemeData(
+        iconSize: 25.sp,
+        backgroundColor: AppColors.homeBackgroundColor,
+      );
+
   static ThemeData get themeData {
     return ThemeData(
-        scaffoldBackgroundColor: homeBackgroundColor,
+        scaffoldBackgroundColor: AppColors.homeBackgroundColor,
         appBarTheme: _appBarTheme,
         drawerTheme: _drawerThemeData,
         snackBarTheme: _snackBarThemeData,
@@ -140,6 +186,8 @@ class LightTheme {
         textTheme: _appTextTheme,
         elevatedButtonTheme: _elevatedButtonTheme,
         inputDecorationTheme: _inputDecorationTheme,
-        checkboxTheme: _checkBoxThemeData);
+        checkboxTheme: _checkBoxThemeData,
+        listTileTheme: _listTileThemeData,
+        floatingActionButtonTheme: _floatingActionButtonThemeData);
   }
 }

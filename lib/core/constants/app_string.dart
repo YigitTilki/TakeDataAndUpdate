@@ -6,8 +6,15 @@ class AppString {
   static const loginUpperCase = "LOGIN";
   static const password = "Password";
 
+  // Validator Errors
+  static const invalidEmailPassword = "Invalid E-Mail or Password";
+  static const invalidEmail = "Invalid Email";
+  static const requiredForm = "* Required form";
+  static const passwordMust8 = "Password length must be 8 or higher";
+  static const passwordDoesntMatch = "Passwords doesn't match";
+
   // Login Page
-  static const emailPhonenumber = "E-Mail / Phone Number";
+  static const eMail = "E-Mail";
   static const rememberMe = "Remember me";
   static const forgotPassWord = "Forgot Password?";
   static const notAMemberYet = "Not a Member yet?";
@@ -27,4 +34,9 @@ class AppString {
   static const alertBox = "ALERT BOX";
   static const settings = "SETTINGS";
   static const rateUs = "RATE US";
+
+  // Admin Page
+  static const users = "Users";
+  static const admin = "Admin";
+  static const search = "Search...";
 }

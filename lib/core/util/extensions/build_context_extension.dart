@@ -14,11 +14,19 @@ extension BuildContextExtansion on BuildContext {
   Color get onErrorColor => colorScheme.onError;
 
   //TextStyles
-  TextStyle? get headLineLarge => textTheme.headlineLarge;
-  TextStyle? get headLineSmall => textTheme.headlineSmall;
-  TextStyle? get labelLarge => textTheme.labelLarge;
-  TextStyle? get labelMedium => textTheme.labelMedium;
   TextStyle? get labelSmall => textTheme.labelSmall;
-  TextStyle? get clickableLabelSmall => textTheme.titleSmall;
-  TextStyle? get errorLabelSmall => textTheme.bodySmall;
+  TextStyle? get labelMedium => textTheme.labelMedium;
+  TextStyle? get labelLarge => textTheme.labelLarge;
+  TextStyle? get titleSmall => textTheme.titleSmall;
+  TextStyle? get titleMedium => textTheme.titleMedium;
+  TextStyle? get titleLarge => textTheme.titleLarge;
+  TextStyle? get bodySmall => textTheme.bodySmall;
+  TextStyle? get bodyMedium => textTheme.bodyMedium;
+  TextStyle? get bodyLarge => textTheme.bodyLarge;
+  TextStyle? get headlineSmall => textTheme.headlineSmall;
+  TextStyle? get headlineMedium => textTheme.headlineMedium;
+  TextStyle? get headlineLarge => textTheme.headlineLarge;
+  TextStyle? get displaySmall => textTheme.displaySmall;
+  TextStyle? get displayMedium => textTheme.displayMedium;
+  TextStyle? get displayLarge => textTheme.displayLarge;
 }

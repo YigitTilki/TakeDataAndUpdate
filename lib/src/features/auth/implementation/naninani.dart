@@ -14,11 +14,10 @@ class FirebaseInteractions {
     String password = passwordController;
 
     User? user = await _auth.signIn(email, password);
-    String? displayName = user?.displayName;
     if (!context.mounted) return;
     if (user != null) {
       debugPrint("User signed in");
-      context.router.replace(HomeRoute(displayName: displayName!));
+      context.router.replace(const AdminRoute());
     } else {
       scaffoldMessanger(context, 'E-Mail or Password Error');
     }

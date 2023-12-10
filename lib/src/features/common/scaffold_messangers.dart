@@ -7,7 +7,7 @@ scaffoldMessanger(BuildContext context, String text) {
     SnackBar(
       content: Text(
         text,
-        style: context.headLineSmall,
+        style: context.headlineSmall,
         textAlign: TextAlign.center,
       ),
       shape: RoundedRectangleBorder(
