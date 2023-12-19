@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/core/constants/app_colors.dart';
+import 'package:take_data_and_update_project/util/constants/app_colors.dart';
 
 class LightTheme {
   LightTheme._();

@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:take_data_and_update_project/core/route/app_router.dart';
+import 'package:take_data_and_update_project/init/route/app_router.dart';
 import 'package:take_data_and_update_project/src/features/auth/implementation/firebase_auth_services.dart';
 import 'package:take_data_and_update_project/src/features/common/scaffold_messangers.dart';
 

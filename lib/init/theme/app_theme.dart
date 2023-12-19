@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:take_data_and_update_project/core/theme/dark_theme.dart';
-import 'package:take_data_and_update_project/core/theme/light_theme.dart';
+import 'package:take_data_and_update_project/init/theme/dark_theme.dart';
+import 'package:take_data_and_update_project/init/theme/light_theme.dart';
 
 class AppTheme {
   AppTheme._();

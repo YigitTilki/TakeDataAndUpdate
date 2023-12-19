@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/core/constants/app_string.dart';
-import 'package:take_data_and_update_project/core/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/src/features/users_page/implementation/users_page_firebase_connection.dart';
+import 'package:take_data_and_update_project/util/constants/app_string.dart';
+import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
 
 class SearchField extends StatefulWidget {
   final TextEditingController searchController;

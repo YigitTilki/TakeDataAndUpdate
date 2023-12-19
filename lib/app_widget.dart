@@ -1,8 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/core/route/app_router.dart';
-import 'package:take_data_and_update_project/core/theme/app_theme.dart';
+import 'package:take_data_and_update_project/init/route/app_router.dart';
+import 'package:take_data_and_update_project/init/theme/app_theme.dart';
 
 class AppWidget extends StatelessWidget {
   AppWidget({super.key});
@@ -21,6 +22,9 @@ class AppWidget extends StatelessWidget {
           title: "Graduating Project",
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
           routerConfig: _appRouter.config(),
         );
       },
