@@ -107,7 +107,7 @@ class LightTheme {
 
   static InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
         enabledBorder: _outlineInputBorder(AppColors.homeBackgroundColor),
-        focusedBorder: _outlineInputBorder(AppColors.tertiarityColor),
+        focusedBorder: _outlineInputBorder(AppColors.tertiaryColor),
         errorBorder: _outlineInputBorder(AppColors.errorColor),
         focusedErrorBorder: _outlineInputBorder(AppColors.onErrorColor),
         errorStyle:
@@ -122,7 +122,7 @@ class LightTheme {
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
             foregroundColor: AppColors.whiteColor,
-            backgroundColor: AppColors.tertiarityColor,
+            backgroundColor: AppColors.tertiaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.sp),
             ),
@@ -133,10 +133,10 @@ class LightTheme {
         fillColor: MaterialStateProperty.resolveWith(
             (states) => AppColors.secondaryColor),
         checkColor: MaterialStateProperty.resolveWith(
-            (states) => AppColors.tertiarityColor),
+            (states) => AppColors.tertiaryColor),
         side: MaterialStateBorderSide.resolveWith(
           (states) => BorderSide(
-            color: AppColors.tertiarityColor,
+            color: AppColors.tertiaryColor,
             width: 1.sp,
           ),
         ),

@@ -59,8 +59,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     AppSpacer.vertical.space20,
                     Text(
                       AppString.signUpUpperCase,
-                      style: context.displayMedium
-                          ?.copyWith(color: AppColors.blackColor),
+                      style: context.displayMedium?.copyWith(
+                        color: AppColors.blackColor,
+                      ),
                     ),
                     AppSpacer.vertical.space20,
                     AuthTextFormField(
@@ -155,7 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         Text(
                           AppString.alreadyHaveAnAcc,
                           style: context.titleLarge
-                              ?.copyWith(color: AppColors.tertiarityColor),
+                              ?.copyWith(color: AppColors.tertiaryColor),
                         ),
                         TextButton(
                           onPressed: () {
@@ -164,7 +165,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Text(
                             AppString.logIn,
                             style: context.titleLarge
-                                ?.copyWith(color: AppColors.clickebleColor),
+                                ?.copyWith(color: AppColors.clickableColor),
                           ),
                         ),
                       ],

@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                             Text(
                               AppString.rememberMe,
                               style: context.titleLarge
-                                  ?.copyWith(color: AppColors.tertiarityColor),
+                                  ?.copyWith(color: AppColors.tertiaryColor),
                             )
                           ],
                         ),
@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text(
                             AppString.forgotPassWord,
                             style: context.titleLarge
-                                ?.copyWith(color: AppColors.tertiarityColor),
+                                ?.copyWith(color: AppColors.tertiaryColor),
                           ),
                         ),
                       ],
@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                       Text(
                         AppString.notAMemberYet,
                         style: context.titleLarge
-                            ?.copyWith(color: AppColors.tertiarityColor),
+                            ?.copyWith(color: AppColors.tertiaryColor),
                       ),
                       TextButton(
                         onPressed: () {
@@ -164,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           AppString.signUp,
                           style: context.titleLarge
-                              ?.copyWith(color: AppColors.clickebleColor),
+                              ?.copyWith(color: AppColors.clickableColor),
                         ),
                       ),
                     ],
