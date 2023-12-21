@@ -1,16 +1,43 @@
 {
-    "home": {
-        "title": "Anasayfa"
+    "commons": {
+        "logo": "LOGO",
+        "loginUpperCase": "GİRİŞ YAP",
+        "password": "Şifre",
+        "eMail": "E-mail"
     },
-    "general": {
-        "button": {
-            "save": "Kaydet"
-        },
-        "dialog": {
-            "version": {
-                "title": "Versiyon",
-                "content": "Veriyon bilgisi"
-            }
+    "loginPage": {
+        "rememberMe": "Beni hatırla",
+        "forgotPassWord": "Şifremi Unuttum?",
+        "notAMemberYet": "Henüz kayıt olmadın mı?",
+        "signUp": "Kayıt Ol!"
+    },
+    "registerPage": {
+        "signUpUpperCase": "KAYIT OL",
+        "firstName": "İsim",
+        "lastName": "Soyisim",
+        "rePassword": "Şifreyi tekrar giriniz",
+        "alreadyHaveAnAcc": "Zaten bir hesabınız var mı?",
+        "logIn": "Giriş Yap!"
+    },
+    "adminPage": {
+        "users": "Kullanıcılar",
+        "admin": "Admin",
+        "usersPage": {
+            "search": "Ara..."
         }
+    },
+    "homePage": {
+        "welcome": "Hoşgeldiniz",
+        "myDevices": "Cihazlarım",
+        "alertBox": "UYARILAR",
+        "settings": "AYARLAR",
+        "rateUs": "BİZİ DEĞERLENDİR"
+    },
+    "validatorErrors": {
+        "invalidEmailPassword": "Hatalı Email veya Şifre",
+        "invalidEmail": "Hatalı Email",
+        "requiredForm": "* Boş Bırakılamaz",
+        "passwordMust8": "Şifre 8 karakter veya daha uzun olmalı",
+        "passwordDoesntMatch": "Şifreler Eşleşmiyor"
     }
 }

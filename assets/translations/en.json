@@ -1,16 +1,43 @@
 {
-    "home": {
-        "title": "Home Page"
+    "commons": {
+        "logo": "LOGO",
+        "loginUpperCase": "LOGIN",
+        "password": "Password",
+        "eMail": "E-mail"
     },
-    "general": {
-        "button": {
-            "save": "Save"
-        },
-        "dialog": {
-            "version": {
-                "title": "Version",
-                "content": "Version Info"
-            }
+    "loginPage": {
+        "rememberMe": "Remember me",
+        "forgotPassWord": "Forgot Password?",
+        "notAMemberYet": "Not a Member yet?",
+        "signUp": "Sign Up!"
+    },
+    "registerPage": {
+        "signUpUpperCase": "SIGN UP",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "rePassword": "Re - Password",
+        "alreadyHaveAnAcc": "Already Have an Account?",
+        "logIn": "Login!"
+    },
+    "adminPage": {
+        "users": "Users",
+        "admin": "Admin",
+        "usersPage": {
+            "search": "Search..."
         }
+    },
+    "homePage": {
+        "welcome": "Welcome",
+        "myDevices": "My Devices",
+        "alertBox": "ALERT BOX",
+        "settings": "SETTINGS",
+        "rateUs": "RATE US"
+    },
+    "validatorErrors": {
+        "invalidEmailPassword": "Invalid E-Mail or Password",
+        "invalidEmail": "Invalid Email",
+        "requiredForm": "* Required form",
+        "passwordMust8": "Password length must be 8 or higher",
+        "passwordDoesntMatch": "Passwords doesn't match"
     }
 }

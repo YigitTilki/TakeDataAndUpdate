@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/init/route/app_router.dart';
 import 'package:take_data_and_update_project/src/features/auth/implementation/naninani.dart';
 import 'package:take_data_and_update_project/src/features/auth/presentation/widgets/auth_text_form_field.dart';
@@ -8,7 +10,6 @@ import 'package:take_data_and_update_project/src/features/auth/presentation/widg
 import 'package:take_data_and_update_project/src/features/common/main_container_decoration.dart';
 import 'package:take_data_and_update_project/util/app_spacer.dart';
 import 'package:take_data_and_update_project/util/constants/app_colors.dart';
-import 'package:take_data_and_update_project/util/constants/app_string.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
 
 @RoutePage()
@@ -58,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     const LogoDividerView(),
                     AppSpacer.vertical.space20,
                     Text(
-                      AppString.signUpUpperCase,
+                      LocaleKeys.registerPage_signUpUpperCase.tr(),
                       style: context.displayMedium?.copyWith(
                         color: AppColors.blackColor,
                       ),
@@ -67,12 +68,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     AuthTextFormField(
                       controller: _firstNameController,
                       keyboardType: TextInputType.name,
-                      hintText: AppString.firstName,
+                      hintText: LocaleKeys.registerPage_firstName.tr(),
                       validator: (value) {
                         if (value!.isNotEmpty) {
                           return null;
                         } else {
-                          return AppString.requiredForm;
+                          return LocaleKeys.validatorErrors_requiredForm.tr();
                         }
                       },
                     ),
@@ -80,12 +81,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     AuthTextFormField(
                       controller: _lastNameController,
                       keyboardType: TextInputType.name,
-                      hintText: AppString.lastName,
+                      hintText: LocaleKeys.registerPage_lastName.tr(),
                       validator: (value) {
                         if (value!.isNotEmpty && value.length >= 2) {
                           return null;
                         } else {
-                          return AppString.requiredForm;
+                          return LocaleKeys.validatorErrors_requiredForm.tr();
                         }
                       },
                     ),
@@ -94,12 +95,12 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: _passwordTextController,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
-                      hintText: AppString.password,
+                      hintText: LocaleKeys.commons_password.tr(),
                       validator: (value) {
                         if (value!.isNotEmpty && value.length >= 8) {
                           return null;
                         } else {
-                          return AppString.passwordMust8;
+                          return LocaleKeys.validatorErrors_passwordMust8.tr();
                         }
                       },
                     ),
@@ -108,10 +109,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: _rePasswordTextController,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
-                      hintText: AppString.rePassword,
+                      hintText: LocaleKeys.registerPage_rePassword.tr(),
                       validator: (value) {
                         if (value != _passwordTextController.text) {
-                          return AppString.passwordDoesntMatch;
+                          return LocaleKeys.validatorErrors_passwordDoesntMatch
+                              .tr();
                         } else {
                           return null;
                         }
@@ -121,12 +123,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     AuthTextFormField(
                       controller: _emailTextController,
                       keyboardType: TextInputType.emailAddress,
-                      hintText: AppString.eMail,
+                      hintText: LocaleKeys.commons_eMail.tr(),
                       validator: (value) {
                         if (value!.isNotEmpty && value.length > 7) {
                           return null;
                         } else {
-                          return AppString.invalidEmail;
+                          return LocaleKeys.validatorErrors_invalidEmail.tr();
                         }
                       },
                     ),
@@ -146,27 +148,27 @@ class _RegisterPageState extends State<RegisterPage> {
                         }
                       },
                       child: Text(
-                        AppString.signUpUpperCase,
+                        LocaleKeys.registerPage_signUpUpperCase,
                         style: context.bodyMedium,
-                      ),
+                      ).tr(),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          AppString.alreadyHaveAnAcc,
+                          LocaleKeys.registerPage_alreadyHaveAnAcc,
                           style: context.titleLarge
                               ?.copyWith(color: AppColors.tertiaryColor),
-                        ),
+                        ).tr(),
                         TextButton(
                           onPressed: () {
                             context.router.replace(const LoginRoute());
                           },
                           child: Text(
-                            AppString.logIn,
+                            LocaleKeys.registerPage_logIn,
                             style: context.titleLarge
                                 ?.copyWith(color: AppColors.clickableColor),
-                          ),
+                          ).tr(),
                         ),
                       ],
                     )

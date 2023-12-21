@@ -3,12 +3,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
+import 'package:take_data_and_update_project/init/languages/locales.dart';
 import 'package:take_data_and_update_project/init/languages/product_localizations.dart';
 import 'package:take_data_and_update_project/init/route/app_router.dart';
 import 'package:take_data_and_update_project/src/features/common/main_container_decoration.dart';
 import 'package:take_data_and_update_project/util/app_spacer.dart';
-import 'package:take_data_and_update_project/util/constants/app_string.dart';
-import 'package:take_data_and_update_project/util/constants/enums/locales.dart';
 import 'package:take_data_and_update_project/util/constants/img_helper.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
 
@@ -45,13 +44,13 @@ class AdminPage extends StatelessWidget {
                 ),
                 AppSpacer.vertical.space5,
                 Text(
-                  AppString.admin,
+                  LocaleKeys.adminPage_admin,
                   style: context.displaySmall,
-                ),
+                ).tr(),
                 AppSpacer.vertical.space15,
                 InkWell(
                   onTap: () {
-                    context.router.replace(const UsersRoute());
+                    context.router.push(const UsersRoute());
                   },
                   child: Container(
                     width: gestureContainerWidth.w,
@@ -71,9 +70,9 @@ class AdminPage extends StatelessWidget {
                           child: SizedBox(
                             width: textBox.w,
                             child: Text(
-                              AppString.users,
+                              LocaleKeys.adminPage_users,
                               style: context.displaySmall,
-                            ),
+                            ).tr(),
                           ),
                         ),
                       ],
@@ -88,7 +87,7 @@ class AdminPage extends StatelessWidget {
                     );
                   },
                   child: Text(
-                    LocaleKeys.general_button_save,
+                    LocaleKeys.adminPage_admin,
                     style: context.bodyLarge,
                   ).tr(),
                 ),
@@ -100,7 +99,7 @@ class AdminPage extends StatelessWidget {
                     );
                   },
                   child: Text(
-                    LocaleKeys.general_button_save,
+                    LocaleKeys.adminPage_admin,
                     style: context.bodyLarge,
                   ).tr(),
                 ),
