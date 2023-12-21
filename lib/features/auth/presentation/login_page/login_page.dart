@@ -8,9 +8,9 @@ import 'package:take_data_and_update_project/features/auth/presentation/widgets/
 import 'package:take_data_and_update_project/features/common/main_container_decoration.dart';
 import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/init/route/app_router.dart';
-import 'package:take_data_and_update_project/util/app_padding.dart';
-import 'package:take_data_and_update_project/util/app_spacer.dart';
 import 'package:take_data_and_update_project/util/constants/app_colors.dart';
+import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
+import 'package:take_data_and_update_project/util/constants/project_padding.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
 
 @RoutePage()
@@ -107,8 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   AppSpacer.vertical.space10,
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: AppPadding.horizontal.largePadding),
+                    padding: ProjectPadding.symHLarge(),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

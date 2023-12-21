@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/util/app_padding.dart';
 import 'package:take_data_and_update_project/util/constants/app_colors.dart';
+import 'package:take_data_and_update_project/util/constants/project_padding.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
 
 class AuthTextFormField extends StatelessWidget {
@@ -23,8 +23,7 @@ class AuthTextFormField extends StatelessWidget {
     const int contentPadding = 15;
 
     return Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: AppPadding.horizontal.largePadding),
+        padding: ProjectPadding.symHLarge(),
         child: TextFormField(
           keyboardType: keyboardType,
           controller: controller,

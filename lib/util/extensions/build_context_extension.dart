@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-extension BuildContextExtansion on BuildContext {
+extension BuildContextExtension on BuildContext {
   //Schemes
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
   TextTheme get textTheme => Theme.of(this).textTheme;
@@ -8,7 +8,7 @@ extension BuildContextExtansion on BuildContext {
   Color get primaryColor => colorScheme.primary;
   Color get secondaryColor => colorScheme.secondary;
   Color get blackColor => colorScheme.surface;
-  Color get tertiarityColor => colorScheme.tertiary;
+  Color get tertiaryColor => colorScheme.tertiary;
   Color get fourthColor => colorScheme.onPrimary;
   Color get errorColor => colorScheme.error;
   Color get onErrorColor => colorScheme.onError;
