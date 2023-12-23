@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/data/auth/admin_process.dart';
 import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
-import 'package:take_data_and_update_project/init/route/app_router.dart';
 import 'package:take_data_and_update_project/util/constants/app_colors.dart';
 import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
-import 'package:take_data_and_update_project/util/constants/project_padding.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/view/auth/login_page/widgets/not_a_member_yet.dart';
+import 'package:take_data_and_update_project/view/auth/login_page/widgets/rememberme_forgot_password.dart';
 import 'package:take_data_and_update_project/view/auth/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/view/auth/widgets/logo_divider_view.dart';
 import 'package:take_data_and_update_project/view/common/main_container_decoration.dart';
@@ -23,7 +23,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool value = false;
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
 
@@ -51,14 +50,19 @@ class _LoginPageState extends State<LoginPage> {
               key: LoginPage._formKey,
               child: Column(
                 children: [
+                  ///Logo
                   const LogoDividerView(),
                   AppSpacer.vertical.space100,
+
+                  ///Login UpperCase
                   Text(
                     LocaleKeys.commons_loginUpperCase.tr(),
                     style: context.displayMedium
                         ?.copyWith(color: AppColors.blackColor),
                   ),
                   AppSpacer.vertical.space20,
+
+                  ///Email Input Field
                   AuthTextFormField(
                     hintText: LocaleKeys.commons_eMail.tr(),
                     keyboardType: TextInputType.emailAddress,
@@ -73,20 +77,25 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                   AppSpacer.vertical.space20,
+
+                  ///Password Input Field
                   AuthTextFormField(
-                      hintText: LocaleKeys.commons_password.tr(),
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
-                      controller: _passwordTextController,
-                      validator: (value) {
-                        if (value!.isNotEmpty && value.length >= 8) {
-                          return null;
-                        } else {
-                          return LocaleKeys.validatorErrors_invalidEmailPassword
-                              .tr();
-                        }
-                      }),
+                    hintText: LocaleKeys.commons_password.tr(),
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
+                    controller: _passwordTextController,
+                    validator: (value) {
+                      if (value!.isNotEmpty && value.length >= 8) {
+                        return null;
+                      } else {
+                        return LocaleKeys.validatorErrors_invalidEmailPassword
+                            .tr();
+                      }
+                    },
+                  ),
                   AppSpacer.vertical.space20,
+
+                  ///Login Button
                   ElevatedButton(
                     onPressed: () {
                       if (!LoginPage._formKey.currentState!.validate()) {
@@ -106,71 +115,12 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   AppSpacer.vertical.space10,
-                  Padding(
-                    padding: ProjectPadding.symHLarge(),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: Checkbox.width.w,
-                              //TODO: CheckBox func
-                              child: Checkbox(
-                                value: value,
-                                onChanged: (bool? value) {
-                                  setState(
-                                    () {
-                                      this.value = value!;
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                            AppSpacer.horizontal.space5,
-                            Text(
-                              LocaleKeys.loginPage_rememberMe.tr(),
-                              style: context.titleLarge
-                                  ?.copyWith(color: AppColors.tertiaryColor),
-                            )
-                          ],
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            //TODO: Forgot Password Route
-                            context.router.replace(
-                              HomeRoute(displayName: "displayName"),
-                            );
-                          },
-                          child: Text(
-                            LocaleKeys.loginPage_forgotPassWord.tr(),
-                            style: context.titleLarge
-                                ?.copyWith(color: AppColors.tertiaryColor),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        LocaleKeys.loginPage_notAMemberYet.tr(),
-                        style: context.titleLarge
-                            ?.copyWith(color: AppColors.tertiaryColor),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          context.router.replace(const RegisterRoute());
-                        },
-                        child: Text(
-                          LocaleKeys.loginPage_signUp.tr(),
-                          style: context.titleLarge
-                              ?.copyWith(color: AppColors.clickableColor),
-                        ),
-                      ),
-                    ],
-                  )
+
+                  ///Remember Me and Forgot Password
+                  const RememberMeForgotPassword(),
+
+                  ///Not a Member Yet
+                  const NotAMemberYet(),
                 ],
               ),
             ),

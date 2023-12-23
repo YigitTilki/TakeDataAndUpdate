@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
 import 'package:take_data_and_update_project/view/admin_page/admin_page.dart';
 import 'package:take_data_and_update_project/view/auth/login_page/login_page.dart';
 import 'package:take_data_and_update_project/view/auth/register_page/register_page.dart';

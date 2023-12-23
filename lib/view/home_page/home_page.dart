@@ -10,8 +10,7 @@ import 'package:take_data_and_update_project/view/common/main_container_decorati
 
 @RoutePage()
 class HomePage extends StatelessWidget {
-  final String displayName;
-  const HomePage({super.key, required this.displayName});
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,7 @@ class HomePage extends StatelessWidget {
                     AppSpacer.vertical.space5,
                     Expanded(
                       child: Text(
-                        displayName,
+                        "displayName",
                         overflow: TextOverflow.ellipsis,
                         style: context.headlineLarge,
                       ),
@@ -54,7 +53,7 @@ class HomePage extends StatelessWidget {
       ),
       backgroundColor: context.secondaryColor,
       appBar: AppBar(
-        title: Text("${LocaleKeys.homePage_welcome} $displayName").tr(),
+        title: Text("${LocaleKeys.homePage_welcome.tr()} displayName"),
       ),
       body: Center(
         child: Column(

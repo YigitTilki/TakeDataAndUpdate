@@ -34,7 +34,7 @@ class FirebaseInteractions {
     if (user != null) {
       debugPrint("User signed up");
 
-      context.router.replace(HomeRoute(displayName: displayName));
+      context.router.replace(const HomeRoute());
     } else {
       scaffoldMessenger(context, 'Some error occurred');
     }
