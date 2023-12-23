@@ -1,26 +1,124 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:take_data_and_update_project/init/theme/app_theme.dart';
 import 'package:take_data_and_update_project/util/constants/app_colors.dart';
 
-class LightTheme {
-  LightTheme._();
+final class LightTheme implements CustomAppTheme {
+  @override
+  ThemeData get themeData => ThemeData(
+        useMaterial3: true,
+        scaffoldBackgroundColor: AppColors.homeBackgroundColor,
+        appBarTheme: appBarTheme,
+        drawerTheme: drawerThemeData,
+        snackBarTheme: snackBarThemeData,
+        colorScheme: colorScheme,
+        fontFamily: appFont,
+        textTheme: textTheme,
+        elevatedButtonTheme: elevatedButtonThemeData,
+        inputDecorationTheme: inputDecorationTheme,
+        checkboxTheme: checkboxThemeData,
+        listTileTheme: listTileThemeData,
+        floatingActionButtonTheme: floatingActionButtonThemeData,
+      );
 
-  static ColorScheme get _colorScheme => const ColorScheme(
-      brightness: Brightness.light,
-      primary: AppColors.homeBackgroundColor,
-      onPrimary: AppColors.fourthColor,
-      secondary: AppColors.secondaryColor,
-      onSecondary: AppColors.homeBackgroundColor,
-      error: AppColors.errorColor,
-      onError: AppColors.onErrorColor,
-      background: AppColors.homeBackgroundColor,
-      onBackground: AppColors.homeBackgroundColor,
-      surface: AppColors.blackColor,
-      onSurface: AppColors.defaultTextColor);
+  @override
+  AppBarTheme get appBarTheme => AppBarTheme(
+        color: AppColors.homeBackgroundColor,
+        titleTextStyle: textTheme.headlineLarge,
+        centerTitle: true,
+        actionsIconTheme:
+            IconThemeData(color: AppColors.secondaryColor, size: 30.sp),
+        iconTheme: IconThemeData(color: AppColors.secondaryColor, size: 30.sp),
+      );
 
-  static String get _appFont => "Inter";
+  @override
+  String get appFont => "Inter";
 
-  static TextTheme get _appTextTheme => TextTheme(
+  @override
+  CheckboxThemeData get checkboxThemeData => CheckboxThemeData(
+        fillColor: MaterialStateProperty.resolveWith(
+            (states) => AppColors.secondaryColor),
+        checkColor: MaterialStateProperty.resolveWith(
+            (states) => AppColors.tertiaryColor),
+        side: MaterialStateBorderSide.resolveWith(
+          (states) => BorderSide(
+            color: AppColors.tertiaryColor,
+            width: 1.sp,
+          ),
+        ),
+      );
+
+  @override
+  ColorScheme get colorScheme => const ColorScheme(
+        brightness: Brightness.light,
+        primary: AppColors.homeBackgroundColor,
+        onPrimary: AppColors.fourthColor,
+        secondary: AppColors.secondaryColor,
+        onSecondary: AppColors.homeBackgroundColor,
+        error: AppColors.errorColor,
+        onError: AppColors.onErrorColor,
+        background: AppColors.homeBackgroundColor,
+        onBackground: AppColors.homeBackgroundColor,
+        surface: AppColors.blackColor,
+        onSurface: AppColors.defaultTextColor,
+      );
+
+  @override
+  DrawerThemeData get drawerThemeData => DrawerThemeData(
+        backgroundColor: AppColors.homeBackgroundColor,
+        width: 242.w,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(width: 10.sp, color: AppColors.secondaryColor),
+        ),
+      );
+
+  @override
+  ElevatedButtonThemeData get elevatedButtonThemeData =>
+      ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            foregroundColor: AppColors.whiteColor,
+            backgroundColor: AppColors.tertiaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.sp),
+            ),
+            textStyle: textTheme.labelMedium),
+      );
+
+  @override
+  FloatingActionButtonThemeData get floatingActionButtonThemeData =>
+      FloatingActionButtonThemeData(
+        iconSize: 25.sp,
+        backgroundColor: AppColors.homeBackgroundColor,
+      );
+
+  @override
+  InputDecorationTheme get inputDecorationTheme => InputDecorationTheme(
+        enabledBorder: outlineInputBorder(AppColors.homeBackgroundColor),
+        focusedBorder: outlineInputBorder(AppColors.tertiaryColor),
+        errorBorder: outlineInputBorder(AppColors.errorColor),
+        focusedErrorBorder: outlineInputBorder(AppColors.onErrorColor),
+        errorStyle: textTheme.titleLarge?.copyWith(color: AppColors.errorColor),
+        filled: true,
+        fillColor: AppColors.fourthColor,
+        hintStyle:
+            textTheme.headlineSmall?.copyWith(color: AppColors.secondaryColor),
+      );
+
+  @override
+  ListTileThemeData get listTileThemeData => ListTileThemeData(
+        subtitleTextStyle: textTheme.titleLarge,
+        titleTextStyle: textTheme.bodyMedium,
+      );
+
+  @override
+  SnackBarThemeData get snackBarThemeData => SnackBarThemeData(
+        actionTextColor: AppColors.fourthColor,
+        backgroundColor: AppColors.homeBackgroundColor,
+        contentTextStyle: textTheme.labelMedium,
+      );
+
+  @override
+  TextTheme get textTheme => TextTheme(
         labelSmall: TextStyle(
           fontSize: 7.sp,
           color: AppColors.defaultTextColor,
@@ -98,96 +196,11 @@ class LightTheme {
         ),
       );
 
-  static OutlineInputBorder _outlineInputBorder(Color color) {
+  @override
+  OutlineInputBorder outlineInputBorder(Color color) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(8.sp),
       borderSide: BorderSide(color: color, width: 2.sp),
     );
-  }
-
-  static InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
-        enabledBorder: _outlineInputBorder(AppColors.homeBackgroundColor),
-        focusedBorder: _outlineInputBorder(AppColors.tertiaryColor),
-        errorBorder: _outlineInputBorder(AppColors.errorColor),
-        focusedErrorBorder: _outlineInputBorder(AppColors.onErrorColor),
-        errorStyle:
-            _appTextTheme.titleLarge?.copyWith(color: AppColors.errorColor),
-        filled: true,
-        fillColor: AppColors.fourthColor,
-        hintStyle: _appTextTheme.headlineSmall
-            ?.copyWith(color: AppColors.secondaryColor),
-      );
-
-  static ElevatedButtonThemeData get _elevatedButtonTheme =>
-      ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            foregroundColor: AppColors.whiteColor,
-            backgroundColor: AppColors.tertiaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.sp),
-            ),
-            textStyle: _appTextTheme.labelMedium),
-      );
-
-  static CheckboxThemeData get _checkBoxThemeData => CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith(
-            (states) => AppColors.secondaryColor),
-        checkColor: MaterialStateProperty.resolveWith(
-            (states) => AppColors.tertiaryColor),
-        side: MaterialStateBorderSide.resolveWith(
-          (states) => BorderSide(
-            color: AppColors.tertiaryColor,
-            width: 1.sp,
-          ),
-        ),
-      );
-
-  static AppBarTheme get _appBarTheme => AppBarTheme(
-        color: AppColors.homeBackgroundColor,
-        titleTextStyle: _appTextTheme.headlineLarge,
-        centerTitle: true,
-        actionsIconTheme:
-            IconThemeData(color: AppColors.secondaryColor, size: 30.sp),
-        iconTheme: IconThemeData(color: AppColors.secondaryColor, size: 30.sp),
-      );
-
-  static DrawerThemeData get _drawerThemeData => DrawerThemeData(
-        backgroundColor: AppColors.homeBackgroundColor,
-        width: 242.w,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(width: 10.sp, color: AppColors.secondaryColor),
-        ),
-      );
-
-  static SnackBarThemeData get _snackBarThemeData => SnackBarThemeData(
-      actionTextColor: AppColors.fourthColor,
-      backgroundColor: AppColors.homeBackgroundColor,
-      contentTextStyle: _appTextTheme.labelMedium);
-
-  static ListTileThemeData get _listTileThemeData => ListTileThemeData(
-        subtitleTextStyle: _appTextTheme.titleLarge,
-        titleTextStyle: _appTextTheme.bodyMedium,
-      );
-
-  static FloatingActionButtonThemeData get _floatingActionButtonThemeData =>
-      FloatingActionButtonThemeData(
-        iconSize: 25.sp,
-        backgroundColor: AppColors.homeBackgroundColor,
-      );
-
-  static ThemeData get themeData {
-    return ThemeData(
-        scaffoldBackgroundColor: AppColors.homeBackgroundColor,
-        appBarTheme: _appBarTheme,
-        drawerTheme: _drawerThemeData,
-        snackBarTheme: _snackBarThemeData,
-        colorScheme: _colorScheme,
-        fontFamily: _appFont,
-        textTheme: _appTextTheme,
-        elevatedButtonTheme: _elevatedButtonTheme,
-        inputDecorationTheme: _inputDecorationTheme,
-        checkboxTheme: _checkBoxThemeData,
-        listTileTheme: _listTileThemeData,
-        floatingActionButtonTheme: _floatingActionButtonThemeData);
   }
 }

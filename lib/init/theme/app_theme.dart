@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:take_data_and_update_project/init/theme/dark_theme.dart';
-import 'package:take_data_and_update_project/init/theme/light_theme.dart';
 
-class AppTheme {
-  AppTheme._();
-
-  static ThemeData get lightTheme => LightTheme.themeData;
-  static ThemeData get darkTheme => DarkTheme.themeData;
+abstract class CustomAppTheme {
+  ThemeData get themeData;
+  ColorScheme get colorScheme;
+  TextTheme get textTheme;
+  String get appFont;
+  OutlineInputBorder outlineInputBorder(Color color);
+  InputDecorationTheme get inputDecorationTheme;
+  ElevatedButtonThemeData get elevatedButtonThemeData;
+  CheckboxThemeData get checkboxThemeData;
+  AppBarTheme get appBarTheme;
+  DrawerThemeData get drawerThemeData;
+  SnackBarThemeData get snackBarThemeData;
+  ListTileThemeData get listTileThemeData;
+  FloatingActionButtonThemeData get floatingActionButtonThemeData;
 }

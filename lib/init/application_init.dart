@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logger/logger.dart';
-import 'package:take_data_and_update_project/firebase_options.dart';
+import 'package:take_data_and_update_project/data/firebase_options.dart';
 
 @immutable
 final class ApplicationInitialize {

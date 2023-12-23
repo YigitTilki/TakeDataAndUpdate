@@ -10,7 +10,7 @@ class FirebaseAuthService {
           email: email, password: password);
       return credential.user;
     } catch (e) {
-      debugPrint("Some error occured");
+      debugPrint("Some error occurred");
     }
     return null;
   }
@@ -23,7 +23,7 @@ class FirebaseAuthService {
       credential.user?.updateDisplayName(displayName);
       return credential.user;
     } catch (e) {
-      debugPrint("Some error occured");
+      debugPrint("Some error occurred");
     }
     return null;
   }

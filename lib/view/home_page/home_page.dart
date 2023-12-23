@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/features/common/main_container_decoration.dart';
 import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
-import 'package:take_data_and_update_project/util/app_spacer.dart';
+import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/util/constants/img_helper.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/view/common/main_container_decoration.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -15,8 +15,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const int smallConttainerHeight = 76;
-    const int bigConttainerHeight = 202;
+    const int smallContainerHeight = 76;
+    const int bigContainerHeight = 202;
     const int bigContainerWidth = 260;
     const int mediumContainerWidth = 200;
     const int smallContainerWidth = 120;
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
               flex: 2,
               child: Container(
                 width: bigContainerWidth.w,
-                height: bigConttainerHeight.h,
+                height: bigContainerHeight.h,
                 decoration: containerDecoration(context.primaryColor),
               ),
             ),
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: Container(
                 width: bigContainerWidth.w,
-                height: smallConttainerHeight.h,
+                height: smallContainerHeight.h,
                 decoration: containerDecoration(context.primaryColor),
               ),
             ),
@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: Container(
                 width: mediumContainerWidth.w,
-                height: smallConttainerHeight.h,
+                height: smallContainerHeight.h,
                 decoration: containerDecoration(context.primaryColor),
               ),
             ),
@@ -89,7 +89,7 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: Container(
                 width: smallContainerWidth.w,
-                height: smallConttainerHeight.h,
+                height: smallContainerHeight.h,
                 decoration: containerDecoration(context.primaryColor),
               ),
             ),
