@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kartal/kartal.dart';
 import 'package:logger/logger.dart';
 import 'package:take_data_and_update_project/data/firebase_options.dart';
 
@@ -37,6 +38,7 @@ final class ApplicationInitialize {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark));
+    await DeviceUtility.instance.initPackageInfo();
 
     FlutterError.onError = (details) {
       /// crashlytics log insert here

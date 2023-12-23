@@ -28,6 +28,7 @@ dependencies:
   kartal: ^3.5.0
   flutter_svg: ^2.0.9
   lottie: ^2.7.0
+  responsive_framework: ^1.1.1
   
 
 dev_dependencies:

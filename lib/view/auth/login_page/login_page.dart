@@ -42,80 +42,82 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
             decoration: containerDecoration(context.secondaryColor),
             child: Form(
               key: LoginPage._formKey,
-              child: Column(
-                children: [
-                  ///Logo
-                  const LogoDividerView(),
-                  AppSpacer.vertical.space100,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ///Logo
+                    const LogoDividerView(),
+                    AppSpacer.vertical.space100,
 
-                  ///Login UpperCase
-                  Text(
-                    LocaleKeys.commons_loginUpperCase.tr(),
-                    style: context.displayMedium
-                        ?.copyWith(color: AppColors.blackColor),
-                  ),
-                  AppSpacer.vertical.space20,
-
-                  ///Email Input Field
-                  AuthTextFormField(
-                    hintText: LocaleKeys.commons_eMail.tr(),
-                    keyboardType: TextInputType.emailAddress,
-                    controller: emailTextController,
-                    validator: (value) {
-                      if (value!.isNotEmpty && value.length > 7) {
-                        return null;
-                      } else {
-                        return LocaleKeys.validatorErrors_invalidEmailPassword
-                            .tr();
-                      }
-                    },
-                  ),
-                  AppSpacer.vertical.space20,
-
-                  ///Password Input Field
-                  AuthTextFormField(
-                    hintText: LocaleKeys.commons_password.tr(),
-                    keyboardType: TextInputType.visiblePassword,
-                    obscureText: true,
-                    controller: passwordTextController,
-                    validator: (value) {
-                      if (value!.isNotEmpty && value.length >= 8) {
-                        return null;
-                      } else {
-                        return LocaleKeys.validatorErrors_invalidEmailPassword
-                            .tr();
-                      }
-                    },
-                  ),
-                  AppSpacer.vertical.space20,
-
-                  ///Login Button
-                  ElevatedButton(
-                    onPressed: () {
-                      if (!LoginPage._formKey.currentState!.validate()) {
-                        return debugPrint("Olmadı");
-                      } else {
-                        FirebaseInteractions().loginAdmin(
-                          context,
-                          emailTextController.text,
-                          passwordTextController.text,
-                        );
-                      }
-                      setState(() {});
-                    },
-                    child: Text(
+                    ///Login UpperCase
+                    Text(
                       LocaleKeys.commons_loginUpperCase.tr(),
-                      style: context.bodyMedium,
+                      style: context.displayMedium
+                          ?.copyWith(color: AppColors.blackColor),
                     ),
-                  ),
-                  AppSpacer.vertical.space10,
+                    AppSpacer.vertical.space20,
 
-                  ///Remember Me and Forgot Password
-                  const _RememberMeForgotPassword(),
+                    ///Email Input Field
+                    AuthTextFormField(
+                      hintText: LocaleKeys.commons_eMail.tr(),
+                      keyboardType: TextInputType.emailAddress,
+                      controller: emailTextController,
+                      validator: (value) {
+                        if (value!.isNotEmpty && value.length > 7) {
+                          return null;
+                        } else {
+                          return LocaleKeys.validatorErrors_invalidEmailPassword
+                              .tr();
+                        }
+                      },
+                    ),
+                    AppSpacer.vertical.space20,
 
-                  ///Not a Member Yet
-                  const _NotAMemberYet(),
-                ],
+                    ///Password Input Field
+                    AuthTextFormField(
+                      hintText: LocaleKeys.commons_password.tr(),
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
+                      controller: passwordTextController,
+                      validator: (value) {
+                        if (value!.isNotEmpty && value.length >= 8) {
+                          return null;
+                        } else {
+                          return LocaleKeys.validatorErrors_invalidEmailPassword
+                              .tr();
+                        }
+                      },
+                    ),
+                    AppSpacer.vertical.space20,
+
+                    ///Login Button
+                    ElevatedButton(
+                      onPressed: () {
+                        if (!LoginPage._formKey.currentState!.validate()) {
+                          return debugPrint("Olmadı");
+                        } else {
+                          FirebaseInteractions().loginAdmin(
+                            context,
+                            emailTextController.text,
+                            passwordTextController.text,
+                          );
+                        }
+                        setState(() {});
+                      },
+                      child: Text(
+                        LocaleKeys.commons_loginUpperCase.tr(),
+                        style: context.bodyMedium,
+                      ),
+                    ),
+                    AppSpacer.vertical.space10,
+
+                    ///Remember Me and Forgot Password
+                    const _RememberMeForgotPassword(),
+
+                    ///Not a Member Yet
+                    const _NotAMemberYet(),
+                  ],
+                ),
               ),
             ),
           ),

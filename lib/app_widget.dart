@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/init/route/app_router.dart';
 import 'package:take_data_and_update_project/init/theme/light_theme.dart';
+import 'package:take_data_and_update_project/util/responsive/custom_responsive.dart';
 
 class AppWidget extends StatelessWidget {
   AppWidget({super.key});
@@ -18,6 +19,7 @@ class AppWidget extends StatelessWidget {
           title: "Graduating Project",
           debugShowCheckedModeBanner: false,
           theme: LightTheme().themeData,
+          builder: CustomResponsive.build,
 
           ///Localization
           localizationsDelegates: context.localizationDelegates,
