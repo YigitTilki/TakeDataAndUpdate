@@ -1,25 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/util/constants/img_helper.dart';
-import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
+part of '../users_page.dart';
 
-class UserListView extends StatefulWidget {
-  final TextEditingController searchController;
+class _UsersList extends StatelessWidget {
+  const _UsersList({
+    required this.userList,
+    required this.searchController,
+    required this.iconSize,
+  });
+
   final Future<List<Map<String, dynamic>>> userList;
-
-  const UserListView(
-      {super.key, required this.searchController, required this.userList});
-
-  @override
-  State<UserListView> createState() => _UserListViewState();
-}
-
-class _UserListViewState extends State<UserListView> {
-  late Future<List<Map<String, dynamic>>> userList = widget.userList;
+  final TextEditingController searchController;
+  final int iconSize;
 
   @override
   Widget build(BuildContext context) {
-    const int iconSize = 20;
     const int listTileHeight = 60;
     return FutureBuilder(
       future: userList,
@@ -29,15 +22,14 @@ class _UserListViewState extends State<UserListView> {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
-          // Filtreleme işlemini gerçekleştir
           List<Map<String, dynamic>> filteredList = snapshot.data!
               .where((user) =>
                   user['FirstName']
                       .toLowerCase()
-                      .contains(widget.searchController.text.toLowerCase()) ||
+                      .contains(searchController.text.toLowerCase()) ||
                   user['LastName']
                       .toLowerCase()
-                      .contains(widget.searchController.text.toLowerCase()))
+                      .contains(searchController.text.toLowerCase()))
               .toList();
 
           return Expanded(
@@ -47,7 +39,8 @@ class _UserListViewState extends State<UserListView> {
                 String firstName = filteredList[index]['FirstName'];
                 String lastName = filteredList[index]['LastName'];
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 4.h),
+                  padding: ProjectPadding.symHXXSmall() +
+                      ProjectPadding.symVXSmall(),
                   child: Container(
                     height: listTileHeight.h,
                     decoration: ShapeDecoration(
@@ -72,8 +65,7 @@ class _UserListViewState extends State<UserListView> {
                                 );
                               });
                         },
-                        leading: Image.asset(
-                          ImageHelper.users,
+                        leading: Assets.images.users.image(
                           width: iconSize.w,
                           height: iconSize.h,
                           color: context.primaryColor,

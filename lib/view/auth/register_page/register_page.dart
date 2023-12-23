@@ -8,9 +8,12 @@ import 'package:take_data_and_update_project/init/route/app_router.dart';
 import 'package:take_data_and_update_project/util/constants/app_colors.dart';
 import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/view/auth/register_page/mixin/register_page_mixin.dart';
 import 'package:take_data_and_update_project/view/auth/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/view/auth/widgets/logo_divider_view.dart';
 import 'package:take_data_and_update_project/view/common/main_container_decoration.dart';
+
+part 'widgets/already_have_account.dart';
 
 @RoutePage()
 class RegisterPage extends StatefulWidget {
@@ -22,24 +25,7 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController _emailTextController = TextEditingController();
-  final TextEditingController _passwordTextController = TextEditingController();
-  final TextEditingController _rePasswordTextController =
-      TextEditingController();
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailTextController.dispose();
-    _passwordTextController.dispose();
-    _firstNameController.dispose();
-    _lastNameController.dispose();
-    _rePasswordTextController.dispose();
-    super.dispose();
-  }
-
+class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
   @override
   Widget build(BuildContext context) {
     const int containerWidth = 310;
@@ -56,8 +42,11 @@ class _RegisterPageState extends State<RegisterPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    ///Logo
                     const LogoDividerView(),
                     AppSpacer.vertical.space20,
+
+                    ///Sign Up UpperCase
                     Text(
                       LocaleKeys.registerPage_signUpUpperCase.tr(),
                       style: context.displayMedium?.copyWith(
@@ -65,8 +54,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     AppSpacer.vertical.space20,
+
+                    ///FirstName Input Field
                     AuthTextFormField(
-                      controller: _firstNameController,
+                      controller: firstNameController,
                       keyboardType: TextInputType.name,
                       hintText: LocaleKeys.registerPage_firstName.tr(),
                       validator: (value) {
@@ -78,8 +69,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                     ),
                     AppSpacer.vertical.space20,
+
+                    ///LastName Input Field
                     AuthTextFormField(
-                      controller: _lastNameController,
+                      controller: lastNameController,
                       keyboardType: TextInputType.name,
                       hintText: LocaleKeys.registerPage_lastName.tr(),
                       validator: (value) {
@@ -91,8 +84,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                     ),
                     AppSpacer.vertical.space20,
+
+                    ///Password Input Field
                     AuthTextFormField(
-                      controller: _passwordTextController,
+                      controller: passwordTextController,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       hintText: LocaleKeys.commons_password.tr(),
@@ -105,13 +100,15 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                     ),
                     AppSpacer.vertical.space20,
+
+                    ///RePassword Input Field
                     AuthTextFormField(
-                      controller: _rePasswordTextController,
+                      controller: rePasswordTextController,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       hintText: LocaleKeys.registerPage_rePassword.tr(),
                       validator: (value) {
-                        if (value != _passwordTextController.text) {
+                        if (value != passwordTextController.text) {
                           return LocaleKeys.validatorErrors_passwordDoesntMatch
                               .tr();
                         } else {
@@ -120,8 +117,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                     ),
                     AppSpacer.vertical.space20,
+
+                    ///Email Input Field
                     AuthTextFormField(
-                      controller: _emailTextController,
+                      controller: emailTextController,
                       keyboardType: TextInputType.emailAddress,
                       hintText: LocaleKeys.commons_eMail.tr(),
                       validator: (value) {
@@ -133,6 +132,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                     ),
                     AppSpacer.vertical.space20,
+
+                    ///Sign Up Button
                     ElevatedButton(
                       onPressed: () {
                         if (!RegisterPage._formKey.currentState!.validate()) {
@@ -140,11 +141,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         } else {
                           FirebaseInteractions().signUpAdmin(
                               context,
-                              _emailTextController.text,
-                              _passwordTextController.text,
-                              "${_firstNameController.text}"
+                              emailTextController.text,
+                              passwordTextController.text,
+                              "${firstNameController.text}"
                               " "
-                              "${_lastNameController.text}");
+                              "${lastNameController.text}");
                         }
                       },
                       child: Text(
@@ -152,26 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: context.bodyMedium,
                       ).tr(),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          LocaleKeys.registerPage_alreadyHaveAnAcc,
-                          style: context.titleLarge
-                              ?.copyWith(color: AppColors.tertiaryColor),
-                        ).tr(),
-                        TextButton(
-                          onPressed: () {
-                            context.router.replace(const LoginRoute());
-                          },
-                          child: Text(
-                            LocaleKeys.registerPage_logIn,
-                            style: context.titleLarge
-                                ?.copyWith(color: AppColors.clickableColor),
-                          ).tr(),
-                        ),
-                      ],
-                    )
+                    const _AlreadyHaveAnAccount()
                   ],
                 ),
               ),

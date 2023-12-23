@@ -4,14 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/data/auth/admin_process.dart';
 import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
+import 'package:take_data_and_update_project/init/route/app_router.dart';
 import 'package:take_data_and_update_project/util/constants/app_colors.dart';
 import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
+import 'package:take_data_and_update_project/util/constants/project_padding.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
-import 'package:take_data_and_update_project/view/auth/login_page/widgets/not_a_member_yet.dart';
-import 'package:take_data_and_update_project/view/auth/login_page/widgets/rememberme_forgot_password.dart';
+import 'package:take_data_and_update_project/view/auth/login_page/mixin/login_page_mixin.dart';
 import 'package:take_data_and_update_project/view/auth/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/view/auth/widgets/logo_divider_view.dart';
 import 'package:take_data_and_update_project/view/common/main_container_decoration.dart';
+
+part 'widgets/not_a_member_yet.dart';
+part 'widgets/remember_me_forgot_password.dart';
 
 @RoutePage()
 class LoginPage extends StatefulWidget {
@@ -22,17 +26,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailTextController = TextEditingController();
-  final TextEditingController _passwordTextController = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailTextController.dispose();
-    _passwordTextController.dispose();
-    super.dispose();
-  }
-
+class _LoginPageState extends State<LoginPage> with LoginPageMixin {
   @override
   Widget build(BuildContext context) {
     const int containerWidth = 310;
@@ -66,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                   AuthTextFormField(
                     hintText: LocaleKeys.commons_eMail.tr(),
                     keyboardType: TextInputType.emailAddress,
-                    controller: _emailTextController,
+                    controller: emailTextController,
                     validator: (value) {
                       if (value!.isNotEmpty && value.length > 7) {
                         return null;
@@ -83,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: LocaleKeys.commons_password.tr(),
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
-                    controller: _passwordTextController,
+                    controller: passwordTextController,
                     validator: (value) {
                       if (value!.isNotEmpty && value.length >= 8) {
                         return null;
@@ -103,8 +97,8 @@ class _LoginPageState extends State<LoginPage> {
                       } else {
                         FirebaseInteractions().loginAdmin(
                           context,
-                          _emailTextController.text,
-                          _passwordTextController.text,
+                          emailTextController.text,
+                          passwordTextController.text,
                         );
                       }
                       setState(() {});
@@ -117,10 +111,10 @@ class _LoginPageState extends State<LoginPage> {
                   AppSpacer.vertical.space10,
 
                   ///Remember Me and Forgot Password
-                  const RememberMeForgotPassword(),
+                  const _RememberMeForgotPassword(),
 
                   ///Not a Member Yet
-                  const NotAMemberYet(),
+                  const _NotAMemberYet(),
                 ],
               ),
             ),

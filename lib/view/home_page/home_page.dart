@@ -8,6 +8,9 @@ import 'package:take_data_and_update_project/util/constants/img_helper.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/view/common/main_container_decoration.dart';
 
+part 'widgets/app_bar.dart';
+part 'widgets/drawer.dart';
+
 @RoutePage()
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -21,40 +24,9 @@ class HomePage extends StatelessWidget {
     const int smallContainerWidth = 120;
 
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              margin: EdgeInsets.only(bottom: 0.h),
-              child: Center(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 80.h,
-                      width: 80.w,
-                      child: const CircleAvatar(
-                        backgroundImage: AssetImage(ImageHelper.profileIcon),
-                      ),
-                    ),
-                    AppSpacer.vertical.space5,
-                    Expanded(
-                      child: Text(
-                        "displayName",
-                        overflow: TextOverflow.ellipsis,
-                        style: context.headlineLarge,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      drawer: const _HomePageDrawer(),
       backgroundColor: context.secondaryColor,
-      appBar: AppBar(
-        title: Text("${LocaleKeys.homePage_welcome.tr()} displayName"),
-      ),
+      appBar: const _HomePageAppBar(),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,7 +1,7 @@
-part of '../login_page.dart';
+part of '../register_page.dart';
 
-class _NotAMemberYet extends StatelessWidget {
-  const _NotAMemberYet();
+class _AlreadyHaveAnAccount extends StatelessWidget {
+  const _AlreadyHaveAnAccount();
 
   @override
   Widget build(BuildContext context) {
@@ -9,18 +9,20 @@ class _NotAMemberYet extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          LocaleKeys.loginPage_notAMemberYet.tr(),
+          LocaleKeys.registerPage_alreadyHaveAnAcc,
           style: context.titleLarge?.copyWith(color: AppColors.tertiaryColor),
-        ),
+        ).tr(),
         TextButton(
           onPressed: () {
-            context.router.replace(const RegisterRoute());
+            context.router.replace(
+              const LoginRoute(),
+            );
           },
           child: Text(
-            LocaleKeys.loginPage_signUp.tr(),
+            LocaleKeys.registerPage_logIn,
             style:
                 context.titleLarge?.copyWith(color: AppColors.clickableColor),
-          ),
+          ).tr(),
         ),
       ],
     );

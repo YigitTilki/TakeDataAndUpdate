@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
+part of '../users_page.dart';
 
-class UsersPageDivider extends StatelessWidget {
-  const UsersPageDivider({super.key});
+class _UsersPageDivider extends StatelessWidget {
+  const _UsersPageDivider();
 
   @override
   Widget build(BuildContext context) {
