@@ -71,8 +71,8 @@ class AuthRepository extends BaseAuthRepository {
       QuerySnapshot<Map<String, dynamic>> result = await FirebaseFirestore
           .instance
           .collection('users')
-          .where('E-Mail', isEqualTo: emailController)
-          .where('Password', isEqualTo: passwordController)
+          .where('email', isEqualTo: emailController)
+          .where('password', isEqualTo: passwordController)
           .get();
 
       if (!context.mounted) return;

@@ -84,21 +84,29 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
 
                     ///Login Button
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (!LoginPage._formKey.currentState!.validate()) {
                           return debugPrint("Olmadı");
                         } else {
-                          AuthRepository().signInUser(
+                          await AuthRepository().signInUser(
                             emailController: emailTextController.text,
                             passwordController: passwordTextController.text,
                             context: context,
                           );
-                          /* FirebaseInteractions().loginAdmin(
-                            context,
-                            emailTextController.text,
-                            passwordTextController.text,
+                          if (!context.mounted) return;
+                          //TODO: Do
+                          /* await AuthRepository().loginAdmin(
+                            context: context,
+                            emailController: emailTextController.text,
+                            passwordController: passwordTextController.text,
                           ); */
+                          /* await AuthRepository().signUpAdmin(
+                              context: context,
+                              emailController: emailTextController.text,
+                              passwordController: passwordTextController.text,
+                              displayName: "Yiğit Tilki"); */
                         }
+
                         setState(() {});
                       },
                       child: Text(
