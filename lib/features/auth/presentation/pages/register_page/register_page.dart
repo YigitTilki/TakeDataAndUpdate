@@ -2,16 +2,19 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/data/auth/admin_process.dart';
+import 'package:take_data_and_update_project/features/auth/data/auth_repository.dart';
+import 'package:take_data_and_update_project/features/auth/domain/user_model.dart';
+import 'package:take_data_and_update_project/features/auth/presentation/pages/register_page/mixin/register_page_mixin.dart';
+import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/auth_text_form_field.dart';
+import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/logo_divider_view.dart';
+import 'package:take_data_and_update_project/features/common/main_container_decoration.dart';
+import 'package:take_data_and_update_project/features/common/scaffold_messengers.dart';
 import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/init/route/app_router.dart';
 import 'package:take_data_and_update_project/util/constants/app_colors.dart';
 import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
-import 'package:take_data_and_update_project/view/auth/register_page/mixin/register_page_mixin.dart';
-import 'package:take_data_and_update_project/view/auth/widgets/auth_text_form_field.dart';
-import 'package:take_data_and_update_project/view/auth/widgets/logo_divider_view.dart';
-import 'package:take_data_and_update_project/view/common/main_container_decoration.dart';
+import 'package:uuid/uuid.dart';
 
 part 'widgets/already_have_account.dart';
 
@@ -135,17 +138,26 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
 
                     ///Sign Up Button
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        bool emailExists = await AuthRepository()
+                            .isEmailExists(eMail: emailTextController.text);
+                        if (!context.mounted) return;
                         if (!RegisterPage._formKey.currentState!.validate()) {
                           return debugPrint("Olmadı");
+                        } else if (!emailExists) {
+                          return scaffoldMessenger(context, "Email Exist");
                         } else {
-                          FirebaseInteractions().signUpAdmin(
-                              context,
-                              emailTextController.text,
-                              passwordTextController.text,
-                              "${firstNameController.text}"
-                              " "
-                              "${lastNameController.text}");
+                          var userModel = UserModel(
+                            id: const Uuid().v4(),
+                            email: emailTextController.text,
+                            password: passwordTextController.text,
+                            firstName: firstNameController.text,
+                            lastName: lastNameController.text,
+                          );
+                          AuthRepository().singUpUser(
+                            userModel: userModel,
+                            context: context,
+                          );
                         }
                       },
                       child: Text(
