@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:take_data_and_update_project/features/auth/data/firebase_auth_services.dart';
 import 'package:take_data_and_update_project/features/auth/domain/base_auth_repository.dart';
 import 'package:take_data_and_update_project/features/auth/domain/user_model.dart';
 import 'package:take_data_and_update_project/features/common/scaffold_messengers.dart';
@@ -113,5 +112,33 @@ class AuthRepository extends BaseAuthRepository {
 
     if (query.docs.isNotEmpty) return false;
     return true;
+  }
+}
+
+class FirebaseAuthService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<User?> signIn(String email, String password) async {
+    try {
+      UserCredential credential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      return credential.user;
+    } catch (e) {
+      debugPrint("Some error occurred");
+    }
+    return null;
+  }
+
+  Future<User?> signUp(
+      String email, String password, String displayName) async {
+    try {
+      UserCredential credential = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      credential.user?.updateDisplayName(displayName);
+      return credential.user;
+    } catch (e) {
+      debugPrint("Some error occurred");
+    }
+    return null;
   }
 }

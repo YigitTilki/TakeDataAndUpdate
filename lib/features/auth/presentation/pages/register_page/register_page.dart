@@ -14,6 +14,7 @@ import 'package:take_data_and_update_project/init/route/app_router.dart';
 import 'package:take_data_and_update_project/util/constants/app_colors.dart';
 import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/util/validators/validators.dart';
 import 'package:uuid/uuid.dart';
 
 part 'widgets/already_have_account.dart';
@@ -63,13 +64,8 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                       controller: firstNameController,
                       keyboardType: TextInputType.name,
                       hintText: LocaleKeys.registerPage_firstName.tr(),
-                      validator: (value) {
-                        if (value!.isNotEmpty) {
-                          return null;
-                        } else {
-                          return LocaleKeys.validatorErrors_requiredForm.tr();
-                        }
-                      },
+                      validator: (value) =>
+                          Validators().firstName(value: value),
                     ),
                     AppSpacer.vertical.space20,
 
@@ -78,13 +74,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                       controller: lastNameController,
                       keyboardType: TextInputType.name,
                       hintText: LocaleKeys.registerPage_lastName.tr(),
-                      validator: (value) {
-                        if (value!.isNotEmpty && value.length >= 2) {
-                          return null;
-                        } else {
-                          return LocaleKeys.validatorErrors_requiredForm.tr();
-                        }
-                      },
+                      validator: (value) => Validators().lastName(value: value),
                     ),
                     AppSpacer.vertical.space20,
 
@@ -94,13 +84,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       hintText: LocaleKeys.commons_password.tr(),
-                      validator: (value) {
-                        if (value!.isNotEmpty && value.length >= 8) {
-                          return null;
-                        } else {
-                          return LocaleKeys.validatorErrors_passwordMust8.tr();
-                        }
-                      },
+                      validator: (value) => Validators().password(value: value),
                     ),
                     AppSpacer.vertical.space20,
 
@@ -110,14 +94,10 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       hintText: LocaleKeys.registerPage_rePassword.tr(),
-                      validator: (value) {
-                        if (value != passwordTextController.text) {
-                          return LocaleKeys.validatorErrors_passwordDoesntMatch
-                              .tr();
-                        } else {
-                          return null;
-                        }
-                      },
+                      validator: (value) => Validators().rePassword(
+                        value: value,
+                        passwordController: passwordTextController.text,
+                      ),
                     ),
                     AppSpacer.vertical.space20,
 
@@ -126,13 +106,10 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                       controller: emailTextController,
                       keyboardType: TextInputType.emailAddress,
                       hintText: LocaleKeys.commons_eMail.tr(),
-                      validator: (value) {
-                        if (value!.isNotEmpty && value.length > 7) {
-                          return null;
-                        } else {
-                          return LocaleKeys.validatorErrors_invalidEmail.tr();
-                        }
-                      },
+                      validator: (value) => Validators().eMail(
+                        value: value,
+                        emailController: emailTextController.text,
+                      ),
                     ),
                     AppSpacer.vertical.space20,
 

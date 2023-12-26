@@ -13,7 +13,6 @@ class UserModel {
     required this.lastName,
   });
 
-  // Convert the UserModel object to a map for Firestore
   Map<String, dynamic> toMap() {
     return {
       'id': id,

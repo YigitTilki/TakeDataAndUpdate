@@ -38,6 +38,9 @@
         "invalidEmail": "Invalid Email",
         "requiredForm": "* Required form",
         "passwordMust8": "Password length must be 8 or higher",
+        "passwordMustUpperCase": "Password must contain one uppercase letter",
+        "passwordMustLowerCase": "Password must contain one lowercase letter",
+        "passwordMustOneDigit": "Password must contain one digit",
         "passwordDoesntMatch": "Passwords doesn't match"
     }
 }

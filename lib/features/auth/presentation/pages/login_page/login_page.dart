@@ -13,6 +13,7 @@ import 'package:take_data_and_update_project/util/constants/app_colors.dart';
 import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/util/constants/project_padding.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/util/validators/validators.dart';
 
 part 'widgets/not_a_member_yet.dart';
 part 'widgets/remember_me_forgot_password.dart';
@@ -62,14 +63,10 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                       hintText: LocaleKeys.commons_eMail.tr(),
                       keyboardType: TextInputType.emailAddress,
                       controller: emailTextController,
-                      validator: (value) {
-                        if (value!.isNotEmpty && value.length > 7) {
-                          return null;
-                        } else {
-                          return LocaleKeys.validatorErrors_invalidEmailPassword
-                              .tr();
-                        }
-                      },
+                      validator: (value) => Validators().loginEMail(
+                        value: value,
+                        emailController: emailTextController.text,
+                      ),
                     ),
                     AppSpacer.vertical.space20,
 
@@ -79,14 +76,9 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       controller: passwordTextController,
-                      validator: (value) {
-                        if (value!.isNotEmpty && value.length >= 8) {
-                          return null;
-                        } else {
-                          return LocaleKeys.validatorErrors_invalidEmailPassword
-                              .tr();
-                        }
-                      },
+                      validator: (value) => Validators().loginPassword(
+                        value: value,
+                      ),
                     ),
                     AppSpacer.vertical.space20,
 
