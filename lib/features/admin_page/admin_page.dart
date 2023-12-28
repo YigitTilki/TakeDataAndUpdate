@@ -7,7 +7,6 @@ import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/init/route/app_router.dart';
 import 'package:take_data_and_update_project/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
-import 'package:take_data_and_update_project/util/constants/img_helper.dart';
 import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
 
 part 'widgets/profile_image.dart';
@@ -19,15 +18,12 @@ class AdminPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const int mainContainerWidth = 340;
-    const int mainContainerHeight = 600;
-
     return Scaffold(
       body: SafeArea(
         child: Center(
           child: Container(
-            width: mainContainerWidth.w,
-            height: mainContainerHeight.h,
+            width: 340.w,
+            height: 600.h,
             decoration: containerDecoration(context.secondaryColor),
             child: Column(
               children: [

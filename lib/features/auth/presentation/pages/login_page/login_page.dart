@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/features/auth/data/auth_repository.dart';
+import 'package:take_data_and_update_project/features/auth/domain/user_model.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/login_page/mixin/login_page_mixin.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/logo_divider_view.dart';
@@ -85,29 +86,28 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                     ///Login Button
                     ElevatedButton(
                       onPressed: () async {
+                        UserModel user = UserModel(
+                          email: emailTextController.text,
+                          password: passwordTextController.text,
+                        );
                         if (!LoginPage._formKey.currentState!.validate()) {
                           return debugPrint("Olmadı");
                         } else {
                           await AuthRepository().signInUser(
-                            emailController: emailTextController.text,
-                            passwordController: passwordTextController.text,
+                            userModel: user,
                             context: context,
                           );
                           if (!context.mounted) return;
-                          //TODO: Do
-                          /* await AuthRepository().loginAdmin(
-                            context: context,
-                            emailController: emailTextController.text,
-                            passwordController: passwordTextController.text,
-                          ); */
-                          /* await AuthRepository().signUpAdmin(
-                              context: context,
-                              emailController: emailTextController.text,
-                              passwordController: passwordTextController.text,
-                              displayName: "Yiğit Tilki"); */
-                        }
 
-                        setState(() {});
+                          await AuthRepository().loginAdmin(
+                            context: context,
+                            userModel: user,
+                          );
+                          /* await AuthRepository().signUpAdmin(
+                            context: context,
+                            userModel: user,
+                          ); */
+                        }
                       },
                       child: Text(
                         LocaleKeys.commons_loginUpperCase.tr(),

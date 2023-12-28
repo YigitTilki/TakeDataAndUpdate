@@ -5,12 +5,13 @@ class _ProfileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const int profileIconSize = 100;
+    const int profileIconSize = 80;
     return SizedBox(
       height: profileIconSize.h,
       width: profileIconSize.w,
-      child: const CircleAvatar(
-        backgroundImage: AssetImage(ImageHelper.profileIcon),
+      child: Assets.images.adminIcon.image(
+        width: profileIconSize.w,
+        height: profileIconSize.h,
       ),
     );
   }

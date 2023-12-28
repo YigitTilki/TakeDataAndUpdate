@@ -44,9 +44,6 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
           TextButton(
             onPressed: () {
               //TODO: Forgot Password Route
-              context.router.replace(
-                const HomeRoute(),
-              );
             },
             child: Text(
               LocaleKeys.loginPage_forgotPassWord.tr(),

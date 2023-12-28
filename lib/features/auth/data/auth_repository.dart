@@ -24,39 +24,36 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
-  Future<void> loginAdmin(
-      {required BuildContext context,
-      required String emailController,
-      required String passwordController}) async {
-    String email = emailController;
-    String password = passwordController;
-
-    User? user = await _auth.signIn(email, password);
+  Future<void> loginAdmin({
+    required BuildContext context,
+    required UserModel userModel,
+  }) async {
+    User? user = await _auth.signIn(
+      userModel.email.toString(),
+      userModel.password.toString(),
+    );
     if (!context.mounted) return;
     if (user != null) {
       debugPrint("Admin signed in");
       context.router.replace(const AdminRoute());
     } else {
-      scaffoldMessenger(context, 'E-Mail or Password Error');
+      debugPrint("Admin info is wrong");
     }
   }
 
   @override
-  Future<void> signUpAdmin(
-      {required BuildContext context,
-      required String emailController,
-      required String passwordController,
-      required String displayName}) async {
-    String email = emailController;
-    String password = passwordController;
-
-    User? user = await _auth.signUp(email, password, displayName);
+  Future<void> signUpAdmin({
+    required BuildContext context,
+    required UserModel userModel,
+  }) async {
+    User? user = await _auth.signUp(
+        userModel.email.toString(), userModel.password.toString());
 
     if (!context.mounted) return;
     if (user != null) {
       debugPrint("User signed up");
 
-      context.router.replace(const HomeRoute());
+      context.router.replace(const AdminRoute());
     } else {
       scaffoldMessenger(context, 'Some error occurred');
     }
@@ -64,21 +61,25 @@ class AuthRepository extends BaseAuthRepository {
 
   @override
   Future<void> signInUser(
-      {required String emailController,
-      required String passwordController,
-      required BuildContext context}) async {
+      {required UserModel userModel, required BuildContext context}) async {
     try {
       QuerySnapshot<Map<String, dynamic>> result = await FirebaseFirestore
           .instance
           .collection('users')
-          .where('email', isEqualTo: emailController)
-          .where('password', isEqualTo: passwordController)
+          .where('email', isEqualTo: userModel.email)
+          .where('password', isEqualTo: userModel.password)
           .get();
 
       if (!context.mounted) return;
 
       if (result.docs.isNotEmpty) {
-        context.router.replace(const HomeRoute());
+        String firstName = result.docs.first['firstName'];
+        String lastName = result.docs.first['lastName'];
+
+        userModel =
+            userModel.copyWith(firstName: firstName, lastName: lastName);
+
+        context.router.replace(HomeRoute(userModel: userModel));
       } else {
         scaffoldMessenger(context, 'E-Mail or Password Error');
       }
@@ -97,7 +98,7 @@ class AuthRepository extends BaseAuthRepository {
 
       if (!context.mounted) return;
       debugPrint('User Added');
-      context.router.replace(const HomeRoute());
+      context.router.replace(HomeRoute(userModel: userModel));
     } catch (e) {
       debugPrint('User cant be added: $e');
     }
@@ -124,20 +125,19 @@ class FirebaseAuthService {
           email: email, password: password);
       return credential.user;
     } catch (e) {
-      debugPrint("Some error occurred");
+      debugPrint("Admin Some error occurred");
     }
     return null;
   }
 
-  Future<User?> signUp(
-      String email, String password, String displayName) async {
+  Future<User?> signUp(String email, String password) async {
     try {
       UserCredential credential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      credential.user?.updateDisplayName(displayName);
+
       return credential.user;
     } catch (e) {
-      debugPrint("Some error occurred");
+      debugPrint("Admin Some error occurred");
     }
     return null;
   }

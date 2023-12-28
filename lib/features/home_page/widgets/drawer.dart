@@ -1,7 +1,8 @@
 part of '../home_page.dart';
 
 class _HomePageDrawer extends StatelessWidget {
-  const _HomePageDrawer();
+  final UserModel userModel;
+  const _HomePageDrawer(this.userModel);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class _HomePageDrawer extends StatelessWidget {
                   Expanded(
                     child: Text(
                       //TODO: take name
-                      "displayName",
+                      "${userModel.firstName} ${userModel.lastName}",
                       overflow: TextOverflow.ellipsis,
                       style: context.headlineLarge,
                     ),

@@ -24,6 +24,7 @@ class _UsersContainer extends StatelessWidget {
             Assets.images.users.image(
               width: iconSize.w,
               height: iconSize.h,
+              color: context.secondaryColor,
             ),
             AppSpacer.horizontal.space20,
             Expanded(

@@ -24,10 +24,10 @@ class _UsersList extends StatelessWidget {
         } else {
           List<Map<String, dynamic>> filteredList = snapshot.data!
               .where((user) =>
-                  user['FirstName']
+                  user['firstName']
                       .toLowerCase()
                       .contains(searchController.text.toLowerCase()) ||
-                  user['LastName']
+                  user['lastName']
                       .toLowerCase()
                       .contains(searchController.text.toLowerCase()))
               .toList();
@@ -36,8 +36,8 @@ class _UsersList extends StatelessWidget {
             child: ListView.builder(
               itemCount: filteredList.length,
               itemBuilder: (BuildContext context, int index) {
-                String firstName = filteredList[index]['FirstName'];
-                String lastName = filteredList[index]['LastName'];
+                String firstName = filteredList[index]['firstName'];
+                String lastName = filteredList[index]['lastName'];
                 return Padding(
                   padding: ProjectPadding.symHXXSmall() +
                       ProjectPadding.symVXSmall(),

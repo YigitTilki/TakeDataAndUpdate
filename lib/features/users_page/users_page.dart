@@ -81,10 +81,10 @@ class _UsersPageState extends State<UsersPage> with UsersPageMixin {
           userListSetter = AuthRepository().getUsers().then((users) {
             return users
                 .where((user) =>
-                    user['FirstName']
+                    user['firstName']
                         .toLowerCase()
                         .contains(value.toLowerCase()) ||
-                    user['LastName']
+                    user['lastName']
                         .toLowerCase()
                         .contains(value.toLowerCase()))
                 .toList();

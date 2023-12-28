@@ -1,13 +1,14 @@
 part of '../home_page.dart';
 
 class _HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _HomePageAppBar();
+  final UserModel userModel;
+  const _HomePageAppBar(this.userModel);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(
-        "${LocaleKeys.homePage_welcome.tr()} displayName",
+        "${LocaleKeys.homePage_welcome.tr()} ${userModel.firstName} ${userModel.lastName}",
       ), //TODO: take name
     );
   }
