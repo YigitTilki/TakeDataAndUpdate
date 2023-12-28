@@ -1,0 +1,95 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
+import 'package:take_data_and_update_project/util/validators/base_validators.dart';
+
+class Validators extends BaseValidators {
+  @override
+  String? eMail({required String? value, required String emailController}) {
+    String email = emailController;
+    final bool isValid = EmailValidator.validate(email);
+    if (email.isNotEmpty) {
+      if (isValid) {
+        return null;
+      } else {
+        return LocaleKeys.validatorErrors_invalidEmail.tr();
+      }
+    } else {
+      return LocaleKeys.validatorErrors_requiredForm.tr();
+    }
+  }
+
+  @override
+  String? firstName({required String? value}) {
+    if (value!.isNotEmpty) {
+      return null;
+    } else {
+      return LocaleKeys.validatorErrors_requiredForm.tr();
+    }
+  }
+
+  @override
+  String? lastName({required String? value}) {
+    if (value!.isNotEmpty && value.length >= 2) {
+      return null;
+    } else {
+      return LocaleKeys.validatorErrors_requiredForm.tr();
+    }
+  }
+
+  @override
+  String? password({required String? value}) {
+    if (value == null || value.isEmpty) {
+      return LocaleKeys.validatorErrors_requiredForm.tr();
+    }
+
+    if (value.length < 8) {
+      return LocaleKeys.validatorErrors_passwordMust8.tr();
+    }
+
+    if (!value.contains(RegExp(r'[A-Z]'))) {
+      return LocaleKeys.validatorErrors_passwordMustUpperCase.tr();
+    }
+
+    if (!value.contains(RegExp(r'[a-z]'))) {
+      return LocaleKeys.validatorErrors_passwordMustLowerCase.tr();
+    }
+
+    if (!value.contains(RegExp(r'[0-9]'))) {
+      return LocaleKeys.validatorErrors_passwordMustOneDigit.tr();
+    }
+
+    return null;
+  }
+
+  @override
+  String? rePassword(
+      {required String? value, required String passwordController}) {
+    if (value != passwordController) {
+      return LocaleKeys.validatorErrors_passwordDoesntMatch.tr();
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String? loginEMail(
+      {required String? value, required String emailController}) {
+    String email = emailController;
+    final bool isValid = EmailValidator.validate(email);
+    if (isValid) {
+      return null;
+    } else {
+      return LocaleKeys.validatorErrors_invalidEmailPassword.tr();
+    }
+  }
+
+  @override
+  String? loginPassword({required String? value}) {
+    if (value!.isNotEmpty && value.length >= 8) {
+      return null;
+    } else {
+      return LocaleKeys.validatorErrors_invalidEmailPassword.tr();
+    }
+  }
+}

@@ -38,6 +38,9 @@
         "invalidEmail": "Hatalı Email",
         "requiredForm": "* Boş Bırakılamaz",
         "passwordMust8": "Şifre 8 karakter veya daha uzun olmalı",
+        "passwordMustUpperCase": "Şifre bir büyük karakter içermeli",
+        "passwordMustLowerCase": "Şifre bir küçük karakter içermeli",
+        "passwordMustOneDigit": "Şifre bir sayı içermeli",
         "passwordDoesntMatch": "Şifreler Eşleşmiyor"
     }
 }

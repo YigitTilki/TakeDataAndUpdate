@@ -17,18 +17,31 @@ dependencies:
 
   
   cupertino_icons: ^1.0.2
-  flutter_screenutil: ^5.9.0
+
+  #Navigation
   auto_route: ^7.8.4
-  firebase_core: ^2.24.0
-  firebase_auth: ^4.15.0
-  cloud_firestore: ^4.13.4
+  
+  #config
   easy_localization: ^3.0.3
-  logger: ^2.0.2+1
-  easy_logger: ^0.0.2
-  kartal: ^3.5.0
   flutter_svg: ^2.0.9
   lottie: ^2.7.0
   responsive_framework: ^1.1.1
+  
+  #DataBase
+  firebase_core: ^2.24.0
+  firebase_auth: ^4.15.0
+  cloud_firestore: ^4.13.4
+  
+  #Util
+  uuid: ^4.2.2
+  email_validator: ^2.1.17
+  kartal: ^3.5.0
+  logger: ^2.0.2+1
+  flutter_screenutil: ^5.9.0
+  easy_logger: ^0.0.2
+
+  #State Management
+  riverpod: ^2.4.9
   
 
 dev_dependencies:
@@ -41,6 +54,7 @@ dev_dependencies:
   very_good_analysis: ^5.1.0
   build_runner: ^2.4.7
   flutter_gen_runner: ^5.3.2
+  
 
 flutter_gen:
   output: lib/util/asset/
