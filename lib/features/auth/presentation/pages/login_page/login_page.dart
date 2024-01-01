@@ -29,6 +29,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with LoginPageMixin {
+  bool _isPasswordVisible = true;
   @override
   Widget build(BuildContext context) {
     const int containerWidth = 310;
@@ -75,7 +76,8 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                     AuthTextFormField(
                       hintText: LocaleKeys.commons_password.tr(),
                       keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
+                      obscureText: _isPasswordVisible,
+                      suffixIcon: passwordObscureIcon(context),
                       controller: passwordTextController,
                       validator: (value) => Validators().loginPassword(
                         value: value,
@@ -128,6 +130,20 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
           ),
         ),
       ),
+    );
+  }
+
+  IconButton passwordObscureIcon(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
+        color: context.primaryColor,
+      ),
+      onPressed: () {
+        setState(() {
+          _isPasswordVisible = !_isPasswordVisible;
+        });
+      },
     );
   }
 }

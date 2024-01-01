@@ -1,48 +1,53 @@
 part of '../users_page.dart';
 
-class _UsersList extends StatelessWidget {
+class _UsersList extends ConsumerWidget {
   const _UsersList({
     required this.userList,
     required this.searchController,
     required this.iconSize,
   });
 
-  final Future<List<Map<String, dynamic>>> userList;
+  final Future<List<UserModel>> userList;
   final TextEditingController searchController;
   final int iconSize;
 
   @override
-  Widget build(BuildContext context) {
-    const int listTileHeight = 60;
+  Widget build(BuildContext context, WidgetRef ref) {
     return FutureBuilder(
       future: userList,
-      builder: (context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+      builder: (context, AsyncSnapshot<List<UserModel>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
-          List<Map<String, dynamic>> filteredList = snapshot.data!
-              .where((user) =>
-                  user['firstName']
-                      .toLowerCase()
-                      .contains(searchController.text.toLowerCase()) ||
-                  user['lastName']
-                      .toLowerCase()
-                      .contains(searchController.text.toLowerCase()))
+          List<UserModel> filteredList = snapshot.data!
+              .where(
+                (user) =>
+                    user.firstName!.toLowerCase().contains(
+                          searchController.text.toLowerCase(),
+                        ) ||
+                    user.lastName!.toLowerCase().contains(
+                          searchController.text.toLowerCase(),
+                        ),
+              )
               .toList();
-
           return Expanded(
             child: ListView.builder(
               itemCount: filteredList.length,
               itemBuilder: (BuildContext context, int index) {
-                String firstName = filteredList[index]['firstName'];
-                String lastName = filteredList[index]['lastName'];
+                UserModel user = filteredList[index];
+
+                String firstName = user.firstName!;
+                String lastName = user.lastName!;
+                String email = user.email!;
+                String id = user.id!;
+
                 return Padding(
                   padding: ProjectPadding.symHXXSmall() +
                       ProjectPadding.symVXSmall(),
                   child: Container(
-                    height: listTileHeight.h,
+                    height: 60.h,
                     decoration: ShapeDecoration(
                       color: context.fourthColor,
                       shape: RoundedRectangleBorder(
@@ -54,16 +59,7 @@ class _UsersList extends StatelessWidget {
                     child: Center(
                       child: ListTile(
                         onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text(
-                                    "$firstName $lastName",
-                                    textAlign: TextAlign.center,
-                                  ),
-                                );
-                              });
+                          usersInfoPopUp(context, firstName, lastName, id);
                         },
                         leading: Assets.images.users.image(
                           width: iconSize.w,
@@ -71,7 +67,7 @@ class _UsersList extends StatelessWidget {
                           color: context.primaryColor,
                         ),
                         title: Text("$firstName $lastName"),
-                        subtitle: const Text("Email"),
+                        subtitle: Text(email),
                       ),
                     ),
                   ),

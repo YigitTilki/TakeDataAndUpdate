@@ -10,7 +10,7 @@ abstract class BaseAuthRepository {
     required UserModel userModel,
     required BuildContext context,
   });
-  Future<List<Map<String, dynamic>>> getUsers();
+  Future<List<UserModel>> getUsers();
   Future<void> loginAdmin({
     required BuildContext context,
     required UserModel userModel,
@@ -18,6 +18,10 @@ abstract class BaseAuthRepository {
   Future<void> signUpAdmin({
     required BuildContext context,
     required UserModel userModel,
+  });
+  Future<void> deleteUser({
+    required BuildContext context,
+    required String id,
   });
   Future<bool> isEmailExists({required String eMail});
 }

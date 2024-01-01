@@ -12,12 +12,13 @@ class AuthRepository extends BaseAuthRepository {
   final FirebaseAuthService _auth = FirebaseAuthService();
 
   @override
-  Future<List<Map<String, dynamic>>> getUsers() async {
+  Future<List<UserModel>> getUsers() async {
     QuerySnapshot querySnapshot = await _firestore.collection('users').get();
-    List<Map<String, dynamic>> userList = [];
+    List<UserModel> userList = [];
 
     for (QueryDocumentSnapshot doc in querySnapshot.docs) {
-      userList.add(doc.data() as Map<String, dynamic>);
+      UserModel user = UserModel.fromJson(doc.data() as Map<String, dynamic>);
+      userList.add(user);
     }
 
     return userList;
@@ -63,8 +64,7 @@ class AuthRepository extends BaseAuthRepository {
   Future<void> signInUser(
       {required UserModel userModel, required BuildContext context}) async {
     try {
-      QuerySnapshot<Map<String, dynamic>> result = await FirebaseFirestore
-          .instance
+      QuerySnapshot<Map<String, dynamic>> result = await _firestore
           .collection('users')
           .where('email', isEqualTo: userModel.email)
           .where('password', isEqualTo: userModel.password)
@@ -93,12 +93,22 @@ class AuthRepository extends BaseAuthRepository {
       {required UserModel userModel, required BuildContext context}) async {
     try {
       Map<String, dynamic> userMap = userModel.toMap();
+      QuerySnapshot<Map<String, dynamic>> passwordFetch = await _firestore
+          .collection('passwords')
+          .where('password', isEqualTo: userModel.password)
+          .get();
 
-      await FirebaseFirestore.instance.collection('users').add(userMap);
+      if (passwordFetch.docs.isNotEmpty) {
+        await _firestore.collection('users').doc(userModel.id).set(userMap);
 
-      if (!context.mounted) return;
-      debugPrint('User Added');
-      context.router.replace(HomeRoute(userModel: userModel));
+        if (!context.mounted) return;
+        debugPrint('User Added');
+
+        //context.router.replace(HomeRoute(userModel: userModel));
+      } else {
+        if (!context.mounted) return;
+        scaffoldMessenger(context, "There isn't fetch passwords");
+      }
     } catch (e) {
       debugPrint('User cant be added: $e');
     }
@@ -106,13 +116,23 @@ class AuthRepository extends BaseAuthRepository {
 
   @override
   Future<bool> isEmailExists({required String eMail}) async {
-    QuerySnapshot<Map<String, dynamic>> query = await FirebaseFirestore.instance
+    QuerySnapshot<Map<String, dynamic>> query = await _firestore
         .collection('users')
         .where('email', isEqualTo: eMail)
         .get();
 
     if (query.docs.isNotEmpty) return false;
     return true;
+  }
+
+  @override
+  Future<void> deleteUser({required BuildContext context, required String id}) {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    return users
+        .doc(id)
+        .delete()
+        .then((value) => print("User Deleted"))
+        .catchError((error) => print("Failed to delete user: $error"));
   }
 }
 

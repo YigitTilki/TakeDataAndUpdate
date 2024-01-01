@@ -30,6 +30,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
+  bool _isPasswordVisible1 = true;
+  bool _isPasswordVisible2 = true;
+
   @override
   Widget build(BuildContext context) {
     const int containerWidth = 310;
@@ -82,7 +85,8 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                     AuthTextFormField(
                       controller: passwordTextController,
                       keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
+                      obscureText: _isPasswordVisible1,
+                      suffixIcon: passwordObscureIcon1(context),
                       hintText: LocaleKeys.commons_password.tr(),
                       validator: (value) => Validators().password(value: value),
                     ),
@@ -92,8 +96,9 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                     AuthTextFormField(
                       controller: rePasswordTextController,
                       keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
+                      obscureText: _isPasswordVisible2,
                       hintText: LocaleKeys.registerPage_rePassword.tr(),
+                      suffixIcon: passwordObscureIcon2(context),
                       validator: (value) => Validators().rePassword(
                         value: value,
                         passwordController: passwordTextController.text,
@@ -150,6 +155,34 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
           ),
         ),
       ),
+    );
+  }
+
+  IconButton passwordObscureIcon1(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        _isPasswordVisible1 ? Icons.visibility_off : Icons.visibility,
+        color: context.primaryColor,
+      ),
+      onPressed: () {
+        setState(() {
+          _isPasswordVisible1 = !_isPasswordVisible1;
+        });
+      },
+    );
+  }
+
+  IconButton passwordObscureIcon2(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        _isPasswordVisible2 ? Icons.visibility_off : Icons.visibility,
+        color: context.primaryColor,
+      ),
+      onPressed: () {
+        setState(() {
+          _isPasswordVisible2 = !_isPasswordVisible2;
+        });
+      },
     );
   }
 }

@@ -4,6 +4,7 @@ class UserModel {
   late String? password;
   late String? firstName;
   late String? lastName;
+  late String? devices;
 
   UserModel({
     this.id,
@@ -11,15 +12,25 @@ class UserModel {
     this.password,
     this.firstName,
     this.lastName,
+    this.devices,
   });
 
-  // CopyWith method to create a new instance with updated values
+  UserModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    email = json['email'];
+    password = json['password'];
+    firstName = json['firstName'];
+    lastName = json['lastName'];
+    devices = json['devices'];
+  }
+
   UserModel copyWith({
     String? id,
     String? email,
     String? password,
     String? firstName,
     String? lastName,
+    String? devices,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -27,6 +38,7 @@ class UserModel {
       password: password ?? this.password,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
+      devices: devices ?? this.devices,
     );
   }
 
@@ -37,6 +49,7 @@ class UserModel {
       'password': password,
       'firstName': firstName,
       'lastName': lastName,
+      'devices': devices,
     };
   }
 }
