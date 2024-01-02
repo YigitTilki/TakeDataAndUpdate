@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:take_data_and_update_project/product/base/base_validators.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
+import 'package:take_data_and_update_project/product/validators/base_validators.dart';
 
 class Validators extends BaseValidators {
   @override

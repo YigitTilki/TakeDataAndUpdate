@@ -58,7 +58,7 @@ class _UsersList extends ConsumerWidget {
                         showDialog<Widget>(
                           context: context,
                           builder: (BuildContext context) {
-                            return UserListPopUp(
+                            return _UserListPopUp(
                               firstName: firstName,
                               lastName: lastName,
                               email: email,
