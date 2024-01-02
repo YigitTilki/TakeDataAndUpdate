@@ -7,7 +7,7 @@ import 'package:take_data_and_update_project/features/auth/domain/user_model.dar
 import 'package:take_data_and_update_project/features/auth/presentation/pages/register_page/mixin/register_page_mixin.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/logo_divider_view.dart';
-import 'package:take_data_and_update_project/features/common/main_container_decoration.dart';
+import 'package:take_data_and_update_project/features/common/decorations.dart';
 import 'package:take_data_and_update_project/features/common/scaffold_messengers.dart';
 import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/init/route/app_router.dart';
@@ -35,15 +35,15 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
 
   @override
   Widget build(BuildContext context) {
-    const int containerWidth = 310;
-    const int containerHeight = 580;
+    const containerWidth = 310;
+    const containerHeight = 580;
     return Scaffold(
       body: SafeArea(
         child: Center(
           child: Container(
             width: containerWidth.w,
             height: containerHeight.h,
-            decoration: containerDecoration(context.secondaryColor),
+            decoration: Decorations.containerDecoration(context.secondaryColor),
             child: Form(
               key: RegisterPage._formKey,
               child: SingleChildScrollView(
@@ -121,22 +121,22 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                     ///Sign Up Button
                     ElevatedButton(
                       onPressed: () async {
-                        bool emailExists = await AuthRepository()
+                        final emailExists = await AuthRepository()
                             .isEmailExists(eMail: emailTextController.text);
                         if (!context.mounted) return;
                         if (!RegisterPage._formKey.currentState!.validate()) {
-                          return debugPrint("Olmadı");
+                          return debugPrint('Olmadı');
                         } else if (!emailExists) {
-                          return scaffoldMessenger(context, "Email Exist");
+                          scaffoldMessenger(context, 'Email Exist');
                         } else {
-                          var userModel = UserModel(
+                          final userModel = UserModel(
                             id: const Uuid().v4(),
                             email: emailTextController.text,
                             password: passwordTextController.text,
                             firstName: firstNameController.text,
                             lastName: lastNameController.text,
                           );
-                          AuthRepository().singUpUser(
+                          await AuthRepository().singUpUser(
                             userModel: userModel,
                             context: context,
                           );
@@ -147,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                         style: context.bodyMedium,
                       ).tr(),
                     ),
-                    const _AlreadyHaveAnAccount()
+                    const _AlreadyHaveAnAccount(),
                   ],
                 ),
               ),

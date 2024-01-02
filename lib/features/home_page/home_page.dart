@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/features/auth/domain/user_model.dart';
-import 'package:take_data_and_update_project/features/common/main_container_decoration.dart';
+import 'package:take_data_and_update_project/features/common/decorations.dart';
 import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/util/constants/img_helper.dart';
@@ -14,16 +14,16 @@ part 'widgets/drawer.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
+  const HomePage({required this.userModel, super.key});
   final UserModel userModel;
-  const HomePage({super.key, required this.userModel});
 
   @override
   Widget build(BuildContext context) {
-    const int smallContainerHeight = 76;
-    const int bigContainerHeight = 202;
-    const int bigContainerWidth = 260;
-    const int mediumContainerWidth = 200;
-    const int smallContainerWidth = 120;
+    const smallContainerHeight = 76;
+    const bigContainerHeight = 202;
+    const bigContainerWidth = 260;
+    const mediumContainerWidth = 200;
+    const smallContainerWidth = 120;
 
     return Scaffold(
       drawer: _HomePageDrawer(userModel),
@@ -39,7 +39,8 @@ class HomePage extends StatelessWidget {
               child: Container(
                 width: bigContainerWidth.w,
                 height: bigContainerHeight.h,
-                decoration: containerDecoration(context.primaryColor),
+                decoration:
+                    Decorations.containerDecoration(context.primaryColor),
               ),
             ),
             AppSpacer.vertical.space30,
@@ -47,7 +48,8 @@ class HomePage extends StatelessWidget {
               child: Container(
                 width: bigContainerWidth.w,
                 height: smallContainerHeight.h,
-                decoration: containerDecoration(context.primaryColor),
+                decoration:
+                    Decorations.containerDecoration(context.primaryColor),
               ),
             ),
             AppSpacer.vertical.space30,
@@ -55,7 +57,8 @@ class HomePage extends StatelessWidget {
               child: Container(
                 width: mediumContainerWidth.w,
                 height: smallContainerHeight.h,
-                decoration: containerDecoration(context.primaryColor),
+                decoration:
+                    Decorations.containerDecoration(context.primaryColor),
               ),
             ),
             AppSpacer.vertical.space30,
@@ -63,7 +66,8 @@ class HomePage extends StatelessWidget {
               child: Container(
                 width: smallContainerWidth.w,
                 height: smallContainerHeight.h,
-                decoration: containerDecoration(context.primaryColor),
+                decoration:
+                    Decorations.containerDecoration(context.primaryColor),
               ),
             ),
             AppSpacer.vertical.space30,

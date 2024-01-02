@@ -6,8 +6,8 @@ import 'package:take_data_and_update_project/util/validators/base_validators.dar
 class Validators extends BaseValidators {
   @override
   String? eMail({required String? value, required String emailController}) {
-    String email = emailController;
-    final bool isValid = EmailValidator.validate(email);
+    final email = emailController;
+    final isValid = EmailValidator.validate(email);
     if (email.isNotEmpty) {
       if (isValid) {
         return null;
@@ -47,15 +47,15 @@ class Validators extends BaseValidators {
       return LocaleKeys.validatorErrors_passwordMust8.tr();
     }
 
-    if (!value.contains(RegExp(r'[A-Z]'))) {
+    if (!value.contains(RegExp('[A-Z]'))) {
       return LocaleKeys.validatorErrors_passwordMustUpperCase.tr();
     }
 
-    if (!value.contains(RegExp(r'[a-z]'))) {
+    if (!value.contains(RegExp('[a-z]'))) {
       return LocaleKeys.validatorErrors_passwordMustLowerCase.tr();
     }
 
-    if (!value.contains(RegExp(r'[0-9]'))) {
+    if (!value.contains(RegExp('[0-9]'))) {
       return LocaleKeys.validatorErrors_passwordMustOneDigit.tr();
     }
 
@@ -63,8 +63,10 @@ class Validators extends BaseValidators {
   }
 
   @override
-  String? rePassword(
-      {required String? value, required String passwordController}) {
+  String? rePassword({
+    required String? value,
+    required String passwordController,
+  }) {
     if (value != passwordController) {
       return LocaleKeys.validatorErrors_passwordDoesntMatch.tr();
     } else {
@@ -73,10 +75,12 @@ class Validators extends BaseValidators {
   }
 
   @override
-  String? loginEMail(
-      {required String? value, required String emailController}) {
-    String email = emailController;
-    final bool isValid = EmailValidator.validate(email);
+  String? loginEMail({
+    required String? value,
+    required String emailController,
+  }) {
+    final email = emailController;
+    final isValid = EmailValidator.validate(email);
     if (isValid) {
       return null;
     } else {

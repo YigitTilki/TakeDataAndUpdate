@@ -35,7 +35,9 @@
     },
     "usersPage": {
         "deleteUser": "Delete User",
-        "updateUser": "Update User"
+        "updateUser": "Update User",
+        "idUpper": "ID",
+        "devices": "Devices"
     },
     "validatorErrors": {
         "invalidEmailPassword": "Invalid E-Mail or Password",

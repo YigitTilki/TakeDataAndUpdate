@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class AdaptMobileView extends StatelessWidget {
-  const AdaptMobileView({super.key, required this.phone, required this.tablet});
+  const AdaptMobileView({required this.phone, required this.tablet, super.key});
 
   final Widget phone;
   final Widget tablet;

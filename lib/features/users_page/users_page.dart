@@ -29,7 +29,7 @@ class UsersPage extends StatefulWidget {
 class _UsersPageState extends State<UsersPage> with UsersPageMixin {
   @override
   Widget build(BuildContext context) {
-    const int iconSize = 20;
+    const iconSize = 20;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: context.secondaryColor,
@@ -84,11 +84,15 @@ class _UsersPageState extends State<UsersPage> with UsersPageMixin {
         setState(() {
           userListSetter = AuthRepository().getUsers().then((users) {
             return users
-                .where((user) =>
-                    user.firstName!
-                        .toLowerCase()
-                        .contains(value.toLowerCase()) ||
-                    user.lastName!.toLowerCase().contains(value.toLowerCase()))
+                .where(
+                  (user) =>
+                      user.firstName!
+                          .toLowerCase()
+                          .contains(value.toLowerCase()) ||
+                      user.lastName!
+                          .toLowerCase()
+                          .contains(value.toLowerCase()),
+                )
                 .toList();
           });
         });

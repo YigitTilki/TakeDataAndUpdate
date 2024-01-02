@@ -7,20 +7,20 @@ import 'package:take_data_and_update_project/util/constants/app_colors.dart';
 final class LightTheme implements CustomAppTheme {
   @override
   ThemeData get themeData => ThemeData(
-      useMaterial3: true,
-      scaffoldBackgroundColor: AppColors.homeBackgroundColor,
-      appBarTheme: appBarTheme,
-      drawerTheme: drawerThemeData,
-      snackBarTheme: snackBarThemeData,
-      colorScheme: colorScheme,
-      fontFamily: appFont,
-      textTheme: textTheme,
-      elevatedButtonTheme: elevatedButtonThemeData,
-      inputDecorationTheme: inputDecorationTheme,
-      checkboxTheme: checkboxThemeData,
-      listTileTheme: listTileThemeData,
-      floatingActionButtonTheme: floatingActionButtonThemeData,
-      dialogTheme: DialogTheme() //TODO: add dialog theme
+        useMaterial3: true,
+        scaffoldBackgroundColor: AppColors.homeBackgroundColor,
+        appBarTheme: appBarTheme,
+        drawerTheme: drawerThemeData,
+        snackBarTheme: snackBarThemeData,
+        colorScheme: colorScheme,
+        fontFamily: appFont,
+        textTheme: textTheme,
+        elevatedButtonTheme: elevatedButtonThemeData,
+        inputDecorationTheme: inputDecorationTheme,
+        checkboxTheme: checkboxThemeData,
+        listTileTheme: listTileThemeData,
+        floatingActionButtonTheme: floatingActionButtonThemeData,
+        dialogTheme: const DialogTheme(), //TODO: add dialog theme
       );
 
   @override
@@ -39,9 +39,11 @@ final class LightTheme implements CustomAppTheme {
   @override
   CheckboxThemeData get checkboxThemeData => CheckboxThemeData(
         fillColor: MaterialStateProperty.resolveWith(
-            (states) => AppColors.secondaryColor),
+          (states) => AppColors.secondaryColor,
+        ),
         checkColor: MaterialStateProperty.resolveWith(
-            (states) => AppColors.tertiaryColor),
+          (states) => AppColors.tertiaryColor,
+        ),
         side: MaterialStateBorderSide.resolveWith(
           (states) => BorderSide(
             color: AppColors.tertiaryColor,
@@ -78,12 +80,13 @@ final class LightTheme implements CustomAppTheme {
   ElevatedButtonThemeData get elevatedButtonThemeData =>
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-            foregroundColor: AppColors.whiteColor,
-            backgroundColor: AppColors.tertiaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.sp),
-            ),
-            textStyle: textTheme.labelMedium),
+          foregroundColor: AppColors.whiteColor,
+          backgroundColor: AppColors.tertiaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.sp),
+          ),
+          textStyle: textTheme.labelMedium,
+        ),
       );
 
   @override

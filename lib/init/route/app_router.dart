@@ -17,6 +17,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: RegisterRoute.page),
         AutoRoute(page: HomeRoute.page),
         AutoRoute(page: AdminRoute.page),
-        AutoRoute(page: UsersRoute.page, initial: true)
+        AutoRoute(page: UsersRoute.page, initial: true),
       ];
 }

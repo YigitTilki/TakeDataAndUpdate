@@ -11,8 +11,8 @@ class LogoDividerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const int dividerWidth = 270;
-    const int dividerHeight = 2;
+    const dividerWidth = 270;
+    const dividerHeight = 2;
 
     return Column(
       children: [

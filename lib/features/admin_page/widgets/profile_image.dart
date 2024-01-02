@@ -5,7 +5,7 @@ class _ProfileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const int profileIconSize = 80;
+    const profileIconSize = 80;
     return SizedBox(
       height: profileIconSize.h,
       width: profileIconSize.w,

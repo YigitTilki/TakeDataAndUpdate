@@ -13,11 +13,11 @@ class _UsersList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<List<UserModel>> userList = ref.watch(userListProvider);
+    final userList = ref.watch(userListProvider);
 
     return userList.when(
       data: (userListData) {
-        List<UserModel> filteredList = userListData
+        final filteredList = userListData
             .where(
               (user) =>
                   user.firstName!.toLowerCase().contains(
@@ -32,12 +32,12 @@ class _UsersList extends ConsumerWidget {
           child: ListView.builder(
             itemCount: filteredList.length,
             itemBuilder: (BuildContext context, int index) {
-              UserModel user = filteredList[index];
+              final user = filteredList[index];
 
-              String firstName = user.firstName!;
-              String lastName = user.lastName!;
-              String email = user.email!;
-              String id = user.id!;
+              final firstName = user.firstName!;
+              final lastName = user.lastName!;
+              final email = user.email!;
+              final id = user.id!;
 
               return Padding(
                 padding:
@@ -55,24 +55,25 @@ class _UsersList extends ConsumerWidget {
                   child: Center(
                     child: ListTile(
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return userListPopUp(
-                                firstName: firstName,
-                                lastName: lastName,
-                                email: email,
-                                id: id,
-                                ref: ref,
-                              );
-                            });
+                        showDialog<Widget>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return UserListPopUp(
+                              firstName: firstName,
+                              lastName: lastName,
+                              email: email,
+                              id: id,
+                              ref: ref,
+                            );
+                          },
+                        );
                       },
                       leading: Assets.images.users.image(
                         width: iconSize.w,
                         height: iconSize.h,
                         color: context.primaryColor,
                       ),
-                      title: Text("$firstName $lastName"),
+                      title: Text('$firstName $lastName'),
                       subtitle: Text(email),
                     ),
                   ),

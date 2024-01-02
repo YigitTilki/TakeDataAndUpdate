@@ -1,5 +1,5 @@
 class ImageHelper {
   ImageHelper._();
 
-  static const profileIcon = "assets/images/profileIcon.png";
+  static const profileIcon = 'assets/images/profileIcon.png';
 }

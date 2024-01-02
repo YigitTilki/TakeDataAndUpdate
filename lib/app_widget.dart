@@ -16,7 +16,7 @@ class AppWidget extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, child) {
         return MaterialApp.router(
-          title: "Graduating Project",
+          title: 'Graduating Project',
           debugShowCheckedModeBanner: false,
           theme: LightTheme().themeData,
           builder: CustomResponsive.build,

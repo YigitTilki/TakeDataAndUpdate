@@ -1,11 +1,4 @@
 class UserModel {
-  late String? id;
-  late String? email;
-  late String? password;
-  late String? firstName;
-  late String? lastName;
-  late String? devices;
-
   UserModel({
     this.id,
     this.email,
@@ -16,13 +9,19 @@ class UserModel {
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    email = json['email'];
-    password = json['password'];
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    devices = json['devices'];
+    id = json['id'].toString();
+    email = json['email'].toString();
+    password = json['password'].toString();
+    firstName = json['firstName'].toString();
+    lastName = json['lastName'].toString();
+    devices = json['devices'].toString();
   }
+  late String? id;
+  late String? email;
+  late String? password;
+  late String? firstName;
+  late String? lastName;
+  late String? devices;
 
   UserModel copyWith({
     String? id,

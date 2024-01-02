@@ -7,7 +7,7 @@ import 'package:take_data_and_update_project/features/auth/domain/user_model.dar
 import 'package:take_data_and_update_project/features/auth/presentation/pages/login_page/mixin/login_page_mixin.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/logo_divider_view.dart';
-import 'package:take_data_and_update_project/features/common/main_container_decoration.dart';
+import 'package:take_data_and_update_project/features/common/decorations.dart';
 import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/init/route/app_router.dart';
 import 'package:take_data_and_update_project/util/constants/app_colors.dart';
@@ -32,8 +32,8 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
   bool _isPasswordVisible = true;
   @override
   Widget build(BuildContext context) {
-    const int containerWidth = 310;
-    const int containerHeight = 580;
+    const containerWidth = 310;
+    const containerHeight = 580;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
           child: Container(
             width: containerWidth.w,
             height: containerHeight.h,
-            decoration: containerDecoration(context.secondaryColor),
+            decoration: Decorations.containerDecoration(context.secondaryColor),
             child: Form(
               key: LoginPage._formKey,
               child: SingleChildScrollView(
@@ -88,12 +88,12 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                     ///Login Button
                     ElevatedButton(
                       onPressed: () async {
-                        UserModel user = UserModel(
+                        final user = UserModel(
                           email: emailTextController.text,
                           password: passwordTextController.text,
                         );
                         if (!LoginPage._formKey.currentState!.validate()) {
-                          return debugPrint("Olmadı");
+                          return debugPrint('Olmadı');
                         } else {
                           await AuthRepository().signInUser(
                             userModel: user,

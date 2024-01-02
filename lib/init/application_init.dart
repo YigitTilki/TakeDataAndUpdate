@@ -35,9 +35,12 @@ final class ApplicationInitialize {
 
     ///System Utils
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark));
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
     await DeviceUtility.instance.initPackageInfo();
 
     FlutterError.onError = (details) {

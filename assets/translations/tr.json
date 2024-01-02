@@ -35,7 +35,9 @@
     },
     "usersPage": {
         "deleteUser": "Kullanıcıyı Sil",
-        "updateUser": "Kullanıcıyı Güncelle"
+        "updateUser": "Kullanıcıyı Güncelle",
+        "idUpper": "ID",
+        "devices": "Cihazlar"
     },
     "validatorErrors": {
         "invalidEmailPassword": "Hatalı Email veya Şifre",

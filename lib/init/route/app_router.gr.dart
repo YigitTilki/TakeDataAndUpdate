@@ -26,8 +26,8 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: HomePage(
-          key: args.key,
           userModel: args.userModel,
+          key: args.key,
         ),
       );
     },
@@ -70,14 +70,14 @@ class AdminRoute extends PageRouteInfo<void> {
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
   HomeRoute({
-    Key? key,
     required UserModel userModel,
+    Key? key,
     List<PageRouteInfo>? children,
   }) : super(
           HomeRoute.name,
           args: HomeRouteArgs(
-            key: key,
             userModel: userModel,
+            key: key,
           ),
           initialChildren: children,
         );
@@ -89,17 +89,17 @@ class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
 
 class HomeRouteArgs {
   const HomeRouteArgs({
-    this.key,
     required this.userModel,
+    this.key,
   });
-
-  final Key? key;
 
   final UserModel userModel;
 
+  final Key? key;
+
   @override
   String toString() {
-    return 'HomeRouteArgs{key: $key, userModel: $userModel}';
+    return 'HomeRouteArgs{userModel: $userModel, key: $key}';
   }
 }
 

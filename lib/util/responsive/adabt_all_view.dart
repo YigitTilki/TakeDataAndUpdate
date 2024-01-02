@@ -4,11 +4,12 @@ import 'package:responsive_framework/responsive_breakpoints.dart';
 /// Adaptive view for all platforms
 final class AdaptAllView extends StatelessWidget {
   /// Define custom widgets for all platforms
-  const AdaptAllView(
-      {super.key,
-      required this.phone,
-      required this.tablet,
-      required this.desktop});
+  const AdaptAllView({
+    required this.phone,
+    required this.tablet,
+    required this.desktop,
+    super.key,
+  });
 
   final Widget phone;
   final Widget tablet;
