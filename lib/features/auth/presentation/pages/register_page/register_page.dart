@@ -2,19 +2,19 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/features/auth/data/auth_repository.dart';
-import 'package:take_data_and_update_project/features/auth/domain/user_model.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/register_page/mixin/register_page_mixin.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/logo_divider_view.dart';
-import 'package:take_data_and_update_project/features/common/main_container_decoration.dart';
+import 'package:take_data_and_update_project/features/common/decorations.dart';
 import 'package:take_data_and_update_project/features/common/scaffold_messengers.dart';
-import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
-import 'package:take_data_and_update_project/init/route/app_router.dart';
-import 'package:take_data_and_update_project/util/constants/app_colors.dart';
-import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
-import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
-import 'package:take_data_and_update_project/util/validators/validators.dart';
+import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
+import 'package:take_data_and_update_project/product/init/route/app_router.dart';
+import 'package:take_data_and_update_project/product/models/user_model.dart';
+import 'package:take_data_and_update_project/product/service/auth_repository.dart';
+import 'package:take_data_and_update_project/product/util/constants/app_colors.dart';
+import 'package:take_data_and_update_project/product/util/constants/app_spacer.dart';
+import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/product/validators/validators.dart';
 import 'package:uuid/uuid.dart';
 
 part 'widgets/already_have_account.dart';
@@ -30,17 +30,20 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
+  bool _isPasswordVisible1 = true;
+  bool _isPasswordVisible2 = true;
+
   @override
   Widget build(BuildContext context) {
-    const int containerWidth = 310;
-    const int containerHeight = 580;
+    const containerWidth = 310;
+    const containerHeight = 580;
     return Scaffold(
       body: SafeArea(
         child: Center(
           child: Container(
             width: containerWidth.w,
             height: containerHeight.h,
-            decoration: containerDecoration(context.secondaryColor),
+            decoration: Decorations.containerDecoration(context.secondaryColor),
             child: Form(
               key: RegisterPage._formKey,
               child: SingleChildScrollView(
@@ -82,7 +85,8 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                     AuthTextFormField(
                       controller: passwordTextController,
                       keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
+                      obscureText: _isPasswordVisible1,
+                      suffixIcon: passwordObscureIcon1(context),
                       hintText: LocaleKeys.commons_password.tr(),
                       validator: (value) => Validators().password(value: value),
                     ),
@@ -92,8 +96,9 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                     AuthTextFormField(
                       controller: rePasswordTextController,
                       keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
+                      obscureText: _isPasswordVisible2,
                       hintText: LocaleKeys.registerPage_rePassword.tr(),
+                      suffixIcon: passwordObscureIcon2(context),
                       validator: (value) => Validators().rePassword(
                         value: value,
                         passwordController: passwordTextController.text,
@@ -116,22 +121,22 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                     ///Sign Up Button
                     ElevatedButton(
                       onPressed: () async {
-                        bool emailExists = await AuthRepository()
+                        final emailExists = await AuthRepository()
                             .isEmailExists(eMail: emailTextController.text);
                         if (!context.mounted) return;
                         if (!RegisterPage._formKey.currentState!.validate()) {
-                          return debugPrint("Olmadı");
+                          return debugPrint('Olmadı');
                         } else if (!emailExists) {
-                          return scaffoldMessenger(context, "Email Exist");
+                          scaffoldMessenger(context, 'Email Exist');
                         } else {
-                          var userModel = UserModel(
+                          final userModel = UserModel(
                             id: const Uuid().v4(),
                             email: emailTextController.text,
                             password: passwordTextController.text,
                             firstName: firstNameController.text,
                             lastName: lastNameController.text,
                           );
-                          AuthRepository().singUpUser(
+                          await AuthRepository().singUpUser(
                             userModel: userModel,
                             context: context,
                           );
@@ -142,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                         style: context.bodyMedium,
                       ).tr(),
                     ),
-                    const _AlreadyHaveAnAccount()
+                    const _AlreadyHaveAnAccount(),
                   ],
                 ),
               ),
@@ -150,6 +155,34 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
           ),
         ),
       ),
+    );
+  }
+
+  IconButton passwordObscureIcon1(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        _isPasswordVisible1 ? Icons.visibility_off : Icons.visibility,
+        color: context.primaryColor,
+      ),
+      onPressed: () {
+        setState(() {
+          _isPasswordVisible1 = !_isPasswordVisible1;
+        });
+      },
+    );
+  }
+
+  IconButton passwordObscureIcon2(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        _isPasswordVisible2 ? Icons.visibility_off : Icons.visibility,
+        color: context.primaryColor,
+      ),
+      onPressed: () {
+        setState(() {
+          _isPasswordVisible2 = !_isPasswordVisible2;
+        });
+      },
     );
   }
 }

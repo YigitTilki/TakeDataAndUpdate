@@ -1,12 +1,12 @@
 part of '../home_page.dart';
 
 class _HomePageDrawer extends StatelessWidget {
-  final UserModel userModel;
   const _HomePageDrawer(this.userModel);
+  final UserModel userModel;
 
   @override
   Widget build(BuildContext context) {
-    const int profileImageSize = 80;
+    const profileImageSize = 80;
     return Drawer(
       child: ListView(
         children: [
@@ -25,7 +25,7 @@ class _HomePageDrawer extends StatelessWidget {
                   Expanded(
                     child: Text(
                       //TODO: take name
-                      "${userModel.firstName} ${userModel.lastName}",
+                      '${userModel.firstName} ${userModel.lastName}',
                       overflow: TextOverflow.ellipsis,
                       style: context.headlineLarge,
                     ),

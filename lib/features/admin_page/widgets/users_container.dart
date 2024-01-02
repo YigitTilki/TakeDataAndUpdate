@@ -5,10 +5,10 @@ class _UsersContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const int iconSize = 90;
-    const int gestureContainerWidth = 290;
-    const int gestureContainerHeight = 130;
-    const int textBox = 160;
+    const iconSize = 90;
+    const gestureContainerWidth = 290;
+    const gestureContainerHeight = 130;
+    const textBox = 160;
     return GestureDetector(
       onTap: () {
         context.router.push(const UsersRoute());
@@ -16,9 +16,8 @@ class _UsersContainer extends StatelessWidget {
       child: Container(
         width: gestureContainerWidth.w,
         height: gestureContainerHeight.h,
-        decoration: containerDecoration(context.primaryColor),
+        decoration: Decorations.containerDecoration(context.primaryColor),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             AppSpacer.horizontal.space20,
             Assets.images.users.image(

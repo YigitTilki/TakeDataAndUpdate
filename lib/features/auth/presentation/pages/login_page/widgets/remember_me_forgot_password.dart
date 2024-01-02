@@ -38,7 +38,7 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
                 LocaleKeys.loginPage_rememberMe.tr(),
                 style: context.titleLarge
                     ?.copyWith(color: AppColors.tertiaryColor),
-              )
+              ),
             ],
           ),
           TextButton(

@@ -5,7 +5,7 @@ class _UsersPageDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const int dividerIndent = 6;
+    const dividerIndent = 6;
     return Divider(
       endIndent: dividerIndent.w,
       indent: dividerIndent.w,

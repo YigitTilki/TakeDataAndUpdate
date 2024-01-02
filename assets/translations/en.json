@@ -33,6 +33,12 @@
         "settings": "SETTINGS",
         "rateUs": "RATE US"
     },
+    "usersPage": {
+        "deleteUser": "Delete User",
+        "updateUser": "Update User",
+        "idUpper": "ID",
+        "devices": "Devices"
+    },
     "validatorErrors": {
         "invalidEmailPassword": "Invalid E-Mail or Password",
         "invalidEmail": "Invalid Email",

@@ -1,16 +1,26 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/features/auth/data/auth_repository.dart';
+import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/auth_text_form_field.dart';
+import 'package:take_data_and_update_project/features/common/decorations.dart';
+import 'package:take_data_and_update_project/features/common/scaffold_messengers.dart';
+import 'package:take_data_and_update_project/features/users_page/mixin/add_user_mixin.dart';
 import 'package:take_data_and_update_project/features/users_page/mixin/users_page_mixin.dart';
-import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
-import 'package:take_data_and_update_project/util/asset/assets.gen.dart';
-import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
-import 'package:take_data_and_update_project/util/constants/project_padding.dart';
-import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/features/users_page/state/state_management_user_list.dart';
+import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
+import 'package:take_data_and_update_project/product/models/user_model.dart';
+import 'package:take_data_and_update_project/product/service/auth_repository.dart';
+import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
+import 'package:take_data_and_update_project/product/util/constants/app_spacer.dart';
+import 'package:take_data_and_update_project/product/util/constants/project_padding.dart';
+import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/product/validators/validators.dart';
+import 'package:uuid/uuid.dart';
 
 part 'widgets/floating_action_button.dart';
+part 'widgets/user_list_pop_up.dart';
 part 'widgets/users_list.dart';
 part 'widgets/users_page_divider.dart';
 
@@ -25,11 +35,11 @@ class UsersPage extends StatefulWidget {
 class _UsersPageState extends State<UsersPage> with UsersPageMixin {
   @override
   Widget build(BuildContext context) {
-    const int iconSize = 20;
+    const iconSize = 20;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: context.secondaryColor,
-      floatingActionButton: const _FloatingActionButton(),
+      floatingActionButton: const UserListFloatingActionButton(),
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -80,13 +90,15 @@ class _UsersPageState extends State<UsersPage> with UsersPageMixin {
         setState(() {
           userListSetter = AuthRepository().getUsers().then((users) {
             return users
-                .where((user) =>
-                    user['firstName']
-                        .toLowerCase()
-                        .contains(value.toLowerCase()) ||
-                    user['lastName']
-                        .toLowerCase()
-                        .contains(value.toLowerCase()))
+                .where(
+                  (user) =>
+                      user.firstName!
+                          .toLowerCase()
+                          .contains(value.toLowerCase()) ||
+                      user.lastName!
+                          .toLowerCase()
+                          .contains(value.toLowerCase()),
+                )
                 .toList();
           });
         });
