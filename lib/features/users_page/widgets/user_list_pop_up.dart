@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/features/common/decorations.dart';
+import 'package:take_data_and_update_project/features/common/scaffold_messengers.dart';
 import 'package:take_data_and_update_project/features/users_page/state/state_management_user_list.dart';
-import 'package:take_data_and_update_project/init/languages/locale_keys.g.dart';
-import 'package:take_data_and_update_project/util/asset/assets.gen.dart';
-import 'package:take_data_and_update_project/util/constants/app_spacer.dart';
-import 'package:take_data_and_update_project/util/constants/project_padding.dart';
-import 'package:take_data_and_update_project/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
+import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
+import 'package:take_data_and_update_project/product/util/constants/app_spacer.dart';
+import 'package:take_data_and_update_project/product/util/constants/project_padding.dart';
+import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 
 class UserListPopUp extends StatelessWidget {
   const UserListPopUp({
@@ -82,37 +83,22 @@ class UserListPopUp extends StatelessWidget {
         ),
       ),
       actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () async {
-                  await context.router.pop();
-                },
-                child: Text(
-                  LocaleKeys.usersPage_updateUser.tr(),
-                  style: context.titleLarge,
-                ),
-              ),
+        AppSpacer.horizontal.space10,
+        Center(
+          child: ElevatedButton(
+            onPressed: () async {
+              final refresh = ref.refresh(userListProvider);
+              ref.read(deleteUserProvider(id));
+              // ignore: unnecessary_statements
+              refresh;
+              scaffoldMessenger(context, '$firstName $lastName Deleted');
+              await context.router.pop();
+            },
+            child: Text(
+              LocaleKeys.usersPage_deleteUser.tr(),
+              style: context.titleLarge,
             ),
-            AppSpacer.horizontal.space10,
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () async {
-                  final refresh = ref.refresh(userListProvider);
-                  ref.read(deleteUserProvider(id));
-                  // ignore: unnecessary_statements
-                  refresh;
-                  await context.router.pop();
-                },
-                child: Text(
-                  LocaleKeys.usersPage_deleteUser.tr(),
-                  style: context.titleLarge,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ],
       shape: Decorations.popUpDecoration(context.fourthColor),

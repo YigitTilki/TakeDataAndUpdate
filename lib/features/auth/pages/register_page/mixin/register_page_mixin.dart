@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:take_data_and_update_project/features/auth/presentation/pages/register_page/register_page.dart';
+import 'package:take_data_and_update_project/features/auth/pages/register_page/register_page.dart';
 
 mixin RegisterPageMixin on State<RegisterPage> {
   final TextEditingController _emailTextController = TextEditingController();

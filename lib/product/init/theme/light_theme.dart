@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/init/theme/app_theme.dart';
-import 'package:take_data_and_update_project/util/asset/fonts.gen.dart';
-import 'package:take_data_and_update_project/util/constants/app_colors.dart';
+import 'package:take_data_and_update_project/product/init/theme/app_theme.dart';
+import 'package:take_data_and_update_project/product/util/asset/fonts.gen.dart';
+import 'package:take_data_and_update_project/product/util/constants/app_colors.dart';
 
 final class LightTheme implements CustomAppTheme {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:take_data_and_update_project/features/auth/domain/user_model.dart';
+import 'package:take_data_and_update_project/product/models/user_model.dart';
 
 abstract class BaseAuthRepository {
   Future<void> signInUser({

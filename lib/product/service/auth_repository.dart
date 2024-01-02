@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:take_data_and_update_project/features/auth/domain/base_auth_repository.dart';
-import 'package:take_data_and_update_project/features/auth/domain/user_model.dart';
 import 'package:take_data_and_update_project/features/common/scaffold_messengers.dart';
-import 'package:take_data_and_update_project/init/route/app_router.dart';
+import 'package:take_data_and_update_project/product/base/base_auth_repository.dart';
+import 'package:take_data_and_update_project/product/init/route/app_router.dart';
+import 'package:take_data_and_update_project/product/models/user_model.dart';
 
 class AuthRepository extends BaseAuthRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
