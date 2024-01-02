@@ -126,7 +126,7 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
-  Future<void> deleteUser({required BuildContext context, required String id}) {
+  Future<void> deleteUser({required String id}) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     return users
         .doc(id)

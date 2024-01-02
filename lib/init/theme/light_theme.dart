@@ -7,19 +7,20 @@ import 'package:take_data_and_update_project/util/constants/app_colors.dart';
 final class LightTheme implements CustomAppTheme {
   @override
   ThemeData get themeData => ThemeData(
-        useMaterial3: true,
-        scaffoldBackgroundColor: AppColors.homeBackgroundColor,
-        appBarTheme: appBarTheme,
-        drawerTheme: drawerThemeData,
-        snackBarTheme: snackBarThemeData,
-        colorScheme: colorScheme,
-        fontFamily: appFont,
-        textTheme: textTheme,
-        elevatedButtonTheme: elevatedButtonThemeData,
-        inputDecorationTheme: inputDecorationTheme,
-        checkboxTheme: checkboxThemeData,
-        listTileTheme: listTileThemeData,
-        floatingActionButtonTheme: floatingActionButtonThemeData,
+      useMaterial3: true,
+      scaffoldBackgroundColor: AppColors.homeBackgroundColor,
+      appBarTheme: appBarTheme,
+      drawerTheme: drawerThemeData,
+      snackBarTheme: snackBarThemeData,
+      colorScheme: colorScheme,
+      fontFamily: appFont,
+      textTheme: textTheme,
+      elevatedButtonTheme: elevatedButtonThemeData,
+      inputDecorationTheme: inputDecorationTheme,
+      checkboxTheme: checkboxThemeData,
+      listTileTheme: listTileThemeData,
+      floatingActionButtonTheme: floatingActionButtonThemeData,
+      dialogTheme: DialogTheme() //TODO: add dialog theme
       );
 
   @override

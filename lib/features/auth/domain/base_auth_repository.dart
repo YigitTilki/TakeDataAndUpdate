@@ -20,7 +20,6 @@ abstract class BaseAuthRepository {
     required UserModel userModel,
   });
   Future<void> deleteUser({
-    required BuildContext context,
     required String id,
   });
   Future<bool> isEmailExists({required String eMail});

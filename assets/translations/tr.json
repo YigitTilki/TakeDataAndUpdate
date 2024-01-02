@@ -33,6 +33,10 @@
         "settings": "AYARLAR",
         "rateUs": "BİZİ DEĞERLENDİR"
     },
+    "usersPage": {
+        "deleteUser": "Kullanıcıyı Sil",
+        "updateUser": "Kullanıcıyı Güncelle"
+    },
     "validatorErrors": {
         "invalidEmailPassword": "Hatalı Email veya Şifre",
         "invalidEmail": "Hatalı Email",
