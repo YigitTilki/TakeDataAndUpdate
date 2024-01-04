@@ -20,7 +20,7 @@ class _UsersContainer extends StatelessWidget {
         child: Row(
           children: [
             AppSpacer.horizontal.space20,
-            Assets.images.users.image(
+            Assets.icons.usersIcon.image(
               width: iconSize.w,
               height: iconSize.h,
               color: context.secondaryColor,

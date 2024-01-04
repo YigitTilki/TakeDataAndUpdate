@@ -20,7 +20,7 @@ class _UserListPopUp extends StatelessWidget {
     const imageSize = 40;
     return AlertDialog(
       title: ListTile(
-        leading: Assets.images.noProfilePhoto
+        leading: Assets.icons.noProfilePhotoIcon
             .image(width: imageSize.w, height: imageSize.h),
         title: Text('$firstName $lastName'),
         subtitle: Text(email),

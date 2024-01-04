@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/product/util/constants/app_colors.dart';
-import 'package:take_data_and_update_project/product/util/constants/project_padding.dart';
+import 'package:take_data_and_update_project/product/constants/app_colors.dart';
+import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 
 final class AuthTextFormField extends StatelessWidget {
