@@ -48,5 +48,16 @@
         "passwordMustLowerCase": "Password must contain one lowercase letter",
         "passwordMustOneDigit": "Password must contain one digit",
         "passwordDoesntMatch": "Passwords doesn't match"
+    },
+    "settingsPage": {
+        "changeLanguage": "Change Language",
+        "appLanguage": "App Language : English",
+        "settingsLower": "Settings",
+        "editUser": "Edit User Credentials",
+        "manageDevices": "Manage Devices",
+        "notificationSettings": "Notification Settings",
+        "logOut": "Log Out",
+        "english": "English",
+        "turkish": "Turkish"
     }
 }

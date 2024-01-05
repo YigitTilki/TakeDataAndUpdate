@@ -21,6 +21,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AdminPage(),
       );
     },
+    ChangeLanguageRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ChangeLanguagePage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       final args = routeData.argsAs<HomeRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -43,6 +49,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RegisterPage(),
       );
     },
+    SettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SettingsPage(),
+      );
+    },
     UsersRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -62,6 +74,20 @@ class AdminRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AdminRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ChangeLanguagePage]
+class ChangeLanguageRoute extends PageRouteInfo<void> {
+  const ChangeLanguageRoute({List<PageRouteInfo>? children})
+      : super(
+          ChangeLanguageRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ChangeLanguageRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -127,6 +153,20 @@ class RegisterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RegisterRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SettingsPage]
+class SettingsRoute extends PageRouteInfo<void> {
+  const SettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          SettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -9,4 +9,5 @@ final userListProvider = FutureProvider<List<UserModel>>((ref) async {
 final deleteUserProvider =
     FutureProvider.family<void, String>((ref, userId) async {
   await AuthRepository().deleteUser(id: userId);
+  ref.refresh(userListProvider);
 });

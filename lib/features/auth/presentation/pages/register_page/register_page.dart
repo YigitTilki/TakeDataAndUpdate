@@ -5,8 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/register_page/mixin/register_page_mixin.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/logo_divider_view.dart';
-import 'package:take_data_and_update_project/features/common/decorations.dart';
-import 'package:take_data_and_update_project/features/common/scaffold_messengers.dart';
 import 'package:take_data_and_update_project/product/constants/app_colors.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
@@ -15,6 +13,8 @@ import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/service/auth_repository.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/validators/validators.dart';
+import 'package:take_data_and_update_project/product/widgets/decorations.dart';
+import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 import 'package:uuid/uuid.dart';
 
 part 'widgets/already_have_account.dart';

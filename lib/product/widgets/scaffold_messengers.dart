@@ -16,6 +16,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> scaffoldMessenger(
       shape: RoundedRectangleBorder(
         side: BorderSide(color: context.fourthColor, width: 5.sp),
       ),
+      duration: const Duration(seconds: 1),
     ),
   );
 }

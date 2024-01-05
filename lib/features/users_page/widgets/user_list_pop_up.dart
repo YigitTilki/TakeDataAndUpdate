@@ -91,10 +91,7 @@ class _UserListPopUp extends StatelessWidget {
             Expanded(
               child: ElevatedButton(
                 onPressed: () async {
-                  final refresh = ref.refresh(userListProvider);
                   ref.read(deleteUserProvider(id));
-                  // ignore: unnecessary_statements
-                  refresh;
                   scaffoldMessenger(context, '$firstName $lastName Deleted');
                   await context.router.pop();
                 },

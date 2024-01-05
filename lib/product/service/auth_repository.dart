@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:take_data_and_update_project/features/common/scaffold_messengers.dart';
 import 'package:take_data_and_update_project/product/base/base_auth_repository.dart';
 import 'package:take_data_and_update_project/product/enums/firebase_enums.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
+import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 
 class AuthRepository extends BaseAuthRepository {
   final _userCollection = FirebaseCollections.users.reference;

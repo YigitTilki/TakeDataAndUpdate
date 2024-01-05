@@ -18,9 +18,25 @@ class $AssetsIconsGen {
   AssetGenImage get adminIcon =>
       const AssetGenImage('assets/icons/adminIcon.png');
 
+  /// File path: assets/icons/changeLanguageIcon.png
+  AssetGenImage get changeLanguageIcon =>
+      const AssetGenImage('assets/icons/changeLanguageIcon.png');
+
+  /// File path: assets/icons/logOutIcon.png
+  AssetGenImage get logOutIcon =>
+      const AssetGenImage('assets/icons/logOutIcon.png');
+
+  /// File path: assets/icons/manageDeviceIcon.png
+  AssetGenImage get manageDeviceIcon =>
+      const AssetGenImage('assets/icons/manageDeviceIcon.png');
+
   /// File path: assets/icons/noProfilePhotoIcon.png
   AssetGenImage get noProfilePhotoIcon =>
       const AssetGenImage('assets/icons/noProfilePhotoIcon.png');
+
+  /// File path: assets/icons/notificationSettingsIcon.png
+  AssetGenImage get notificationSettingsIcon =>
+      const AssetGenImage('assets/icons/notificationSettingsIcon.png');
 
   /// File path: assets/icons/overheatIcon.png
   AssetGenImage get overheatIcon =>
@@ -37,19 +53,33 @@ class $AssetsIconsGen {
   /// File path: assets/icons/starsIcon.svg
   SvgGenImage get starsIcon => const SvgGenImage('assets/icons/starsIcon.svg');
 
+  /// File path: assets/icons/updateProfileIcon.png
+  AssetGenImage get updateProfileIcon =>
+      const AssetGenImage('assets/icons/updateProfileIcon.png');
+
   /// File path: assets/icons/usersIcon.png
   AssetGenImage get usersIcon =>
       const AssetGenImage('assets/icons/usersIcon.png');
 
+  /// File path: assets/icons/versionControlIcon.png
+  AssetGenImage get versionControlIcon =>
+      const AssetGenImage('assets/icons/versionControlIcon.png');
+
   /// List of all assets
   List<dynamic> get values => [
         adminIcon,
+        changeLanguageIcon,
+        logOutIcon,
+        manageDeviceIcon,
         noProfilePhotoIcon,
+        notificationSettingsIcon,
         overheatIcon,
         phoneIcon,
         settingsIcon,
         starsIcon,
-        usersIcon
+        updateProfileIcon,
+        usersIcon,
+        versionControlIcon
       ];
 }
 
@@ -60,8 +90,14 @@ class $AssetsImagesGen {
   AssetGenImage get profilePhoto =>
       const AssetGenImage('assets/images/profilePhoto.png');
 
+  /// File path: assets/images/tr_flag.png
+  AssetGenImage get trFlag => const AssetGenImage('assets/images/tr_flag.png');
+
+  /// File path: assets/images/uk_flag.png
+  AssetGenImage get ukFlag => const AssetGenImage('assets/images/uk_flag.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [profilePhoto];
+  List<AssetGenImage> get values => [profilePhoto, trFlag, ukFlag];
 }
 
 class $AssetsTranslationsGen {

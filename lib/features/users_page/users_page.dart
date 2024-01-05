@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/auth_text_form_field.dart';
-import 'package:take_data_and_update_project/features/common/decorations.dart';
-import 'package:take_data_and_update_project/features/common/scaffold_messengers.dart';
 import 'package:take_data_and_update_project/features/users_page/mixin/add_user_mixin.dart';
 import 'package:take_data_and_update_project/features/users_page/mixin/users_page_mixin.dart';
 import 'package:take_data_and_update_project/features/users_page/state/state_management_user_list.dart';
@@ -17,6 +15,8 @@ import 'package:take_data_and_update_project/product/service/auth_repository.dar
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/validators/validators.dart';
+import 'package:take_data_and_update_project/product/widgets/decorations.dart';
+import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 import 'package:uuid/uuid.dart';
 
 part 'widgets/floating_action_button.dart';
