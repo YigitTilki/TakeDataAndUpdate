@@ -9,7 +9,7 @@ class _ProfileImage extends StatelessWidget {
     return SizedBox(
       height: profileIconSize.h,
       width: profileIconSize.w,
-      child: Assets.images.adminIcon.image(
+      child: Assets.icons.adminIcon.image(
         width: profileIconSize.w,
         height: profileIconSize.h,
       ),

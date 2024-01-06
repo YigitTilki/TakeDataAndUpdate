@@ -62,7 +62,7 @@ dev_dependencies:
   
 
 flutter_gen:
-  output: lib/util/asset/
+  output: lib/product/util/asset/
   integrations:
     lottie: true
     flutter_svg: true
@@ -76,6 +76,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/icons/
     - assets/translations/
     - assets/lottie/
 

@@ -23,4 +23,28 @@ final class Decorations {
       borderRadius: BorderRadius.circular(borderRadius.sp),
     );
   }
+
+  static ShapeDecoration borderContainerDecoration(
+    Color containerColor,
+    Color borderColor,
+  ) {
+    return ShapeDecoration(
+      color: containerColor,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          width: 5.sp,
+          color: borderColor,
+        ),
+        borderRadius: BorderRadius.circular(borderRadius.sp),
+      ),
+    );
+  }
+
+  static ShapeDecoration circleWithBorderDecoration(Color borderColor) {
+    return ShapeDecoration(
+      shape: CircleBorder(
+        side: BorderSide(width: 2.sp, color: borderColor),
+      ),
+    );
+  }
 }

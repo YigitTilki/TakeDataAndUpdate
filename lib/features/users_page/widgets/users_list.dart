@@ -68,7 +68,7 @@ class _UsersList extends ConsumerWidget {
                           },
                         );
                       },
-                      leading: Assets.images.users.image(
+                      leading: Assets.icons.usersIcon.image(
                         width: iconSize.w,
                         height: iconSize.h,
                         color: context.primaryColor,

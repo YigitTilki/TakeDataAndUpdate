@@ -19,6 +19,10 @@ abstract class BaseAuthRepository {
     required BuildContext context,
     required UserModel userModel,
   });
+  Future<void> signUpAuthUser({
+    required BuildContext context,
+    required UserModel userModel,
+  });
   Future<void> deleteUser({
     required String id,
   });

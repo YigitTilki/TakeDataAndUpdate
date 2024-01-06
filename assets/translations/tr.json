@@ -48,5 +48,16 @@
         "passwordMustLowerCase": "Şifre bir küçük karakter içermeli",
         "passwordMustOneDigit": "Şifre bir sayı içermeli",
         "passwordDoesntMatch": "Şifreler Eşleşmiyor"
+    },
+    "settingsPage": {
+        "changeLanguage": "Dili Değiştir",
+        "appLanguage": "Uygulama Dili : Türkçe",
+        "settingsLower": "Ayarlar",
+        "editUser": "Bilgilerini Düzenle",
+        "manageDevices": "Cihazları Yönet",
+        "notificationSettings": "Bildirim Ayarları",
+        "logOut": "Çıkış Yap",
+        "english": "İngilizce",
+        "turkish": "Türkçe"
     }
 }

@@ -20,7 +20,7 @@ class _UserListPopUp extends StatelessWidget {
     const imageSize = 40;
     return AlertDialog(
       title: ListTile(
-        leading: Assets.images.noProfilePhoto
+        leading: Assets.icons.noProfilePhotoIcon
             .image(width: imageSize.w, height: imageSize.h),
         title: Text('$firstName $lastName'),
         subtitle: Text(email),
@@ -91,10 +91,7 @@ class _UserListPopUp extends StatelessWidget {
             Expanded(
               child: ElevatedButton(
                 onPressed: () async {
-                  final refresh = ref.refresh(userListProvider);
                   ref.read(deleteUserProvider(id));
-                  // ignore: unnecessary_statements
-                  refresh;
                   scaffoldMessenger(context, '$firstName $lastName Deleted');
                   await context.router.pop();
                 },
