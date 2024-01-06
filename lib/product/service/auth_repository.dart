@@ -143,6 +143,26 @@ class AuthRepository extends BaseAuthRepository {
         // ignore: inference_failure_on_untyped_parameter
         .catchError((error) => logger.d('Failed to delete user: $error'));
   }
+
+  @override
+  Future<void> signUpAuthUser({
+    required BuildContext context,
+    required UserModel userModel,
+  }) async {
+    final user = await _auth.signUp(
+      userModel.email.toString(),
+      userModel.password.toString(),
+    );
+
+    if (!context.mounted) return;
+    if (user != null) {
+      logger.d('User signed up');
+
+      await context.router.replace(HomeRoute(userModel: userModel));
+    } else {
+      scaffoldMessenger(context, 'Some error occurred');
+    }
+  }
 }
 
 class FirebaseAuthService {

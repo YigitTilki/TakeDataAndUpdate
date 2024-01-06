@@ -140,6 +140,9 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                             userModel: userModel,
                             context: context,
                           );
+                          await context.router.replace(
+                            SetOwnPasswordRoute(userModel: userModel),
+                          );
                         }
                       },
                       child: Text(
