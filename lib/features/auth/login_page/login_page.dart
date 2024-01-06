@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/features/auth/presentation/pages/login_page/mixin/login_page_mixin.dart';
-import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/auth_text_form_field.dart';
-import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/logo_divider_view.dart';
+import 'package:take_data_and_update_project/features/auth/login_page/mixin/login_page_mixin.dart';
+import 'package:take_data_and_update_project/features/auth/widgets/auth_text_form_field.dart';
+import 'package:take_data_and_update_project/features/auth/widgets/logo_divider_view.dart';
 import 'package:take_data_and_update_project/product/constants/app_colors.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
@@ -92,24 +92,14 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                           email: emailTextController.text,
                           password: passwordTextController.text,
                         );
-                        if (!LoginPage._formKey.currentState!.validate()) {
-                          return debugPrint('Olmadı');
-                        } else {
-                          await AuthRepository().signInUser(
-                            userModel: user,
-                            context: context,
-                          );
-                          if (!context.mounted) return;
-
-                          await AuthRepository().loginAdmin(
-                            context: context,
-                            userModel: user,
-                          );
-                          /* await AuthRepository().signUpAdmin(
-                            context: context,
-                            userModel: user,
-                          ); */
-                        }
+                        final isAdmin = await AuthRepository()
+                            .isAdmin(password: user.password!);
+                        if (!context.mounted) return;
+                        await buttonProcess(
+                          isAdmin: isAdmin,
+                          context: context,
+                          user: user,
+                        );
                       },
                       child: Text(
                         LocaleKeys.commons_loginUpperCase.tr(),
@@ -131,6 +121,23 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
         ),
       ),
     );
+  }
+
+  Future<void> buttonProcess({
+    required bool isAdmin,
+    required BuildContext context,
+    required UserModel user,
+  }) async {
+    if (isAdmin) {
+      await context.router.replace(const AdminRoute());
+    } else if (!LoginPage._formKey.currentState!.validate()) {
+      debugPrint('Olmadı');
+    } else {
+      await AuthRepository().signInUser(
+        userModel: user,
+        context: context,
+      );
+    }
   }
 
   IconButton passwordObscureIcon(BuildContext context) {

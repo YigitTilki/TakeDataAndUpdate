@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:take_data_and_update_project/features/auth/presentation/pages/login_page/login_page.dart';
+import 'package:take_data_and_update_project/features/auth/login_page/login_page.dart';
 
 mixin LoginPageMixin on State<LoginPage> {
   final TextEditingController _emailTextController = TextEditingController();

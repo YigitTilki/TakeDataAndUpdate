@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/auth_text_form_field.dart';
+import 'package:take_data_and_update_project/features/auth/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/features/users_page/mixin/add_user_mixin.dart';
 import 'package:take_data_and_update_project/features/users_page/mixin/users_page_mixin.dart';
 import 'package:take_data_and_update_project/features/users_page/state/state_management_user_list.dart';

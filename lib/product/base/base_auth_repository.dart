@@ -11,20 +11,11 @@ abstract class BaseAuthRepository {
     required BuildContext context,
   });
   Future<List<UserModel>> getUsers();
-  Future<void> loginAdmin({
-    required BuildContext context,
-    required UserModel userModel,
-  });
-  Future<void> signUpAdmin({
-    required BuildContext context,
-    required UserModel userModel,
-  });
-  Future<void> signUpAuthUser({
-    required BuildContext context,
-    required UserModel userModel,
-  });
+
   Future<void> deleteUser({
     required String id,
   });
   Future<bool> isEmailExists({required String eMail});
+
+  Future<bool> isAdmin({required String password});
 }

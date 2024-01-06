@@ -118,6 +118,7 @@ class HomePage extends StatelessWidget {
                     Text(
                       LocaleKeys.homePage_rateUs.tr(),
                       style: context.headlineMedium,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     AppSpacer.vertical.space10,
                     Assets.icons.starsIcon.svg(),

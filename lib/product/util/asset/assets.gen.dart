@@ -86,10 +86,6 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/profilePhoto.png
-  AssetGenImage get profilePhoto =>
-      const AssetGenImage('assets/images/profilePhoto.png');
-
   /// File path: assets/images/tr_flag.png
   AssetGenImage get trFlag => const AssetGenImage('assets/images/tr_flag.png');
 
@@ -97,7 +93,7 @@ class $AssetsImagesGen {
   AssetGenImage get ukFlag => const AssetGenImage('assets/images/uk_flag.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [profilePhoto, trFlag, ukFlag];
+  List<AssetGenImage> get values => [trFlag, ukFlag];
 }
 
 class $AssetsTranslationsGen {

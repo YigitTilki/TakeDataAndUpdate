@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/features/auth/presentation/pages/register_page/mixin/register_page_mixin.dart';
-import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/auth_text_form_field.dart';
-import 'package:take_data_and_update_project/features/auth/presentation/pages/widgets/logo_divider_view.dart';
+
+import 'package:take_data_and_update_project/features/auth/register_page/mixin/register_page_mixin.dart';
+import 'package:take_data_and_update_project/features/auth/widgets/logo_divider_view.dart';
 import 'package:take_data_and_update_project/product/constants/app_colors.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
@@ -16,6 +16,8 @@ import 'package:take_data_and_update_project/product/validators/validators.dart'
 import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 import 'package:uuid/uuid.dart';
+
+import 'package:take_data_and_update_project/features/auth/widgets/auth_text_form_field.dart';
 
 part 'widgets/already_have_account.dart';
 
@@ -31,7 +33,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
   bool _isPasswordVisible1 = true;
-  bool _isPasswordVisible2 = true;
+  final bool _isPasswordVisible2 = true;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +88,13 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                       controller: passwordTextController,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: _isPasswordVisible1,
-                      suffixIcon: passwordObscureIcon1(context),
+                      suffixIcon: passwordObscureIcon(
+                        context: context,
+                        isPasswordVisible: _isPasswordVisible1,
+                        onPressed: () => setState(() {
+                          _isPasswordVisible1 = !_isPasswordVisible1;
+                        }),
+                      ),
                       hintText: LocaleKeys.commons_password.tr(),
                       validator: (value) => Validators().password(value: value),
                     ),
@@ -98,7 +106,13 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: _isPasswordVisible2,
                       hintText: LocaleKeys.registerPage_rePassword.tr(),
-                      suffixIcon: passwordObscureIcon2(context),
+                      suffixIcon: passwordObscureIcon(
+                        context: context,
+                        isPasswordVisible: _isPasswordVisible2,
+                        onPressed: () => setState(() {
+                          _isPasswordVisible1 = !_isPasswordVisible1;
+                        }),
+                      ),
                       validator: (value) => Validators().rePassword(
                         value: value,
                         passwordController: passwordTextController.text,
@@ -121,29 +135,21 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                     ///Sign Up Button
                     ElevatedButton(
                       onPressed: () async {
+                        final userModel = UserModel(
+                          id: const Uuid().v4(),
+                          email: emailTextController.text,
+                          password: passwordTextController.text,
+                          firstName: firstNameController.text,
+                          lastName: lastNameController.text,
+                        );
                         final emailExists = await AuthRepository()
                             .isEmailExists(eMail: emailTextController.text);
                         if (!context.mounted) return;
-                        if (!RegisterPage._formKey.currentState!.validate()) {
-                          return debugPrint('Olmadı');
-                        } else if (!emailExists) {
-                          scaffoldMessenger(context, 'Email Exist');
-                        } else {
-                          final userModel = UserModel(
-                            id: const Uuid().v4(),
-                            email: emailTextController.text,
-                            password: passwordTextController.text,
-                            firstName: firstNameController.text,
-                            lastName: lastNameController.text,
-                          );
-                          await AuthRepository().singUpUser(
-                            userModel: userModel,
-                            context: context,
-                          );
-                          await context.router.replace(
-                            SetOwnPasswordRoute(userModel: userModel),
-                          );
-                        }
+                        await buttonProcess(
+                          emailExists: emailExists,
+                          context: context,
+                          userModel: userModel,
+                        );
                       },
                       child: Text(
                         LocaleKeys.registerPage_signUpUpperCase,
@@ -161,31 +167,34 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
     );
   }
 
-  IconButton passwordObscureIcon1(BuildContext context) {
-    return IconButton(
-      icon: Icon(
-        _isPasswordVisible1 ? Icons.visibility_off : Icons.visibility,
-        color: context.primaryColor,
-      ),
-      onPressed: () {
-        setState(() {
-          _isPasswordVisible1 = !_isPasswordVisible1;
-        });
-      },
-    );
+  Future<void> buttonProcess({
+    required bool emailExists,
+    required BuildContext context,
+    required UserModel userModel,
+  }) async {
+    if (!RegisterPage._formKey.currentState!.validate()) {
+      debugPrint('Olmadı');
+    } else if (!emailExists) {
+      scaffoldMessenger(context, 'Email Exist');
+    } else {
+      await AuthRepository().singUpUser(
+        userModel: userModel,
+        context: context,
+      );
+    }
   }
 
-  IconButton passwordObscureIcon2(BuildContext context) {
+  IconButton passwordObscureIcon({
+    required BuildContext context,
+    required bool isPasswordVisible,
+    required VoidCallback onPressed,
+  }) {
     return IconButton(
       icon: Icon(
-        _isPasswordVisible2 ? Icons.visibility_off : Icons.visibility,
+        isPasswordVisible ? Icons.visibility_off : Icons.visibility,
         color: context.primaryColor,
       ),
-      onPressed: () {
-        setState(() {
-          _isPasswordVisible2 = !_isPasswordVisible2;
-        });
-      },
+      onPressed: onPressed,
     );
   }
 }

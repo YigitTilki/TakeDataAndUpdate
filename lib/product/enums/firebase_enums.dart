@@ -3,7 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 enum FirebaseCollections {
   users,
   devices,
-  passwords;
+  passwords,
+  admin;
 
   CollectionReference get reference =>
       FirebaseFirestore.instance.collection(name);
