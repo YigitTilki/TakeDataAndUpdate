@@ -5,6 +5,7 @@ import 'package:take_data_and_update_project/features/auth/login_page/login_page
 import 'package:take_data_and_update_project/features/auth/register_page/register_page.dart';
 import 'package:take_data_and_update_project/features/home_page/home_page.dart';
 import 'package:take_data_and_update_project/features/settings_page/pages/change_language_page.dart';
+import 'package:take_data_and_update_project/features/settings_page/pages/edit_user_page.dart';
 import 'package:take_data_and_update_project/features/settings_page/settings_page.dart';
 import 'package:take_data_and_update_project/features/users_page/users_page.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
@@ -22,5 +23,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: UsersRoute.page),
         AutoRoute(page: SettingsRoute.page),
         AutoRoute(page: ChangeLanguageRoute.page),
+        AutoRoute(page: EditUserRoute.page),
       ];
 }

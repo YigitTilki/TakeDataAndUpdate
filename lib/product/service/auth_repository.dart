@@ -14,6 +14,8 @@ class AuthRepository extends BaseAuthRepository {
   final _passwordField = FirebaseFields.password.field;
   final _firstNameField = FirebaseFields.firstName.field;
   final _lastNameField = FirebaseFields.lastName.field;
+  final _idField = FirebaseFields.id.field;
+  final _devicesField = FirebaseFields.devices.field;
 
   Logger logger = Logger();
 
@@ -51,9 +53,15 @@ class AuthRepository extends BaseAuthRepository {
       if (result.docs.isNotEmpty) {
         final firstName = result.docs.first[_firstNameField].toString();
         final lastName = result.docs.first[_lastNameField].toString();
+        final id = result.docs.first[_idField].toString();
+        final devices = result.docs.first[_devicesField].toString();
 
-        userModel =
-            userModel.copyWith(firstName: firstName, lastName: lastName);
+        userModel = userModel.copyWith(
+          firstName: firstName,
+          lastName: lastName,
+          id: id,
+          devices: devices,
+        );
 
         await context.router.replace(HomeRoute(userModel: userModel));
       } else {
@@ -118,6 +126,19 @@ class AuthRepository extends BaseAuthRepository {
       return true;
     } else {
       return false;
+    }
+  }
+
+  @override
+  Future<void> updateUser({
+    required UserModel userModel,
+    required BuildContext context,
+  }) async {
+    try {
+      await _usersCollection.doc(userModel.id).update(userModel.toMap());
+      logger.d('User Updated');
+    } catch (e) {
+      logger.d('Error : $e');
     }
   }
 }

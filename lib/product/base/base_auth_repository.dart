@@ -10,6 +10,10 @@ abstract class BaseAuthRepository {
     required UserModel userModel,
     required BuildContext context,
   });
+  Future<void> updateUser({
+    required UserModel userModel,
+    required BuildContext context,
+  });
   Future<List<UserModel>> getUsers();
 
   Future<void> deleteUser({

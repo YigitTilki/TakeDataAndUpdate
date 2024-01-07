@@ -5,13 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/features/settings_page/widgets/settings_container_widget.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
+import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 
 @RoutePage()
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+  const SettingsPage({required this.userModel, super.key});
+  final UserModel userModel;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,9 @@ class SettingsPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SettingsContainerWidget(
-                onPressed: () {},
+                onPressed: () {
+                  context.router.push(EditUserRoute(userModel: userModel));
+                },
                 title: LocaleKeys.settingsPage_editUser.tr(),
                 asset: Assets.icons.updateProfileIcon,
               ),

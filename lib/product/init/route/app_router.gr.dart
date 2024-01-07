@@ -27,6 +27,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ChangeLanguagePage(),
       );
     },
+    EditUserRoute.name: (routeData) {
+      final args = routeData.argsAs<EditUserRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EditUserPage(
+          userModel: args.userModel,
+          key: args.key,
+        ),
+      );
+    },
     HomeRoute.name: (routeData) {
       final args = routeData.argsAs<HomeRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -50,9 +60,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     SettingsRoute.name: (routeData) {
+      final args = routeData.argsAs<SettingsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const SettingsPage(),
+        child: SettingsPage(
+          userModel: args.userModel,
+          key: args.key,
+        ),
       );
     },
     UsersRoute.name: (routeData) {
@@ -90,6 +104,44 @@ class ChangeLanguageRoute extends PageRouteInfo<void> {
   static const String name = 'ChangeLanguageRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [EditUserPage]
+class EditUserRoute extends PageRouteInfo<EditUserRouteArgs> {
+  EditUserRoute({
+    required UserModel userModel,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditUserRoute.name,
+          args: EditUserRouteArgs(
+            userModel: userModel,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditUserRoute';
+
+  static const PageInfo<EditUserRouteArgs> page =
+      PageInfo<EditUserRouteArgs>(name);
+}
+
+class EditUserRouteArgs {
+  const EditUserRouteArgs({
+    required this.userModel,
+    this.key,
+  });
+
+  final UserModel userModel;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EditUserRouteArgs{userModel: $userModel, key: $key}';
+  }
 }
 
 /// generated route for
@@ -159,16 +211,40 @@ class RegisterRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SettingsPage]
-class SettingsRoute extends PageRouteInfo<void> {
-  const SettingsRoute({List<PageRouteInfo>? children})
-      : super(
+class SettingsRoute extends PageRouteInfo<SettingsRouteArgs> {
+  SettingsRoute({
+    required UserModel userModel,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           SettingsRoute.name,
+          args: SettingsRouteArgs(
+            userModel: userModel,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'SettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<SettingsRouteArgs> page =
+      PageInfo<SettingsRouteArgs>(name);
+}
+
+class SettingsRouteArgs {
+  const SettingsRouteArgs({
+    required this.userModel,
+    this.key,
+  });
+
+  final UserModel userModel;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SettingsRouteArgs{userModel: $userModel, key: $key}';
+  }
 }
 
 /// generated route for

@@ -84,7 +84,7 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: InkWell(
                 onTap: () {
-                  context.router.push(const SettingsRoute());
+                  context.router.push(SettingsRoute(userModel: userModel));
                 },
                 child: Container(
                   width: mediumContainerWidth.w,
