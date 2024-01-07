@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/features/auth/login_page/mixin/login_page_mixin.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/logo_divider_view.dart';
-import 'package:take_data_and_update_project/product/constants/app_colors.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
@@ -15,6 +14,7 @@ import 'package:take_data_and_update_project/product/service/auth_repository.dar
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/validators/validators.dart';
 import 'package:take_data_and_update_project/product/widgets/decorations.dart';
+import 'package:take_data_and_update_project/product/widgets/password_obscure_icon.dart';
 
 part 'widgets/not_a_member_yet.dart';
 part 'widgets/remember_me_forgot_password.dart';
@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                     Text(
                       LocaleKeys.commons_loginUpperCase.tr(),
                       style: context.displayMedium
-                          ?.copyWith(color: AppColors.blackColor),
+                          ?.copyWith(color: context.blackColor),
                     ),
                     AppSpacer.vertical.space20,
 
@@ -77,7 +77,13 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                       hintText: LocaleKeys.commons_password.tr(),
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: _isPasswordVisible,
-                      suffixIcon: passwordObscureIcon(context),
+                      suffixIcon: passwordObscureIcon(
+                        context: context,
+                        isPasswordVisible: _isPasswordVisible,
+                        onPressed: () => setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        }),
+                      ),
                       controller: passwordTextController,
                       validator: (value) => Validators().loginPassword(
                         value: value,
@@ -95,6 +101,7 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                         final isAdmin = await AuthRepository()
                             .isAdmin(password: user.password!);
                         if (!context.mounted) return;
+
                         await buttonProcess(
                           isAdmin: isAdmin,
                           context: context,
@@ -138,19 +145,5 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
         context: context,
       );
     }
-  }
-
-  IconButton passwordObscureIcon(BuildContext context) {
-    return IconButton(
-      icon: Icon(
-        _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
-        color: context.primaryColor,
-      ),
-      onPressed: () {
-        setState(() {
-          _isPasswordVisible = !_isPasswordVisible;
-        });
-      },
-    );
   }
 }

@@ -10,7 +10,7 @@ class _NotAMemberYet extends StatelessWidget {
       children: [
         Text(
           LocaleKeys.loginPage_notAMemberYet.tr(),
-          style: context.titleLarge?.copyWith(color: AppColors.tertiaryColor),
+          style: context.titleLarge?.copyWith(color: context.tertiaryColor),
         ),
         TextButton(
           onPressed: () {
@@ -18,8 +18,7 @@ class _NotAMemberYet extends StatelessWidget {
           },
           child: Text(
             LocaleKeys.loginPage_signUp.tr(),
-            style:
-                context.titleLarge?.copyWith(color: AppColors.clickableColor),
+            style: context.titleLarge?.copyWith(color: context.clickableColor),
           ),
         ),
       ],

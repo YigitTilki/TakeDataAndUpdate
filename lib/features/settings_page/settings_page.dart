@@ -79,10 +79,20 @@ class SettingsPage extends StatelessWidget {
               ),
             ],
           ),
-          SettingsContainerWidget(
-            onPressed: () {},
-            title: LocaleKeys.settingsPage_logOut.tr(),
-            asset: Assets.icons.logOutIcon,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SettingsContainerWidget(
+                onPressed: () {},
+                title: 'Change\nTheme',
+                asset: Assets.icons.notificationSettingsIcon,
+              ),
+              SettingsContainerWidget(
+                onPressed: () {},
+                title: LocaleKeys.settingsPage_logOut.tr(),
+                asset: Assets.icons.logOutIcon,
+              ),
+            ],
           ),
         ],
       ),

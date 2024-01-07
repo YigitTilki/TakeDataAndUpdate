@@ -36,8 +36,8 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
               AppSpacer.horizontal.space5,
               Text(
                 LocaleKeys.loginPage_rememberMe.tr(),
-                style: context.titleLarge
-                    ?.copyWith(color: AppColors.tertiaryColor),
+                style:
+                    context.titleLarge?.copyWith(color: context.tertiaryColor),
               ),
             ],
           ),
@@ -47,8 +47,7 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
             },
             child: Text(
               LocaleKeys.loginPage_forgotPassWord.tr(),
-              style:
-                  context.titleLarge?.copyWith(color: AppColors.tertiaryColor),
+              style: context.titleLarge?.copyWith(color: context.tertiaryColor),
             ),
           ),
         ],

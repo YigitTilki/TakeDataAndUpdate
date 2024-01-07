@@ -10,7 +10,7 @@ class _AlreadyHaveAnAccount extends StatelessWidget {
       children: [
         Text(
           LocaleKeys.registerPage_alreadyHaveAnAcc,
-          style: context.titleLarge?.copyWith(color: AppColors.tertiaryColor),
+          style: context.titleLarge?.copyWith(color: context.tertiaryColor),
         ).tr(),
         TextButton(
           onPressed: () {
@@ -20,8 +20,7 @@ class _AlreadyHaveAnAccount extends StatelessWidget {
           },
           child: Text(
             LocaleKeys.registerPage_logIn,
-            style:
-                context.titleLarge?.copyWith(color: AppColors.clickableColor),
+            style: context.titleLarge?.copyWith(color: context.clickableColor),
           ).tr(),
         ),
       ],

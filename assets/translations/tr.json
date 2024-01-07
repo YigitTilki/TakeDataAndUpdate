@@ -53,11 +53,13 @@
         "changeLanguage": "Dili Değiştir",
         "appLanguage": "Uygulama Dili : Türkçe",
         "settingsLower": "Ayarlar",
-        "editUser": "Bilgilerini Düzenle",
-        "manageDevices": "Cihazları Yönet",
-        "notificationSettings": "Bildirim Ayarları",
+        "editUser": "Bilgilerini\nDüzenle",
+        "manageDevices": "Cihazları\nYönet",
+        "notificationSettings": "Bildirim\nAyarları",
         "logOut": "Çıkış Yap",
         "english": "İngilizce",
-        "turkish": "Türkçe"
+        "turkish": "Türkçe",
+        "updateUserUpperCase": "KULLANICIYI\nGÜNCELLE",
+        "update": "Güncelle"
     }
 }

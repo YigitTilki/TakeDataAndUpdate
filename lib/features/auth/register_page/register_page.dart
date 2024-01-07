@@ -2,10 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:take_data_and_update_project/features/auth/register_page/mixin/register_page_mixin.dart';
+import 'package:take_data_and_update_project/features/auth/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/logo_divider_view.dart';
-import 'package:take_data_and_update_project/product/constants/app_colors.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
@@ -14,10 +13,9 @@ import 'package:take_data_and_update_project/product/service/auth_repository.dar
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/validators/validators.dart';
 import 'package:take_data_and_update_project/product/widgets/decorations.dart';
+import 'package:take_data_and_update_project/product/widgets/password_obscure_icon.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 import 'package:uuid/uuid.dart';
-
-import 'package:take_data_and_update_project/features/auth/widgets/auth_text_form_field.dart';
 
 part 'widgets/already_have_account.dart';
 
@@ -59,7 +57,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                     Text(
                       LocaleKeys.registerPage_signUpUpperCase.tr(),
                       style: context.displayMedium?.copyWith(
-                        color: AppColors.blackColor,
+                        color: context.blackColor,
                       ),
                     ),
                     AppSpacer.vertical.space20,
@@ -182,19 +180,5 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
         context: context,
       );
     }
-  }
-
-  IconButton passwordObscureIcon({
-    required BuildContext context,
-    required bool isPasswordVisible,
-    required VoidCallback onPressed,
-  }) {
-    return IconButton(
-      icon: Icon(
-        isPasswordVisible ? Icons.visibility_off : Icons.visibility,
-        color: context.primaryColor,
-      ),
-      onPressed: onPressed,
-    );
   }
 }
