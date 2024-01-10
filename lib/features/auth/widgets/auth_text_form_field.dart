@@ -31,6 +31,8 @@ final class AuthTextFormField extends StatelessWidget {
         style: context.headlineSmall?.copyWith(color: context.blackColor),
         decoration: InputDecoration(
           hintText: hintText,
+          hintStyle:
+              context.headlineSmall?.copyWith(color: context.secondaryColor),
           contentPadding: EdgeInsets.all(15.sp),
           suffixIcon: Padding(
             padding: ProjectPadding.symHMedium(),

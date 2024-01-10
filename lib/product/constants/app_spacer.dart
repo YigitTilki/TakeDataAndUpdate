@@ -22,4 +22,5 @@ class _HorizontalSpace {
   final SizedBox space10 = SizedBox(width: 10.w);
   final SizedBox space15 = SizedBox(width: 15.w);
   final SizedBox space20 = SizedBox(width: 20.w);
+  final SizedBox space40 = SizedBox(width: 40.w);
 }

@@ -28,7 +28,7 @@
     },
     "homePage": {
         "welcome": "Welcome",
-        "myDevices": "My Devices",
+        "myDevices": "MY DEVICES",
         "alertBox": "ALERT BOX",
         "settings": "SETTINGS",
         "rateUs": "RATE US"
@@ -51,6 +51,7 @@
     },
     "settingsPage": {
         "changeLanguage": "Change\nLanguage",
+        "changeTheme": "Change\nTheme",
         "appLanguage": "App Language : English",
         "settingsLower": "Settings",
         "editUser": "Edit User\nCredentials",

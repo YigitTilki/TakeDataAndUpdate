@@ -28,7 +28,7 @@
     },
     "homePage": {
         "welcome": "Hoşgeldiniz",
-        "myDevices": "Cihazlarım",
+        "myDevices": "CİHAZLARIM",
         "alertBox": "UYARILAR",
         "settings": "AYARLAR",
         "rateUs": "OY VER"
@@ -51,6 +51,7 @@
     },
     "settingsPage": {
         "changeLanguage": "Dili Değiştir",
+        "changeTheme": "Temayı\nDeğiştir",
         "appLanguage": "Uygulama Dili : Türkçe",
         "settingsLower": "Ayarlar",
         "editUser": "Bilgilerini\nDüzenle",

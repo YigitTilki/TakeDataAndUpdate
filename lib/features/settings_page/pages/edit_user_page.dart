@@ -1,17 +1,21 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/features/auth/widgets/auth_text_form_field.dart';
+import 'package:take_data_and_update_project/features/auth/widgets/email_field.dart';
+import 'package:take_data_and_update_project/features/auth/widgets/first_name_field.dart';
+import 'package:take_data_and_update_project/features/auth/widgets/last_name_field.dart';
+import 'package:take_data_and_update_project/features/auth/widgets/password_field.dart';
+import 'package:take_data_and_update_project/features/auth/widgets/re_password_field.dart';
 import 'package:take_data_and_update_project/features/settings_page/mixin/edit_user_mixin.dart';
+import 'package:take_data_and_update_project/features/settings_page/widgets/custom_header.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
+import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/service/auth_repository.dart';
+import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
-import 'package:take_data_and_update_project/product/validators/validators.dart';
-import 'package:take_data_and_update_project/product/widgets/decorations.dart';
-import 'package:take_data_and_update_project/product/widgets/password_obscure_icon.dart';
+import 'package:take_data_and_update_project/product/widgets/buttons/elevated_button.dart';
+import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 
 @RoutePage()
 class EditUserPage extends StatefulWidget {
@@ -38,122 +42,114 @@ class _EditUserPageState extends State<EditUserPage> with EditUserMixin {
 
   @override
   Widget build(BuildContext context) {
-    const containerWidth = 310;
-    const containerHeight = 450;
     return Scaffold(
+      backgroundColor: context.secondaryColor,
       body: SafeArea(
-        child: Center(
-          child: Container(
-            width: containerWidth.w,
-            height: containerHeight.h,
-            decoration: Decorations.containerDecoration(context.secondaryColor),
-            child: Center(
-              child: Form(
-                key: EditUserPage._formKey,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ///Update User UpperCase
-                      Text(
-                        LocaleKeys.settingsPage_updateUserUpperCase.tr(),
-                        style: context.displaySmall?.copyWith(
-                          color: context.blackColor,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      AppSpacer.vertical.space20,
-
-                      ///FirstName Input Field
-                      AuthTextFormField(
-                        controller: firstNameController,
-                        keyboardType: TextInputType.name,
-                        hintText: LocaleKeys.registerPage_firstName.tr(),
-                        validator: (value) =>
-                            Validators().firstName(value: value),
-                      ),
-                      AppSpacer.vertical.space20,
-
-                      ///LastName Input Field
-                      AuthTextFormField(
-                        controller: lastNameController,
-                        keyboardType: TextInputType.name,
-                        hintText: LocaleKeys.registerPage_lastName.tr(),
-                        validator: (value) =>
-                            Validators().lastName(value: value),
-                      ),
-                      AppSpacer.vertical.space20,
-
-                      ///Password Input Field
-                      AuthTextFormField(
-                        controller: passwordTextController,
-                        keyboardType: TextInputType.visiblePassword,
-                        obscureText: _isPasswordVisible1,
-                        hintText: LocaleKeys.commons_password.tr(),
-                        suffixIcon: passwordObscureIcon(
-                          context: context,
-                          isPasswordVisible: _isPasswordVisible1,
-                          onPressed: () => setState(() {
-                            _isPasswordVisible1 = !_isPasswordVisible1;
-                          }),
-                        ),
-                        validator: (value) =>
-                            Validators().password(value: value),
-                      ),
-                      AppSpacer.vertical.space20,
-
-                      ///RePassword Input Field
-                      AuthTextFormField(
-                        controller: rePasswordTextController,
-                        keyboardType: TextInputType.visiblePassword,
-                        hintText: LocaleKeys.registerPage_rePassword.tr(),
-                        obscureText: _isPasswordVisible2,
-                        suffixIcon: passwordObscureIcon(
-                          context: context,
-                          isPasswordVisible: _isPasswordVisible2,
-                          onPressed: () => setState(() {
-                            _isPasswordVisible2 = !_isPasswordVisible2;
-                          }),
-                        ),
-                        validator: (value) => Validators().rePassword(
-                          value: value,
-                          passwordController: passwordTextController.text,
-                        ),
-                      ),
-                      AppSpacer.vertical.space20,
-
-                      ///Sign Up Button
-                      ElevatedButton(
-                        onPressed: () async {
-                          final userModel = UserModel(
-                            id: widget.userModel.id,
-                            email: widget.userModel.email,
-                            devices: widget.userModel.devices,
-                            firstName: firstNameController.text,
-                            lastName: lastNameController.text,
-                            password: passwordTextController.text,
-                          );
-                          if (!EditUserPage._formKey.currentState!.validate()) {
-                            debugPrint('olmadı');
-                          } else {
-                            await AuthRepository().updateUser(
-                              userModel: userModel,
-                              context: context,
-                            );
-                          }
-                        },
-                        child: Text(
-                          LocaleKeys.settingsPage_update.tr(),
-                          style: context.bodyMedium,
-                        ),
-                      ),
-                    ],
-                  ),
+        child: Form(
+          key: EditUserPage._formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                AppSpacer.vertical.space20,
+                CustomHeader(
+                  icon: Assets.icons.updateProfileIcon.image(),
+                  text: LocaleKeys.usersPage_updateUser,
                 ),
-              ),
+                AppSpacer.vertical.space30,
+                FirstNameField(firstNameController: firstNameController),
+                AppSpacer.vertical.space20,
+                LastNameField(lastNameController: lastNameController),
+                AppSpacer.vertical.space20,
+                PasswordField(
+                  passwordTextController: passwordTextController,
+                  onPressed: () => setState(() {
+                    _isPasswordVisible1 = !_isPasswordVisible1;
+                  }),
+                  isPasswordVisible: _isPasswordVisible1,
+                  isLogin: false,
+                ),
+                AppSpacer.vertical.space20,
+                RePasswordField(
+                  rePasswordTextController: rePasswordTextController,
+                  onPressedIcon: () => setState(() {
+                    _isPasswordVisible2 = !_isPasswordVisible2;
+                  }),
+                  isPasswordVisible: _isPasswordVisible2,
+                  passwordTextController: passwordTextController,
+                ),
+                AppSpacer.vertical.space20,
+                EmailField(
+                  emailTextController: emailTextController,
+                  isLogin: false,
+                ),
+                AppSpacer.vertical.space20,
+                _UpdateButton(
+                  widget: widget,
+                  emailTextController: emailTextController,
+                  firstNameController: firstNameController,
+                  lastNameController: lastNameController,
+                  passwordTextController: passwordTextController,
+                ),
+              ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _UpdateButton extends StatelessWidget {
+  const _UpdateButton({
+    required this.widget,
+    required this.emailTextController,
+    required this.firstNameController,
+    required this.lastNameController,
+    required this.passwordTextController,
+  });
+
+  final EditUserPage widget;
+  final TextEditingController emailTextController;
+  final TextEditingController firstNameController;
+  final TextEditingController lastNameController;
+  final TextEditingController passwordTextController;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppElevatedButton(
+      text: LocaleKeys.settingsPage_update,
+      onPressed: () async {
+        final userModel = UserModel(
+          id: widget.userModel.id,
+          email: emailTextController.text,
+          devices: widget.userModel.devices,
+          firstName: firstNameController.text,
+          lastName: lastNameController.text,
+          password: passwordTextController.text,
+        );
+
+        final isEmailExist = await AuthRepository()
+            .isEmailExists(eMail: emailTextController.text);
+
+        if (!context.mounted) return;
+        if (!EditUserPage._formKey.currentState!.validate()) {
+          debugPrint('olmadı');
+        } else if (isEmailExist &&
+            emailTextController.text != widget.userModel.email) {
+          scaffoldMessenger(
+            context,
+            'Bu Email Kullanılamaz',
+          );
+        } else {
+          scaffoldMessenger(context, 'User Updated');
+          await AuthRepository().updateUser(
+            userModel: userModel,
+            context: context,
+          );
+          if (!context.mounted) return;
+          await context.router.replace(const LoginRoute());
+        }
+      },
     );
   }
 }

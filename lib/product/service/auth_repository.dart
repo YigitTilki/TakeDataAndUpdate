@@ -104,8 +104,8 @@ class AuthRepository extends BaseAuthRepository {
     final query =
         await _usersCollection.where(_emailField, isEqualTo: eMail).get();
 
-    if (query.docs.isNotEmpty) return false;
-    return true;
+    if (query.docs.isNotEmpty) return true;
+    return false;
   }
 
   @override

@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+/* import 'package:flutter/widgets.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
 /// Adaptive view for all platforms
@@ -23,3 +23,4 @@ final class AdaptAllView extends StatelessWidget {
     return desktop;
   }
 }
+ */

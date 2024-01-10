@@ -17,41 +17,40 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              SizedBox(
-                width: Checkbox.width.w,
-                //TODO: CheckBox func
-                child: Checkbox(
-                  value: value,
-                  onChanged: (bool? value) {
-                    setState(
-                      () {
-                        this.value = value!;
-                      },
-                    );
-                  },
-                ),
-              ),
-              AppSpacer.horizontal.space5,
-              Text(
-                LocaleKeys.loginPage_rememberMe.tr(),
-                style:
-                    context.titleLarge?.copyWith(color: context.tertiaryColor),
-              ),
-            ],
-          ),
-          TextButton(
+          _rememberMe(),
+          AppTextButton(
+            text: LocaleKeys.loginPage_forgotPassWord,
             onPressed: () {
-              //TODO: Forgot Password Route
+              context.router.push(HomeRoute(userModel: UserModel()));
             },
-            child: Text(
-              LocaleKeys.loginPage_forgotPassWord.tr(),
-              style: context.titleLarge?.copyWith(color: context.tertiaryColor),
-            ),
           ),
         ],
       ),
+    );
+  }
+
+  Row _rememberMe() {
+    return Row(
+      children: [
+        Padding(
+          padding: ProjectPadding.symHSmall(),
+          child: SizedBox(
+            width: Checkbox.width.w,
+            //TODO: CheckBox func
+            child: Checkbox(
+              value: value,
+              onChanged: (bool? value) {
+                setState(
+                  () {
+                    this.value = value!;
+                  },
+                );
+              },
+            ),
+          ),
+        ),
+        const SmallInfoText(text: LocaleKeys.loginPage_rememberMe),
+      ],
     );
   }
 }
