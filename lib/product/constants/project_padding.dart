@@ -51,4 +51,24 @@ final class ProjectPadding extends EdgeInsets {
   ProjectPadding.leftLarge() : super.only(left: 14.w);
   ProjectPadding.leftXLarge() : super.only(left: 16.w);
   ProjectPadding.leftXXLarge() : super.only(left: 20.w);
+
+  ///Only Top Padding
+  ProjectPadding.topXXSmall() : super.only(top: 2.h);
+  ProjectPadding.topXSmall() : super.only(top: 4.h);
+  ProjectPadding.topSmall() : super.only(top: 8..h);
+  ProjectPadding.topMedium() : super.only(top: 10.h);
+  ProjectPadding.topNormal() : super.only(top: 12.h);
+  ProjectPadding.topLarge() : super.only(top: 14.h);
+  ProjectPadding.topXLarge() : super.only(top: 16.h);
+  ProjectPadding.topXXLarge() : super.only(top: 20.h);
+
+  ///Only Bottom Padding
+  ProjectPadding.bottomXXSmall() : super.only(bottom: 2.h);
+  ProjectPadding.bottomXSmall() : super.only(bottom: 4.h);
+  ProjectPadding.bottomSmall() : super.only(bottom: 8..h);
+  ProjectPadding.bottomMedium() : super.only(bottom: 10.h);
+  ProjectPadding.bottomNormal() : super.only(bottom: 12.h);
+  ProjectPadding.bottomLarge() : super.only(bottom: 14.h);
+  ProjectPadding.bottomXLarge() : super.only(bottom: 16.h);
+  ProjectPadding.bottomXXLarge() : super.only(bottom: 20.h);
 }

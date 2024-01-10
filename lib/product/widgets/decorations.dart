@@ -32,7 +32,7 @@ final class Decorations {
       color: containerColor,
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          width: 5.sp,
+          width: 4.sp,
           color: borderColor,
         ),
         borderRadius: BorderRadius.circular(borderRadius.sp),
@@ -44,6 +44,18 @@ final class Decorations {
     return ShapeDecoration(
       shape: CircleBorder(
         side: BorderSide(width: 2.sp, color: borderColor),
+      ),
+    );
+  }
+
+  static ShapeDecoration circleWithTwoColorDecoration(
+    Color borderColor,
+    Color containerColor,
+  ) {
+    return ShapeDecoration(
+      color: containerColor,
+      shape: CircleBorder(
+        side: BorderSide(width: 4.sp, color: borderColor),
       ),
     );
   }

@@ -3,13 +3,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:take_data_and_update_project/features/settings_page/widgets/custom_header.dart';
 import 'package:take_data_and_update_project/features/settings_page/widgets/settings_container_widget.dart';
+import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
-
-part 'widgets/settings_header.dart';
 
 @RoutePage()
 class SettingsPage extends StatelessWidget {
@@ -20,33 +19,48 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.secondaryColor,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const _Header(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _EditUser(userModel: userModel),
-              const _ManageDevices(),
-            ],
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _ChangeLanguage(),
-              _NotificationSettings(),
-            ],
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _ChangeTheme(),
-              _LogOut(),
-            ],
-          ),
-        ],
+      body: Padding(
+        padding: ProjectPadding.topLarge(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const _Header(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _EditUser(userModel: userModel),
+                const _ManageDevices(),
+              ],
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _ChangeLanguage(),
+                _NotificationSettings(),
+              ],
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _ChangeTheme(),
+                _LogOut(),
+              ],
+            ),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header();
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomHeader(
+      icon: Assets.icons.settingsIcon.svg(),
+      text: LocaleKeys.settingsPage_settingsLower,
     );
   }
 }

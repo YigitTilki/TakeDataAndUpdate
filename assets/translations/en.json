@@ -61,6 +61,7 @@
         "english": "English",
         "turkish": "Turkish",
         "updateUserUpperCase": "UPDATE USER",
-        "update": "Update"
+        "update": "Update",
+        "userUpdated" : "User Updated"
     }
 }

@@ -25,7 +25,7 @@ class _FloatingActionButtonState extends State<UserListFloatingActionButton>
                 return Form(
                   key: formKey,
                   child: AlertDialog(
-                    icon: Assets.images.adminIcon.image(),
+                    icon: Assets.icons.adminIcon.image(),
                     title: Center(
                       child: Text(
                         'Add User',

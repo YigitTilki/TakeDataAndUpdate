@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
@@ -16,31 +17,60 @@ class CustomHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 250.w,
-      height: 50.h,
-      decoration: Decorations.borderContainerDecoration(
-        context.primaryColor,
-        context.fourthColor,
-      ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Padding(
-              padding: ProjectPadding.symVSmall(),
-              child: icon,
-            ),
-            SettingsPageText(
-              value: text,
-            ),
-            Padding(
-              padding: ProjectPadding.symVSmall(),
-              child: icon,
-            ),
-          ],
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(
+          decoration: Decorations.circleWithTwoColorDecoration(
+            context.fourthColor,
+            context.primaryColor,
+          ),
+          child: IconButton(
+            onPressed: () {
+              context.router.pop();
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
         ),
-      ),
+        Container(
+          width: 230.w,
+          height: 50.h,
+          decoration: Decorations.borderContainerDecoration(
+            context.primaryColor,
+            context.fourthColor,
+          ),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: ProjectPadding.symVSmall(),
+                  child: icon,
+                ),
+                SettingsPageText(
+                  value: text,
+                ),
+                Padding(
+                  padding: ProjectPadding.symVSmall(),
+                  child: icon,
+                ),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          decoration: Decorations.circleWithTwoColorDecoration(
+            context.fourthColor,
+            context.primaryColor,
+          ),
+          child: IconButton(
+            onPressed: () {
+              context.router.pop();
+            },
+            icon: const Icon(Icons.home),
+          ),
+        ),
+      ],
     );
   }
 }

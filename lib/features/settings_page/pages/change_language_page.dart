@@ -20,10 +20,11 @@ class ChangeLanguagePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: context.secondaryColor,
-        body: Column(
+    return Scaffold(
+      backgroundColor: context.secondaryColor,
+      body: Padding(
+        padding: ProjectPadding.topXXLarge(),
+        child: Column(
           children: [
             AppSpacer.vertical.space20,
             const _Header(),
