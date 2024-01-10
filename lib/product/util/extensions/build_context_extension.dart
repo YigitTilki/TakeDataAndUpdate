@@ -12,6 +12,7 @@ extension BuildContextExtension on BuildContext {
   Color get fourthColor => colorScheme.onPrimary;
   Color get errorColor => colorScheme.error;
   Color get onErrorColor => colorScheme.onError;
+  Color get clickableColor => colorScheme.scrim;
 
   //TextStyles
   TextStyle? get labelSmall => textTheme.labelSmall;

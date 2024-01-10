@@ -22,6 +22,10 @@ class $AssetsIconsGen {
   AssetGenImage get changeLanguageIcon =>
       const AssetGenImage('assets/icons/changeLanguageIcon.png');
 
+  /// File path: assets/icons/changeThemeIcon.png
+  AssetGenImage get changeThemeIcon =>
+      const AssetGenImage('assets/icons/changeThemeIcon.png');
+
   /// File path: assets/icons/logOutIcon.png
   AssetGenImage get logOutIcon =>
       const AssetGenImage('assets/icons/logOutIcon.png');
@@ -69,6 +73,7 @@ class $AssetsIconsGen {
   List<dynamic> get values => [
         adminIcon,
         changeLanguageIcon,
+        changeThemeIcon,
         logOutIcon,
         manageDeviceIcon,
         noProfilePhotoIcon,
@@ -86,10 +91,6 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/profilePhoto.png
-  AssetGenImage get profilePhoto =>
-      const AssetGenImage('assets/images/profilePhoto.png');
-
   /// File path: assets/images/tr_flag.png
   AssetGenImage get trFlag => const AssetGenImage('assets/images/tr_flag.png');
 
@@ -97,7 +98,7 @@ class $AssetsImagesGen {
   AssetGenImage get ukFlag => const AssetGenImage('assets/images/uk_flag.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [profilePhoto, trFlag, ukFlag];
+  List<AssetGenImage> get values => [trFlag, ukFlag];
 }
 
 class $AssetsTranslationsGen {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:take_data_and_update_project/features/auth/presentation/pages/register_page/register_page.dart';
+import 'package:take_data_and_update_project/features/settings_page/pages/edit_user_page.dart';
 
-mixin RegisterPageMixin on State<RegisterPage> {
+mixin EditUserMixin on State<EditUserPage> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
   final TextEditingController _rePasswordTextController =

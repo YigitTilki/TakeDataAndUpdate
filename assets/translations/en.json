@@ -28,7 +28,7 @@
     },
     "homePage": {
         "welcome": "Welcome",
-        "myDevices": "My Devices",
+        "myDevices": "MY DEVICES",
         "alertBox": "ALERT BOX",
         "settings": "SETTINGS",
         "rateUs": "RATE US"
@@ -50,14 +50,17 @@
         "passwordDoesntMatch": "Passwords doesn't match"
     },
     "settingsPage": {
-        "changeLanguage": "Change Language",
+        "changeLanguage": "Change\nLanguage",
+        "changeTheme": "Change\nTheme",
         "appLanguage": "App Language : English",
         "settingsLower": "Settings",
-        "editUser": "Edit User Credentials",
-        "manageDevices": "Manage Devices",
-        "notificationSettings": "Notification Settings",
+        "editUser": "Edit User\nCredentials",
+        "manageDevices": "Manage\nDevices",
+        "notificationSettings": "Notification\nSettings",
         "logOut": "Log Out",
         "english": "English",
-        "turkish": "Turkish"
+        "turkish": "Turkish",
+        "updateUserUpperCase": "UPDATE USER",
+        "update": "Update"
     }
 }

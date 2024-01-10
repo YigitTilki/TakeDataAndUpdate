@@ -4,6 +4,7 @@ import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/widgets/decorations.dart';
+import 'package:take_data_and_update_project/product/widgets/text/settings_page_text.dart';
 
 class SettingsContainerWidget extends StatelessWidget {
   const SettingsContainerWidget({
@@ -32,11 +33,7 @@ class SettingsContainerWidget extends StatelessWidget {
           children: [
             asset.image(width: 80.w, height: 60.h),
             AppSpacer.vertical.space15,
-            Text(
-              title,
-              style: context.headlineMedium,
-              textAlign: TextAlign.center,
-            ),
+            SettingsPageText(value: title),
           ],
         ),
       ),

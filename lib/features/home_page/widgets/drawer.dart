@@ -23,7 +23,8 @@ class _HomePageDrawer extends StatelessWidget {
                   Expanded(
                     child: Text(
                       '${userModel.firstName} ${userModel.lastName}',
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.visible,
+                      textAlign: TextAlign.center,
                       style: context.headlineLarge,
                     ),
                   ),

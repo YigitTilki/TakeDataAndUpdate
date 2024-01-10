@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+/* import 'package:flutter/widgets.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class AdaptMobileView extends StatelessWidget {
@@ -13,3 +13,4 @@ class AdaptMobileView extends StatelessWidget {
     return tablet;
   }
 }
+ */

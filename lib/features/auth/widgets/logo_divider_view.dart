@@ -1,10 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/product/constants/app_colors.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/product/widgets/text/header_text.dart';
 
 class LogoDividerView extends StatelessWidget {
   const LogoDividerView({super.key});
@@ -12,15 +11,12 @@ class LogoDividerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const dividerWidth = 270;
-    const dividerHeight = 2;
+    const dividerHeight = 3;
 
     return Column(
       children: [
         AppSpacer.vertical.space20,
-        Text(
-          LocaleKeys.commons_logo,
-          style: context.displayMedium?.copyWith(color: AppColors.blackColor),
-        ).tr(),
+        const HeaderText(value: LocaleKeys.commons_logo),
         AppSpacer.vertical.space20,
         Container(
           width: dividerWidth.w,

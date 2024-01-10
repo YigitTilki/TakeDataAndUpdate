@@ -11,7 +11,7 @@ class _HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(
         '${LocaleKeys.homePage_welcome.tr()} ${userModel.firstName} ${userModel.lastName}',
-      ), //TODO: take name
+      ),
     );
   }
 

@@ -8,21 +8,16 @@ class _AlreadyHaveAnAccount extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          LocaleKeys.registerPage_alreadyHaveAnAcc,
-          style: context.titleLarge?.copyWith(color: AppColors.tertiaryColor),
-        ).tr(),
-        TextButton(
+        const SmallInfoText(
+          text: LocaleKeys.registerPage_alreadyHaveAnAcc,
+        ),
+        AppTextButton(
+          text: LocaleKeys.registerPage_logIn,
           onPressed: () {
             context.router.replace(
               const LoginRoute(),
             );
           },
-          child: Text(
-            LocaleKeys.registerPage_logIn,
-            style:
-                context.titleLarge?.copyWith(color: AppColors.clickableColor),
-          ).tr(),
         ),
       ],
     );

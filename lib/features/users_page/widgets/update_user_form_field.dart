@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/product/constants/app_colors.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 
 class UpdateUserPopUpFormField extends StatelessWidget {
@@ -26,7 +25,7 @@ class UpdateUserPopUpFormField extends StatelessWidget {
       keyboardType: keyboardType,
       controller: controller,
       initialValue: initialValue,
-      style: context.headlineSmall?.copyWith(color: AppColors.blackColor),
+      style: context.headlineSmall?.copyWith(color: context.blackColor),
       decoration: InputDecoration(
         labelText: labelText,
         contentPadding: EdgeInsets.all(15.sp),

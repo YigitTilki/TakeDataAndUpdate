@@ -28,10 +28,10 @@
     },
     "homePage": {
         "welcome": "Hoşgeldiniz",
-        "myDevices": "Cihazlarım",
+        "myDevices": "CİHAZLARIM",
         "alertBox": "UYARILAR",
         "settings": "AYARLAR",
-        "rateUs": "BİZİ DEĞERLENDİR"
+        "rateUs": "OY VER"
     },
     "usersPage": {
         "deleteUser": "Kullanıcıyı Sil",
@@ -51,13 +51,16 @@
     },
     "settingsPage": {
         "changeLanguage": "Dili Değiştir",
+        "changeTheme": "Temayı\nDeğiştir",
         "appLanguage": "Uygulama Dili : Türkçe",
         "settingsLower": "Ayarlar",
-        "editUser": "Bilgilerini Düzenle",
-        "manageDevices": "Cihazları Yönet",
-        "notificationSettings": "Bildirim Ayarları",
+        "editUser": "Bilgilerini\nDüzenle",
+        "manageDevices": "Cihazları\nYönet",
+        "notificationSettings": "Bildirim\nAyarları",
         "logOut": "Çıkış Yap",
         "english": "İngilizce",
-        "turkish": "Türkçe"
+        "turkish": "Türkçe",
+        "updateUserUpperCase": "KULLANICIYI\nGÜNCELLE",
+        "update": "Güncelle"
     }
 }
