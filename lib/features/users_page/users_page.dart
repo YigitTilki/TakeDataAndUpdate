@@ -53,7 +53,7 @@ class _UsersPageState extends State<UsersPage> with UsersPageMixin {
                 ),
                 AppSpacer.vertical.space5,
 
-                ///Dividerr
+                ///Divider
                 const _UsersPageDivider(),
                 AppSpacer.vertical.space5,
 
