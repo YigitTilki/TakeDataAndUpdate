@@ -8,7 +8,7 @@ import 'package:take_data_and_update_project/product/init/route/app_router.dart'
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
-import 'package:take_data_and_update_project/product/widgets/decorations.dart';
+import 'package:take_data_and_update_project/product/widgets/containers/home_container.dart';
 import 'package:take_data_and_update_project/product/widgets/text/home_page_text.dart';
 
 part 'widgets/app_bar.dart';
@@ -77,10 +77,9 @@ class _RateUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        width: smallContainerWidth.w,
-        height: smallContainerHeight.h,
-        decoration: Decorations.containerDecoration(context.primaryColor),
+      child: HomeContainer(
+        width: smallContainerWidth,
+        height: smallContainerHeight,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -112,10 +111,9 @@ class _Settings extends StatelessWidget {
         onTap: () {
           context.router.push(SettingsRoute(userModel: userModel));
         },
-        child: Container(
-          width: mediumContainerWidth.w,
-          height: smallContainerHeight.h,
-          decoration: Decorations.containerDecoration(context.primaryColor),
+        child: HomeContainer(
+          width: mediumContainerWidth,
+          height: smallContainerHeight,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -141,10 +139,9 @@ class _AlertBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        width: bigContainerWidth.w,
-        height: smallContainerHeight.h,
-        decoration: Decorations.containerDecoration(context.primaryColor),
+      child: HomeContainer(
+        width: bigContainerWidth,
+        height: smallContainerHeight,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -170,10 +167,9 @@ class _MyDevices extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 2,
-      child: Container(
-        width: bigContainerWidth.w,
-        height: bigContainerHeight.h,
-        decoration: Decorations.containerDecoration(context.primaryColor),
+      child: HomeContainer(
+        width: bigContainerWidth,
+        height: bigContainerHeight,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

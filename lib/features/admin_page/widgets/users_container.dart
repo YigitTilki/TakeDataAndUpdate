@@ -5,35 +5,27 @@ class _UsersContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const iconSize = 90;
-    const gestureContainerWidth = 290;
-    const gestureContainerHeight = 130;
-    const textBox = 160;
+    const iconSize = 80;
+    const gestureContainerWidth = 180;
+    const gestureContainerHeight = 140;
     return GestureDetector(
       onTap: () {
         context.router.push(const UsersRoute());
       },
-      child: Container(
-        width: gestureContainerWidth.w,
-        height: gestureContainerHeight.h,
-        decoration: Decorations.containerDecoration(context.primaryColor),
-        child: Row(
+      child: HomeContainer(
+        width: gestureContainerWidth,
+        height: gestureContainerHeight,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AppSpacer.horizontal.space20,
-            Assets.icons.usersIcon.image(
+            Assets.icons.adminUsersIcon.image(
               width: iconSize.w,
               height: iconSize.h,
-              color: context.secondaryColor,
             ),
             AppSpacer.horizontal.space20,
-            Expanded(
-              child: SizedBox(
-                width: textBox.w,
-                child: Text(
-                  LocaleKeys.adminPage_users,
-                  style: context.displaySmall,
-                ).tr(),
-              ),
+            const HomePageText(
+              value: LocaleKeys.adminPage_users,
             ),
           ],
         ),

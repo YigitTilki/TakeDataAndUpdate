@@ -18,6 +18,10 @@ class $AssetsIconsGen {
   AssetGenImage get adminIcon =>
       const AssetGenImage('assets/icons/adminIcon.png');
 
+  /// File path: assets/icons/adminUsersIcon.png
+  AssetGenImage get adminUsersIcon =>
+      const AssetGenImage('assets/icons/adminUsersIcon.png');
+
   /// File path: assets/icons/changeLanguageIcon.png
   AssetGenImage get changeLanguageIcon =>
       const AssetGenImage('assets/icons/changeLanguageIcon.png');
@@ -72,6 +76,7 @@ class $AssetsIconsGen {
   /// List of all assets
   List<dynamic> get values => [
         adminIcon,
+        adminUsersIcon,
         changeLanguageIcon,
         changeThemeIcon,
         logOutIcon,

@@ -83,6 +83,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                     ),
                     AppSpacer.vertical.space20,
                     EmailField(
+                      //TODO: tolowerCase indirge
                       emailTextController: emailTextController,
                       isLogin: false,
                     ),

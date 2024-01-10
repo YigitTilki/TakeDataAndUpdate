@@ -13,6 +13,7 @@ extension BuildContextExtension on BuildContext {
   Color get errorColor => colorScheme.error;
   Color get onErrorColor => colorScheme.onError;
   Color get clickableColor => colorScheme.scrim;
+  Color get whiteColor => colorScheme.onSurface;
 
   //TextStyles
   TextStyle? get labelSmall => textTheme.labelSmall;

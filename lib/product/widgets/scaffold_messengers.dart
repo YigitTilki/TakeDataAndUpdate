@@ -7,6 +7,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> scaffoldMessenger(
   String text,
 ) {
   return ScaffoldMessenger.of(context).showSnackBar(
+    //TODO: Refactor it
     SnackBar(
       content: Text(
         text,
@@ -14,9 +15,12 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> scaffoldMessenger(
         textAlign: TextAlign.center,
       ),
       shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
         side: BorderSide(color: context.fourthColor, width: 5.sp),
       ),
       duration: const Duration(seconds: 1),
+      behavior: SnackBarBehavior.floating,
+      width: 250.w,
     ),
   );
 }

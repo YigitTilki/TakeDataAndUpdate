@@ -7,7 +7,7 @@ import 'package:take_data_and_update_project/features/auth/widgets/last_name_fie
 import 'package:take_data_and_update_project/features/auth/widgets/password_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/re_password_field.dart';
 import 'package:take_data_and_update_project/features/settings_page/mixin/edit_user_mixin.dart';
-import 'package:take_data_and_update_project/features/settings_page/widgets/custom_header.dart';
+import 'package:take_data_and_update_project/product/widgets/custom_header.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
