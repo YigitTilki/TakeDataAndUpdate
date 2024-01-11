@@ -77,28 +77,20 @@ class _UserListPopUp extends StatelessWidget {
           children: [
             Expanded(
               //TODO: is it necessary
-              child: ElevatedButton(
-                onPressed: () async {
-                  await context.router.pop();
-                },
-                child: Text(
-                  LocaleKeys.usersPage_updateUser.tr(),
-                  style: context.titleLarge,
-                ),
+              child: BorderedElevatedButton(
+                onPressed: () {},
+                text: LocaleKeys.usersPage_updateUser,
               ),
             ),
             AppSpacer.horizontal.space10,
             Expanded(
-              child: ElevatedButton(
+              child: BorderedElevatedButton(
                 onPressed: () async {
                   ref.read(deleteUserProvider(id));
                   scaffoldMessenger(context, '$firstName $lastName Deleted');
                   await context.router.pop();
                 },
-                child: Text(
-                  LocaleKeys.usersPage_deleteUser.tr(),
-                  style: context.titleLarge,
-                ),
+                text: LocaleKeys.usersPage_deleteUser,
               ),
             ),
           ],

@@ -84,7 +84,9 @@ class _ChangeTheme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingsContainerWidget(
-      onPressed: () {},
+      onPressed: () {
+        context.router.push(const ChangeThemeRoute());
+      },
       title: LocaleKeys.settingsPage_changeTheme,
       asset: Assets.icons.changeThemeIcon,
     );

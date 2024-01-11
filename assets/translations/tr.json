@@ -62,7 +62,9 @@
         "turkish": "Türkçe",
         "updateUserUpperCase": "KULLANICIYI\nGÜNCELLE",
         "update": "Güncelle",
-        "userUpdated" : "Kullanıcı Güncellendi"
+        "userUpdated" : "Kullanıcı Güncellendi",
+        "lightTheme" : "Açık Tema",
+        "blueTheme" : "Mavi Tema"
 
     }
 }

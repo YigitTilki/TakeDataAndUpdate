@@ -3,16 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/product/init/theme/app_theme.dart';
 import 'package:take_data_and_update_project/product/util/asset/fonts.gen.dart';
 
-class DarkTheme implements CustomAppTheme {
+class BlueGreyTheme implements CustomAppTheme {
   //Dark Theme Colors
-  static const Color homeBackgroundColor = Colors.grey;
-  static const Color secondaryColor = Colors.redAccent;
+  static const Color homeBackgroundColor = Color(0xFFF1F0E8);
+  static const Color secondaryColor = Color(0xFF96B6C5);
+  static const Color tertiaryColor = Color(0xFFCCE6F1);
+  static const Color fourthColor = Color(0xFFEEE0C9);
+
   static const Color blackColor = Colors.black;
   static const Color whiteColor = Colors.white;
-  static const Color tertiaryColor = Colors.pink;
-  static const Color onErrorColor = Colors.red;
-  static const Color errorColor = Color(0xFF990F02);
-  static const Color fourthColor = Colors.deepPurple;
+  static const Color onErrorColor = Color.fromARGB(255, 90, 26, 174);
+  static const Color errorColor = Color.fromARGB(255, 50, 13, 99);
   static const Color clickableColor = Colors.blueGrey;
   static const Color defaultTextColor = Colors.black;
 
@@ -76,6 +77,7 @@ class DarkTheme implements CustomAppTheme {
         onBackground: homeBackgroundColor,
         surface: blackColor,
         onSurface: defaultTextColor,
+        scrim: clickableColor,
       );
 
   @override
@@ -92,7 +94,7 @@ class DarkTheme implements CustomAppTheme {
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           foregroundColor: whiteColor,
-          backgroundColor: tertiaryColor,
+          backgroundColor: homeBackgroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.sp),
           ),
@@ -105,6 +107,7 @@ class DarkTheme implements CustomAppTheme {
       FloatingActionButtonThemeData(
         iconSize: 25.sp,
         backgroundColor: homeBackgroundColor,
+        foregroundColor: defaultTextColor,
       );
 
   @override

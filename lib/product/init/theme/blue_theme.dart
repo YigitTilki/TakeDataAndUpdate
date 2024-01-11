@@ -3,19 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/product/init/theme/app_theme.dart';
 import 'package:take_data_and_update_project/product/util/asset/fonts.gen.dart';
 
-final class LightTheme implements CustomAppTheme {
-  //Light Theme Colors
-  static const Color homeBackgroundColor = Color(0xFFB68C6D);
-  static const Color secondaryColor = Color(0xFFE5B18C);
+class BlueTheme implements CustomAppTheme {
+  //Dark Theme Colors
+  static const Color homeBackgroundColor = Color(0xFF2D9596);
+  static const Color secondaryColor = Color(0xFF9AD0C2);
+  static const Color tertiaryColor = Color(0xFFECF4D6);
+  static const Color fourthColor = Color(0xFF265073);
   static const Color blackColor = Colors.black;
   static const Color whiteColor = Colors.white;
-  static const Color tertiaryColor = Color(0xFF855D40);
-  static const Color onErrorColor = Color(0xFFE3242B);
-  static const Color errorColor = Color(0xFF990F02);
-  static const Color fourthColor = Color(0xFFFFD4B6);
-  static const Color clickableColor = Color(0xFFA15C1C);
+  static const Color onErrorColor = Color.fromARGB(255, 90, 26, 174);
+  static const Color errorColor = Color.fromARGB(255, 50, 13, 99);
+  static const Color clickableColor = Colors.blueGrey;
   static const Color defaultTextColor = Colors.white;
-  static const Color difColor = Color.fromARGB(255, 92, 66, 47);
+  static const Color difColor = Color.fromARGB(255, 21, 41, 58);
 
   @override
   ThemeData get themeData => ThemeData(
@@ -65,13 +65,13 @@ final class LightTheme implements CustomAppTheme {
 
   @override
   ColorScheme get colorScheme => const ColorScheme(
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         primary: homeBackgroundColor,
         onPrimary: fourthColor,
         secondary: secondaryColor,
         onSecondary: homeBackgroundColor,
-        error: errorColor,
         tertiary: tertiaryColor,
+        error: errorColor,
         onError: onErrorColor,
         background: homeBackgroundColor,
         onBackground: homeBackgroundColor,
@@ -95,7 +95,7 @@ final class LightTheme implements CustomAppTheme {
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           foregroundColor: whiteColor,
-          backgroundColor: tertiaryColor,
+          backgroundColor: homeBackgroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.sp),
           ),
@@ -108,6 +108,7 @@ final class LightTheme implements CustomAppTheme {
       FloatingActionButtonThemeData(
         iconSize: 25.sp,
         backgroundColor: homeBackgroundColor,
+        foregroundColor: defaultTextColor,
       );
 
   @override
