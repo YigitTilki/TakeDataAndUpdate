@@ -89,7 +89,7 @@ class AuthRepository extends BaseAuthRepository {
         if (!context.mounted) return;
         logger.d('User Added');
 
-        //await context.router.replace(HomeRoute(userModel: userModel));
+        await context.router.replace(HomeRoute(userModel: userModel));
       } else {
         if (!context.mounted) return;
         scaffoldMessenger(context, "There isn't fetch passwords");
