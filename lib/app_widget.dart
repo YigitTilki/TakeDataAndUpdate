@@ -24,7 +24,7 @@ class AppWidget extends StatelessWidget {
               title: 'Graduating Project',
               debugShowCheckedModeBanner: false,
               theme: theme.themeData,
-              //darkTheme: DarkTheme().themeData,
+              darkTheme: theme.darkThemeData,
               builder: CustomResponsive.build,
 
               ///Localization
