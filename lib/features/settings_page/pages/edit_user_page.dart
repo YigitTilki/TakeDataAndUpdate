@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/email_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/first_name_field.dart';
@@ -7,9 +6,7 @@ import 'package:take_data_and_update_project/features/auth/widgets/last_name_fie
 import 'package:take_data_and_update_project/features/auth/widgets/password_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/re_password_field.dart';
 import 'package:take_data_and_update_project/features/settings_page/mixin/edit_user_mixin.dart';
-import 'package:take_data_and_update_project/product/widgets/custom_header.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
-import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
@@ -17,6 +14,7 @@ import 'package:take_data_and_update_project/product/service/auth_repository.dar
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/elevated_button.dart';
+import 'package:take_data_and_update_project/product/widgets/custom_header.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 
 @RoutePage()
@@ -46,15 +44,17 @@ class _EditUserPageState extends State<EditUserPage> with EditUserMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.secondaryColor,
-      body: Form(
-        key: EditUserPage._formKey,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: ProjectPadding.topXXLarge(),
+      body: SafeArea(
+        child: Form(
+          key: EditUserPage._formKey,
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 AppSpacer.vertical.space20,
-                const _Header(),
+                CustomHeader(
+                  icon: Assets.icons.updateProfileIcon.image(),
+                  text: LocaleKeys.usersPage_updateUser,
+                ),
                 AppSpacer.vertical.space30,
                 FirstNameField(firstNameController: firstNameController),
                 AppSpacer.vertical.space20,
@@ -99,18 +99,6 @@ class _EditUserPageState extends State<EditUserPage> with EditUserMixin {
   }
 }
 
-class _Header extends StatelessWidget {
-  const _Header();
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomHeader(
-      icon: Assets.icons.updateProfileIcon.image(),
-      text: LocaleKeys.usersPage_updateUser,
-    );
-  }
-}
-
 class _UpdateButton extends StatelessWidget {
   const _UpdateButton({
     required this.widget,
@@ -150,10 +138,10 @@ class _UpdateButton extends StatelessWidget {
             emailTextController.text != widget.userModel.email) {
           scaffoldMessenger(
             context,
-            LocaleKeys.validatorErrors_invalidEmail.tr(),
+            'Bu Email Kullanılamaz',
           );
         } else {
-          scaffoldMessenger(context, LocaleKeys.settingsPage_userUpdated.tr());
+          scaffoldMessenger(context, 'User Updated');
           await AuthRepository().updateUser(
             userModel: userModel,
             context: context,

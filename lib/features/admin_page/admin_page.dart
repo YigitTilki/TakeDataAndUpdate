@@ -10,7 +10,6 @@ import 'package:take_data_and_update_project/product/widgets/containers/home_con
 import 'package:take_data_and_update_project/product/widgets/custom_header.dart';
 import 'package:take_data_and_update_project/product/widgets/text/home_page_text.dart';
 
-part 'widgets/profile_image.dart';
 part 'widgets/users_container.dart';
 
 @RoutePage()
