@@ -14,7 +14,6 @@ import 'package:take_data_and_update_project/product/service/auth_repository.dar
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/elevated_button.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/text_button.dart';
-import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 import 'package:take_data_and_update_project/product/widgets/text/header_text.dart';
 import 'package:take_data_and_update_project/product/widgets/text/small_info_text.dart';
 
@@ -34,50 +33,41 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
   bool _isPasswordVisible = true;
   @override
   Widget build(BuildContext context) {
-    const containerWidth = 310;
-    const containerHeight = 580;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: context.secondaryColor,
       body: SafeArea(
-        child: Center(
-          child: Container(
-            width: containerWidth.w,
-            height: containerHeight.h,
-            decoration: Decorations.containerDecoration(context.secondaryColor),
-            child: Form(
-              key: LoginPage._formKey,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const LogoDividerView(),
-                    AppSpacer.vertical.space100,
-                    const HeaderText(value: LocaleKeys.commons_loginUpperCase),
-                    AppSpacer.vertical.space20,
-                    EmailField(
-                      emailTextController: emailTextController,
-                      isLogin: true,
-                    ),
-                    AppSpacer.vertical.space20,
-                    PasswordField(
-                      passwordTextController: passwordTextController,
-                      onPressed: () => setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      }),
-                      isPasswordVisible: _isPasswordVisible,
-                      isLogin: true,
-                    ),
-                    AppSpacer.vertical.space20,
-                    _LoginButton(
-                      emailTextController: emailTextController,
-                      passwordTextController: passwordTextController,
-                    ),
-                    AppSpacer.vertical.space10,
-                    const _RememberMeForgotPassword(),
-                    const _NotAMemberYet(),
-                  ],
+        child: Form(
+          key: LoginPage._formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const LogoDividerView(),
+                AppSpacer.vertical.space100,
+                const HeaderText(value: LocaleKeys.commons_loginUpperCase),
+                AppSpacer.vertical.space20,
+                EmailField(
+                  emailTextController: emailTextController,
+                  isLogin: true,
                 ),
-              ),
+                AppSpacer.vertical.space20,
+                PasswordField(
+                  passwordTextController: passwordTextController,
+                  onPressed: () => setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  }),
+                  isPasswordVisible: _isPasswordVisible,
+                  isLogin: true,
+                ),
+                AppSpacer.vertical.space20,
+                _LoginButton(
+                  emailTextController: emailTextController,
+                  passwordTextController: passwordTextController,
+                ),
+                AppSpacer.vertical.space10,
+                const _RememberMeForgotPassword(),
+                const _NotAMemberYet(),
+              ],
             ),
           ),
         ),

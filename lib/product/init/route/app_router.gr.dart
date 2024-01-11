@@ -27,6 +27,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ChangeLanguagePage(),
       );
     },
+    ChangeThemeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ChangeThemePage(),
+      );
+    },
     EditUserRoute.name: (routeData) {
       final args = routeData.argsAs<EditUserRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -102,6 +108,20 @@ class ChangeLanguageRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ChangeLanguageRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ChangeThemePage]
+class ChangeThemeRoute extends PageRouteInfo<void> {
+  const ChangeThemeRoute({List<PageRouteInfo>? children})
+      : super(
+          ChangeThemeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ChangeThemeRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

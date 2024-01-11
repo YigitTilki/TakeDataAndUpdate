@@ -25,7 +25,6 @@ class _FloatingActionButtonState extends State<UserListFloatingActionButton>
                 return Form(
                   key: formKey,
                   child: AlertDialog(
-                    icon: Assets.icons.adminIcon.image(),
                     title: Center(
                       child: Text(
                         'Add User',
@@ -102,7 +101,7 @@ class _FloatingActionButtonState extends State<UserListFloatingActionButton>
                                 if (!context.mounted) return;
                                 if (!formKey.currentState!.validate()) {
                                   return debugPrint('Olmadı');
-                                } else if (!emailExists) {
+                                } else if (emailExists) {
                                   scaffoldMessenger(context, 'Email Exist');
                                 } else {
                                   final userModel = UserModel(

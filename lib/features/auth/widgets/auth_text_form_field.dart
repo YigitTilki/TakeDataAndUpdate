@@ -28,7 +28,7 @@ final class AuthTextFormField extends StatelessWidget {
         keyboardType: keyboardType,
         controller: controller,
         obscureText: obscureText ?? false,
-        style: context.headlineSmall?.copyWith(color: context.blackColor),
+        style: context.headlineSmall?.copyWith(color: context.defaultTextColor),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle:

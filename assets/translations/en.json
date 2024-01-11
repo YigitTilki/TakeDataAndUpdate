@@ -62,6 +62,8 @@
         "turkish": "Turkish",
         "updateUserUpperCase": "UPDATE USER",
         "update": "Update",
-        "userUpdated" : "User Updated"
+        "userUpdated" : "User Updated",
+        "lightTheme" : "Light Theme",
+        "blueTheme" : "Blue Theme"
     }
 }

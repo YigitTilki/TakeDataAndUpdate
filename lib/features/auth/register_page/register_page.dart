@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/features/auth/register_page/mixin/register_page_mixin.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/email_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/first_name_field.dart';
@@ -16,7 +15,6 @@ import 'package:take_data_and_update_project/product/service/auth_repository.dar
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/elevated_button.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/text_button.dart';
-import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 import 'package:take_data_and_update_project/product/widgets/text/header_text.dart';
 import 'package:take_data_and_update_project/product/widgets/text/small_info_text.dart';
@@ -40,64 +38,56 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
 
   @override
   Widget build(BuildContext context) {
-    const containerWidth = 310;
-    const containerHeight = 580;
     return Scaffold(
+      backgroundColor: context.secondaryColor,
       body: SafeArea(
-        child: Center(
-          child: Container(
-            width: containerWidth.w,
-            height: containerHeight.h,
-            decoration: Decorations.containerDecoration(context.secondaryColor),
-            child: Form(
-              key: RegisterPage._formKey,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const LogoDividerView(),
-                    AppSpacer.vertical.space20,
-                    const HeaderText(
-                      value: LocaleKeys.registerPage_signUpUpperCase,
-                    ),
-                    AppSpacer.vertical.space20,
-                    FirstNameField(firstNameController: firstNameController),
-                    AppSpacer.vertical.space20,
-                    LastNameField(lastNameController: lastNameController),
-                    AppSpacer.vertical.space20,
-                    PasswordField(
-                      passwordTextController: passwordTextController,
-                      onPressed: () => setState(() {
-                        _isPasswordVisible1 = !_isPasswordVisible1;
-                      }),
-                      isPasswordVisible: _isPasswordVisible1,
-                      isLogin: false,
-                    ),
-                    AppSpacer.vertical.space20,
-                    RePasswordField(
-                      rePasswordTextController: rePasswordTextController,
-                      isPasswordVisible: _isPasswordVisible2,
-                      passwordTextController: passwordTextController,
-                      onPressedIcon: () => setState(() {
-                        _isPasswordVisible2 = !_isPasswordVisible2;
-                      }),
-                    ),
-                    AppSpacer.vertical.space20,
-                    EmailField(
-                      //TODO: tolowerCase indirge
-                      emailTextController: emailTextController,
-                      isLogin: false,
-                    ),
-                    AppSpacer.vertical.space20,
-                    _RegisterButton(
-                      emailTextController: emailTextController,
-                      passwordTextController: passwordTextController,
-                      firstNameController: firstNameController,
-                      lastNameController: lastNameController,
-                    ),
-                    const _AlreadyHaveAnAccount(),
-                  ],
+        child: Form(
+          key: RegisterPage._formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const LogoDividerView(),
+                AppSpacer.vertical.space20,
+                const HeaderText(
+                  value: LocaleKeys.registerPage_signUpUpperCase,
                 ),
-              ),
+                AppSpacer.vertical.space20,
+                FirstNameField(firstNameController: firstNameController),
+                AppSpacer.vertical.space20,
+                LastNameField(lastNameController: lastNameController),
+                AppSpacer.vertical.space20,
+                PasswordField(
+                  passwordTextController: passwordTextController,
+                  onPressed: () => setState(() {
+                    _isPasswordVisible1 = !_isPasswordVisible1;
+                  }),
+                  isPasswordVisible: _isPasswordVisible1,
+                  isLogin: false,
+                ),
+                AppSpacer.vertical.space20,
+                RePasswordField(
+                  rePasswordTextController: rePasswordTextController,
+                  isPasswordVisible: _isPasswordVisible2,
+                  passwordTextController: passwordTextController,
+                  onPressedIcon: () => setState(() {
+                    _isPasswordVisible2 = !_isPasswordVisible2;
+                  }),
+                ),
+                AppSpacer.vertical.space20,
+                EmailField(
+                  //TODO: tolowerCase indirge
+                  emailTextController: emailTextController,
+                  isLogin: false,
+                ),
+                AppSpacer.vertical.space20,
+                _RegisterButton(
+                  emailTextController: emailTextController,
+                  passwordTextController: passwordTextController,
+                  firstNameController: firstNameController,
+                  lastNameController: lastNameController,
+                ),
+                const _AlreadyHaveAnAccount(),
+              ],
             ),
           ),
         ),
