@@ -8,6 +8,7 @@ import 'package:take_data_and_update_project/features/settings_page/pages/change
 import 'package:take_data_and_update_project/features/settings_page/pages/change_theme_page.dart';
 import 'package:take_data_and_update_project/features/settings_page/pages/edit_user_page.dart';
 import 'package:take_data_and_update_project/features/settings_page/settings_page.dart';
+import 'package:take_data_and_update_project/features/splash/splash_view.dart';
 import 'package:take_data_and_update_project/features/users_page/users_page.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 
@@ -17,7 +18,8 @@ part 'app_router.gr.dart';
 class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: LoginRoute.page, initial: true),
+        AutoRoute(page: SplashRoute.page, initial: true),
+        AutoRoute(page: LoginRoute.page),
         AutoRoute(page: RegisterRoute.page),
         AutoRoute(page: HomeRoute.page),
         AutoRoute(page: AdminRoute.page),
