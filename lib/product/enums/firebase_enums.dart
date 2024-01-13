@@ -4,7 +4,8 @@ enum FirebaseCollections {
   users,
   devices,
   passwords,
-  admin;
+  admin,
+  version;
 
   CollectionReference get reference =>
       FirebaseFirestore.instance.collection(name);

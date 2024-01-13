@@ -14,10 +14,8 @@ class ThemeNotifier extends ChangeNotifier {
   SharedPreferences? _prefs;
 
   ThemeData _themeData = LightTheme().themeData;
-  final ThemeData _darkThemeData = BlueTheme().themeData;
 
   ThemeData get themeData => _themeData;
-  ThemeData get darkThemeData => _darkThemeData;
 
   Future<void> _loadTheme() async {
     _prefs = await SharedPreferences.getInstance();

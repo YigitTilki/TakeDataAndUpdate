@@ -24,7 +24,7 @@ dependencies:
   #config
   easy_localization: ^3.0.3
   flutter_svg: ^2.0.9
-  lottie: ^2.7.0
+  lottie: ^3.0.0
   responsive_framework: ^1.1.1
   
   #DataBase
@@ -44,6 +44,7 @@ dependencies:
   flutter_riverpod: ^2.4.9
   riverpod_annotation: ^2.3.3
   shared_preferences: ^2.2.2
+  equatable: ^2.0.5
   
   
   
@@ -79,6 +80,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/icons/
+    - assets/lottie/
     - assets/translations/
     
 
