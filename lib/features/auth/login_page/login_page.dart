@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/features/auth/login_page/mixin/login_page_mixin.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/email_field.dart';
@@ -21,15 +22,15 @@ part 'widgets/not_a_member_yet.dart';
 part 'widgets/remember_me_forgot_password.dart';
 
 @RoutePage()
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with LoginPageMixin {
+class _LoginPageState extends ConsumerState<LoginPage> with LoginPageMixin {
   bool _isPasswordVisible = true;
   @override
   Widget build(BuildContext context) {
