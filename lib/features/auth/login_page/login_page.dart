@@ -24,7 +24,7 @@ part 'widgets/remember_me_forgot_password.dart';
 @RoutePage()
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _formKeyLogin = GlobalKey<FormState>();
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
@@ -39,7 +39,7 @@ class _LoginPageState extends ConsumerState<LoginPage> with LoginPageMixin {
       backgroundColor: context.secondaryColor,
       body: SafeArea(
         child: Form(
-          key: LoginPage._formKey,
+          key: LoginPage._formKeyLogin,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -100,8 +100,8 @@ class _LoginButton extends StatelessWidget {
         if (!context.mounted) return;
 
         if (isAdmin) {
-          await context.router.replace(const AdminRoute());
-        } else if (!LoginPage._formKey.currentState!.validate()) {
+          await context.router.push(const AdminRoute());
+        } else if (!LoginPage._formKeyLogin.currentState!.validate()) {
           debugPrint('Olmadı');
         } else {
           await AuthRepository().signInUser(

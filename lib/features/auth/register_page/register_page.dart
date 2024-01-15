@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:take_data_and_update_project/features/auth/register_page/mixin/register_page_mixin.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/email_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/first_name_field.dart';
@@ -23,16 +24,17 @@ import 'package:uuid/uuid.dart';
 part 'widgets/already_have_account.dart';
 
 @RoutePage()
-class RegisterPage extends StatefulWidget {
+class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
 
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _formKeyRegister = GlobalKey<FormState>();
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
+class _RegisterPageState extends ConsumerState<RegisterPage>
+    with RegisterPageMixin {
   bool _isPasswordVisible1 = true;
   bool _isPasswordVisible2 = true;
 
@@ -42,7 +44,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
       backgroundColor: context.secondaryColor,
       body: SafeArea(
         child: Form(
-          key: RegisterPage._formKey,
+          key: RegisterPage._formKeyRegister,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -124,7 +126,7 @@ class _RegisterButton extends StatelessWidget {
         final emailExists = await AuthRepository()
             .isEmailExists(eMail: emailTextController.text);
         if (!context.mounted) return;
-        if (!RegisterPage._formKey.currentState!.validate()) {
+        if (!RegisterPage._formKeyRegister.currentState!.validate()) {
           debugPrint('Olmadı');
         } else if (emailExists) {
           scaffoldMessenger(context, 'Email Exist');
