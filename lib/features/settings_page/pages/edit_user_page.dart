@@ -138,10 +138,10 @@ class _UpdateButton extends StatelessWidget {
             emailTextController.text != widget.userModel.email) {
           scaffoldMessenger(
             context,
-            'Bu Email Kullanılamaz',
+            LocaleKeys.scaffoldMessages_emailCantBeUsed,
           );
         } else {
-          scaffoldMessenger(context, 'User Updated');
+          scaffoldMessenger(context, LocaleKeys.settingsPage_userUpdated);
           await AuthRepository().updateUser(
             userModel: userModel,
             context: context,

@@ -129,12 +129,13 @@ class _RegisterButton extends StatelessWidget {
         if (!RegisterPage._formKeyRegister.currentState!.validate()) {
           debugPrint('Olmadı');
         } else if (emailExists) {
-          scaffoldMessenger(context, 'Email Exist');
+          scaffoldMessenger(context, LocaleKeys.scaffoldMessages_emailExist);
         } else {
           await AuthRepository().singUpUser(
             userModel: userModel,
             context: context,
           );
+          await context.router.replace(HomeRoute(userModel: userModel));
         }
       },
     );

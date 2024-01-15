@@ -87,7 +87,8 @@ class _UserListPopUp extends StatelessWidget {
               child: BorderedElevatedButton(
                 onPressed: () async {
                   ref.read(deleteUserProvider(id));
-                  scaffoldMessenger(context, '$firstName $lastName Deleted');
+                  scaffoldMessenger(context,
+                      '$firstName $lastName ${LocaleKeys.scaffoldMessages_deleted}');
                   await context.router.pop();
                 },
                 text: LocaleKeys.usersPage_deleteUser,

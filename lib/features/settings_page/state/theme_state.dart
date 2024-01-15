@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:take_data_and_update_project/product/init/theme/blue_theme.dart';
+import 'package:take_data_and_update_project/product/init/theme/blush_rose.dart';
 import 'package:take_data_and_update_project/product/init/theme/light_theme.dart';
 
 final themeProvider = ChangeNotifierProvider((ref) => ThemeNotifier());
@@ -26,6 +27,8 @@ class ThemeNotifier extends ChangeNotifier {
         _themeData = LightTheme().themeData;
       case 1:
         _themeData = BlueTheme().themeData;
+      case 2:
+        _themeData = BlushRose().themeData;
       default:
         _themeData = LightTheme().themeData;
     }
@@ -46,6 +49,12 @@ class ThemeNotifier extends ChangeNotifier {
   void blueTheme() {
     _themeData = BlueTheme().themeData;
     _saveTheme(1);
+    notifyListeners();
+  }
+
+  void blushTheme() {
+    _themeData = BlushRose().themeData;
+    _saveTheme(2);
     notifyListeners();
   }
 }

@@ -19,24 +19,22 @@ class _FloatingActionButtonState extends State<UserListFloatingActionButton>
         ref.watch(userListProvider);
         return FloatingActionButton(
           onPressed: () {
-            showDialog<Widget>(
+            showModalBottomSheet<Widget>(
               context: context,
               builder: (BuildContext context) {
                 return Form(
                   key: formKey,
-                  child: AlertDialog(
-                    title: Center(
-                      child: Text(
-                        'Add User',
-                        style: context.headlineSmall!
-                            .copyWith(fontWeight: FontWeight.w500),
-                      ),
+                  child: Container(
+                    decoration: Decorations.borderContainerDecoration(
+                      context.secondaryColor,
+                      context.primaryColor,
                     ),
-                    contentPadding: ProjectPadding.allXSmall(),
-                    titlePadding: ProjectPadding.symVNormal(),
-                    content: SingleChildScrollView(
+                    height: double.infinity,
+                    width: double.infinity,
+                    child: SingleChildScrollView(
                       child: Column(
                         children: [
+                          AppSpacer.vertical.space30,
                           AuthTextFormField(
                             controller: firstNameController,
                             keyboardType: TextInputType.name,
@@ -92,7 +90,8 @@ class _FloatingActionButtonState extends State<UserListFloatingActionButton>
 
                           Center(
                             //TODO: do refactor this page
-                            child: ElevatedButton(
+                            child: AppElevatedButton(
+                              text: LocaleKeys.usersPage_addUser,
                               onPressed: () async {
                                 final emailExists =
                                     await AuthRepository().isEmailExists(
@@ -102,7 +101,8 @@ class _FloatingActionButtonState extends State<UserListFloatingActionButton>
                                 if (!formKey.currentState!.validate()) {
                                   return debugPrint('Olmadı');
                                 } else if (emailExists) {
-                                  scaffoldMessenger(context, 'Email Exist');
+                                  scaffoldMessenger(context,
+                                      LocaleKeys.scaffoldMessages_emailExist);
                                 } else {
                                   final userModel = UserModel(
                                     id: const Uuid().v4(),
@@ -116,15 +116,14 @@ class _FloatingActionButtonState extends State<UserListFloatingActionButton>
                                     context: context,
                                   );
                                   await ref.refresh(userListProvider.future);
-                                  if (!context.mounted) return;
                                   clearController();
+                                  scaffoldMessenger(
+                                    context,
+                                    LocaleKeys.scaffoldMessages_userAdded,
+                                  );
                                   await context.router.pop();
                                 }
                               },
-                              child: Text(
-                                LocaleKeys.registerPage_signUpUpperCase,
-                                style: context.titleMedium,
-                              ).tr(),
                             ),
                           ),
                           AppSpacer.vertical.space10,

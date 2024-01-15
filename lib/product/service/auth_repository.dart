@@ -3,26 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:take_data_and_update_project/product/base/base_auth_repository.dart';
 import 'package:take_data_and_update_project/product/enums/firebase_enums.dart';
+import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 
 class AuthRepository extends BaseAuthRepository {
-  final _usersCollection = FirebaseCollections.users.reference;
-  final _adminCollection = FirebaseCollections.admin.reference;
-  final _emailField = FirebaseFields.email.field;
-  final _passwordField = FirebaseFields.password.field;
-  final _firstNameField = FirebaseFields.firstName.field;
-  final _lastNameField = FirebaseFields.lastName.field;
-  final _idField = FirebaseFields.id.field;
-  final _devicesField = FirebaseFields.devices.field;
-
   Logger logger = Logger();
 
   @override
   Future<List<UserModel>> getUsers() async {
     try {
-      final querySnapshot = await _usersCollection.get();
+      final querySnapshot = await usersCollection.get();
       final userList = <UserModel>[];
 
       for (final doc in querySnapshot.docs) {
@@ -43,18 +35,18 @@ class AuthRepository extends BaseAuthRepository {
     required BuildContext context,
   }) async {
     try {
-      final result = await _usersCollection
-          .where(_emailField, isEqualTo: userModel.email)
-          .where(_passwordField, isEqualTo: userModel.password)
+      final result = await usersCollection
+          .where(emailField, isEqualTo: userModel.email)
+          .where(passwordField, isEqualTo: userModel.password)
           .get();
 
       if (!context.mounted) return;
 
       if (result.docs.isNotEmpty) {
-        final firstName = result.docs.first[_firstNameField].toString();
-        final lastName = result.docs.first[_lastNameField].toString();
-        final id = result.docs.first[_idField].toString();
-        final devices = result.docs.first[_devicesField].toString();
+        final firstName = result.docs.first[firstNameField].toString();
+        final lastName = result.docs.first[lastNameField].toString();
+        final id = result.docs.first[idField].toString();
+        final devices = result.docs.first[devicesField].toString();
 
         userModel = userModel.copyWith(
           firstName: firstName,
@@ -65,7 +57,10 @@ class AuthRepository extends BaseAuthRepository {
 
         await context.router.replace(HomeRoute(userModel: userModel));
       } else {
-        scaffoldMessenger(context, 'E-Mail or Password Error');
+        scaffoldMessenger(
+          context,
+          LocaleKeys.scaffoldMessages_wrongEmailAndPassword,
+        );
       }
     } catch (error) {
       logger.d('Error during sign-in: $error');
@@ -79,20 +74,21 @@ class AuthRepository extends BaseAuthRepository {
   }) async {
     try {
       final userMap = userModel.toMap();
-      final passwordFetch = await _usersCollection
-          .where(_passwordField, isEqualTo: userModel.password)
+      final passwordFetch = await passwordsCollection
+          .where(passwordField, isEqualTo: userModel.password)
           .get();
 
       if (passwordFetch.docs.isNotEmpty) {
-        await _usersCollection.doc(userModel.id).set(userMap);
+        await usersCollection.doc(userModel.id).set(userMap);
 
         if (!context.mounted) return;
         logger.d('User Added');
-
-        await context.router.replace(HomeRoute(userModel: userModel));
       } else {
         if (!context.mounted) return;
-        scaffoldMessenger(context, "There isn't fetch passwords");
+        scaffoldMessenger(
+          context,
+          LocaleKeys.scaffoldMessages_wrongPassword,
+        );
       }
     } catch (e) {
       logger.d('User cant be added: $e');
@@ -102,7 +98,7 @@ class AuthRepository extends BaseAuthRepository {
   @override
   Future<bool> isEmailExists({required String eMail}) async {
     final query =
-        await _usersCollection.where(_emailField, isEqualTo: eMail).get();
+        await usersCollection.where(emailField, isEqualTo: eMail).get();
 
     if (query.docs.isNotEmpty) return true;
     return false;
@@ -110,18 +106,19 @@ class AuthRepository extends BaseAuthRepository {
 
   @override
   Future<void> deleteUser({required String id}) {
-    return _usersCollection
+    return usersCollection
         .doc(id)
         .delete()
         .then((value) => logger.d('User Deleted'))
-        // ignore: inference_failure_on_untyped_parameter
-        .catchError((error) => logger.d('Failed to delete user: $error'));
+        .catchError(
+          (value) => logger.d('User Cant be Deleted'),
+        );
   }
 
   @override
   Future<bool> isAdmin({required String password}) async {
     final value =
-        await _adminCollection.where(_passwordField, isEqualTo: password).get();
+        await adminCollection.where(passwordField, isEqualTo: password).get();
     if (value.docs.isNotEmpty) {
       return true;
     } else {
@@ -135,7 +132,7 @@ class AuthRepository extends BaseAuthRepository {
     required BuildContext context,
   }) async {
     try {
-      await _usersCollection.doc(userModel.id).update(userModel.toMap());
+      await usersCollection.doc(userModel.id).update(userModel.toMap());
       logger.d('User Updated');
     } catch (e) {
       logger.d('Error : $e');

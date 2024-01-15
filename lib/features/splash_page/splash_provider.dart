@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +9,7 @@ import 'package:take_data_and_update_project/product/util/version_manager.dart';
 class SplashProvider extends StateNotifier<SplashState> {
   SplashProvider() : super(const SplashState());
 
-  Future<void> checkInternetConnection() async {
+  /* Future<void> checkInternetConnection() async {
     final connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
       state = state.copyWith(isConnected: false);
@@ -21,7 +20,7 @@ class SplashProvider extends StateNotifier<SplashState> {
 
       return;
     }
-  }
+  } */
 
   Future<void> checkApplicationVersion(String clientVersion) async {
     final databaseValue = await getVersionNumberFromDatabase();

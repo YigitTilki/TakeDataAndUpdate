@@ -8,7 +8,7 @@ import 'package:take_data_and_update_project/features/settings_page/pages/change
 import 'package:take_data_and_update_project/features/settings_page/pages/change_theme_page.dart';
 import 'package:take_data_and_update_project/features/settings_page/pages/edit_user_page.dart';
 import 'package:take_data_and_update_project/features/settings_page/settings_page.dart';
-import 'package:take_data_and_update_project/features/splash/splash_view.dart';
+import 'package:take_data_and_update_project/features/splash_page/splash_page.dart';
 import 'package:take_data_and_update_project/features/users_page/users_page.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 

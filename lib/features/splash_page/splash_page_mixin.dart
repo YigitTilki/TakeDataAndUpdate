@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kartal/kartal.dart';
-import 'package:take_data_and_update_project/features/splash/splash_view.dart';
+import 'package:take_data_and_update_project/features/splash_page/splash_page.dart';
 import 'package:take_data_and_update_project/product/base/base_providers.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 
@@ -12,7 +12,7 @@ mixin SplashViewListenMixin on ConsumerState<SplashPage> {
     super.initState();
 
     ref.read(splashProvider.notifier).checkApplicationVersion(''.ext.version);
-    ref.read(splashProvider.notifier).checkInternetConnection();
+    //ref.read(splashProvider.notifier).checkInternetConnection();
   }
 
   void listenAndNavigate() {
