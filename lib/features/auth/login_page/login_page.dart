@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/features/auth/login_page/mixin/login_page_mixin.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/email_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/logo_divider_view.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/password_field.dart';
+import 'package:take_data_and_update_project/product/base/base_providers.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
@@ -21,24 +23,25 @@ part 'widgets/not_a_member_yet.dart';
 part 'widgets/remember_me_forgot_password.dart';
 
 @RoutePage()
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _formKeyLogin = GlobalKey<FormState>();
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with LoginPageMixin {
-  bool _isPasswordVisible = true;
+class _LoginPageState extends ConsumerState<LoginPage> with LoginPageMixin {
   @override
   Widget build(BuildContext context) {
+    final passwordVisible = ref.watch(passwordVisibilityProvider);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: context.secondaryColor,
       body: SafeArea(
         child: Form(
-          key: LoginPage._formKey,
+          key: LoginPage._formKeyLogin,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -53,10 +56,10 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                 AppSpacer.vertical.space20,
                 PasswordField(
                   passwordTextController: passwordTextController,
-                  onPressed: () => setState(() {
-                    _isPasswordVisible = !_isPasswordVisible;
-                  }),
-                  isPasswordVisible: _isPasswordVisible,
+                  onPressed: () => ref
+                      .read(passwordVisibilityProvider.notifier)
+                      .state = !passwordVisible,
+                  isPasswordVisible: passwordVisible,
                   isLogin: true,
                 ),
                 AppSpacer.vertical.space20,
@@ -99,8 +102,8 @@ class _LoginButton extends StatelessWidget {
         if (!context.mounted) return;
 
         if (isAdmin) {
-          await context.router.replace(const AdminRoute());
-        } else if (!LoginPage._formKey.currentState!.validate()) {
+          await context.router.push(const AdminRoute());
+        } else if (!LoginPage._formKeyLogin.currentState!.validate()) {
           debugPrint('Olmadı');
         } else {
           await AuthRepository().signInUser(

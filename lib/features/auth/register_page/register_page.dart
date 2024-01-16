@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:take_data_and_update_project/features/auth/register_page/mixin/register_page_mixin.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/email_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/first_name_field.dart';
@@ -7,6 +8,7 @@ import 'package:take_data_and_update_project/features/auth/widgets/last_name_fie
 import 'package:take_data_and_update_project/features/auth/widgets/logo_divider_view.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/password_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/re_password_field.dart';
+import 'package:take_data_and_update_project/product/base/base_providers.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
@@ -23,26 +25,27 @@ import 'package:uuid/uuid.dart';
 part 'widgets/already_have_account.dart';
 
 @RoutePage()
-class RegisterPage extends StatefulWidget {
+class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
 
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _formKeyRegister = GlobalKey<FormState>();
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
-  bool _isPasswordVisible1 = true;
-  bool _isPasswordVisible2 = true;
-
+class _RegisterPageState extends ConsumerState<RegisterPage>
+    with RegisterPageMixin {
   @override
   Widget build(BuildContext context) {
+    final passwordVisible1 = ref.watch(passwordVisibilityProvider1);
+    final passwordVisible2 = ref.watch(passwordVisibilityProvider2);
+
     return Scaffold(
       backgroundColor: context.secondaryColor,
       body: SafeArea(
         child: Form(
-          key: RegisterPage._formKey,
+          key: RegisterPage._formKeyRegister,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -58,20 +61,20 @@ class _RegisterPageState extends State<RegisterPage> with RegisterPageMixin {
                 AppSpacer.vertical.space20,
                 PasswordField(
                   passwordTextController: passwordTextController,
-                  onPressed: () => setState(() {
-                    _isPasswordVisible1 = !_isPasswordVisible1;
-                  }),
-                  isPasswordVisible: _isPasswordVisible1,
+                  onPressed: () => ref
+                      .read(passwordVisibilityProvider1.notifier)
+                      .state = !passwordVisible1,
+                  isPasswordVisible: passwordVisible1,
                   isLogin: false,
                 ),
                 AppSpacer.vertical.space20,
                 RePasswordField(
                   rePasswordTextController: rePasswordTextController,
-                  isPasswordVisible: _isPasswordVisible2,
+                  isPasswordVisible: passwordVisible2,
                   passwordTextController: passwordTextController,
-                  onPressedIcon: () => setState(() {
-                    _isPasswordVisible2 = !_isPasswordVisible2;
-                  }),
+                  onPressedIcon: () => ref
+                      .read(passwordVisibilityProvider2.notifier)
+                      .state = !passwordVisible2,
                 ),
                 AppSpacer.vertical.space20,
                 EmailField(
@@ -124,15 +127,16 @@ class _RegisterButton extends StatelessWidget {
         final emailExists = await AuthRepository()
             .isEmailExists(eMail: emailTextController.text);
         if (!context.mounted) return;
-        if (!RegisterPage._formKey.currentState!.validate()) {
+        if (!RegisterPage._formKeyRegister.currentState!.validate()) {
           debugPrint('Olmadı');
         } else if (emailExists) {
-          scaffoldMessenger(context, 'Email Exist');
+          scaffoldMessenger(context, LocaleKeys.scaffoldMessages_emailExist);
         } else {
           await AuthRepository().singUpUser(
             userModel: userModel,
             context: context,
           );
+          await context.router.replace(HomeRoute(userModel: userModel));
         }
       },
     );

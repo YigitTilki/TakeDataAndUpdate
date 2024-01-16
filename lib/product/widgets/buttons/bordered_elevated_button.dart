@@ -23,6 +23,7 @@ class BorderedElevatedButton extends StatelessWidget {
       child: Text(
         text.tr(),
         style: context.titleMedium,
+        textAlign: TextAlign.center,
       ),
     );
   }

@@ -21,7 +21,7 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
           AppTextButton(
             text: LocaleKeys.loginPage_forgotPassWord,
             onPressed: () {
-              context.router.push(HomeRoute(userModel: UserModel()));
+              context.router.push(HomeRoute(userModel: const UserModel()));
             },
           ),
         ],

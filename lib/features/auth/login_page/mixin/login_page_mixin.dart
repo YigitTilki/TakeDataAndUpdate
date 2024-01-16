@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:take_data_and_update_project/features/auth/login_page/login_page.dart';
 
-mixin LoginPageMixin on State<LoginPage> {
+mixin LoginPageMixin on ConsumerState<LoginPage> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
 

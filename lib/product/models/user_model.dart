@@ -1,5 +1,7 @@
-class UserModel {
-  UserModel({
+import 'package:equatable/equatable.dart';
+
+class UserModel extends Equatable {
+  const UserModel({
     this.id,
     this.email,
     this.password,
@@ -8,20 +10,22 @@ class UserModel {
     this.devices,
   });
 
-  UserModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'].toString();
-    email = json['email'].toString();
-    password = json['password'].toString();
-    firstName = json['firstName'].toString();
-    lastName = json['lastName'].toString();
-    devices = json['devices'].toString();
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'].toString(),
+      email: json['email'].toString(),
+      password: json['password'].toString(),
+      firstName: json['firstName'].toString(),
+      lastName: json['lastName'].toString(),
+      devices: json['devices'].toString(),
+    );
   }
-  late String? id;
-  late String? email;
-  late String? password;
-  late String? firstName;
-  late String? lastName;
-  late String? devices;
+  final String? id;
+  final String? email;
+  final String? password;
+  final String? firstName;
+  final String? lastName;
+  final String? devices;
 
   UserModel copyWith({
     String? id,
@@ -51,4 +55,8 @@ class UserModel {
       'devices': devices,
     };
   }
+
+  @override
+  List<Object?> get props =>
+      [id, email, password, firstName, lastName, devices];
 }

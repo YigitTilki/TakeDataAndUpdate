@@ -10,12 +10,6 @@ mixin UsersPageMixin on State<UsersPage> {
   TextEditingController get searchController => _searchController;
   Future<List<UserModel>> get userList => _userList;
 
-  set userListSetter(Future<List<UserModel>> value) {
-    setState(() {
-      _userList = value;
-    });
-  }
-
   @override
   void initState() {
     _userList = AuthRepository().getUsers();

@@ -37,7 +37,8 @@
         "deleteUser": "Delete User",
         "updateUser": "Update User",
         "idUpper": "ID",
-        "devices": "Devices"
+        "devices": "Devices",
+        "addUser": "Add User"
     },
     "validatorErrors": {
         "invalidEmailPassword": "Invalid E-Mail or Password",
@@ -65,5 +66,18 @@
         "userUpdated" : "User Updated",
         "lightTheme" : "Light Theme",
         "blueTheme" : "Blue Theme"
+    },
+    "scaffoldMessages":{
+        "wrongEmailAndPassword": "Wrong Email or Password",
+        "wrongPassword": "Wrong Password",
+        "userDeleted": "User Deleted",
+        "userCantDeleted": "User Can't be Deleted",
+        "userAdded": "User Added",
+        "emailExist": "Email Exist",
+        "emailCantBeUsed": "Email Can't be Used",
+        "deleted": "Deleted"
+
+
     }
+
 }

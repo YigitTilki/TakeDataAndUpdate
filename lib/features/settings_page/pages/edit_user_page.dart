@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/email_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/first_name_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/last_name_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/password_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/re_password_field.dart';
 import 'package:take_data_and_update_project/features/settings_page/mixin/edit_user_mixin.dart';
+import 'package:take_data_and_update_project/product/base/base_providers.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
@@ -18,30 +20,21 @@ import 'package:take_data_and_update_project/product/widgets/custom_header.dart'
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 
 @RoutePage()
-class EditUserPage extends StatefulWidget {
+class EditUserPage extends ConsumerStatefulWidget {
   const EditUserPage({required this.userModel, super.key});
   final UserModel userModel;
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
-  State<EditUserPage> createState() => _EditUserPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _EditUserPageState();
 }
 
-class _EditUserPageState extends State<EditUserPage> with EditUserMixin {
-  @override
-  void initState() {
-    super.initState();
-    firstNameController.text = widget.userModel.firstName.toString();
-    lastNameController.text = widget.userModel.lastName.toString();
-    passwordTextController.text = widget.userModel.password.toString();
-    emailTextController.text = widget.userModel.email.toString();
-  }
-
-  bool _isPasswordVisible1 = true;
-  bool _isPasswordVisible2 = true;
-
+class _EditUserPageState extends ConsumerState<EditUserPage>
+    with EditUserMixin {
   @override
   Widget build(BuildContext context) {
+    final passwordVisible1 = ref.watch(passwordVisibilityProvider1);
+    final passwordVisible2 = ref.watch(passwordVisibilityProvider2);
     return Scaffold(
       backgroundColor: context.secondaryColor,
       body: SafeArea(
@@ -62,19 +55,19 @@ class _EditUserPageState extends State<EditUserPage> with EditUserMixin {
                 AppSpacer.vertical.space20,
                 PasswordField(
                   passwordTextController: passwordTextController,
-                  onPressed: () => setState(() {
-                    _isPasswordVisible1 = !_isPasswordVisible1;
-                  }),
-                  isPasswordVisible: _isPasswordVisible1,
+                  onPressed: () => ref
+                      .read(passwordVisibilityProvider1.notifier)
+                      .state = !passwordVisible1,
+                  isPasswordVisible: passwordVisible1,
                   isLogin: false,
                 ),
                 AppSpacer.vertical.space20,
                 RePasswordField(
                   rePasswordTextController: rePasswordTextController,
-                  onPressedIcon: () => setState(() {
-                    _isPasswordVisible2 = !_isPasswordVisible2;
-                  }),
-                  isPasswordVisible: _isPasswordVisible2,
+                  onPressedIcon: () => ref
+                      .read(passwordVisibilityProvider2.notifier)
+                      .state = !passwordVisible2,
+                  isPasswordVisible: passwordVisible2,
                   passwordTextController: passwordTextController,
                 ),
                 AppSpacer.vertical.space20,
@@ -138,10 +131,10 @@ class _UpdateButton extends StatelessWidget {
             emailTextController.text != widget.userModel.email) {
           scaffoldMessenger(
             context,
-            'Bu Email Kullanılamaz',
+            LocaleKeys.scaffoldMessages_emailCantBeUsed,
           );
         } else {
-          scaffoldMessenger(context, 'User Updated');
+          scaffoldMessenger(context, LocaleKeys.settingsPage_userUpdated);
           await AuthRepository().updateUser(
             userModel: userModel,
             context: context,

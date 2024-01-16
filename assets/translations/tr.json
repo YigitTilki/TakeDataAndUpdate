@@ -37,7 +37,9 @@
         "deleteUser": "Kullanıcıyı Sil",
         "updateUser": "Kullanıcıyı Güncelle",
         "idUpper": "ID",
-        "devices": "Cihazlar"
+        "devices": "Cihazlar",
+        "addUser": "Kullanıcı Ekle"
+
     },
     "validatorErrors": {
         "invalidEmailPassword": "Hatalı Email veya Şifre",
@@ -65,6 +67,20 @@
         "userUpdated" : "Kullanıcı Güncellendi",
         "lightTheme" : "Açık Tema",
         "blueTheme" : "Mavi Tema"
+
+    },
+    "scaffoldMessages":{
+        "wrongEmailAndPassword": "Hatalı Email veya Şifre",
+        "wrongPassword": "Hatalı Şifre",
+        "userDeleted": "Kullanıcı Silindi",
+        "userCantDeleted": "Kullanıcı Silinemedi",
+        "userAdded": "Kullanıcı Eklendi",
+        "emailExist": "Email Kullanılıyor",
+        "emailCantBeUsed": "Bu Email Kullanılamaz",
+        "deleted": "Silindi"
+
+
+        
 
     }
 }

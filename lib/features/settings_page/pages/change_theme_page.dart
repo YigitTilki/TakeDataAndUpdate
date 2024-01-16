@@ -7,6 +7,7 @@ import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/theme/blue_theme.dart';
+import 'package:take_data_and_update_project/product/init/theme/blush_rose.dart';
 import 'package:take_data_and_update_project/product/init/theme/light_theme.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
@@ -37,9 +38,46 @@ class ChangeThemePage extends ConsumerWidget {
                 _BlueThemeContainer(theme: theme),
               ],
             ),
+            AppSpacer.vertical.space20,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _BlushThemeContainer(theme: theme),
+              ],
+            ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _BlushThemeContainer extends StatelessWidget {
+  const _BlushThemeContainer({
+    required this.theme,
+    super.key,
+  });
+
+  final ThemeNotifier theme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: theme.blushTheme,
+          child: const ThemeChangerContainer(
+            color1: BlushRose.homeBackgroundColor,
+            color2: BlushRose.secondaryColor,
+            color3: BlushRose.tertiaryColor,
+            color4: BlushRose.fourthColor,
+          ),
+        ),
+        AppSpacer.vertical.space5,
+        const SettingsPageText(
+          value: LocaleKeys.settingsPage_blueTheme,
+        ),
+      ],
     );
   }
 }
