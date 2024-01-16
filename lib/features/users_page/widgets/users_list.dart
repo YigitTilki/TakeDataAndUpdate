@@ -28,63 +28,82 @@ class _UsersList extends ConsumerWidget {
                       ),
             )
             .toList();
-        return Expanded(
-          child: ListView.builder(
-            itemCount: filteredList.length,
-            itemBuilder: (BuildContext context, int index) {
-              final user = filteredList[index];
-
-              final firstName = user.firstName!;
-              final lastName = user.lastName!;
-              final email = user.email!;
-              final id = user.id!;
-
-              return Padding(
-                padding:
-                    ProjectPadding.symHXXSmall() + ProjectPadding.symVXSmall(),
-                child: Container(
-                  height: 60.h,
-                  decoration: ShapeDecoration(
-                    color: context.fourthColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.sp),
-                      side:
-                          BorderSide(color: context.primaryColor, width: 2.sp),
-                    ),
-                  ),
-                  child: Center(
-                    child: ListTile(
-                      onTap: () {
-                        showDialog<Widget>(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return _UserListPopUp(
-                              firstName: firstName,
-                              lastName: lastName,
-                              email: email,
-                              id: id,
-                              ref: ref,
-                            );
-                          },
-                        );
-                      },
-                      leading: Assets.icons.usersIcon.image(
-                        width: iconSize.w,
-                        height: iconSize.h,
-                        color: context.primaryColor,
-                      ),
-                      title: Text('$firstName $lastName'),
-                      subtitle: Text(email),
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
+        return _UserList(
+          filteredList: filteredList,
+          iconSize: iconSize,
+          ref: ref,
         );
       },
-      loading: () => const CircularProgressIndicator(),
+      loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => Text('Error: $error'),
+    );
+  }
+}
+
+class _UserList extends StatelessWidget {
+  const _UserList({
+    required this.filteredList,
+    required this.iconSize,
+    required this.ref,
+  });
+
+  final List<UserModel> filteredList;
+  final int iconSize;
+  final WidgetRef ref;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: filteredList.length,
+        itemBuilder: (BuildContext context, int index) {
+          final user = filteredList[index];
+
+          final firstName = user.firstName!;
+          final lastName = user.lastName!;
+          final email = user.email!;
+          final id = user.id!;
+
+          return Padding(
+            padding: ProjectPadding.symHXXSmall() + ProjectPadding.symVXSmall(),
+            child: Container(
+              height: 60.h,
+              decoration: ShapeDecoration(
+                color: context.fourthColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.sp),
+                  side: BorderSide(color: context.primaryColor, width: 2.sp),
+                ),
+              ),
+              child: Center(
+                child: ListTile(
+                  onTap: () {
+                    showDialog<Widget>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return _UserListPopUp(
+                          firstName: firstName,
+                          lastName: lastName,
+                          email: email,
+                          id: id,
+                          ref: ref,
+                        );
+                      },
+                    );
+                  },
+                  leading: Assets.icons.usersIcon.image(
+                    width: iconSize.w,
+                    height: iconSize.h,
+                    color: context.primaryColor,
+                  ),
+                  title: Text('$firstName $lastName'),
+                  subtitle: Text(email),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

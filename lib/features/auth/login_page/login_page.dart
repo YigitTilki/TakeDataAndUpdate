@@ -6,6 +6,7 @@ import 'package:take_data_and_update_project/features/auth/login_page/mixin/logi
 import 'package:take_data_and_update_project/features/auth/widgets/email_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/logo_divider_view.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/password_field.dart';
+import 'package:take_data_and_update_project/product/base/base_providers.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
@@ -31,9 +32,10 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> with LoginPageMixin {
-  bool _isPasswordVisible = true;
   @override
   Widget build(BuildContext context) {
+    final passwordVisible = ref.watch(passwordVisibilityProvider);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: context.secondaryColor,
@@ -54,10 +56,10 @@ class _LoginPageState extends ConsumerState<LoginPage> with LoginPageMixin {
                 AppSpacer.vertical.space20,
                 PasswordField(
                   passwordTextController: passwordTextController,
-                  onPressed: () => setState(() {
-                    _isPasswordVisible = !_isPasswordVisible;
-                  }),
-                  isPasswordVisible: _isPasswordVisible,
+                  onPressed: () => ref
+                      .read(passwordVisibilityProvider.notifier)
+                      .state = !passwordVisible,
+                  isPasswordVisible: passwordVisible,
                   isLogin: true,
                 ),
                 AppSpacer.vertical.space20,

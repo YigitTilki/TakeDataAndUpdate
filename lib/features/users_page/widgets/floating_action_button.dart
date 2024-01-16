@@ -14,14 +14,16 @@ class _FloatingActionButtonState extends State<UserListFloatingActionButton>
     with AddUserMixin {
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        ref.watch(userListProvider);
-        return FloatingActionButton(
-          onPressed: () {
-            showModalBottomSheet<Widget>(
-              context: context,
-              builder: (BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        showModalBottomSheet<Widget>(
+          context: context,
+          builder: (BuildContext context) {
+            return Consumer(
+              builder: (context, ref, child) {
+                ref.watch(userListProvider);
+                final passwordVisible1 = ref.watch(passwordVisibilityProvider1);
+                final passwordVisible2 = ref.watch(passwordVisibilityProvider2);
                 return Form(
                   key: formKey,
                   child: Container(
@@ -35,61 +37,38 @@ class _FloatingActionButtonState extends State<UserListFloatingActionButton>
                       child: Column(
                         children: [
                           AppSpacer.vertical.space30,
-                          AuthTextFormField(
-                            controller: firstNameController,
-                            keyboardType: TextInputType.name,
-                            hintText: LocaleKeys.registerPage_firstName.tr(),
-                            validator: (value) =>
-                                Validators().firstName(value: value),
+                          FirstNameField(
+                            firstNameController: firstNameController,
                           ),
                           AppSpacer.vertical.space10,
-
-                          ///LastName Input Field
-                          AuthTextFormField(
-                            controller: lastNameController,
-                            keyboardType: TextInputType.name,
-                            hintText: LocaleKeys.registerPage_lastName.tr(),
-                            validator: (value) =>
-                                Validators().lastName(value: value),
+                          LastNameField(
+                            lastNameController: lastNameController,
                           ),
                           AppSpacer.vertical.space10,
-
-                          ///Password Input Field
-                          AuthTextFormField(
-                            controller: passwordTextController,
-                            keyboardType: TextInputType.visiblePassword,
-                            hintText: LocaleKeys.commons_password.tr(),
-                            validator: (value) =>
-                                Validators().password(value: value),
+                          PasswordField(
+                            passwordTextController: passwordTextController,
+                            onPressed: () => ref
+                                .read(passwordVisibilityProvider1.notifier)
+                                .state = !passwordVisible1,
+                            isPasswordVisible: passwordVisible1,
+                            isLogin: false,
                           ),
                           AppSpacer.vertical.space10,
-
-                          ///RePassword Input Field
-                          AuthTextFormField(
-                            controller: rePasswordTextController,
-                            keyboardType: TextInputType.visiblePassword,
-                            hintText: LocaleKeys.registerPage_rePassword.tr(),
-                            validator: (value) => Validators().rePassword(
-                              value: value,
-                              passwordController: passwordTextController.text,
-                            ),
+                          RePasswordField(
+                            rePasswordTextController: rePasswordTextController,
+                            onPressedIcon: () => ref
+                                .read(passwordVisibilityProvider2.notifier)
+                                .state = !passwordVisible2,
+                            isPasswordVisible: passwordVisible2,
+                            passwordTextController: passwordTextController,
                           ),
                           AppSpacer.vertical.space10,
-
-                          ///Email Input Field
-                          AuthTextFormField(
-                            controller: emailTextController,
-                            keyboardType: TextInputType.emailAddress,
-                            hintText: LocaleKeys.commons_eMail.tr(),
-                            validator: (value) => Validators().eMail(
-                              value: value,
-                              emailController: emailTextController.text,
-                            ),
+                          EmailField(
+                            emailTextController: emailTextController,
+                            isLogin: false,
                           ),
                           AppSpacer.vertical.space10,
-
                           Center(
-                            //TODO: do refactor this page
                             child: AppElevatedButton(
                               text: LocaleKeys.usersPage_addUser,
                               onPressed: () async {
@@ -97,32 +76,20 @@ class _FloatingActionButtonState extends State<UserListFloatingActionButton>
                                     await AuthRepository().isEmailExists(
                                   eMail: emailTextController.text,
                                 );
-                                if (!context.mounted) return;
-                                if (!formKey.currentState!.validate()) {
-                                  return debugPrint('Olmadı');
-                                } else if (emailExists) {
-                                  scaffoldMessenger(context,
-                                      LocaleKeys.scaffoldMessages_emailExist);
-                                } else {
-                                  final userModel = UserModel(
-                                    id: const Uuid().v4(),
-                                    email: emailTextController.text,
-                                    password: passwordTextController.text,
-                                    firstName: firstNameController.text,
-                                    lastName: lastNameController.text,
-                                  );
-                                  await AuthRepository().singUpUser(
-                                    userModel: userModel,
-                                    context: context,
-                                  );
-                                  await ref.refresh(userListProvider.future);
-                                  clearController();
-                                  scaffoldMessenger(
-                                    context,
-                                    LocaleKeys.scaffoldMessages_userAdded,
-                                  );
-                                  await context.router.pop();
-                                }
+                                final userModel = UserModel(
+                                  id: const Uuid().v4(),
+                                  email: emailTextController.text,
+                                  password: passwordTextController.text,
+                                  firstName: firstNameController.text,
+                                  lastName: lastNameController.text,
+                                );
+
+                                await _buttonOnPressed(
+                                  emailExists,
+                                  context,
+                                  userModel,
+                                  ref,
+                                );
                               },
                             ),
                           ),
@@ -135,9 +102,37 @@ class _FloatingActionButtonState extends State<UserListFloatingActionButton>
               },
             );
           },
-          child: const Icon(Icons.add),
         );
       },
+      child: const Icon(Icons.add),
     );
+  }
+
+  Future<void> _buttonOnPressed(
+    bool emailExists,
+    BuildContext context,
+    UserModel userModel,
+    WidgetRef ref,
+  ) async {
+    if (!formKey.currentState!.validate()) {
+      debugPrint('Olmadı');
+    } else if (emailExists) {
+      scaffoldMessenger(
+        context,
+        LocaleKeys.scaffoldMessages_emailExist,
+      );
+    } else {
+      await AuthRepository().singUpUser(
+        userModel: userModel,
+        context: context,
+      );
+      await ref.refresh(userListProvider.future);
+      clearController();
+      scaffoldMessenger(
+        context,
+        LocaleKeys.scaffoldMessages_userAdded,
+      );
+      await context.router.pop();
+    }
   }
 }

@@ -17,6 +17,15 @@ mixin EditUserMixin on State<EditUserPage> {
       _rePasswordTextController;
 
   @override
+  void initState() {
+    super.initState();
+    firstNameController.text = widget.userModel.firstName.toString();
+    lastNameController.text = widget.userModel.lastName.toString();
+    passwordTextController.text = widget.userModel.password.toString();
+    emailTextController.text = widget.userModel.email.toString();
+  }
+
+  @override
   void dispose() {
     _emailTextController.dispose();
     _passwordTextController.dispose();
