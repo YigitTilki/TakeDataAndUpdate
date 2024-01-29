@@ -6,9 +6,9 @@ import 'package:take_data_and_update_project/product/init/languages/locale_keys.
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/home_container.dart';
-import 'package:take_data_and_update_project/product/widgets/custom_header.dart';
-import 'package:take_data_and_update_project/product/widgets/text/home_page_text.dart';
+import 'package:take_data_and_update_project/product/widgets/text/large_text.dart';
 
 part 'widgets/users_container.dart';
 
@@ -43,7 +43,8 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomHeaderOutBackButton(
+    return CustomHeader(
+      needBackButton: false,
       icon: Assets.icons.adminIcon.image(
         height: 20.h,
         color: context.fourthColor,

@@ -1,29 +1,51 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
-import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
-import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
-import 'package:take_data_and_update_project/product/widgets/text/header_text.dart';
+import 'package:take_data_and_update_project/product/init/languages/locales.dart';
+import 'package:take_data_and_update_project/product/init/languages/product_localizations.dart';
+import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
+import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
 
-class LogoDividerView extends StatelessWidget {
+final flagProvider = StateProvider<bool>((ref) => false);
+
+class LogoDividerView extends ConsumerWidget {
   const LogoDividerView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    const dividerWidth = 270;
-    const dividerHeight = 3;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isEng = ref.watch(flagProvider.notifier).state;
 
-    return Column(
-      children: [
-        AppSpacer.vertical.space20,
-        const HeaderText(value: LocaleKeys.commons_logo),
-        AppSpacer.vertical.space20,
-        Container(
-          width: dividerWidth.w,
-          height: dividerHeight.h,
-          color: context.blackColor,
-        ),
-      ],
+    return CustomHeader(
+      icon: Assets.icons.processor.image(),
+      text: 'VTGRS',
+      needBackButton: false,
+      iconButton: IconButton(
+        onPressed: () {
+          if (context.locale == const Locale('tr', 'TR')) {
+            ProductLocalizations.updateLanguage(
+              context: context,
+              value: Locales.en,
+            );
+            ref.read(flagProvider.notifier).state = true;
+          } else {
+            ProductLocalizations.updateLanguage(
+              context: context,
+              value: Locales.tr,
+            );
+            ref.read(flagProvider.notifier).state = false;
+          }
+        },
+        icon: isEng
+            ? Assets.images.ukFlag.image(
+                width: 30.w,
+                height: 30.h,
+              )
+            : Assets.images.trFlag.image(
+                width: 30.w,
+                height: 30.h,
+              ),
+      ),
     );
   }
 }

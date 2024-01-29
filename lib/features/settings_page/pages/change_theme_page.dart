@@ -11,8 +11,8 @@ import 'package:take_data_and_update_project/product/init/theme/blush_rose.dart'
 import 'package:take_data_and_update_project/product/init/theme/light_theme.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
-import 'package:take_data_and_update_project/product/widgets/custom_header.dart';
-import 'package:take_data_and_update_project/product/widgets/text/settings_page_text.dart';
+import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
+import 'package:take_data_and_update_project/product/widgets/text/medium_text.dart';
 
 @RoutePage()
 class ChangeThemePage extends ConsumerWidget {
@@ -74,7 +74,7 @@ class _BlushThemeContainer extends StatelessWidget {
           ),
         ),
         AppSpacer.vertical.space5,
-        const SettingsPageText(
+        const MediumText(
           value: LocaleKeys.settingsPage_blueTheme,
         ),
       ],
@@ -103,7 +103,7 @@ class _BlueThemeContainer extends StatelessWidget {
           ),
         ),
         AppSpacer.vertical.space5,
-        const SettingsPageText(
+        const MediumText(
           value: LocaleKeys.settingsPage_blueTheme,
         ),
       ],
@@ -132,7 +132,7 @@ class _LightThemeContainer extends StatelessWidget {
           ),
         ),
         AppSpacer.vertical.space5,
-        const SettingsPageText(
+        const MediumText(
           value: LocaleKeys.settingsPage_lightTheme,
         ),
       ],
@@ -146,6 +146,7 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomHeader(
+      needBackButton: true,
       icon: Assets.icons.changeThemeIcon.image(),
       text: LocaleKeys.settingsPage_changeTheme,
     );

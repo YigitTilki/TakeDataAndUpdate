@@ -17,7 +17,6 @@ class _SplashViewState extends ConsumerState<SplashPage>
   @override
   Widget build(BuildContext context) {
     listenAndNavigate();
-
     return Scaffold(
       body: Center(
         child: Assets.lottie.splashCat.lottie(),

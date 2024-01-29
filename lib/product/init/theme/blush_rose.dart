@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/product/init/theme/app_theme.dart';
+import 'package:take_data_and_update_project/product/base/base_app_theme.dart';
 import 'package:take_data_and_update_project/product/util/asset/fonts.gen.dart';
 
 class BlushRose implements CustomAppTheme {
@@ -45,7 +45,7 @@ class BlushRose implements CustomAppTheme {
       );
 
   @override
-  String get appFont => FontFamily.inter;
+  String get appFont => FontFamily.josefinSans;
 
   @override
   CheckboxThemeData get checkboxThemeData => CheckboxThemeData(

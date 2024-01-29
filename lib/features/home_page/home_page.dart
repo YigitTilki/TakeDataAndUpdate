@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
@@ -9,10 +8,7 @@ import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/home_container.dart';
-import 'package:take_data_and_update_project/product/widgets/text/home_page_text.dart';
-
-part 'widgets/app_bar.dart';
-part 'widgets/drawer.dart';
+import 'package:take_data_and_update_project/product/widgets/text/large_text.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -29,13 +25,17 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      drawer: _HomePageDrawer(userModel),
       backgroundColor: context.secondaryColor,
-      appBar: _HomePageAppBar(userModel),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            AppSpacer.vertical.space30,
+            _UserInfoContainer(
+              bigContainerWidth: bigContainerWidth,
+              smallContainerHeight: smallContainerHeight,
+              userModel: userModel,
+            ),
             AppSpacer.vertical.space30,
             const _MyDevices(
               bigContainerWidth: bigContainerWidth,
@@ -65,6 +65,34 @@ class HomePage extends StatelessWidget {
   }
 }
 
+class _UserInfoContainer extends StatelessWidget {
+  const _UserInfoContainer({
+    required this.bigContainerWidth,
+    required this.smallContainerHeight,
+    required this.userModel,
+  });
+
+  final int bigContainerWidth;
+  final int smallContainerHeight;
+  final UserModel userModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 2,
+      child: HomeContainer(
+        width: bigContainerWidth,
+        height: smallContainerHeight,
+        child: Center(
+          child: LargeText(
+            value: '${userModel.firstName} ${userModel.lastName}',
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _RateUs extends StatelessWidget {
   const _RateUs({
     required this.smallContainerWidth,
@@ -77,13 +105,14 @@ class _RateUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      flex: 3,
       child: HomeContainer(
         width: smallContainerWidth,
         height: smallContainerHeight,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const HomePageText(value: LocaleKeys.homePage_rateUs),
+            const LargeText(value: LocaleKeys.homePage_rateUs),
             AppSpacer.vertical.space10,
             Assets.icons.starsIcon.svg(),
           ],
@@ -107,6 +136,7 @@ class _Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      flex: 3,
       child: InkWell(
         onTap: () {
           context.router.push(SettingsRoute(userModel: userModel));
@@ -118,7 +148,7 @@ class _Settings extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Assets.icons.settingsIcon.svg(),
-              const HomePageText(value: LocaleKeys.homePage_settings),
+              const LargeText(value: LocaleKeys.homePage_settings),
             ],
           ),
         ),
@@ -139,6 +169,7 @@ class _AlertBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      flex: 3,
       child: HomeContainer(
         width: bigContainerWidth,
         height: smallContainerHeight,
@@ -146,7 +177,7 @@ class _AlertBox extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Assets.icons.overheatIcon.image(width: 70.w, height: 62.h),
-            const HomePageText(value: LocaleKeys.homePage_alertBox),
+            const LargeText(value: LocaleKeys.homePage_alertBox),
           ],
         ),
       ),
@@ -166,7 +197,7 @@ class _MyDevices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 2,
+      flex: 6,
       child: HomeContainer(
         width: bigContainerWidth,
         height: bigContainerHeight,
@@ -178,7 +209,7 @@ class _MyDevices extends StatelessWidget {
               height: 120.h,
             ),
             AppSpacer.vertical.space5,
-            const HomePageText(value: LocaleKeys.homePage_myDevices),
+            const LargeText(value: LocaleKeys.homePage_myDevices),
           ],
         ),
       ),

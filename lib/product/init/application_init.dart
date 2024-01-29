@@ -19,7 +19,6 @@ final class ApplicationInitialize {
     });
   }
 
-  /// This method is used to initialize the application process
   static Future<void> _initialize() async {
     ///For Localization
     await EasyLocalization.ensureInitialized();

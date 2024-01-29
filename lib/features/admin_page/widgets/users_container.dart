@@ -24,7 +24,7 @@ class _UsersContainer extends StatelessWidget {
               height: iconSize.h,
             ),
             AppSpacer.horizontal.space20,
-            const HomePageText(
+            const LargeText(
               value: LocaleKeys.adminPage_users,
             ),
           ],

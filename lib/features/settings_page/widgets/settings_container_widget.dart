@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/home_container.dart';
-import 'package:take_data_and_update_project/product/widgets/text/settings_page_text.dart';
+import 'package:take_data_and_update_project/product/widgets/text/medium_text.dart';
 
 class SettingsContainerWidget extends StatelessWidget {
   const SettingsContainerWidget({
@@ -28,7 +28,7 @@ class SettingsContainerWidget extends StatelessWidget {
           children: [
             asset.image(width: 80.w, height: 60.h),
             AppSpacer.vertical.space15,
-            SettingsPageText(value: title),
+            MediumText(value: title),
           ],
         ),
       ),

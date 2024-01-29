@@ -55,6 +55,10 @@ class $AssetsIconsGen {
   AssetGenImage get phoneIcon =>
       const AssetGenImage('assets/icons/phoneIcon.png');
 
+  /// File path: assets/icons/processor.png
+  AssetGenImage get processor =>
+      const AssetGenImage('assets/icons/processor.png');
+
   /// File path: assets/icons/settingsIcon.svg
   SvgGenImage get settingsIcon =>
       const SvgGenImage('assets/icons/settingsIcon.svg');
@@ -86,6 +90,7 @@ class $AssetsIconsGen {
         notificationSettingsIcon,
         overheatIcon,
         phoneIcon,
+        processor,
         settingsIcon,
         starsIcon,
         updateProfileIcon,

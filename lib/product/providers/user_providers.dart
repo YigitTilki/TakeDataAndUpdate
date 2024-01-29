@@ -1,12 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:take_data_and_update_project/features/splash_page/splash_provider.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/service/auth_repository.dart';
 
-final splashProvider =
-    StateNotifierProvider<SplashProvider, SplashState>((ref) {
-  return SplashProvider();
-});
 final userListProvider = FutureProvider<List<UserModel>>((ref) async {
   return AuthRepository().getUsers();
 });
@@ -17,10 +12,6 @@ final deleteUserProvider =
   // ignore: unused_result
   ref.refresh(userListProvider);
 });
-
-final passwordVisibilityProvider = StateProvider<bool>((ref) => false);
-final passwordVisibilityProvider1 = StateProvider<bool>((ref) => false);
-final passwordVisibilityProvider2 = StateProvider<bool>((ref) => false);
 
 final userListNotifierProvider =
     StateNotifierProvider<UserListNotifier, AsyncValue<List<UserModel>>>(
