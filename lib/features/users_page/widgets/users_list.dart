@@ -58,7 +58,6 @@ class _UserList extends StatelessWidget {
         itemCount: filteredList.length,
         itemBuilder: (BuildContext context, int index) {
           final user = filteredList[index];
-
           final firstName = user.firstName!;
           final lastName = user.lastName!;
           final email = user.email!;

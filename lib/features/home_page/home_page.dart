@@ -10,6 +10,12 @@ import 'package:take_data_and_update_project/product/util/extensions/build_conte
 import 'package:take_data_and_update_project/product/widgets/containers/home_container.dart';
 import 'package:take_data_and_update_project/product/widgets/text/large_text.dart';
 
+part 'widgets/alert_box.dart';
+part 'widgets/my_devices.dart';
+part 'widgets/rate_us.dart';
+part 'widgets/settings.dart';
+part 'widgets/user_info_container.dart';
+
 @RoutePage()
 class HomePage extends StatelessWidget {
   const HomePage({required this.userModel, super.key});
@@ -58,158 +64,6 @@ class HomePage extends StatelessWidget {
               smallContainerHeight: smallContainerHeight,
             ),
             AppSpacer.vertical.space30,
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _UserInfoContainer extends StatelessWidget {
-  const _UserInfoContainer({
-    required this.bigContainerWidth,
-    required this.smallContainerHeight,
-    required this.userModel,
-  });
-
-  final int bigContainerWidth;
-  final int smallContainerHeight;
-  final UserModel userModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: HomeContainer(
-        width: bigContainerWidth,
-        height: smallContainerHeight,
-        child: Center(
-          child: LargeText(
-            value: '${userModel.firstName} ${userModel.lastName}',
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _RateUs extends StatelessWidget {
-  const _RateUs({
-    required this.smallContainerWidth,
-    required this.smallContainerHeight,
-  });
-
-  final int smallContainerWidth;
-  final int smallContainerHeight;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 3,
-      child: HomeContainer(
-        width: smallContainerWidth,
-        height: smallContainerHeight,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const LargeText(value: LocaleKeys.homePage_rateUs),
-            AppSpacer.vertical.space10,
-            Assets.icons.starsIcon.svg(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _Settings extends StatelessWidget {
-  const _Settings({
-    required this.userModel,
-    required this.mediumContainerWidth,
-    required this.smallContainerHeight,
-  });
-
-  final UserModel userModel;
-  final int mediumContainerWidth;
-  final int smallContainerHeight;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 3,
-      child: InkWell(
-        onTap: () {
-          context.router.push(SettingsRoute(userModel: userModel));
-        },
-        child: HomeContainer(
-          width: mediumContainerWidth,
-          height: smallContainerHeight,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Assets.icons.settingsIcon.svg(),
-              const LargeText(value: LocaleKeys.homePage_settings),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _AlertBox extends StatelessWidget {
-  const _AlertBox({
-    required this.bigContainerWidth,
-    required this.smallContainerHeight,
-  });
-
-  final int bigContainerWidth;
-  final int smallContainerHeight;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 3,
-      child: HomeContainer(
-        width: bigContainerWidth,
-        height: smallContainerHeight,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Assets.icons.overheatIcon.image(width: 70.w, height: 62.h),
-            const LargeText(value: LocaleKeys.homePage_alertBox),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _MyDevices extends StatelessWidget {
-  const _MyDevices({
-    required this.bigContainerWidth,
-    required this.bigContainerHeight,
-  });
-
-  final int bigContainerWidth;
-  final int bigContainerHeight;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 6,
-      child: HomeContainer(
-        width: bigContainerWidth,
-        height: bigContainerHeight,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Assets.icons.phoneIcon.image(
-              width: 120.w,
-              height: 120.h,
-            ),
-            AppSpacer.vertical.space5,
-            const LargeText(value: LocaleKeys.homePage_myDevices),
           ],
         ),
       ),

@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:take_data_and_update_project/features/settings_page/state/theme_state.dart';
 import 'package:take_data_and_update_project/features/settings_page/widgets/theme_changer_container.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
@@ -9,6 +8,7 @@ import 'package:take_data_and_update_project/product/init/languages/locale_keys.
 import 'package:take_data_and_update_project/product/init/theme/blue_theme.dart';
 import 'package:take_data_and_update_project/product/init/theme/blush_rose.dart';
 import 'package:take_data_and_update_project/product/init/theme/light_theme.dart';
+import 'package:take_data_and_update_project/product/providers/theme_provider.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';

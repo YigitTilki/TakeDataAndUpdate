@@ -16,7 +16,6 @@ import 'package:take_data_and_update_project/product/init/languages/locale_keys.
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/providers/user_providers.dart';
 import 'package:take_data_and_update_project/product/providers/visibility_providers.dart';
-import 'package:take_data_and_update_project/product/service/auth_repository.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/bordered_elevated_button.dart';
@@ -24,7 +23,6 @@ import 'package:take_data_and_update_project/product/widgets/buttons/elevated_bu
 import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
 import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
-import 'package:uuid/uuid.dart';
 
 part 'widgets/floating_action_button.dart';
 part 'widgets/search_text_field.dart';
