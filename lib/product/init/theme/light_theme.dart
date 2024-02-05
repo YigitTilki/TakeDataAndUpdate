@@ -16,6 +16,7 @@ final class LightTheme implements CustomAppTheme {
   static const Color clickableColor = Color(0xFFA15C1C);
   static const Color defaultTextColor = Colors.white;
   static const Color difColor = Color.fromARGB(255, 92, 66, 47);
+  static const Color textFieldTextColor = blackColor;
 
   @override
   ThemeData get themeData => ThemeData(
@@ -76,6 +77,8 @@ final class LightTheme implements CustomAppTheme {
         background: homeBackgroundColor,
         onBackground: homeBackgroundColor,
         surface: blackColor,
+        surfaceTint: whiteColor,
+        surfaceVariant: textFieldTextColor,
         onSurface: defaultTextColor,
         scrim: clickableColor,
         shadow: difColor,
@@ -120,6 +123,7 @@ final class LightTheme implements CustomAppTheme {
         filled: true,
         fillColor: fourthColor,
         hintStyle: textTheme.headlineSmall?.copyWith(color: secondaryColor),
+        contentPadding: EdgeInsets.all(15.sp),
       );
 
   @override

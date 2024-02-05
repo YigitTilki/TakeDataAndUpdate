@@ -1,58 +1,71 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
-import 'package:take_data_and_update_project/product/widgets/decorations.dart';
+part of '../pages/change_theme_page.dart';
 
-class ThemeChangerContainer extends StatelessWidget {
-  const ThemeChangerContainer({
-    required this.color1,
-    required this.color2,
-    required this.color3,
-    required this.color4,
+class ChangeThemeContainer extends StatelessWidget {
+  const ChangeThemeContainer({
+    required this.theme,
+    required this.primaryColor,
+    required this.secondaryColor,
+    required this.tertiaryColor,
+    required this.fourthColor,
+    required this.text,
+    required this.selectedOne,
     super.key,
   });
-  final Color color1;
-  final Color color2;
-  final Color color3;
-  final Color color4;
+  final VoidCallback theme;
+  final Color primaryColor;
+  final Color secondaryColor;
+  final Color tertiaryColor;
+  final Color fourthColor;
+  final String text;
+  final bool selectedOne;
 
   @override
   Widget build(BuildContext context) {
     const colorContainerWidth = 20;
     const colorContainerHeight = 80;
-
-    return Container(
-      decoration: Decorations.borderContainerDecoration(
-        context.difColor,
-        context.fourthColor,
-      ),
-      width: 150.w,
-      height: 100.h,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            height: colorContainerHeight.h,
-            width: colorContainerWidth.w,
-            color: color1,
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: theme,
+          child: Container(
+            decoration: Decorations.borderContainerDecoration(
+              context.difColor,
+              selectedOne ? Colors.green : context.fourthColor,
+            ),
+            width: 150.w,
+            height: 100.h,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  height: colorContainerHeight.h,
+                  width: colorContainerWidth.w,
+                  color: primaryColor,
+                ),
+                Container(
+                  height: colorContainerHeight.h,
+                  width: colorContainerWidth.w,
+                  color: secondaryColor,
+                ),
+                Container(
+                  height: colorContainerHeight.h,
+                  width: colorContainerWidth.w,
+                  color: tertiaryColor,
+                ),
+                Container(
+                  height: colorContainerHeight.h,
+                  width: colorContainerWidth.w,
+                  color: fourthColor,
+                ),
+              ],
+            ),
           ),
-          Container(
-            height: colorContainerHeight.h,
-            width: colorContainerWidth.w,
-            color: color2,
-          ),
-          Container(
-            height: colorContainerHeight.h,
-            width: colorContainerWidth.w,
-            color: color3,
-          ),
-          Container(
-            height: colorContainerHeight.h,
-            width: colorContainerWidth.w,
-            color: color3,
-          ),
-        ],
-      ),
+        ),
+        AppSpacer.vertical.space5,
+        MediumText(
+          value: text,
+        ),
+      ],
     );
   }
 }

@@ -7,22 +7,19 @@ import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/service/auth_repository.dart';
 
 mixin LoginPageMixin on ConsumerState<LoginPage> {
-  final TextEditingController _emailTextController = TextEditingController();
-  final TextEditingController _passwordTextController = TextEditingController();
-
-  TextEditingController get emailTextController => _emailTextController;
-  TextEditingController get passwordTextController => _passwordTextController;
+  final TextEditingController emailTextController = TextEditingController();
+  final TextEditingController passwordTextController = TextEditingController();
 
   @override
   void dispose() {
-    _emailTextController.dispose();
-    _passwordTextController.dispose();
+    emailTextController.dispose();
+    passwordTextController.dispose();
     super.dispose();
   }
 
   Future<void> elevatedButtonProcess() async {
     final user = UserModel(
-      email: emailTextController.text,
+      email: emailTextController.text.toLowerCase(),
       password: passwordTextController.text,
     );
     final isAdmin = await AuthRepository().isAdmin(password: user.password!);

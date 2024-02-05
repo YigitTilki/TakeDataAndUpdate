@@ -14,15 +14,17 @@ class ThemeNotifier extends ChangeNotifier {
   static const String _themeKey = 'selectedTheme';
   SharedPreferences? _prefs;
 
+  int selectedThemeIndex = 0;
+
   ThemeData _themeData = LightTheme().themeData;
 
   ThemeData get themeData => _themeData;
 
   Future<void> _loadTheme() async {
     _prefs = await SharedPreferences.getInstance();
-    final savedThemeIndex = _prefs?.getInt(_themeKey);
+    selectedThemeIndex = _prefs?.getInt(_themeKey) ?? 0;
 
-    switch (savedThemeIndex) {
+    switch (selectedThemeIndex) {
       case 0:
         _themeData = LightTheme().themeData;
       case 1:
@@ -43,18 +45,21 @@ class ThemeNotifier extends ChangeNotifier {
   void lightTheme() {
     _themeData = LightTheme().themeData;
     _saveTheme(0);
+    selectedThemeIndex = 0;
     notifyListeners();
   }
 
   void blueTheme() {
     _themeData = BlueTheme().themeData;
     _saveTheme(1);
+    selectedThemeIndex = 1;
     notifyListeners();
   }
 
   void blushTheme() {
     _themeData = BlushRose().themeData;
     _saveTheme(2);
+    selectedThemeIndex = 2;
     notifyListeners();
   }
 }

@@ -8,19 +8,12 @@ import 'package:take_data_and_update_project/product/service/auth_repository.dar
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 
 mixin EditUserMixin on State<EditUserPage> {
-  final TextEditingController _emailTextController = TextEditingController();
-  final TextEditingController _passwordTextController = TextEditingController();
-  final TextEditingController _rePasswordTextController =
+  final TextEditingController emailTextController = TextEditingController();
+  final TextEditingController passwordTextController = TextEditingController();
+  final TextEditingController rePasswordTextController =
       TextEditingController();
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-
-  TextEditingController get emailTextController => _emailTextController;
-  TextEditingController get passwordTextController => _passwordTextController;
-  TextEditingController get firstNameController => _firstNameController;
-  TextEditingController get lastNameController => _lastNameController;
-  TextEditingController get rePasswordTextController =>
-      _rePasswordTextController;
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
 
   @override
   void initState() {
@@ -33,32 +26,32 @@ mixin EditUserMixin on State<EditUserPage> {
 
   @override
   void dispose() {
-    _emailTextController.dispose();
-    _passwordTextController.dispose();
-    _firstNameController.dispose();
-    _lastNameController.dispose();
-    _rePasswordTextController.dispose();
+    emailTextController.dispose();
+    passwordTextController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    rePasswordTextController.dispose();
     super.dispose();
   }
 
   Future<void> elevatedButtonProcess() async {
     final userModel = UserModel(
       id: widget.userModel.id,
-      email: emailTextController.text,
+      email: emailTextController.text.toLowerCase(),
       devices: widget.userModel.devices,
       firstName: firstNameController.text,
       lastName: lastNameController.text,
       password: passwordTextController.text,
     );
 
-    final isEmailExist =
-        await AuthRepository().isEmailExists(eMail: emailTextController.text);
+    final isEmailExist = await AuthRepository()
+        .isEmailExists(eMail: emailTextController.text.toLowerCase());
 
     if (!context.mounted) return;
     if (!EditUserPage.formKey.currentState!.validate()) {
       debugPrint('olmadı');
     } else if (isEmailExist &&
-        emailTextController.text != widget.userModel.email) {
+        emailTextController.text.toLowerCase() != widget.userModel.email) {
       scaffoldMessenger(
         context,
         LocaleKeys.scaffoldMessages_emailCantBeUsed,

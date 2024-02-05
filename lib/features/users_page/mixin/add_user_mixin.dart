@@ -37,11 +37,11 @@ mixin AddUserMixin on ConsumerState<UserListFloatingActionButton> {
 
   Future<void> elevatedButtonProcess() async {
     final emailExists = await AuthRepository().isEmailExists(
-      eMail: emailTextController.text,
+      eMail: emailTextController.text.toLowerCase(),
     );
     final userModel = UserModel(
       id: const Uuid().v4(),
-      email: emailTextController.text,
+      email: emailTextController.text.toLowerCase(),
       password: passwordTextController.text,
       firstName: firstNameController.text,
       lastName: lastNameController.text,

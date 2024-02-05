@@ -15,6 +15,8 @@ extension BuildContextExtension on BuildContext {
   Color get clickableColor => colorScheme.scrim;
   Color get defaultTextColor => colorScheme.onSurface;
   Color get difColor => colorScheme.shadow;
+  Color get whiteColor => colorScheme.surfaceTint;
+  Color get textFieldTextColor => colorScheme.surfaceVariant;
 
   //TextStyles
   TextStyle? get labelSmall => textTheme.labelSmall;

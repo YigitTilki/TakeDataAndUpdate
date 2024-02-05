@@ -16,6 +16,7 @@ class BlushRose implements CustomAppTheme {
   static const Color clickableColor = Colors.blueGrey;
   static const Color defaultTextColor = Colors.white;
   static const Color difColor = Color.fromARGB(255, 21, 41, 58);
+  static const Color textFieldTextColor = whiteColor;
 
   @override
   ThemeData get themeData => ThemeData(
@@ -76,6 +77,8 @@ class BlushRose implements CustomAppTheme {
         background: homeBackgroundColor,
         onBackground: homeBackgroundColor,
         surface: blackColor,
+        surfaceTint: whiteColor,
+        surfaceVariant: textFieldTextColor,
         onSurface: defaultTextColor,
         scrim: clickableColor,
         shadow: difColor,

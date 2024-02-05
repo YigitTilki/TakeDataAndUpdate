@@ -10,40 +10,33 @@ import 'package:take_data_and_update_project/product/widgets/scaffold_messengers
 import 'package:uuid/uuid.dart';
 
 mixin RegisterPageMixin on ConsumerState<RegisterPage> {
-  final TextEditingController _emailTextController = TextEditingController();
-  final TextEditingController _passwordTextController = TextEditingController();
-  final TextEditingController _rePasswordTextController =
+  final TextEditingController emailTextController = TextEditingController();
+  final TextEditingController passwordTextController = TextEditingController();
+  final TextEditingController rePasswordTextController =
       TextEditingController();
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-
-  TextEditingController get emailTextController => _emailTextController;
-  TextEditingController get passwordTextController => _passwordTextController;
-  TextEditingController get firstNameController => _firstNameController;
-  TextEditingController get lastNameController => _lastNameController;
-  TextEditingController get rePasswordTextController =>
-      _rePasswordTextController;
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
 
   @override
   void dispose() {
-    _emailTextController.dispose();
-    _passwordTextController.dispose();
-    _firstNameController.dispose();
-    _lastNameController.dispose();
-    _rePasswordTextController.dispose();
+    emailTextController.dispose();
+    passwordTextController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    rePasswordTextController.dispose();
     super.dispose();
   }
 
   Future<void> elevatedButtonProcess() async {
     final userModel = UserModel(
       id: const Uuid().v4(),
-      email: emailTextController.text,
+      email: emailTextController.text.toLowerCase(),
       password: passwordTextController.text,
       firstName: firstNameController.text,
       lastName: lastNameController.text,
     );
-    final emailExists =
-        await AuthRepository().isEmailExists(eMail: emailTextController.text);
+    final emailExists = await AuthRepository()
+        .isEmailExists(eMail: emailTextController.text.toLowerCase());
     if (!context.mounted) return;
     if (!RegisterPage.formKeyRegister.currentState!.validate()) {
       debugPrint('Olmadı');
