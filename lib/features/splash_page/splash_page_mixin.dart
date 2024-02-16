@@ -6,6 +6,7 @@ import 'package:kartal/kartal.dart';
 import 'package:take_data_and_update_project/features/splash_page/splash_page.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/providers/splash_provider.dart';
+import 'package:take_data_and_update_project/product/util/show_dialog.dart';
 
 mixin SplashViewListenMixin on ConsumerState<SplashPage> {
   @override
@@ -25,13 +26,11 @@ mixin SplashViewListenMixin on ConsumerState<SplashPage> {
           return;
         }
         if (next.isConnected == false) {
-          showDialog<Widget>(
-            context: context,
-            builder: (context) {
-              return const AlertDialog(
-                title: Text('No Internet'),
-              );
-            },
+          show(
+            context,
+            const AlertDialog(
+              title: Text('No Internet'),
+            ),
           );
           return;
         }

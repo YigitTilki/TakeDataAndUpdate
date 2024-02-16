@@ -15,6 +15,7 @@ import 'package:take_data_and_update_project/product/providers/visibility_provid
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/elevated_button.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/text_button.dart';
+import 'package:take_data_and_update_project/product/widgets/pop_scope.dart';
 import 'package:take_data_and_update_project/product/widgets/text/header_text.dart';
 import 'package:take_data_and_update_project/product/widgets/text/small_info_text.dart';
 
@@ -23,8 +24,6 @@ part 'widgets/already_have_account.dart';
 @RoutePage()
 class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
-
-  static final GlobalKey<FormState> formKeyRegister = GlobalKey<FormState>();
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _RegisterPageState();
@@ -37,54 +36,55 @@ class _RegisterPageState extends ConsumerState<RegisterPage>
     final passwordVisible1 = ref.watch(passwordVisibilityProvider1);
     final passwordVisible2 = ref.watch(passwordVisibilityProvider2);
 
-    return Scaffold(
-      backgroundColor: context.secondaryColor,
-      body: SafeArea(
-        child: Form(
-          key: RegisterPage.formKeyRegister,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const AuthHeader(),
-                AppSpacer.vertical.space30,
-                const HeaderText(
-                  value: LocaleKeys.registerPage_signUpUpperCase,
-                ),
-                AppSpacer.vertical.space20,
-                FirstNameField(firstNameController: firstNameController),
-                AppSpacer.vertical.space20,
-                LastNameField(lastNameController: lastNameController),
-                AppSpacer.vertical.space20,
-                PasswordField(
-                  passwordTextController: passwordTextController,
-                  onPressed: () => ref
-                      .read(passwordVisibilityProvider1.notifier)
-                      .state = !passwordVisible1,
-                  isPasswordVisible: passwordVisible1,
-                  isLogin: false,
-                ),
-                AppSpacer.vertical.space20,
-                RePasswordField(
-                  rePasswordTextController: rePasswordTextController,
-                  isPasswordVisible: passwordVisible2,
-                  passwordTextController: passwordTextController,
-                  onPressedIcon: () => ref
-                      .read(passwordVisibilityProvider2.notifier)
-                      .state = !passwordVisible2,
-                ),
-                AppSpacer.vertical.space20,
-                EmailField(
-                  //TODO: tolowerCase indirge
-                  emailTextController: emailTextController,
-                  isLogin: false,
-                ),
-                AppSpacer.vertical.space20,
-                AppElevatedButton(
-                  text: LocaleKeys.registerPage_signUpUpperCase,
-                  onPressed: elevatedButtonProcess,
-                ),
-                const _AlreadyHaveAnAccount(),
-              ],
+    return MyPopScope(
+      child: Scaffold(
+        backgroundColor: context.secondaryColor,
+        body: SafeArea(
+          child: Form(
+            key: formKeyRegister,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const AuthHeader(),
+                  AppSpacer.vertical.space30,
+                  const HeaderText(
+                    value: LocaleKeys.registerPage_signUpUpperCase,
+                  ),
+                  AppSpacer.vertical.space20,
+                  FirstNameField(firstNameController: firstNameController),
+                  AppSpacer.vertical.space20,
+                  LastNameField(lastNameController: lastNameController),
+                  AppSpacer.vertical.space20,
+                  PasswordField(
+                    passwordTextController: passwordTextController,
+                    onPressed: () => ref
+                        .read(passwordVisibilityProvider1.notifier)
+                        .state = !passwordVisible1,
+                    isPasswordVisible: passwordVisible1,
+                    isLogin: false,
+                  ),
+                  AppSpacer.vertical.space20,
+                  RePasswordField(
+                    rePasswordTextController: rePasswordTextController,
+                    isPasswordVisible: passwordVisible2,
+                    passwordTextController: passwordTextController,
+                    onPressedIcon: () => ref
+                        .read(passwordVisibilityProvider2.notifier)
+                        .state = !passwordVisible2,
+                  ),
+                  AppSpacer.vertical.space20,
+                  EmailField(
+                    emailTextController: emailTextController,
+                    isLogin: false,
+                  ),
+                  AppSpacer.vertical.space20,
+                  AppElevatedButton(
+                    text: LocaleKeys.registerPage_signUpUpperCase,
+                    onPressed: elevatedButtonProcess,
+                  ),
+                  const _AlreadyHaveAnAccount(),
+                ],
+              ),
             ),
           ),
         ),

@@ -8,7 +8,9 @@ import 'package:take_data_and_update_project/product/init/route/app_router.dart'
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/product/util/show_dialog.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
+import 'package:take_data_and_update_project/product/widgets/pop_ups/back_pop_up.dart';
 
 @RoutePage()
 class SettingsPage extends StatelessWidget {
@@ -72,7 +74,9 @@ class _LogOut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingsContainerWidget(
-      onPressed: () {},
+      onPressed: () {
+        show(context, const GoLoginPopUp());
+      },
       title: LocaleKeys.settingsPage_logOut.tr(),
       asset: Assets.icons.logOutIcon,
     );

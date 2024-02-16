@@ -9,6 +9,7 @@ import 'package:take_data_and_update_project/product/service/auth_repository.dar
 mixin LoginPageMixin on ConsumerState<LoginPage> {
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
+  GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -27,7 +28,7 @@ mixin LoginPageMixin on ConsumerState<LoginPage> {
 
     if (isAdmin) {
       await context.router.push(const AdminRoute());
-    } else if (!LoginPage.formKeyLogin.currentState!.validate()) {
+    } else if (!formKeyLogin.currentState!.validate()) {
       debugPrint('Olmadı');
     } else {
       await AuthRepository().signInUser(

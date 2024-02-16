@@ -1,7 +1,8 @@
 part of '../login_page.dart';
 
 class _RememberMeForgotPassword extends StatefulWidget {
-  const _RememberMeForgotPassword();
+  const _RememberMeForgotPassword({required this.onChanged});
+  final void Function(bool?)? onChanged;
 
   @override
   State<_RememberMeForgotPassword> createState() =>
@@ -17,7 +18,7 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _rememberMe(),
+          _rememberMe(widget.onChanged),
           AppTextButton(
             text: LocaleKeys.loginPage_forgotPassWord,
             onPressed: () {
@@ -29,7 +30,7 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
     );
   }
 
-  Row _rememberMe() {
+  Row _rememberMe(void Function(bool?)? onChanged) {
     return Row(
       children: [
         Padding(
@@ -39,13 +40,7 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
             //TODO: CheckBox func
             child: Checkbox(
               value: value,
-              onChanged: (bool? value) {
-                setState(
-                  () {
-                    this.value = value!;
-                  },
-                );
-              },
+              onChanged: onChanged,
             ),
           ),
         ),

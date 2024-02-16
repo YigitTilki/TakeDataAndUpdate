@@ -14,4 +14,5 @@ abstract class CustomAppTheme {
   SnackBarThemeData get snackBarThemeData;
   ListTileThemeData get listTileThemeData;
   FloatingActionButtonThemeData get floatingActionButtonThemeData;
+  DialogTheme get dialogTheme;
 }

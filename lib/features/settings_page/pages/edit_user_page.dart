@@ -20,7 +20,6 @@ import 'package:take_data_and_update_project/product/widgets/containers/custom_h
 class EditUserPage extends ConsumerStatefulWidget {
   const EditUserPage({required this.userModel, super.key});
   final UserModel userModel;
-  static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _EditUserPageState();
@@ -36,7 +35,7 @@ class _EditUserPageState extends ConsumerState<EditUserPage>
       backgroundColor: context.secondaryColor,
       body: SafeArea(
         child: Form(
-          key: EditUserPage.formKey,
+          key: formKey,
           child: SingleChildScrollView(
             child: Column(
               children: [

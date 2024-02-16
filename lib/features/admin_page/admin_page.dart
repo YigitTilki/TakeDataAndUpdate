@@ -8,6 +8,7 @@ import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart'
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/home_container.dart';
+import 'package:take_data_and_update_project/product/widgets/pop_scope.dart';
 import 'package:take_data_and_update_project/product/widgets/text/large_text.dart';
 
 part 'widgets/users_container.dart';
@@ -18,19 +19,21 @@ class AdminPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: context.secondaryColor,
-      body: Center(
-        child: SizedBox(
-          width: 340.w,
-          height: 600.h,
-          child: Column(
-            children: [
-              AppSpacer.vertical.space20,
-              const _Header(),
-              AppSpacer.vertical.space20,
-              const _UsersContainer(),
-            ],
+    return MyPopScope(
+      child: Scaffold(
+        backgroundColor: context.secondaryColor,
+        body: Center(
+          child: SizedBox(
+            width: 340.w,
+            height: 600.h,
+            child: Column(
+              children: [
+                AppSpacer.vertical.space20,
+                const _Header(),
+                AppSpacer.vertical.space20,
+                const _UsersContainer(),
+              ],
+            ),
           ),
         ),
       ),

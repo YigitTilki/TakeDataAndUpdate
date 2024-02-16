@@ -16,6 +16,7 @@ mixin RegisterPageMixin on ConsumerState<RegisterPage> {
       TextEditingController();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
+  GlobalKey<FormState> formKeyRegister = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -38,7 +39,7 @@ mixin RegisterPageMixin on ConsumerState<RegisterPage> {
     final emailExists = await AuthRepository()
         .isEmailExists(eMail: emailTextController.text.toLowerCase());
     if (!context.mounted) return;
-    if (!RegisterPage.formKeyRegister.currentState!.validate()) {
+    if (!formKeyRegister.currentState!.validate()) {
       debugPrint('Olmadı');
     } else if (emailExists) {
       scaffoldMessenger(context, LocaleKeys.scaffoldMessages_emailExist);

@@ -14,6 +14,7 @@ mixin EditUserMixin on State<EditUserPage> {
       TextEditingController();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -48,7 +49,7 @@ mixin EditUserMixin on State<EditUserPage> {
         .isEmailExists(eMail: emailTextController.text.toLowerCase());
 
     if (!context.mounted) return;
-    if (!EditUserPage.formKey.currentState!.validate()) {
+    if (!formKey.currentState!.validate()) {
       debugPrint('olmadı');
     } else if (isEmailExist &&
         emailTextController.text.toLowerCase() != widget.userModel.email) {

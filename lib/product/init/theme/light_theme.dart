@@ -33,7 +33,7 @@ final class LightTheme implements CustomAppTheme {
         checkboxTheme: checkboxThemeData,
         listTileTheme: listTileThemeData,
         floatingActionButtonTheme: floatingActionButtonThemeData,
-        dialogTheme: const DialogTheme(), //TODO: add dialog theme
+        dialogTheme: dialogTheme,
       );
 
   @override
@@ -225,4 +225,12 @@ final class LightTheme implements CustomAppTheme {
       borderSide: BorderSide(color: color, width: 2.sp),
     );
   }
+
+  @override
+  DialogTheme get dialogTheme => DialogTheme(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.sp),
+          side: BorderSide(width: 4.w, color: fourthColor),
+        ),
+      );
 }

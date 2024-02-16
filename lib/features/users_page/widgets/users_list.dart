@@ -77,17 +77,15 @@ class _UserList extends StatelessWidget {
               child: Center(
                 child: ListTile(
                   onTap: () {
-                    showDialog<Widget>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return _UserListPopUp(
-                          firstName: firstName,
-                          lastName: lastName,
-                          email: email,
-                          id: id,
-                          ref: ref,
-                        );
-                      },
+                    show(
+                      context,
+                      _UserListPopUp(
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        id: id,
+                        ref: ref,
+                      ),
                     );
                   },
                   leading: Assets.icons.usersIcon.image(

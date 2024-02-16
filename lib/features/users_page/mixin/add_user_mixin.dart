@@ -10,7 +10,7 @@ import 'package:take_data_and_update_project/product/widgets/scaffold_messengers
 import 'package:uuid/uuid.dart';
 
 mixin AddUserMixin on ConsumerState<UserListFloatingActionButton> {
-  final formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final rePasswordTextController = TextEditingController();

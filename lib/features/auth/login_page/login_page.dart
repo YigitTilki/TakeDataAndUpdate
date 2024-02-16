@@ -15,6 +15,7 @@ import 'package:take_data_and_update_project/product/providers/visibility_provid
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/elevated_button.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/text_button.dart';
+import 'package:take_data_and_update_project/product/widgets/pop_scope.dart';
 import 'package:take_data_and_update_project/product/widgets/text/header_text.dart';
 import 'package:take_data_and_update_project/product/widgets/text/small_info_text.dart';
 
@@ -24,7 +25,6 @@ part 'widgets/remember_me_forgot_password.dart';
 @RoutePage()
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
-  static final GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
@@ -35,41 +35,49 @@ class _LoginPageState extends ConsumerState<LoginPage> with LoginPageMixin {
   Widget build(BuildContext context) {
     final passwordVisible = ref.watch(passwordVisibilityProvider);
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: context.secondaryColor,
-      body: SafeArea(
-        child: Form(
-          key: LoginPage.formKeyLogin,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const AuthHeader(),
-                AppSpacer.vertical.space100,
-                const HeaderText(value: LocaleKeys.commons_loginUpperCase),
-                AppSpacer.vertical.space20,
-                EmailField(
-                  emailTextController: emailTextController,
-                  isLogin: true,
-                ),
-                AppSpacer.vertical.space20,
-                PasswordField(
-                  passwordTextController: passwordTextController,
-                  onPressed: () => ref
-                      .read(passwordVisibilityProvider.notifier)
-                      .state = !passwordVisible,
-                  isPasswordVisible: passwordVisible,
-                  isLogin: true,
-                ),
-                AppSpacer.vertical.space20,
-                AppElevatedButton(
-                  text: LocaleKeys.commons_loginUpperCase,
-                  onPressed: elevatedButtonProcess,
-                ),
-                AppSpacer.vertical.space10,
-                const _RememberMeForgotPassword(),
-                const _NotAMemberYet(),
-              ],
+    return MyPopScope(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: context.secondaryColor,
+        body: SafeArea(
+          child: Form(
+            key: formKeyLogin,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const AuthHeader(),
+                  AppSpacer.vertical.space100,
+                  const HeaderText(value: LocaleKeys.commons_loginUpperCase),
+                  AppSpacer.vertical.space20,
+                  EmailField(
+                    emailTextController: emailTextController,
+                    isLogin: true,
+                  ),
+                  AppSpacer.vertical.space20,
+                  PasswordField(
+                    passwordTextController: passwordTextController,
+                    onPressed: () => ref
+                        .read(passwordVisibilityProvider.notifier)
+                        .state = !passwordVisible,
+                    isPasswordVisible: passwordVisible,
+                    isLogin: true,
+                  ),
+                  AppSpacer.vertical.space20,
+                  AppElevatedButton(
+                    text: LocaleKeys.commons_loginUpperCase,
+                    onPressed: elevatedButtonProcess,
+                  ),
+                  AppSpacer.vertical.space10,
+                  _RememberMeForgotPassword(
+                    onChanged: (value) {
+                      /* setState(() {
+                        rememberMe = value!;
+                      }); */
+                    },
+                  ),
+                  const _NotAMemberYet(),
+                ],
+              ),
             ),
           ),
         ),
