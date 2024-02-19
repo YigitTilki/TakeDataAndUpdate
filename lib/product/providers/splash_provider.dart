@@ -6,6 +6,11 @@ import 'package:take_data_and_update_project/product/enums/platform_enum.dart';
 import 'package:take_data_and_update_project/product/models/number_model.dart';
 import 'package:take_data_and_update_project/product/util/version_manager.dart';
 
+final splashProvider =
+    StateNotifierProvider<SplashProvider, SplashState>((ref) {
+  return SplashProvider();
+});
+
 class SplashProvider extends StateNotifier<SplashState> {
   SplashProvider() : super(const SplashState());
 

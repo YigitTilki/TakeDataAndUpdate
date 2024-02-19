@@ -1,18 +1,21 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:take_data_and_update_project/features/settings_page/state/theme_state.dart';
-import 'package:take_data_and_update_project/features/settings_page/widgets/theme_changer_container.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/theme/blue_theme.dart';
 import 'package:take_data_and_update_project/product/init/theme/blush_rose.dart';
 import 'package:take_data_and_update_project/product/init/theme/light_theme.dart';
+import 'package:take_data_and_update_project/product/providers/theme_provider.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
-import 'package:take_data_and_update_project/product/widgets/custom_header.dart';
-import 'package:take_data_and_update_project/product/widgets/text/settings_page_text.dart';
+import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
+import 'package:take_data_and_update_project/product/widgets/decorations.dart';
+import 'package:take_data_and_update_project/product/widgets/text/medium_text.dart';
+
+part '../widgets/theme_changer_container.dart';
 
 @RoutePage()
 class ChangeThemePage extends ConsumerWidget {
@@ -55,29 +58,20 @@ class ChangeThemePage extends ConsumerWidget {
 class _BlushThemeContainer extends StatelessWidget {
   const _BlushThemeContainer({
     required this.theme,
-    super.key,
   });
 
   final ThemeNotifier theme;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: theme.blushTheme,
-          child: const ThemeChangerContainer(
-            color1: BlushRose.homeBackgroundColor,
-            color2: BlushRose.secondaryColor,
-            color3: BlushRose.tertiaryColor,
-            color4: BlushRose.fourthColor,
-          ),
-        ),
-        AppSpacer.vertical.space5,
-        const SettingsPageText(
-          value: LocaleKeys.settingsPage_blueTheme,
-        ),
-      ],
+    return ChangeThemeContainer(
+      theme: theme.blushTheme,
+      primaryColor: BlushRose.homeBackgroundColor,
+      secondaryColor: BlushRose.secondaryColor,
+      tertiaryColor: BlushRose.tertiaryColor,
+      fourthColor: BlushRose.fourthColor,
+      text: LocaleKeys.settingsPage_blueTheme,
+      selectedOne: theme.selectedThemeIndex == 2,
     );
   }
 }
@@ -91,22 +85,14 @@ class _BlueThemeContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: theme.blueTheme,
-          child: const ThemeChangerContainer(
-            color1: BlueTheme.homeBackgroundColor,
-            color2: BlueTheme.secondaryColor,
-            color3: BlueTheme.tertiaryColor,
-            color4: BlueTheme.fourthColor,
-          ),
-        ),
-        AppSpacer.vertical.space5,
-        const SettingsPageText(
-          value: LocaleKeys.settingsPage_blueTheme,
-        ),
-      ],
+    return ChangeThemeContainer(
+      theme: theme.blueTheme,
+      primaryColor: BlueTheme.homeBackgroundColor,
+      secondaryColor: BlueTheme.secondaryColor,
+      tertiaryColor: BlueTheme.tertiaryColor,
+      fourthColor: BlueTheme.fourthColor,
+      text: LocaleKeys.settingsPage_blueTheme,
+      selectedOne: theme.selectedThemeIndex == 1,
     );
   }
 }
@@ -120,22 +106,14 @@ class _LightThemeContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: theme.lightTheme,
-          child: const ThemeChangerContainer(
-            color1: LightTheme.homeBackgroundColor,
-            color2: LightTheme.secondaryColor,
-            color3: LightTheme.tertiaryColor,
-            color4: LightTheme.fourthColor,
-          ),
-        ),
-        AppSpacer.vertical.space5,
-        const SettingsPageText(
-          value: LocaleKeys.settingsPage_lightTheme,
-        ),
-      ],
+    return ChangeThemeContainer(
+      theme: theme.lightTheme,
+      primaryColor: LightTheme.homeBackgroundColor,
+      secondaryColor: LightTheme.secondaryColor,
+      tertiaryColor: LightTheme.tertiaryColor,
+      fourthColor: LightTheme.fourthColor,
+      text: LocaleKeys.settingsPage_lightTheme,
+      selectedOne: theme.selectedThemeIndex == 0,
     );
   }
 }
@@ -146,6 +124,7 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomHeader(
+      needBackButton: true,
       icon: Assets.icons.changeThemeIcon.image(),
       text: LocaleKeys.settingsPage_changeTheme,
     );

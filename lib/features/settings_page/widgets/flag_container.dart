@@ -5,10 +5,12 @@ class _FlagContainer extends StatelessWidget {
     required this.language,
     required this.image,
     required this.flagText,
+    required this.selectedOne,
   });
   final Locales language;
   final AssetGenImage image;
   final String flagText;
+  final bool selectedOne;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class _FlagContainer extends StatelessWidget {
             ),
             child: Container(
               decoration: Decorations.circleWithBorderDecoration(
-                context.fourthColor,
+                selectedOne ? Colors.green : context.fourthColor,
               ),
               child: image.image(),
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/product/init/theme/app_theme.dart';
+import 'package:take_data_and_update_project/product/base/base_app_theme.dart';
 import 'package:take_data_and_update_project/product/util/asset/fonts.gen.dart';
 
 class BlushRose implements CustomAppTheme {
@@ -16,6 +16,7 @@ class BlushRose implements CustomAppTheme {
   static const Color clickableColor = Colors.blueGrey;
   static const Color defaultTextColor = Colors.white;
   static const Color difColor = Color.fromARGB(255, 21, 41, 58);
+  static const Color textFieldTextColor = whiteColor;
 
   @override
   ThemeData get themeData => ThemeData(
@@ -32,7 +33,7 @@ class BlushRose implements CustomAppTheme {
         checkboxTheme: checkboxThemeData,
         listTileTheme: listTileThemeData,
         floatingActionButtonTheme: floatingActionButtonThemeData,
-        dialogTheme: const DialogTheme(), //TODO: add dialog theme
+        dialogTheme: dialogTheme,
       );
 
   @override
@@ -45,7 +46,7 @@ class BlushRose implements CustomAppTheme {
       );
 
   @override
-  String get appFont => FontFamily.inter;
+  String get appFont => FontFamily.josefinSans;
 
   @override
   CheckboxThemeData get checkboxThemeData => CheckboxThemeData(
@@ -76,6 +77,8 @@ class BlushRose implements CustomAppTheme {
         background: homeBackgroundColor,
         onBackground: homeBackgroundColor,
         surface: blackColor,
+        surfaceTint: whiteColor,
+        surfaceVariant: textFieldTextColor,
         onSurface: defaultTextColor,
         scrim: clickableColor,
         shadow: difColor,
@@ -222,4 +225,12 @@ class BlushRose implements CustomAppTheme {
       borderSide: BorderSide(color: color, width: 2.sp),
     );
   }
+
+  @override
+  DialogTheme get dialogTheme => DialogTheme(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.sp),
+          side: BorderSide(width: 4.w, color: fourthColor),
+        ),
+      );
 }

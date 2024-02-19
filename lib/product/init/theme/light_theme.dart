@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:take_data_and_update_project/product/init/theme/app_theme.dart';
+import 'package:take_data_and_update_project/product/base/base_app_theme.dart';
 import 'package:take_data_and_update_project/product/util/asset/fonts.gen.dart';
 
 final class LightTheme implements CustomAppTheme {
@@ -16,6 +16,7 @@ final class LightTheme implements CustomAppTheme {
   static const Color clickableColor = Color(0xFFA15C1C);
   static const Color defaultTextColor = Colors.white;
   static const Color difColor = Color.fromARGB(255, 92, 66, 47);
+  static const Color textFieldTextColor = blackColor;
 
   @override
   ThemeData get themeData => ThemeData(
@@ -32,7 +33,7 @@ final class LightTheme implements CustomAppTheme {
         checkboxTheme: checkboxThemeData,
         listTileTheme: listTileThemeData,
         floatingActionButtonTheme: floatingActionButtonThemeData,
-        dialogTheme: const DialogTheme(), //TODO: add dialog theme
+        dialogTheme: dialogTheme,
       );
 
   @override
@@ -45,7 +46,7 @@ final class LightTheme implements CustomAppTheme {
       );
 
   @override
-  String get appFont => FontFamily.inter;
+  String get appFont => FontFamily.josefinSans;
 
   @override
   CheckboxThemeData get checkboxThemeData => CheckboxThemeData(
@@ -76,6 +77,8 @@ final class LightTheme implements CustomAppTheme {
         background: homeBackgroundColor,
         onBackground: homeBackgroundColor,
         surface: blackColor,
+        surfaceTint: whiteColor,
+        surfaceVariant: textFieldTextColor,
         onSurface: defaultTextColor,
         scrim: clickableColor,
         shadow: difColor,
@@ -120,6 +123,7 @@ final class LightTheme implements CustomAppTheme {
         filled: true,
         fillColor: fourthColor,
         hintStyle: textTheme.headlineSmall?.copyWith(color: secondaryColor),
+        contentPadding: EdgeInsets.all(15.sp),
       );
 
   @override
@@ -221,4 +225,12 @@ final class LightTheme implements CustomAppTheme {
       borderSide: BorderSide(color: color, width: 2.sp),
     );
   }
+
+  @override
+  DialogTheme get dialogTheme => DialogTheme(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.sp),
+          side: BorderSide(width: 4.w, color: fourthColor),
+        ),
+      );
 }

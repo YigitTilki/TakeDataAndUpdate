@@ -40,19 +40,12 @@ class AuthRepository extends BaseAuthRepository {
           .where(passwordField, isEqualTo: userModel.password)
           .get();
 
-      if (!context.mounted) return;
-
       if (result.docs.isNotEmpty) {
-        final firstName = result.docs.first[firstNameField].toString();
-        final lastName = result.docs.first[lastNameField].toString();
-        final id = result.docs.first[idField].toString();
-        final devices = result.docs.first[devicesField].toString();
-
         userModel = userModel.copyWith(
-          firstName: firstName,
-          lastName: lastName,
-          id: id,
-          devices: devices,
+          firstName: result.docs.first[firstNameField].toString(),
+          lastName: result.docs.first[lastNameField].toString(),
+          id: result.docs.first[idField].toString(),
+          devices: result.docs.first[devicesField].toString(),
         );
 
         await context.router.replace(HomeRoute(userModel: userModel));
@@ -80,11 +73,8 @@ class AuthRepository extends BaseAuthRepository {
 
       if (passwordFetch.docs.isNotEmpty) {
         await usersCollection.doc(userModel.id).set(userMap);
-
-        if (!context.mounted) return;
         logger.d('User Added');
       } else {
-        if (!context.mounted) return;
         scaffoldMessenger(
           context,
           LocaleKeys.scaffoldMessages_wrongPassword,

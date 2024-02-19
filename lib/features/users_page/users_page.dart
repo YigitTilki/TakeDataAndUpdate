@@ -10,20 +10,20 @@ import 'package:take_data_and_update_project/features/auth/widgets/password_fiel
 import 'package:take_data_and_update_project/features/auth/widgets/re_password_field.dart';
 import 'package:take_data_and_update_project/features/users_page/mixin/add_user_mixin.dart';
 import 'package:take_data_and_update_project/features/users_page/mixin/users_page_mixin.dart';
-import 'package:take_data_and_update_project/product/base/base_providers.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
-import 'package:take_data_and_update_project/product/service/auth_repository.dart';
+import 'package:take_data_and_update_project/product/providers/user_providers.dart';
+import 'package:take_data_and_update_project/product/providers/visibility_providers.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/product/util/show_dialog.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/bordered_elevated_button.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/elevated_button.dart';
-import 'package:take_data_and_update_project/product/widgets/custom_header.dart';
+import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
 import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
-import 'package:uuid/uuid.dart';
 
 part 'widgets/floating_action_button.dart';
 part 'widgets/search_text_field.dart';
@@ -56,6 +56,7 @@ class _UsersPageState extends ConsumerState<UsersPage> with UsersPageMixin {
                 CustomHeader(
                   icon: Assets.icons.adminUsersIcon.image(),
                   text: LocaleKeys.adminPage_users,
+                  needBackButton: true,
                 ),
                 AppSpacer.vertical.space20,
 

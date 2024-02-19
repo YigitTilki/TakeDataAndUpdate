@@ -58,7 +58,6 @@ class _UserList extends StatelessWidget {
         itemCount: filteredList.length,
         itemBuilder: (BuildContext context, int index) {
           final user = filteredList[index];
-
           final firstName = user.firstName!;
           final lastName = user.lastName!;
           final email = user.email!;
@@ -78,17 +77,15 @@ class _UserList extends StatelessWidget {
               child: Center(
                 child: ListTile(
                   onTap: () {
-                    showDialog<Widget>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return _UserListPopUp(
-                          firstName: firstName,
-                          lastName: lastName,
-                          email: email,
-                          id: id,
-                          ref: ref,
-                        );
-                      },
+                    show(
+                      context,
+                      _UserListPopUp(
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        id: id,
+                        ref: ref,
+                      ),
                     );
                   },
                   leading: Assets.icons.usersIcon.image(
