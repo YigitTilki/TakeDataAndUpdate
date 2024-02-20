@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:take_data_and_update_project/features/auth/login_page/login_page.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
+import 'package:take_data_and_update_project/product/providers/splash_provider.dart';
+import 'package:take_data_and_update_project/product/providers/visibility_providers.dart';
 import 'package:take_data_and_update_project/product/service/auth_repository.dart';
 
 mixin LoginPageMixin on ConsumerState<LoginPage> {
@@ -36,5 +38,14 @@ mixin LoginPageMixin on ConsumerState<LoginPage> {
         context: context,
       );
     }
+  }
+
+  Future<void> checkBoxProcess(bool? value) async {
+    final userModel = await AuthRepository()
+        .getUser(email: emailTextController.text.toLowerCase());
+    ref.read(checkBoxProvider.notifier).state = value!;
+    await ref
+        .read(splashProvider.notifier)
+        .saveRememberMe(value: value, userModel: userModel);
   }
 }

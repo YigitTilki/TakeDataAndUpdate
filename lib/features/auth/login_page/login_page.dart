@@ -34,6 +34,7 @@ class _LoginPageState extends ConsumerState<LoginPage> with LoginPageMixin {
   @override
   Widget build(BuildContext context) {
     final passwordVisible = ref.watch(passwordVisibilityProvider);
+    final rememberMe = ref.watch(checkBoxProvider);
 
     return MyPopScope(
       child: Scaffold(
@@ -69,11 +70,8 @@ class _LoginPageState extends ConsumerState<LoginPage> with LoginPageMixin {
                   ),
                   AppSpacer.vertical.space10,
                   _RememberMeForgotPassword(
-                    onChanged: (value) {
-                      /* setState(() {
-                        rememberMe = value!;
-                      }); */
-                    },
+                    value: rememberMe,
+                    onChanged: checkBoxProcess,
                   ),
                   const _NotAMemberYet(),
                 ],

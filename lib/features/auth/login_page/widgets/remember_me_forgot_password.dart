@@ -1,8 +1,12 @@
 part of '../login_page.dart';
 
 class _RememberMeForgotPassword extends StatefulWidget {
-  const _RememberMeForgotPassword({required this.onChanged});
+  const _RememberMeForgotPassword({
+    required this.onChanged,
+    required this.value,
+  });
   final void Function(bool?)? onChanged;
+  final bool value;
 
   @override
   State<_RememberMeForgotPassword> createState() =>
@@ -10,7 +14,6 @@ class _RememberMeForgotPassword extends StatefulWidget {
 }
 
 class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
-  bool value = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,7 +21,7 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _rememberMe(widget.onChanged),
+          _rememberMe(widget.onChanged, widget.value),
           AppTextButton(
             text: LocaleKeys.loginPage_forgotPassWord,
             onPressed: () {
@@ -30,7 +33,7 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
     );
   }
 
-  Row _rememberMe(void Function(bool?)? onChanged) {
+  Row _rememberMe(void Function(bool?)? onChanged, bool? value) {
     return Row(
       children: [
         Padding(

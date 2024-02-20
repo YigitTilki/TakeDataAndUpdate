@@ -30,6 +30,28 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
+  Future<UserModel?> getUser({required String email}) async {
+    try {
+      final user =
+          await usersCollection.where(emailField, isEqualTo: email).get();
+      if (user.docs.isNotEmpty) {
+        final userModel = const UserModel().copyWith(
+          firstName: user.docs.first[firstNameField].toString(),
+          lastName: user.docs.first[lastNameField].toString(),
+          password: user.docs.first[passwordField].toString(),
+          email: user.docs.first[emailField].toString(),
+          id: user.docs.first[idField].toString(),
+          devices: user.docs.first[devicesField].toString(),
+        );
+        return userModel;
+      }
+    } catch (exception) {
+      logger.d(exception);
+    }
+    return null;
+  }
+
+  @override
   Future<void> signInUser({
     required UserModel userModel,
     required BuildContext context,
