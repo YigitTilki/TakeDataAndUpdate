@@ -43,6 +43,10 @@ class $AssetsIconsGen {
   AssetGenImage get noProfilePhotoIcon =>
       const AssetGenImage('assets/icons/noProfilePhotoIcon.png');
 
+  /// File path: assets/icons/noWifiIcon.png
+  AssetGenImage get noWifiIcon =>
+      const AssetGenImage('assets/icons/noWifiIcon.png');
+
   /// File path: assets/icons/notificationSettingsIcon.png
   AssetGenImage get notificationSettingsIcon =>
       const AssetGenImage('assets/icons/notificationSettingsIcon.png');
@@ -87,6 +91,7 @@ class $AssetsIconsGen {
         logOutIcon,
         manageDeviceIcon,
         noProfilePhotoIcon,
+        noWifiIcon,
         notificationSettingsIcon,
         overheatIcon,
         phoneIcon,

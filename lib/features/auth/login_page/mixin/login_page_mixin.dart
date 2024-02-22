@@ -7,11 +7,18 @@ import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/providers/splash_provider.dart';
 import 'package:take_data_and_update_project/product/providers/visibility_providers.dart';
 import 'package:take_data_and_update_project/product/service/auth_repository.dart';
+import 'package:take_data_and_update_project/product/util/wifi_connector.dart';
 
 mixin LoginPageMixin on ConsumerState<LoginPage> {
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
   GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    wifiConnector(context, ref);
+  }
 
   @override
   void dispose() {

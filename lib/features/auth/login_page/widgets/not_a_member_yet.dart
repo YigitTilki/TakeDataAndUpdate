@@ -12,7 +12,10 @@ class _NotAMemberYet extends StatelessWidget {
         AppTextButton(
           text: LocaleKeys.loginPage_signUp,
           onPressed: () {
-            context.router.replace(const RegisterRoute());
+            context.router.pushAndPopUntil(
+              const RegisterRoute(),
+              predicate: (predicate) => true,
+            );
           },
         ),
       ],

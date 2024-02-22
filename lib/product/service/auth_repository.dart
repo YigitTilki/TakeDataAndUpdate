@@ -70,7 +70,7 @@ class AuthRepository extends BaseAuthRepository {
           devices: result.docs.first[devicesField].toString(),
         );
 
-        await context.router.replace(HomeRoute(userModel: userModel));
+        await context.router.push(HomeRoute(userModel: userModel));
       } else {
         scaffoldMessenger(
           context,

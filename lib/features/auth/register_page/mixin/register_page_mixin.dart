@@ -6,6 +6,7 @@ import 'package:take_data_and_update_project/product/init/languages/locale_keys.
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/service/auth_repository.dart';
+import 'package:take_data_and_update_project/product/util/wifi_connector.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 import 'package:uuid/uuid.dart';
 
@@ -17,6 +18,12 @@ mixin RegisterPageMixin on ConsumerState<RegisterPage> {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   GlobalKey<FormState> formKeyRegister = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    wifiConnector(context, ref);
+  }
 
   @override
   void dispose() {
