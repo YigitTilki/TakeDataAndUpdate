@@ -43,6 +43,22 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    EnterCodeRoute.name: (routeData) {
+      final args = routeData.argsAs<EnterCodeRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EnterCodePage(
+          code: args.code,
+          key: args.key,
+        ),
+      );
+    },
+    ForgotPasswordRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ForgotPasswordPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       final args = routeData.argsAs<HomeRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -63,6 +79,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const RegisterPage(),
+      );
+    },
+    ResetPasswordRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ResetPasswordPage(),
       );
     },
     SettingsRoute.name: (routeData) {
@@ -171,6 +193,58 @@ class EditUserRouteArgs {
 }
 
 /// generated route for
+/// [EnterCodePage]
+class EnterCodeRoute extends PageRouteInfo<EnterCodeRouteArgs> {
+  EnterCodeRoute({
+    required int code,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EnterCodeRoute.name,
+          args: EnterCodeRouteArgs(
+            code: code,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EnterCodeRoute';
+
+  static const PageInfo<EnterCodeRouteArgs> page =
+      PageInfo<EnterCodeRouteArgs>(name);
+}
+
+class EnterCodeRouteArgs {
+  const EnterCodeRouteArgs({
+    required this.code,
+    this.key,
+  });
+
+  final int code;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EnterCodeRouteArgs{code: $code, key: $key}';
+  }
+}
+
+/// generated route for
+/// [ForgotPasswordPage]
+class ForgotPasswordRoute extends PageRouteInfo<void> {
+  const ForgotPasswordRoute({List<PageRouteInfo>? children})
+      : super(
+          ForgotPasswordRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ForgotPasswordRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
   HomeRoute({
@@ -231,6 +305,20 @@ class RegisterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RegisterRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ResetPasswordPage]
+class ResetPasswordRoute extends PageRouteInfo<void> {
+  const ResetPasswordRoute({List<PageRouteInfo>? children})
+      : super(
+          ResetPasswordRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ResetPasswordRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
