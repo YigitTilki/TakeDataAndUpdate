@@ -23,25 +23,28 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
     return Scaffold(
       backgroundColor: context.secondaryColor,
       body: SafeArea(
-        child: Column(
-          children: [
-            AppSpacer.vertical.space10,
-            CustomHeader(
-              icon: Assets.icons.manageDeviceIcon.image(),
-              text: 'Forgot Password',
-              needBackButton: true,
-            ),
-            AppSpacer.vertical.space20,
-            EmailField(
-              emailTextController: emailTextController,
-              isLogin: false,
-            ),
-            AppSpacer.vertical.space10,
-            BorderedElevatedButton(
-              onPressed: elevatedButtonProcess,
-              text: 'Send Email to Reset Password',
-            ),
-          ],
+        child: Form(
+          key: formKeyForgotPassword,
+          child: Column(
+            children: [
+              AppSpacer.vertical.space10,
+              CustomHeader(
+                icon: Assets.icons.manageDeviceIcon.image(),
+                text: 'Forgot Password',
+                needBackButton: true,
+              ),
+              AppSpacer.vertical.space20,
+              EmailField(
+                emailTextController: emailTextController,
+                isLogin: false,
+              ),
+              AppSpacer.vertical.space10,
+              BorderedElevatedButton(
+                onPressed: elevatedButtonProcess,
+                text: 'Send Email to Reset Password',
+              ),
+            ],
+          ),
         ),
       ),
     );

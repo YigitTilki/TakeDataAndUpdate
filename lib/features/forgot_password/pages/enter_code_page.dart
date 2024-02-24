@@ -10,8 +10,9 @@ import 'package:take_data_and_update_project/product/widgets/containers/custom_h
 
 @RoutePage()
 class EnterCodePage extends StatefulWidget {
-  const EnterCodePage({required this.code, super.key});
+  const EnterCodePage({required this.code, required this.email, super.key});
   final int code;
+  final String email;
 
   @override
   State<EnterCodePage> createState() => _EnterCodePageState();
@@ -31,6 +32,7 @@ class _EnterCodePageState extends State<EnterCodePage> with EnterCodeMixin {
               text: 'Enter Code',
               needBackButton: true,
             ),
+            AppSpacer.vertical.space20,
             AuthTextFormField(
               hintText: 'Enter Code',
               validator: (validator) {
@@ -39,6 +41,7 @@ class _EnterCodePageState extends State<EnterCodePage> with EnterCodeMixin {
               controller: codeController,
               keyboardType: TextInputType.number,
             ),
+            AppSpacer.vertical.space10,
             BorderedElevatedButton(
               onPressed: elevatedButtonProcess,
               text: 'Change Password',

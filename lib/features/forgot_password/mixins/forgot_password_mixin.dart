@@ -11,6 +11,7 @@ import 'package:take_data_and_update_project/product/widgets/scaffold_messengers
 
 mixin ForgotPasswordMixin on State<ForgotPasswordPage> {
   final TextEditingController emailTextController = TextEditingController();
+  GlobalKey<FormState> formKeyForgotPassword = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -69,7 +70,9 @@ mixin ForgotPasswordMixin on State<ForgotPasswordPage> {
         .isEmailExists(eMail: emailTextController.text.toLowerCase());
     final userModel = await AuthRepository()
         .getUser(email: emailTextController.text.toLowerCase());
-    if (!emailExists) {
+    if (!formKeyForgotPassword.currentState!.validate()) {
+      debugPrint('Olmadı');
+    } else if (!emailExists) {
       scaffoldMessenger(context, 'Böyle Bir Email Yok');
     } else {
       scaffoldMessenger(context, 'Email Gönderildi');
@@ -80,7 +83,12 @@ mixin ForgotPasswordMixin on State<ForgotPasswordPage> {
         message: 'Şifre sıfırlamak için kod: $code',
         toEmail: emailTextController.text.toLowerCase(),
       );
-      await context.router.push(EnterCodeRoute(code: code));
+      await context.router.push(
+        EnterCodeRoute(
+          code: code,
+          email: emailTextController.text.toLowerCase(),
+        ),
+      );
     }
   }
 }

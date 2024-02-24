@@ -16,7 +16,7 @@ mixin EnterCodeMixin on State<EnterCodePage> {
     if (codeController.text != widget.code.toString()) {
       scaffoldMessenger(context, 'Hatalı kod');
     } else {
-      await context.router.replace(const ResetPasswordRoute());
+      await context.router.replace(ResetPasswordRoute(email: widget.email));
     }
   }
 }
