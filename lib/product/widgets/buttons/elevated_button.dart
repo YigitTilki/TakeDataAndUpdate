@@ -17,7 +17,7 @@ class AppElevatedButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         text.tr(),
-        style: context.bodySmall,
+        style: context.titleMedium,
         textAlign: TextAlign.center,
       ),
     );

@@ -5,13 +5,13 @@ import 'package:take_data_and_update_project/features/auth/widgets/password_fiel
 import 'package:take_data_and_update_project/features/auth/widgets/re_password_field.dart';
 import 'package:take_data_and_update_project/features/forgot_password/mixins/reset_password_mixin.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
+import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/providers/visibility_providers.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
-import 'package:take_data_and_update_project/product/util/show_dialog.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/bordered_elevated_button.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
-import 'package:take_data_and_update_project/product/widgets/pop_ups/go_login_page.dart';
+import 'package:take_data_and_update_project/product/widgets/pop_scope.dart';
 
 @RoutePage()
 class ResetPasswordPage extends ConsumerStatefulWidget {
@@ -32,14 +32,7 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage>
     final passwordVisible2 =
         ref.watch(passwordVisibilityProviderResetPassword2);
 
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (didPop) {
-        if (didPop) {
-          return;
-        }
-        show(context, const GoLoginPagePopUp());
-      },
+    return GoLoginPopScope(
       child: Scaffold(
         backgroundColor: context.secondaryColor,
         body: SafeArea(
@@ -48,11 +41,7 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage>
             child: Column(
               children: [
                 AppSpacer.vertical.space10,
-                CustomHeader(
-                  icon: Assets.icons.manageDeviceIcon.image(),
-                  text: 'New Password',
-                  needBackButton: false,
-                ),
+                const _Header(),
                 AppSpacer.vertical.space20,
                 PasswordField(
                   passwordTextController: passwordTextController,
@@ -74,13 +63,26 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage>
                 AppSpacer.vertical.space10,
                 BorderedElevatedButton(
                   onPressed: elevatedButtonProcess,
-                  text: 'Change Password',
+                  text: LocaleKeys.forgotPassword_changePassword,
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header();
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomHeader(
+      icon: Assets.icons.manageDeviceIcon.image(),
+      text: LocaleKeys.forgotPassword_newPassword,
+      needBackButton: false,
     );
   }
 }

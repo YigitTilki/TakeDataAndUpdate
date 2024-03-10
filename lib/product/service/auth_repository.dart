@@ -96,6 +96,7 @@ class AuthRepository extends BaseAuthRepository {
       if (passwordFetch.docs.isNotEmpty) {
         await usersCollection.doc(userModel.id).set(userMap);
         logger.d('User Added');
+        await context.router.replace(HomeRoute(userModel: userModel));
       } else {
         scaffoldMessenger(
           context,

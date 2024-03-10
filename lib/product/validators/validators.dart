@@ -58,6 +58,10 @@ class Validators extends BaseValidators {
     if (!value.contains(RegExp('[0-9]'))) {
       return LocaleKeys.validatorErrors_passwordMustOneDigit.tr();
     }
+    if (!value.contains(RegExp(r'[!@#\$%^&*(),.?":{}|<>]'))) {
+      return LocaleKeys.validatorErrors_passwordMustContainOneSpecialCharacter
+          .tr();
+    }
 
     return null;
   }

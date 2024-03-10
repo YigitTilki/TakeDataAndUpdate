@@ -2,6 +2,7 @@ import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/bordered_elevated_button.dart';
 import 'package:take_data_and_update_project/product/widgets/pop_scope.dart';
@@ -17,7 +18,7 @@ class NoWifiPopUp extends StatelessWidget {
       child: AlertDialog(
         title: Assets.icons.noWifiIcon.image(height: 70.h),
         content: const LargeText(
-          value: 'No Internet Connection',
+          value: LocaleKeys.popUps_noInternetConnection,
         ),
         actions: [
           BorderedElevatedButton(
@@ -26,7 +27,7 @@ class NoWifiPopUp extends StatelessWidget {
                 type: AppSettingsType.wifi,
               );
             },
-            text: 'Wifi Settings',
+            text: LocaleKeys.popUps_wifiSettings,
           ),
           BorderedElevatedButton(
             onPressed: () async {
@@ -35,7 +36,7 @@ class NoWifiPopUp extends StatelessWidget {
                 navigator();
               }
             },
-            text: 'Try Again',
+            text: LocaleKeys.popUps_tryAgain,
           ),
         ],
       ),

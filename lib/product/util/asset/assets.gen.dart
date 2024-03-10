@@ -31,6 +31,10 @@ class $AssetsIconsGen {
   AssetGenImage get changeThemeIcon =>
       const AssetGenImage('assets/icons/changeThemeIcon.png');
 
+  /// File path: assets/icons/forgotPasswordIcon.png
+  AssetGenImage get forgotPasswordIcon =>
+      const AssetGenImage('assets/icons/forgotPasswordIcon.png');
+
   /// File path: assets/icons/logOutIcon.png
   AssetGenImage get logOutIcon =>
       const AssetGenImage('assets/icons/logOutIcon.png');
@@ -88,6 +92,7 @@ class $AssetsIconsGen {
         adminUsersIcon,
         changeLanguageIcon,
         changeThemeIcon,
+        forgotPasswordIcon,
         logOutIcon,
         manageDeviceIcon,
         noProfilePhotoIcon,

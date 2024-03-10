@@ -3,7 +3,7 @@
         "logo": "LOGO",
         "loginUpperCase": "GİRİŞ YAP",
         "password": "Şifre",
-        "eMail": "E-mail"
+        "eMail": "E-Posta"
     },
     "loginPage": {
         "rememberMe": "Beni hatırla",
@@ -39,15 +39,15 @@
         "idUpper": "ID",
         "devices": "Cihazlar",
         "addUser": "Kullanıcı Ekle"
-
     },
     "validatorErrors": {
-        "invalidEmailPassword": "Hatalı Email veya Şifre",
-        "invalidEmail": "Hatalı Email",
+        "invalidEmailPassword": "Hatalı E-Posta veya Şifre",
+        "invalidEmail": "Hatalı E-Posta",
         "requiredForm": "* Boş Bırakılamaz",
         "passwordMust8": "Şifre 8 karakter veya daha uzun olmalı",
         "passwordMustUpperCase": "Şifre bir büyük karakter içermeli",
         "passwordMustLowerCase": "Şifre bir küçük karakter içermeli",
+        "passwordMustContainOneSpecialCharacter": "Şifre bir özel karakter içermeli",
         "passwordMustOneDigit": "Şifre bir sayı içermeli",
         "passwordDoesntMatch": "Şifreler Eşleşmiyor"
     },
@@ -59,28 +59,44 @@
         "editUser": "Bilgilerini\nDüzenle",
         "manageDevices": "Cihazları\nYönet",
         "notificationSettings": "Bildirim\nAyarları",
-        "logOut": "Çıkış Yap",
+        "logOut": "Oturumu Kapat",
         "english": "İngilizce",
         "turkish": "Türkçe",
         "updateUserUpperCase": "KULLANICIYI\nGÜNCELLE",
         "update": "Güncelle",
-        "userUpdated" : "Kullanıcı Güncellendi",
-        "lightTheme" : "Açık Tema",
-        "blueTheme" : "Mavi Tema"
-
+        "userUpdated": "Kullanıcı Güncellendi",
+        "lightTheme": "Açık Tema",
+        "blueTheme": "Mavi Tema"
     },
-    "scaffoldMessages":{
-        "wrongEmailAndPassword": "Hatalı Email veya Şifre",
+    "scaffoldMessages": {
+        "wrongEmailAndPassword": "Hatalı E-Posta veya Şifre",
         "wrongPassword": "Hatalı Şifre",
         "userDeleted": "Kullanıcı Silindi",
         "userCantDeleted": "Kullanıcı Silinemedi",
         "userAdded": "Kullanıcı Eklendi",
-        "emailExist": "Email Kullanılıyor",
-        "emailCantBeUsed": "Bu Email Kullanılamaz",
+        "emailExist": "E-Posta Kullanılıyor",
+        "emailCantBeUsed": "Bu E-Posta Kullanılamaz",
         "deleted": "Silindi"
-
-
-        
-
+    },
+    "forgotPassword": {
+        "sendEmailToResetPassword": "Şifre Sıfırlamak için E-Posta Gönder",
+        "emailSend": "E-Posta Gönderildi",
+        "enterCode": "Gönderilen Kodu Gir",
+        "confirm": "Onayla",
+        "invalidCode": "Hatalı Kod",
+        "newPassword": "Yeni Şifre",
+        "changePassword": "Şifreni Değiştir"
+    },
+    "popUps": {
+        "yes": "Evet",
+        "no": "Hayır",
+        "areYouSureLogOut": "Oturumu kapatmak istediğinize emin misiniz?",
+        "exitApp": "Uygulamayı Kapat",
+        "areYouSureExitApp": "Uygulamayı kapatmak istediğinize emin misiniz?",
+        "goToLoginPage": "Giriş Yap Sayfasına Dön",
+        "areYouSureGoLogin": "Giriş yap sayfasına dönmek istediğinize emin misiniz?",
+        "noInternetConnection": "İnternet Bağlantısı Yok",
+        "wifiSettings": "Wifi Ayarları",
+        "tryAgain": "Tekrar  Deneyin"
     }
 }

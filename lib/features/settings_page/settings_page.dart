@@ -10,7 +10,7 @@ import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart'
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/util/show_dialog.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
-import 'package:take_data_and_update_project/product/widgets/pop_ups/back_pop_up.dart';
+import 'package:take_data_and_update_project/product/widgets/pop_ups/log_out_pop_up.dart';
 
 @RoutePage()
 class SettingsPage extends StatelessWidget {
@@ -75,7 +75,7 @@ class _LogOut extends StatelessWidget {
   Widget build(BuildContext context) {
     return SettingsContainerWidget(
       onPressed: () {
-        show(context, const GoLoginPopUp());
+        show(context, const LogOutPopUp());
       },
       title: LocaleKeys.settingsPage_logOut.tr(),
       asset: Assets.icons.logOutIcon,

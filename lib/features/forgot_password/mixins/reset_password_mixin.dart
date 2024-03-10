@@ -4,12 +4,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:take_data_and_update_project/features/forgot_password/pages/reset_password_page.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/service/auth_repository.dart';
+import 'package:take_data_and_update_project/product/util/wifi_connector.dart';
 
 mixin ResetPasswordMixin on ConsumerState<ResetPasswordPage> {
   final TextEditingController passwordTextController = TextEditingController();
   final TextEditingController rePasswordTextController =
       TextEditingController();
   GlobalKey<FormState> formKeyResetPassword = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    wifiConnector(context, ref);
+  }
 
   @override
   void dispose() {

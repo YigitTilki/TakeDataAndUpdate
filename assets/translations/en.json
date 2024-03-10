@@ -48,6 +48,7 @@
         "passwordMustUpperCase": "Password must contain one uppercase letter",
         "passwordMustLowerCase": "Password must contain one lowercase letter",
         "passwordMustOneDigit": "Password must contain one digit",
+        "passwordMustContainOneSpecialCharacter": "Password must contain one special character",
         "passwordDoesntMatch": "Passwords doesn't match"
     },
     "settingsPage": {
@@ -63,11 +64,11 @@
         "turkish": "Turkish",
         "updateUserUpperCase": "UPDATE USER",
         "update": "Update",
-        "userUpdated" : "User Updated",
-        "lightTheme" : "Light Theme",
-        "blueTheme" : "Blue Theme"
+        "userUpdated": "User Updated",
+        "lightTheme": "Light Theme",
+        "blueTheme": "Blue Theme"
     },
-    "scaffoldMessages":{
+    "scaffoldMessages": {
         "wrongEmailAndPassword": "Wrong Email or Password",
         "wrongPassword": "Wrong Password",
         "userDeleted": "User Deleted",
@@ -76,8 +77,26 @@
         "emailExist": "Email Exist",
         "emailCantBeUsed": "Email Can't be Used",
         "deleted": "Deleted"
-
-
+    },
+    "forgotPassword": {
+        "sendEmailToResetPassword": "Send Email to Reset Password",
+        "emailSend": "Email Send",
+        "enterCode": "Enter Code",
+        "confirm": "Confirm",
+        "invalidCode": "Invalid Code",
+        "newPassword": "New Password",
+        "changePassword": "changePassword"
+    },
+    "popUps": {
+        "yes": "Yes",
+        "no": "No",
+        "areYouSureLogOut": "Are you sure you want to log out?",
+        "exitApp": "Exit App",
+        "areYouSureExitApp": "Are you sure you want to exit the app",
+        "goToLoginPage": "Go to Login Page",
+        "areYouSureGoLogin": "Are you sure you want to return to Login Page",
+        "noInternetConnection": "No Internet Connection",
+        "wifiSettings": "Wifi Settings",
+        "tryAgain": "Try Again"
     }
-
 }

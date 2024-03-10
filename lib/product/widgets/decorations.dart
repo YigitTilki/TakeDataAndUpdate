@@ -40,6 +40,21 @@ final class Decorations {
     );
   }
 
+  static ShapeDecoration popUPBorderContainerDecoration(
+    Color containerColor,
+    Color borderColor,
+  ) {
+    return ShapeDecoration(
+      color: containerColor,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          width: 4.sp,
+          color: borderColor,
+        ),
+      ),
+    );
+  }
+
   static ShapeDecoration circleWithBorderDecoration(Color borderColor) {
     return ShapeDecoration(
       shape: CircleBorder(
