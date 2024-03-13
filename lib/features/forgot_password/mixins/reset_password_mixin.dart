@@ -29,10 +29,12 @@ mixin ResetPasswordMixin on ConsumerState<ResetPasswordPage> {
     if (!formKeyResetPassword.currentState!.validate()) {
       debugPrint('Olmadı');
     } else {
+      if (!context.mounted) return;
       await AuthRepository().updateUser(
         userModel: userModel!.copyWith(password: passwordTextController.text),
         context: context,
       );
+      if (!context.mounted) return;
       await context.router.push(const LoginRoute());
     }
   }

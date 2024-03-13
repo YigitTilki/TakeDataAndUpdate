@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 part of '../login_page.dart';
 
 class _RememberMeForgotPassword extends StatefulWidget {
@@ -5,6 +7,7 @@ class _RememberMeForgotPassword extends StatefulWidget {
     required this.onChanged,
     required this.value,
   });
+
   final void Function(bool?)? onChanged;
   final bool value;
 
@@ -40,7 +43,6 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
           padding: ProjectPadding.symHSmall(),
           child: SizedBox(
             width: Checkbox.width.w,
-            //TODO: CheckBox func
             child: Checkbox(
               value: value,
               onChanged: onChanged,

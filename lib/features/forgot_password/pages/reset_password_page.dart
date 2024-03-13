@@ -40,7 +40,6 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage>
             key: formKeyResetPassword,
             child: Column(
               children: [
-                AppSpacer.vertical.space10,
                 const _Header(),
                 AppSpacer.vertical.space20,
                 PasswordField(

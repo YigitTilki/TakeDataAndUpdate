@@ -57,17 +57,23 @@ mixin AddUserMixin on ConsumerState<UserListFloatingActionButton> {
     if (!formKey.currentState!.validate()) {
       debugPrint('Olmadı');
     } else if (emailExists) {
+      if (!context.mounted) return;
+
       scaffoldMessenger(
         context,
         LocaleKeys.scaffoldMessages_emailExist,
       );
     } else {
+      if (!context.mounted) return;
+
       await AuthRepository().singUpUser(
         userModel: userModel,
         context: context,
       );
       ref.invalidate(userListProvider);
       clearController();
+      if (!context.mounted) return;
+
       scaffoldMessenger(
         context,
         LocaleKeys.scaffoldMessages_userAdded,

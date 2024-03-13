@@ -53,11 +53,7 @@ class _UsersPageState extends ConsumerState<UsersPage> with UsersPageMixin {
             padding: ProjectPadding.allSmall(),
             child: Column(
               children: [
-                CustomHeader(
-                  icon: Assets.icons.adminUsersIcon.image(),
-                  text: LocaleKeys.adminPage_users,
-                  needBackButton: true,
-                ),
+                const _Header(),
                 AppSpacer.vertical.space20,
 
                 ///Search Field
@@ -82,6 +78,19 @@ class _UsersPageState extends ConsumerState<UsersPage> with UsersPageMixin {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header();
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomHeader(
+      icon: Assets.icons.adminUsersIcon.image(),
+      text: LocaleKeys.adminPage_users,
+      needBackButton: true,
     );
   }
 }

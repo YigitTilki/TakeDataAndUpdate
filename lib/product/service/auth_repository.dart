@@ -69,9 +69,12 @@ class AuthRepository extends BaseAuthRepository {
           id: result.docs.first[idField].toString(),
           devices: result.docs.first[devicesField].toString(),
         );
+        if (!context.mounted) return;
 
         await context.router.push(HomeRoute(userModel: userModel));
       } else {
+      if (!context.mounted) return;
+
         scaffoldMessenger(
           context,
           LocaleKeys.scaffoldMessages_wrongEmailAndPassword,
@@ -96,8 +99,12 @@ class AuthRepository extends BaseAuthRepository {
       if (passwordFetch.docs.isNotEmpty) {
         await usersCollection.doc(userModel.id).set(userMap);
         logger.d('User Added');
+      if (!context.mounted) return;
+
         await context.router.replace(HomeRoute(userModel: userModel));
       } else {
+      if (!context.mounted) return;
+
         scaffoldMessenger(
           context,
           LocaleKeys.scaffoldMessages_wrongPassword,

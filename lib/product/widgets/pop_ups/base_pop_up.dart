@@ -66,7 +66,7 @@ class _Title extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        LargeText(value: title),
+        Expanded(child: LargeText(value: title)),
         AppSpacer.horizontal.space10,
         icon.image(height: iconSize.w),
       ],
@@ -86,7 +86,7 @@ class _Content extends StatelessWidget {
     return Container(
       width: double.infinity.w,
       decoration: Decorations.popUPBorderContainerDecoration(
-        context.tertiaryColor,
+        context.difColor,
         context.fourthColor,
       ),
       child: Padding(

@@ -22,17 +22,18 @@ class AdminPage extends StatelessWidget {
     return MyPopScope(
       child: Scaffold(
         backgroundColor: context.secondaryColor,
-        body: Center(
-          child: SizedBox(
-            width: 340.w,
-            height: 600.h,
-            child: Column(
-              children: [
-                AppSpacer.vertical.space20,
-                const _Header(),
-                AppSpacer.vertical.space20,
-                const _UsersContainer(),
-              ],
+        body: SafeArea(
+          child: Center(
+            child: SizedBox(
+              width: 340.w,
+              height: 600.h,
+              child: Column(
+                children: [
+                  const _Header(),
+                  AppSpacer.vertical.space20,
+                  const _UsersContainer(),
+                ],
+              ),
             ),
           ),
         ),

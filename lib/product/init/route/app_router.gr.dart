@@ -114,6 +114,17 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const UsersPage(),
       );
     },
+    VerifyEmailRoute.name: (routeData) {
+      final args = routeData.argsAs<VerifyEmailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: VerifyEmailPage(
+          code: args.code,
+          userModel: args.userModel,
+          key: args.key,
+        ),
+      );
+    },
   };
 }
 
@@ -421,4 +432,47 @@ class UsersRoute extends PageRouteInfo<void> {
   static const String name = 'UsersRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [VerifyEmailPage]
+class VerifyEmailRoute extends PageRouteInfo<VerifyEmailRouteArgs> {
+  VerifyEmailRoute({
+    required int code,
+    required UserModel userModel,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          VerifyEmailRoute.name,
+          args: VerifyEmailRouteArgs(
+            code: code,
+            userModel: userModel,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'VerifyEmailRoute';
+
+  static const PageInfo<VerifyEmailRouteArgs> page =
+      PageInfo<VerifyEmailRouteArgs>(name);
+}
+
+class VerifyEmailRouteArgs {
+  const VerifyEmailRouteArgs({
+    required this.code,
+    required this.userModel,
+    this.key,
+  });
+
+  final int code;
+
+  final UserModel userModel;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'VerifyEmailRouteArgs{code: $code, userModel: $userModel, key: $key}';
+  }
 }

@@ -15,7 +15,7 @@ class BlueTheme implements CustomAppTheme {
   static const Color errorColor = Color.fromARGB(255, 50, 13, 99);
   static const Color clickableColor = Colors.blueGrey;
   static const Color defaultTextColor = Colors.white;
-  static const Color difColor = Color.fromARGB(255, 21, 41, 58);
+  static const Color difColor = Color.fromARGB(255, 10, 49, 83);
   static const Color textFieldTextColor = whiteColor;
 
   @override
@@ -230,7 +230,7 @@ class BlueTheme implements CustomAppTheme {
   DialogTheme get dialogTheme => DialogTheme(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.sp),
-          side: BorderSide(width: 4.w, color: secondaryColor),
+          side: BorderSide(width: 4.w, color: fourthColor),
         ),
       );
 }

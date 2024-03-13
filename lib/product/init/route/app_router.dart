@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:take_data_and_update_project/features/admin_page/admin_page.dart';
 import 'package:take_data_and_update_project/features/auth/login_page/login_page.dart';
 import 'package:take_data_and_update_project/features/auth/register_page/register_page.dart';
+import 'package:take_data_and_update_project/features/auth/register_page/verify_email_page.dart';
 import 'package:take_data_and_update_project/features/forgot_password/pages/enter_code_page.dart';
 import 'package:take_data_and_update_project/features/forgot_password/pages/forgot_password_page.dart';
 import 'package:take_data_and_update_project/features/forgot_password/pages/reset_password_page.dart';
@@ -34,5 +35,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: ForgotPasswordRoute.page),
         AutoRoute(page: EnterCodeRoute.page),
         AutoRoute(page: ResetPasswordRoute.page),
+        AutoRoute(page: VerifyEmailRoute.page),
       ];
 }

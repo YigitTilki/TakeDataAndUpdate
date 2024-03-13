@@ -15,13 +15,13 @@ StreamSubscription<ConnectivityResult> wifiConnector(
 ) {
   return Connectivity()
       .onConnectivityChanged
-      .listen((ConnectivityResult result) {
+      .listen((ConnectivityResult result) async {
     final internetConnection = ref.read(internetConnectionProvider.notifier);
 
     if (result == ConnectivityResult.none) {
       internetConnection.state = false;
 
-      show(
+      await show(
         context,
         NoWifiPopUp(
           navigator: () {

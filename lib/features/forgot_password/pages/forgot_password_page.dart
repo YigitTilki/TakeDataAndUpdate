@@ -30,7 +30,6 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
           key: formKeyForgotPassword,
           child: Column(
             children: [
-              AppSpacer.vertical.space10,
               const _Header(),
               AppSpacer.vertical.space20,
               EmailField(

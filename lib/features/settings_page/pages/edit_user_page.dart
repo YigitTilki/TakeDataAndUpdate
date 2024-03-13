@@ -39,12 +39,7 @@ class _EditUserPageState extends ConsumerState<EditUserPage>
           child: SingleChildScrollView(
             child: Column(
               children: [
-                AppSpacer.vertical.space20,
-                CustomHeader(
-                  icon: Assets.icons.updateProfileIcon.image(),
-                  text: LocaleKeys.usersPage_updateUser,
-                  needBackButton: true,
-                ),
+                const _Header(),
                 AppSpacer.vertical.space30,
                 FirstNameField(firstNameController: firstNameController),
                 AppSpacer.vertical.space20,
@@ -82,6 +77,19 @@ class _EditUserPageState extends ConsumerState<EditUserPage>
           ),
         ),
       ),
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header();
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomHeader(
+      icon: Assets.icons.updateProfileIcon.image(),
+      text: LocaleKeys.usersPage_updateUser,
+      needBackButton: true,
     );
   }
 }

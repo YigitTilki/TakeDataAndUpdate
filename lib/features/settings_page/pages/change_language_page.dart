@@ -22,11 +22,9 @@ class ChangeLanguagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.secondaryColor,
-      body: Padding(
-        padding: ProjectPadding.topXXLarge(),
+      body: SafeArea(
         child: Column(
           children: [
-            AppSpacer.vertical.space20,
             const _Header(),
             AppSpacer.vertical.space30,
             Row(
