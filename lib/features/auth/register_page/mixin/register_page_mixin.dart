@@ -6,6 +6,8 @@ import 'package:take_data_and_update_project/product/init/languages/locale_keys.
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/service/auth_repository.dart';
+import 'package:take_data_and_update_project/product/service/email_service.dart';
+import 'package:take_data_and_update_project/product/util/wifi_connector.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 import 'package:uuid/uuid.dart';
 
@@ -19,6 +21,12 @@ mixin RegisterPageMixin on ConsumerState<RegisterPage> {
   GlobalKey<FormState> formKeyRegister = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    wifiConnector(context, ref);
+  }
+
+  @override
   void dispose() {
     emailTextController.dispose();
     passwordTextController.dispose();
@@ -29,6 +37,7 @@ mixin RegisterPageMixin on ConsumerState<RegisterPage> {
   }
 
   Future<void> elevatedButtonProcess() async {
+    final code = EmailService().generateCode();
     final userModel = UserModel(
       id: const Uuid().v4(),
       email: emailTextController.text.toLowerCase(),
@@ -44,11 +53,18 @@ mixin RegisterPageMixin on ConsumerState<RegisterPage> {
     } else if (emailExists) {
       scaffoldMessenger(context, LocaleKeys.scaffoldMessages_emailExist);
     } else {
-      await AuthRepository().singUpUser(
-        userModel: userModel,
-        context: context,
+      await EmailService().sendEmail(
+        //TODO: Config Email UI
+        name: userModel.firstName.toString(),
+        replyMail: 'yigittilkiw@gmail.com',
+        subject: 'VTGRS için Email Kontrolü',
+        message: 'Email onaylamak için kod: $code',
+        toEmail: emailTextController.text.toLowerCase(),
       );
-      await context.router.replace(HomeRoute(userModel: userModel));
+      if (!context.mounted) return;
+      scaffoldMessenger(context, LocaleKeys.forgotPassword_emailSend);
+      await context.router
+          .push(VerifyEmailRoute(code: code, userModel: userModel));
     }
   }
 }

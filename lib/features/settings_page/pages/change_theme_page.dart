@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
-import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/theme/blue_theme.dart';
 import 'package:take_data_and_update_project/product/init/theme/blush_rose.dart';
@@ -27,11 +26,9 @@ class ChangeThemePage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: context.difColor,
-      body: Padding(
-        padding: ProjectPadding.topXXLarge(),
+      body: SafeArea(
         child: Column(
           children: [
-            AppSpacer.vertical.space20,
             const _Header(),
             AppSpacer.vertical.space30,
             Row(

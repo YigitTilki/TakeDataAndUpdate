@@ -31,6 +31,10 @@ class $AssetsIconsGen {
   AssetGenImage get changeThemeIcon =>
       const AssetGenImage('assets/icons/changeThemeIcon.png');
 
+  /// File path: assets/icons/forgotPasswordIcon.png
+  AssetGenImage get forgotPasswordIcon =>
+      const AssetGenImage('assets/icons/forgotPasswordIcon.png');
+
   /// File path: assets/icons/logOutIcon.png
   AssetGenImage get logOutIcon =>
       const AssetGenImage('assets/icons/logOutIcon.png');
@@ -42,6 +46,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/noProfilePhotoIcon.png
   AssetGenImage get noProfilePhotoIcon =>
       const AssetGenImage('assets/icons/noProfilePhotoIcon.png');
+
+  /// File path: assets/icons/noWifiIcon.png
+  AssetGenImage get noWifiIcon =>
+      const AssetGenImage('assets/icons/noWifiIcon.png');
 
   /// File path: assets/icons/notificationSettingsIcon.png
   AssetGenImage get notificationSettingsIcon =>
@@ -84,9 +92,11 @@ class $AssetsIconsGen {
         adminUsersIcon,
         changeLanguageIcon,
         changeThemeIcon,
+        forgotPasswordIcon,
         logOutIcon,
         manageDeviceIcon,
         noProfilePhotoIcon,
+        noWifiIcon,
         notificationSettingsIcon,
         overheatIcon,
         phoneIcon,

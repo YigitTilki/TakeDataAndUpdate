@@ -14,8 +14,9 @@ class _AlreadyHaveAnAccount extends StatelessWidget {
         AppTextButton(
           text: LocaleKeys.registerPage_logIn,
           onPressed: () {
-            context.router.replace(
+            context.router.pushAndPopUntil(
               const LoginRoute(),
+              predicate: (predicate) => true,
             );
           },
         ),

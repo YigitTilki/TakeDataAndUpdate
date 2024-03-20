@@ -5,6 +5,7 @@ import 'package:easy_logger/easy_logger.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kartal/kartal.dart';
 import 'package:logger/logger.dart';
@@ -13,6 +14,7 @@ import 'package:take_data_and_update_project/product/service/firebase_options.da
 @immutable
 final class ApplicationInitialize {
   Future<void> make() async {
+    await dotenv.load(fileName: 'assets/.env');
     WidgetsFlutterBinding.ensureInitialized();
     await runZonedGuarded<Future<void>>(_initialize, (error, stack) {
       Logger().e(error);

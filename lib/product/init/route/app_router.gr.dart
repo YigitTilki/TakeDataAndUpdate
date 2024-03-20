@@ -43,6 +43,23 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    EnterCodeRoute.name: (routeData) {
+      final args = routeData.argsAs<EnterCodeRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EnterCodePage(
+          code: args.code,
+          email: args.email,
+          key: args.key,
+        ),
+      );
+    },
+    ForgotPasswordRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ForgotPasswordPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       final args = routeData.argsAs<HomeRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -65,6 +82,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RegisterPage(),
       );
     },
+    ResetPasswordRoute.name: (routeData) {
+      final args = routeData.argsAs<ResetPasswordRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ResetPasswordPage(
+          email: args.email,
+          key: args.key,
+        ),
+      );
+    },
     SettingsRoute.name: (routeData) {
       final args = routeData.argsAs<SettingsRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -85,6 +112,17 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const UsersPage(),
+      );
+    },
+    VerifyEmailRoute.name: (routeData) {
+      final args = routeData.argsAs<VerifyEmailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: VerifyEmailPage(
+          code: args.code,
+          userModel: args.userModel,
+          key: args.key,
+        ),
       );
     },
   };
@@ -171,6 +209,63 @@ class EditUserRouteArgs {
 }
 
 /// generated route for
+/// [EnterCodePage]
+class EnterCodeRoute extends PageRouteInfo<EnterCodeRouteArgs> {
+  EnterCodeRoute({
+    required int code,
+    required String email,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EnterCodeRoute.name,
+          args: EnterCodeRouteArgs(
+            code: code,
+            email: email,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EnterCodeRoute';
+
+  static const PageInfo<EnterCodeRouteArgs> page =
+      PageInfo<EnterCodeRouteArgs>(name);
+}
+
+class EnterCodeRouteArgs {
+  const EnterCodeRouteArgs({
+    required this.code,
+    required this.email,
+    this.key,
+  });
+
+  final int code;
+
+  final String email;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EnterCodeRouteArgs{code: $code, email: $email, key: $key}';
+  }
+}
+
+/// generated route for
+/// [ForgotPasswordPage]
+class ForgotPasswordRoute extends PageRouteInfo<void> {
+  const ForgotPasswordRoute({List<PageRouteInfo>? children})
+      : super(
+          ForgotPasswordRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ForgotPasswordRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
   HomeRoute({
@@ -233,6 +328,44 @@ class RegisterRoute extends PageRouteInfo<void> {
   static const String name = 'RegisterRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ResetPasswordPage]
+class ResetPasswordRoute extends PageRouteInfo<ResetPasswordRouteArgs> {
+  ResetPasswordRoute({
+    required String email,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ResetPasswordRoute.name,
+          args: ResetPasswordRouteArgs(
+            email: email,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ResetPasswordRoute';
+
+  static const PageInfo<ResetPasswordRouteArgs> page =
+      PageInfo<ResetPasswordRouteArgs>(name);
+}
+
+class ResetPasswordRouteArgs {
+  const ResetPasswordRouteArgs({
+    required this.email,
+    this.key,
+  });
+
+  final String email;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ResetPasswordRouteArgs{email: $email, key: $key}';
+  }
 }
 
 /// generated route for
@@ -299,4 +432,47 @@ class UsersRoute extends PageRouteInfo<void> {
   static const String name = 'UsersRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [VerifyEmailPage]
+class VerifyEmailRoute extends PageRouteInfo<VerifyEmailRouteArgs> {
+  VerifyEmailRoute({
+    required int code,
+    required UserModel userModel,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          VerifyEmailRoute.name,
+          args: VerifyEmailRouteArgs(
+            code: code,
+            userModel: userModel,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'VerifyEmailRoute';
+
+  static const PageInfo<VerifyEmailRouteArgs> page =
+      PageInfo<VerifyEmailRouteArgs>(name);
+}
+
+class VerifyEmailRouteArgs {
+  const VerifyEmailRouteArgs({
+    required this.code,
+    required this.userModel,
+    this.key,
+  });
+
+  final int code;
+
+  final UserModel userModel;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'VerifyEmailRouteArgs{code: $code, userModel: $userModel, key: $key}';
+  }
 }

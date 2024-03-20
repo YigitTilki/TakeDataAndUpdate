@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
@@ -21,7 +20,7 @@ class PasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthTextFormField(
-      hintText: LocaleKeys.commons_password.tr(),
+      hintText: LocaleKeys.commons_password,
       keyboardType: TextInputType.visiblePassword,
       obscureText: isPasswordVisible,
       suffixIcon: passwordObscureIcon(

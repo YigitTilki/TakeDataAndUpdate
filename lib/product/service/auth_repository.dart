@@ -30,6 +30,28 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
+  Future<UserModel?> getUser({required String email}) async {
+    try {
+      final user =
+          await usersCollection.where(emailField, isEqualTo: email).get();
+      if (user.docs.isNotEmpty) {
+        final userModel = const UserModel().copyWith(
+          firstName: user.docs.first[firstNameField].toString(),
+          lastName: user.docs.first[lastNameField].toString(),
+          password: user.docs.first[passwordField].toString(),
+          email: user.docs.first[emailField].toString(),
+          id: user.docs.first[idField].toString(),
+          devices: user.docs.first[devicesField].toString(),
+        );
+        return userModel;
+      }
+    } catch (exception) {
+      logger.d(exception);
+    }
+    return null;
+  }
+
+  @override
   Future<void> signInUser({
     required UserModel userModel,
     required BuildContext context,
@@ -47,9 +69,12 @@ class AuthRepository extends BaseAuthRepository {
           id: result.docs.first[idField].toString(),
           devices: result.docs.first[devicesField].toString(),
         );
+        if (!context.mounted) return;
 
-        await context.router.replace(HomeRoute(userModel: userModel));
+        await context.router.push(HomeRoute(userModel: userModel));
       } else {
+      if (!context.mounted) return;
+
         scaffoldMessenger(
           context,
           LocaleKeys.scaffoldMessages_wrongEmailAndPassword,
@@ -74,7 +99,12 @@ class AuthRepository extends BaseAuthRepository {
       if (passwordFetch.docs.isNotEmpty) {
         await usersCollection.doc(userModel.id).set(userMap);
         logger.d('User Added');
+      if (!context.mounted) return;
+
+        await context.router.replace(HomeRoute(userModel: userModel));
       } else {
+      if (!context.mounted) return;
+
         scaffoldMessenger(
           context,
           LocaleKeys.scaffoldMessages_wrongPassword,

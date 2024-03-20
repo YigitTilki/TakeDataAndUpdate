@@ -1,9 +1,14 @@
+import 'dart:convert';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:take_data_and_update_project/product/enums/firebase_enums.dart';
 import 'package:take_data_and_update_project/product/enums/platform_enum.dart';
 import 'package:take_data_and_update_project/product/models/number_model.dart';
+import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/util/version_manager.dart';
 
 final splashProvider =
@@ -14,7 +19,7 @@ final splashProvider =
 class SplashProvider extends StateNotifier<SplashState> {
   SplashProvider() : super(const SplashState());
 
-  /* Future<void> checkInternetConnection() async {
+  Future<void> checkInternetConnection() async {
     final connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
       state = state.copyWith(isConnected: false);
@@ -22,10 +27,33 @@ class SplashProvider extends StateNotifier<SplashState> {
     } else {
       state = state.copyWith(isConnected: true);
       state = state.copyWith(isRedirectHome: true);
-
       return;
     }
-  } */
+  }
+
+  Future<void> saveRememberMe({
+    bool value = false,
+    UserModel? userModel,
+  }) async {
+    if (userModel != null) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('rememberMe', value);
+      final userModelJson = jsonEncode(userModel.toMap());
+      await prefs.setString('userModel', userModelJson);
+    }
+  }
+
+  Future<void> checkRememberMe() async {
+    final prefs = await SharedPreferences.getInstance();
+    final rememberMeValue = prefs.getBool('rememberMe') ?? false;
+    state = state.copyWith(rememberMe: rememberMeValue);
+    final userModelJson = prefs.getString('userModel');
+
+    if (userModelJson == null) return;
+    final userModelMap = jsonDecode(userModelJson) as Map<String, dynamic>;
+    state = state.copyWith(userModel: UserModel.fromJson(userModelMap));
+    return;
+  }
 
   Future<void> checkApplicationVersion(String clientVersion) async {
     final databaseValue = await getVersionNumberFromDatabase();
@@ -66,6 +94,8 @@ class SplashProvider extends StateNotifier<SplashState> {
 
 class SplashState extends Equatable {
   const SplashState({
+    this.userModel,
+    this.rememberMe,
     this.isRequiredForceUpdate,
     this.isRedirectHome,
     this.isConnected,
@@ -74,21 +104,34 @@ class SplashState extends Equatable {
   final bool? isRequiredForceUpdate;
   final bool? isRedirectHome;
   final bool? isConnected;
+  final bool? rememberMe;
+  final UserModel? userModel;
 
   @override
-  List<Object?> get props =>
-      [isRequiredForceUpdate, isRedirectHome, isConnected];
+  List<Object?> get props {
+    return [
+      isRequiredForceUpdate,
+      isRedirectHome,
+      isConnected,
+      rememberMe,
+      userModel,
+    ];
+  }
 
   SplashState copyWith({
     bool? isRequiredForceUpdate,
     bool? isRedirectHome,
     bool? isConnected,
+    bool? rememberMe,
+    UserModel? userModel,
   }) {
     return SplashState(
       isRequiredForceUpdate:
           isRequiredForceUpdate ?? this.isRequiredForceUpdate,
       isRedirectHome: isRedirectHome ?? this.isRedirectHome,
       isConnected: isConnected ?? this.isConnected,
+      rememberMe: rememberMe ?? this.rememberMe,
+      userModel: userModel ?? this.userModel,
     );
   }
 }

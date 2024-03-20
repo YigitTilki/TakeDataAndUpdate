@@ -6,6 +6,7 @@ import 'package:take_data_and_update_project/product/init/languages/locale_keys.
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/providers/user_providers.dart';
 import 'package:take_data_and_update_project/product/service/auth_repository.dart';
+import 'package:take_data_and_update_project/product/util/wifi_connector.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 import 'package:uuid/uuid.dart';
 
@@ -16,6 +17,12 @@ mixin AddUserMixin on ConsumerState<UserListFloatingActionButton> {
   final rePasswordTextController = TextEditingController();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    wifiConnector(context, ref);
+  }
 
   @override
   void dispose() {
@@ -50,17 +57,23 @@ mixin AddUserMixin on ConsumerState<UserListFloatingActionButton> {
     if (!formKey.currentState!.validate()) {
       debugPrint('Olmadı');
     } else if (emailExists) {
+      if (!context.mounted) return;
+
       scaffoldMessenger(
         context,
         LocaleKeys.scaffoldMessages_emailExist,
       );
     } else {
+      if (!context.mounted) return;
+
       await AuthRepository().singUpUser(
         userModel: userModel,
         context: context,
       );
       ref.invalidate(userListProvider);
       clearController();
+      if (!context.mounted) return;
+
       scaffoldMessenger(
         context,
         LocaleKeys.scaffoldMessages_userAdded,

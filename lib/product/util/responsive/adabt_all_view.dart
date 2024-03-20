@@ -23,4 +23,4 @@ final class AdaptAllView extends StatelessWidget {
     return desktop;
   }
 }
- */
+*/
