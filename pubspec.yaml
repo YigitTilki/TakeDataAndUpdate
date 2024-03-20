@@ -48,6 +48,7 @@ dependencies:
   shared_preferences: ^2.2.2
   equatable: ^2.0.5
   http: ^1.2.0
+  flutter_dotenv: ^5.1.0
  
  
   
@@ -87,6 +88,7 @@ flutter:
     - assets/icons/
     - assets/lottie/
     - assets/translations/
+    - assets/.env
     
 
     

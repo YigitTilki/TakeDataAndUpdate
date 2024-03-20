@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class EmailService {
@@ -11,11 +12,11 @@ class EmailService {
     required String message,
     required String toEmail,
   }) async {
-    const serviceId = 'service_l7yp5c8';
-    const templateId = 'template_obeszmf'; //TODO: add env
-    const userId = 'qFcBLaFNEIJWBBJU1';
+    final serviceId = dotenv.get('SERVICE_ID');
+    final templateId = dotenv.get('TEMPLATE_ID');
+    final userId = dotenv.get('USER_ID');
 
-    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    final url = Uri.parse(dotenv.get('BASE_URL'));
     await http.post(
       url,
       headers: {
