@@ -11,11 +11,11 @@ class EmailService {
     required String message,
     required String toEmail,
   }) async {
-    const serviceId = 'service_l7yp5c8';
-    const templateId = 'template_obeszmf'; //TODO: add env
-    const userId = 'qFcBLaFNEIJWBBJU1';
+    const serviceId = 's';
+    const templateId = 's'; //TODO: add env
+    const userId = 's';
 
-    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    final url = Uri.parse('s');
     await http.post(
       url,
       headers: {
