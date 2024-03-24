@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:take_data_and_update_project/features/forgot_password/pages/forgot_password_page.dart';
+import 'package:take_data_and_update_project/product/enums/env_enums.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/service/auth_repository.dart';
@@ -38,12 +39,12 @@ mixin ForgotPasswordMixin on ConsumerState<ForgotPasswordPage> {
       if (!context.mounted) return;
       scaffoldMessenger(context, LocaleKeys.validatorErrors_invalidEmail);
     } else {
+      print(userModel!.devices);
       await EmailService().sendEmail(
-        //TODO: Config Email UI
-        name: userModel!.firstName.toString(),
-        replyMail: 'yigittilkiw@gmail.com',
-        subject: 'VTGRS için Şifre Değişikliği',
-        message: 'Şifre sıfırlamak için kod: $code',
+        name: userModel.firstName.toString(),
+        replyMail: EnvEnums.replyMail.dotEnv,
+        subject: 'Reset password VTGRS',
+        message: 'Code for the reset password: $code',
         toEmail: emailTextController.text.toLowerCase(),
       );
       if (!context.mounted) return;

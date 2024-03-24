@@ -39,6 +39,7 @@ class _EditUserPageState extends ConsumerState<EditUserPage>
           child: SingleChildScrollView(
             child: Column(
               children: [
+                AppSpacer.vertical.space5,
                 const _Header(),
                 AppSpacer.vertical.space30,
                 FirstNameField(firstNameController: firstNameController),

@@ -8,7 +8,6 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> scaffoldMessenger(
   String text,
 ) {
   return ScaffoldMessenger.of(context).showSnackBar(
-    //TODO: Refactor it
     SnackBar(
       content: Text(
         text.tr(),

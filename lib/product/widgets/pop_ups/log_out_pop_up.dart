@@ -22,7 +22,7 @@ class LogOutPopUp extends ConsumerWidget {
       onPressed1: () async {
         await ref
             .read(splashProvider.notifier)
-            .saveRememberMe(userModel: const UserModel());
+            .saveRememberMe(userModel: UserModel());
         if (!context.mounted) return;
 
         await context.router.pushAndPopUntil(

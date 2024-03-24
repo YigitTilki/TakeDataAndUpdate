@@ -41,7 +41,9 @@ class AuthRepository extends BaseAuthRepository {
           password: user.docs.first[passwordField].toString(),
           email: user.docs.first[emailField].toString(),
           id: user.docs.first[idField].toString(),
-          devices: user.docs.first[devicesField].toString(),
+          devices: (user.docs.first[devicesField] as Iterable<dynamic>?)
+              ?.map((device) => device.toString())
+              .toList(),
         );
         return userModel;
       }
@@ -67,13 +69,15 @@ class AuthRepository extends BaseAuthRepository {
           firstName: result.docs.first[firstNameField].toString(),
           lastName: result.docs.first[lastNameField].toString(),
           id: result.docs.first[idField].toString(),
-          devices: result.docs.first[devicesField].toString(),
+          devices: (result.docs.first[devicesField] as Iterable<dynamic>?)
+              ?.map((device) => device.toString())
+              .toList(),
         );
         if (!context.mounted) return;
 
         await context.router.push(HomeRoute(userModel: userModel));
       } else {
-      if (!context.mounted) return;
+        if (!context.mounted) return;
 
         scaffoldMessenger(
           context,
@@ -99,11 +103,11 @@ class AuthRepository extends BaseAuthRepository {
       if (passwordFetch.docs.isNotEmpty) {
         await usersCollection.doc(userModel.id).set(userMap);
         logger.d('User Added');
-      if (!context.mounted) return;
+        if (!context.mounted) return;
 
         await context.router.replace(HomeRoute(userModel: userModel));
       } else {
-      if (!context.mounted) return;
+        if (!context.mounted) return;
 
         scaffoldMessenger(
           context,

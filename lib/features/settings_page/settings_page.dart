@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:take_data_and_update_project/features/settings_page/widgets/settings_container_widget.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
@@ -78,7 +77,7 @@ class _LogOut extends StatelessWidget {
       onPressed: () {
         show(context, const LogOutPopUp());
       },
-      title: LocaleKeys.settingsPage_logOut.tr(),
+      title: LocaleKeys.settingsPage_logOut,
       asset: Assets.icons.logOutIcon,
     );
   }
@@ -133,7 +132,9 @@ class _ManageDevices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingsContainerWidget(
-      onPressed: () {},
+      onPressed: () {
+        context.router.push(const ManageDevicesRoute());
+      },
       title: LocaleKeys.settingsPage_manageDevices,
       asset: Assets.icons.manageDeviceIcon,
     );

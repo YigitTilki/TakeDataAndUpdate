@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:take_data_and_update_project/product/enums/env_enums.dart';
 
 class EmailService {
   Future<void> sendEmail({
@@ -12,11 +12,11 @@ class EmailService {
     required String message,
     required String toEmail,
   }) async {
-    final serviceId = dotenv.get('SERVICE_ID');
-    final templateId = dotenv.get('TEMPLATE_ID');
-    final userId = dotenv.get('USER_ID');
+    final serviceId = EnvEnums.serviceId.dotEnv;
+    final templateId = EnvEnums.templateId.dotEnv;
+    final userId = EnvEnums.userId.dotEnv;
 
-    final url = Uri.parse(dotenv.get('BASE_URL'));
+    final url = Uri.parse(EnvEnums.baseUrl.dotEnv);
     await http.post(
       url,
       headers: {

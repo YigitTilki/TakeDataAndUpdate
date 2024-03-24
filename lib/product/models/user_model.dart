@@ -17,15 +17,18 @@ class UserModel extends Equatable {
       password: json['password']?.toString(),
       firstName: json['firstName']?.toString(),
       lastName: json['lastName']?.toString(),
-      devices: json['devices']?.toString(),
+      devices: (json['devices'] as List<dynamic>?)
+          ?.map((device) => device.toString())
+          .toList(),
     );
   }
+
   final String? id;
   final String? email;
   final String? password;
   final String? firstName;
   final String? lastName;
-  final String? devices;
+  final List<String>? devices;
 
   UserModel copyWith({
     String? id,
@@ -33,7 +36,7 @@ class UserModel extends Equatable {
     String? password,
     String? firstName,
     String? lastName,
-    String? devices,
+    List<String>? devices,
   }) {
     return UserModel(
       id: id ?? this.id,

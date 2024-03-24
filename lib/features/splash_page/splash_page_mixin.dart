@@ -40,7 +40,7 @@ mixin SplashViewListenMixin on ConsumerState<SplashPage> {
                     } else {
                       context.router.replace(
                         HomeRoute(
-                          userModel: next.userModel ?? const UserModel(),
+                          userModel: next.userModel ?? UserModel(),
                         ),
                       );
                     }
@@ -58,7 +58,7 @@ mixin SplashViewListenMixin on ConsumerState<SplashPage> {
               context.router.replace(const LoginRoute());
             } else {
               context.router.replace(
-                HomeRoute(userModel: next.userModel ?? const UserModel()),
+                HomeRoute(userModel: next.userModel ?? UserModel()),
               );
             }
             return;

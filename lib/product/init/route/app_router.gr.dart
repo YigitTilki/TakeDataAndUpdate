@@ -76,6 +76,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginPage(),
       );
     },
+    ManageDevicesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ManageDevicesPage(),
+      );
+    },
     RegisterRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -312,6 +318,20 @@ class LoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ManageDevicesPage]
+class ManageDevicesRoute extends PageRouteInfo<void> {
+  const ManageDevicesRoute({List<PageRouteInfo>? children})
+      : super(
+          ManageDevicesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ManageDevicesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
