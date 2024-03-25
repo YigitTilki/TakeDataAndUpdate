@@ -1,9 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:take_data_and_update_project/product/enums/firebase_enums.dart';
-import 'package:take_data_and_update_project/product/models/device_model.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 
 class DeviceService {
+  Future<List<String>> getUserDevices(String userId) async {
+    final deviceList = await usersCollection.doc(userId).get();
+    final data = deviceList.data() as Map<String, dynamic>?;
+    if (data != null && data[devicesField] != null) {
+      final devices = data[devicesField] as List<dynamic>;
+      return devices.map((device) => device.toString()).toList();
+    } else {
+      return [];
+    }
+  }
+
   Future<void> verifyDeviceId(
     String deviceId,
     String userID,
@@ -16,9 +27,10 @@ class DeviceService {
                 as Map<String, dynamic>)[userIdField] as String? ??
             '';
         if (userId.isEmpty) {
-          await devicesCollection
-              .doc(deviceId)
-              .set(DeviceModel(userId: userID, id: deviceId).toJson());
+          await usersCollection.doc(userID).update({
+            devicesField: FieldValue.arrayUnion([deviceId]),
+          });
+          await devicesCollection.doc(deviceId).update({userIdField: userID});
         } else {
           scaffoldMessenger(context, 'Wrong ID');
         }
@@ -26,7 +38,7 @@ class DeviceService {
         scaffoldMessenger(context, 'Wrong ID');
       }
     } catch (exception) {
-      print(exception);
+      debugPrint(exception.toString());
     }
   }
 }
