@@ -39,9 +39,8 @@ mixin ForgotPasswordMixin on ConsumerState<ForgotPasswordPage> {
       if (!context.mounted) return;
       scaffoldMessenger(context, LocaleKeys.validatorErrors_invalidEmail);
     } else {
-      print(userModel!.devices);
       await EmailService().sendEmail(
-        name: userModel.firstName.toString(),
+        name: userModel!.firstName.toString(),
         replyMail: EnvEnums.replyMail.dotEnv,
         subject: 'Reset password VTGRS',
         message: 'Code for the reset password: $code',

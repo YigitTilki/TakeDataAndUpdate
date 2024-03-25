@@ -29,7 +29,9 @@ class SettingsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _EditUser(userModel: userModel),
-                const _ManageDevices(),
+                _ManageDevices(
+                  userModel: userModel,
+                ),
               ],
             ),
             AppSpacer.vertical.space20,
@@ -127,13 +129,14 @@ class _ChangeLanguage extends StatelessWidget {
 }
 
 class _ManageDevices extends StatelessWidget {
-  const _ManageDevices();
+  const _ManageDevices({required this.userModel});
+  final UserModel userModel;
 
   @override
   Widget build(BuildContext context) {
     return SettingsContainerWidget(
       onPressed: () {
-        context.router.push(const ManageDevicesRoute());
+        context.router.push(ManageDevicesRoute(userModel: userModel));
       },
       title: LocaleKeys.settingsPage_manageDevices,
       asset: Assets.icons.manageDeviceIcon,

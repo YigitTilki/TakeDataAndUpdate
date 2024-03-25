@@ -77,9 +77,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ManageDevicesRoute.name: (routeData) {
+      final args = routeData.argsAs<ManageDevicesRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ManageDevicesPage(),
+        child: ManageDevicesPage(
+          userModel: args.userModel,
+          key: args.key,
+        ),
       );
     },
     RegisterRoute.name: (routeData) {
@@ -324,16 +328,40 @@ class LoginRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ManageDevicesPage]
-class ManageDevicesRoute extends PageRouteInfo<void> {
-  const ManageDevicesRoute({List<PageRouteInfo>? children})
-      : super(
+class ManageDevicesRoute extends PageRouteInfo<ManageDevicesRouteArgs> {
+  ManageDevicesRoute({
+    required UserModel userModel,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           ManageDevicesRoute.name,
+          args: ManageDevicesRouteArgs(
+            userModel: userModel,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ManageDevicesRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<ManageDevicesRouteArgs> page =
+      PageInfo<ManageDevicesRouteArgs>(name);
+}
+
+class ManageDevicesRouteArgs {
+  const ManageDevicesRouteArgs({
+    required this.userModel,
+    this.key,
+  });
+
+  final UserModel userModel;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ManageDevicesRouteArgs{userModel: $userModel, key: $key}';
+  }
 }
 
 /// generated route for
