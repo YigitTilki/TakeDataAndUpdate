@@ -33,6 +33,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ChangeThemePage(),
       );
     },
+    DevicesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DevicesPage(),
+      );
+    },
     EditUserRoute.name: (routeData) {
       final args = routeData.argsAs<EditUserRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -176,6 +182,20 @@ class ChangeThemeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ChangeThemeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DevicesPage]
+class DevicesRoute extends PageRouteInfo<void> {
+  const DevicesRoute({List<PageRouteInfo>? children})
+      : super(
+          DevicesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DevicesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

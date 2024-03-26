@@ -32,6 +32,24 @@ class AdminPage extends StatelessWidget {
                   const _Header(),
                   AppSpacer.vertical.space20,
                   const _UsersContainer(),
+                  AppSpacer.vertical.space20,
+                  GestureDetector(
+                    onTap: () {
+                      context.router.push(const DevicesRoute());
+                    },
+                    child: HomeContainer(
+                      width: 180,
+                      height: 140,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Assets.icons.manageDeviceIcon.image(width: 80.w),
+                          AppSpacer.vertical.space20,
+                          const LargeText(value: LocaleKeys.usersPage_devices),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

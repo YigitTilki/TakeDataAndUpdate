@@ -58,10 +58,13 @@ class _UserList extends StatelessWidget {
         itemCount: filteredList.length,
         itemBuilder: (BuildContext context, int index) {
           final user = filteredList[index];
-          final firstName = user.firstName!;
-          final lastName = user.lastName!;
-          final email = user.email!;
-          final id = user.id!;
+          final userModel = UserModel(
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            devices: user.devices,
+          );
 
           return Padding(
             padding: ProjectPadding.symHXXSmall() + ProjectPadding.symVXSmall(),
@@ -80,10 +83,7 @@ class _UserList extends StatelessWidget {
                     show(
                       context,
                       _UserListPopUp(
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        id: id,
+                        userModel: userModel,
                         ref: ref,
                       ),
                     );
@@ -93,8 +93,8 @@ class _UserList extends StatelessWidget {
                     height: iconSize.h,
                     color: context.primaryColor,
                   ),
-                  title: Text('$firstName $lastName'),
-                  subtitle: Text(email),
+                  title: Text('${userModel.firstName} ${userModel.lastName}'),
+                  subtitle: Text(userModel.email ?? ''),
                 ),
               ),
             ),

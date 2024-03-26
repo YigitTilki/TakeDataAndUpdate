@@ -2,17 +2,11 @@ part of '../users_page.dart';
 
 class _UserListPopUp extends StatelessWidget {
   const _UserListPopUp({
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.id,
+    required this.userModel,
     required this.ref,
   });
 
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String id;
+  final UserModel userModel;
   final WidgetRef ref;
 
   @override
@@ -21,15 +15,23 @@ class _UserListPopUp extends StatelessWidget {
     return AlertDialog(
       title: _ListTile(
         imageSize: imageSize,
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
+        firstName: userModel.firstName ?? '',
+        lastName: userModel.lastName ?? '',
+        email: userModel.email ?? '',
       ),
       titlePadding: ProjectPadding.allSmall(),
       contentPadding: ProjectPadding.symHXXLarge(),
-      content: _Content(id: id),
+      content: _Content(
+        devices: userModel.devices ?? ['No Devices'],
+        id: userModel.id ?? '',
+      ),
       actions: [
-        _Buttons(ref: ref, id: id, firstName: firstName, lastName: lastName),
+        _Buttons(
+          ref: ref,
+          id: userModel.id ?? '',
+          firstName: userModel.firstName ?? '',
+          lastName: userModel.lastName ?? '',
+        ),
       ],
       shape: Decorations.popUpDecoration(context.fourthColor),
     );
@@ -82,9 +84,11 @@ class _Buttons extends StatelessWidget {
 
 class _Content extends StatelessWidget {
   const _Content({
+    required this.devices,
     required this.id,
   });
 
+  final List<String?> devices;
   final String id;
 
   @override
@@ -123,9 +127,8 @@ class _Content extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              //TODO: add devices when devices added
-              '$id\n$id\n$id\n$id\n$id\n$id\n$id\n$id',
-              style: context.titleMedium,
+              devices.map((e) => '$e\n').join(),
+              style: context.titleLarge,
             ),
           ),
           AppSpacer.vertical.space10,
