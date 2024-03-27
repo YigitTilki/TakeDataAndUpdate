@@ -7,8 +7,18 @@ import 'package:take_data_and_update_project/product/util/date_time.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 
 class DeviceService {
+  final Logger logger = Logger();
+
+  Future<void> addDevice(DeviceModel deviceModel) async {
+    try {
+      final deviceModelMap = deviceModel.toJson();
+      await devicesCollection.doc(deviceModel.id).set(deviceModelMap);
+    } catch (exception) {
+      print(exception);
+    }
+  }
+
   Future<List<DeviceModel>> getDevices() async {
-    final logger = Logger();
     try {
       final querySnapshot = await devicesCollection.get();
       final deviceList = <DeviceModel>[];

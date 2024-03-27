@@ -8,6 +8,7 @@ import 'package:take_data_and_update_project/features/auth/widgets/first_name_fi
 import 'package:take_data_and_update_project/features/auth/widgets/last_name_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/password_field.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/re_password_field.dart';
+import 'package:take_data_and_update_project/features/auth/widgets/search_text_field.dart';
 import 'package:take_data_and_update_project/features/users_page/mixin/add_user_mixin.dart';
 import 'package:take_data_and_update_project/features/users_page/mixin/users_page_mixin.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
@@ -26,7 +27,6 @@ import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 
 part 'widgets/floating_action_button.dart';
-part 'widgets/search_text_field.dart';
 part 'widgets/user_list_pop_up.dart';
 part 'widgets/users_list.dart';
 part 'widgets/users_page_divider.dart';
@@ -42,6 +42,8 @@ class UsersPage extends ConsumerStatefulWidget {
 class _UsersPageState extends ConsumerState<UsersPage> with UsersPageMixin {
   @override
   Widget build(BuildContext context) {
+    final userListState = ref.watch(userListProvider);
+
     const iconSize = 20;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -57,9 +59,17 @@ class _UsersPageState extends ConsumerState<UsersPage> with UsersPageMixin {
                 AppSpacer.vertical.space20,
 
                 ///Search Field
-                _SearchTextField(
-                  searchController: searchController,
-                  iconSize: iconSize,
+                SearchTextField(
+                  searchTextController: searchController,
+                  onChanged: (value) {
+                    if (userListState is AsyncData<List<UserModel>>) {
+                      ref.read(userListNotifierProvider.notifier).filterUsers(
+                            value,
+                            userListState.value.toList(),
+                          );
+                      ref.invalidate(userListProvider);
+                    }
+                  },
                 ),
                 AppSpacer.vertical.space5,
 
