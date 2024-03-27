@@ -37,6 +37,16 @@ class DeviceService {
     }
   }
 
+  Future<List<String>> getDeviceTypes() async {
+    final types = await deviceTypesCollection.get();
+    final typesList = <String>[];
+    for (final doc in types.docs) {
+      final fieldValue = doc.get(typeField) as String;
+      typesList.add(fieldValue);
+    }
+    return typesList;
+  }
+
   Future<void> verifyDeviceId(
     String deviceId,
     String userID,
@@ -55,7 +65,7 @@ class DeviceService {
           });
           await devicesCollection
               .doc(deviceId)
-              .update({userIdField: userID, createdAtField: dateTime});
+              .update({userIdField: userID, createdAtByUserField: dateTime});
         } else {
           scaffoldMessenger(context, 'Wrong ID');
         }

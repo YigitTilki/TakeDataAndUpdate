@@ -3,14 +3,18 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:take_data_and_update_project/features/auth/widgets/auth_text_form_field.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/models/device_model.dart';
 import 'package:take_data_and_update_project/product/providers/device_list_provider.dart';
+import 'package:take_data_and_update_project/product/service/devices_service.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/product/widgets/buttons/bordered_elevated_button.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
+import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 
 @RoutePage()
 class DevicesPage extends ConsumerStatefulWidget {
@@ -22,24 +26,92 @@ class DevicesPage extends ConsumerStatefulWidget {
 
 class _DevicesPageState extends ConsumerState<DevicesPage> {
   final TextEditingController searchTextController = TextEditingController();
+  final deviceTypeProvider = StateProvider<String>((ref) {
+    return 'Temperature';
+  });
   @override
   Widget build(BuildContext context) {
     final deviceListState = ref.watch(deviceListProvider);
+    String? deviceType;
     return Scaffold(
       backgroundColor: context.secondaryColor,
       resizeToAvoidBottomInset: false,
-      floatingActionButton: FloatingActionButton(onPressed: () {}),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final typeList = await DeviceService().getDeviceTypes();
+          String? defaultValue;
+          if (!mounted) return;
+          await showModalBottomSheet<Widget>(
+            context: context,
+            builder: (context) {
+              return StatefulBuilder(
+                builder: (context, setStates) {
+                  return Form(
+                    child: Container(
+                      decoration: Decorations.borderContainerDecoration(
+                        context.secondaryColor,
+                        context.primaryColor,
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            AppSpacer.vertical.space20,
+                            CustomHeader(
+                              icon: Assets.icons.manageDeviceIcon.image(),
+                              text: LocaleKeys.usersPage_devices,
+                              needBackButton: false,
+                            ),
+                            AppSpacer.vertical.space10,
+                            AuthTextFormField(
+                              hintText: 'Device Id',
+                              validator: (validator) {
+                                return null;
+                              },
+                              controller: TextEditingController(),
+                              keyboardType: TextInputType.text,
+                            ),
+                            AppSpacer.vertical.space10,
+                            DropdownButton(
+                              icon: const Icon(Icons.menu),
+                              style: context.titleMedium,
+                              onChanged: (onChanged) {
+                                setStates(() {
+                                  deviceType = onChanged;
+                                });
+                              },
+                              value: deviceType,
+                              items: typeList.map((e) {
+                                return DropdownMenuItem(
+                                  value: e,
+                                  child: Text(e),
+                                );
+                              }).toList(),
+                            ),
+                            AppSpacer.vertical.space10,
+                            BorderedElevatedButton(
+                              onPressed: () {},
+                              text: 'Add Device',
+                            ),
+                            AppSpacer.vertical.space30,
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
       body: SafeArea(
         child: Center(
           child: Padding(
             padding: ProjectPadding.allSmall(),
             child: Column(
               children: [
-                CustomHeader(
-                  icon: Assets.icons.manageDeviceIcon.image(),
-                  text: LocaleKeys.usersPage_devices,
-                  needBackButton: true,
-                ),
+                const _Header(),
                 AppSpacer.vertical.space20,
                 Padding(
                   padding: ProjectPadding.symHXXSmall(),
@@ -115,22 +187,17 @@ class _DevicesPageState extends ConsumerState<DevicesPage> {
                               ),
                               child: Center(
                                 child: ListTile(
-                                  onTap: () {
-                                    // Buraya tıklama olayı ekleyin
-                                    // Örneğin, seçilen cihazın detay sayfasına yönlendirme yapabilirsiniz
-                                    // Örneğin: AutoRouter.of(context).push(DeviceDetailPageRoute(device: device));
-                                  },
-                                  leading: Assets.icons.usersIcon.image(
+                                  onTap: () {},
+                                  leading: Assets.icons.manageDeviceIcon.image(
                                     width: 30.w,
                                     height: 30.h,
-                                    color: context.primaryColor,
                                   ),
                                   title: Text(
-                                    '${device.id}', // Cihazın ID'sini kullanın veya istediğiniz bir veriyi buraya yerleştirin
+                                    '${device.id}',
                                     style: context.titleMedium,
                                   ),
                                   subtitle: Text(
-                                    '${device.userId}', // Cihazın kullanıcı ID'sini kullanın veya istediğiniz bir veriyi buraya yerleştirin
+                                    '${device.userId}',
                                     style: context.titleMedium,
                                   ),
                                 ),
@@ -149,6 +216,21 @@ class _DevicesPageState extends ConsumerState<DevicesPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomHeader(
+      icon: Assets.icons.manageDeviceIcon.image(),
+      text: LocaleKeys.usersPage_devices,
+      needBackButton: true,
     );
   }
 }

@@ -6,8 +6,10 @@ class DeviceModel extends Equatable {
     this.id,
     this.userId,
     this.type,
-    this.createdAt,
+    this.createdAtByUser,
     this.deviceName,
+    this.createdAtByAdmin,
+    this.isActive,
   });
 
   factory DeviceModel.fromJson(Map<String, dynamic> json) {
@@ -15,15 +17,19 @@ class DeviceModel extends Equatable {
       id: json['id'] as String?,
       userId: json['userId'] as String?,
       type: json['type'] as String?,
-      createdAt: json['createdAt'] as String?,
+      createdAtByUser: json['createdAtByUser'] as String?,
       deviceName: json['deviceName'] as String?,
+      createdAtByAdmin: json['createdAtByAdmin'] as String?,
+      isActive: json['isActive'] as bool?,
     );
   }
   final String? id;
   final String? userId;
   final String? type;
-  final String? createdAt;
+  final String? createdAtByUser;
   final String? deviceName;
+  final String? createdAtByAdmin;
+  final bool? isActive;
 
   @override
   List<Object?> get props {
@@ -31,8 +37,10 @@ class DeviceModel extends Equatable {
       id,
       userId,
       type,
-      createdAt,
+      createdAtByUser,
       deviceName,
+      createdAtByAdmin,
+      isActive,
     ];
   }
 
@@ -40,15 +48,19 @@ class DeviceModel extends Equatable {
     String? id,
     String? userId,
     String? type,
-    String? createdAt,
+    String? createdAtByUser,
     String? deviceName,
+    String? createdAtByAdmin,
+    bool? isActive,
   }) {
     return DeviceModel(
       id: id ?? this.id,
       userId: userId ?? this.userId,
       type: type ?? this.type,
-      createdAt: createdAt ?? this.createdAt,
+      createdAtByUser: createdAtByUser ?? this.createdAtByUser,
       deviceName: deviceName ?? this.deviceName,
+      createdAtByAdmin: createdAtByAdmin ?? this.createdAtByAdmin,
+      isActive: isActive ?? this.isActive,
     );
   }
 
@@ -57,8 +69,10 @@ class DeviceModel extends Equatable {
       'id': id,
       'userId': userId,
       'type': type,
-      'createdAt': createdAt,
+      'createdAtByUser': createdAtByUser,
       'deviceName': deviceName,
+      'createdAtByAdmin': createdAtByAdmin,
+      'isActive': isActive,
     };
   }
 }
