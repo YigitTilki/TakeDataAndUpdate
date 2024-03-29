@@ -98,5 +98,10 @@
         "noInternetConnection": "No Internet Connection",
         "wifiSettings": "Wifi Settings",
         "tryAgain": "Try Again"
+    },
+    "devicesPage": {
+        "selectType": "Select Type",
+        "addDevice": "Add Device",
+        "deviceId": "Device ID"
     }
 }

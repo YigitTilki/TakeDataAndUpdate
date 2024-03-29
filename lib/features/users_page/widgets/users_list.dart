@@ -17,17 +17,7 @@ class _UsersList extends ConsumerWidget {
 
     return userList.when(
       data: (userListData) {
-        final filteredList = userListData
-            .where(
-              (user) =>
-                  user.firstName!.toLowerCase().contains(
-                        searchController.text.toLowerCase(),
-                      ) ||
-                  user.lastName!.toLowerCase().contains(
-                        searchController.text.toLowerCase(),
-                      ),
-            )
-            .toList();
+        final filteredList = userListData.where(filter).toList();
         return _UserList(
           filteredList: filteredList,
           iconSize: iconSize,
@@ -37,6 +27,15 @@ class _UsersList extends ConsumerWidget {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => Text('Error: $error'),
     );
+  }
+
+  bool filter(UserModel user) {
+    return user.firstName!.toLowerCase().contains(
+              searchController.text.toLowerCase(),
+            ) ||
+        user.lastName!.toLowerCase().contains(
+              searchController.text.toLowerCase(),
+            );
   }
 }
 
@@ -70,12 +69,9 @@ class _UserList extends StatelessWidget {
             padding: ProjectPadding.symHXXSmall() + ProjectPadding.symVXSmall(),
             child: Container(
               height: 60.h,
-              decoration: ShapeDecoration(
-                color: context.fourthColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.sp),
-                  side: BorderSide(color: context.primaryColor, width: 2.sp),
-                ),
+              decoration: Decorations.borderContainerDecoration(
+                context.fourthColor,
+                context.primaryColor,
               ),
               child: Center(
                 child: ListTile(

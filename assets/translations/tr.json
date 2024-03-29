@@ -98,5 +98,10 @@
         "noInternetConnection": "İnternet Bağlantısı Yok",
         "wifiSettings": "Wifi Ayarları",
         "tryAgain": "Tekrar  Deneyin"
+    },
+    "devicesPage": {
+        "selectType": "Cihaz Türü",
+        "addDevice": "Cihaz Ekle",
+        "deviceId": "Cihaz ID"
     }
 }

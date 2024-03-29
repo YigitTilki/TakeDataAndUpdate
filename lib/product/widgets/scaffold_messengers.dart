@@ -19,8 +19,13 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> scaffoldMessenger(
         side: BorderSide(color: context.fourthColor, width: 5.sp),
       ),
       duration: const Duration(seconds: 1),
+      dismissDirection: DismissDirection.up,
       behavior: SnackBarBehavior.floating,
-      width: 250.w,
+      margin: EdgeInsets.only(
+        bottom: 320.h,
+        left: 50.w,
+        right: 50.w,
+      ),
     ),
   );
 }

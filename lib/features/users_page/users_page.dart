@@ -11,6 +11,7 @@ import 'package:take_data_and_update_project/features/auth/widgets/re_password_f
 import 'package:take_data_and_update_project/features/auth/widgets/search_text_field.dart';
 import 'package:take_data_and_update_project/features/users_page/mixin/add_user_mixin.dart';
 import 'package:take_data_and_update_project/features/users_page/mixin/users_page_mixin.dart';
+import 'package:take_data_and_update_project/features/users_page/widgets/app_divider.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
@@ -29,7 +30,6 @@ import 'package:take_data_and_update_project/product/widgets/scaffold_messengers
 part 'widgets/floating_action_button.dart';
 part 'widgets/user_list_pop_up.dart';
 part 'widgets/users_list.dart';
-part 'widgets/users_page_divider.dart';
 
 @RoutePage()
 class UsersPage extends ConsumerStatefulWidget {
@@ -74,7 +74,7 @@ class _UsersPageState extends ConsumerState<UsersPage> with UsersPageMixin {
                 AppSpacer.vertical.space5,
 
                 ///Divider
-                const _UsersPageDivider(),
+                const AppDivider(),
                 AppSpacer.vertical.space5,
 
                 ///ListView
