@@ -102,6 +102,17 @@
     "devicesPage": {
         "selectType": "Cihaz Türü",
         "addDevice": "Cihaz Ekle",
-        "deviceId": "Cihaz ID"
+        "deviceId": "Cihaz ID",
+        "deviceIdPopUp": "Cihaz Id :\n  ",
+        "deviceTypePopUp": "Cihaz Türü :\n  ",
+        "createdDateByAdminPopUp": "Yönetici Oluşturma Tarihi :\n  ",
+        "isDeviceActivePopUp": "Is Device Active :\n  ",
+        "createdDateByUserPopUp": "Kullanıcı Oluşturma  Tarihi : \n   ",
+        "userIdPopUP": "Kullanıcı Id :\n  ",
+        "active": "Aktif",
+        "passive": "Pasif",
+        "updateDevice": "Cihazı Güncelle",
+        "deleteDevice": "Cihazi Sil",
+        "getUserCredentials": "Kullanıcı Bilgilerine\nEriş"
     }
 }
