@@ -47,6 +47,26 @@ class DeviceService {
     }
   }
 
+  Future<void> deleteDevice({required String deviceId}) async {
+    final deviceData = await devicesCollection.doc(deviceId).get();
+    final userID = deviceData[userIdField];
+
+    if (userID == null) {
+      await devicesCollection.doc(deviceId).delete();
+      logger.d('Device Deleted');
+    } else {
+      final userDevices = await getUserDevices(userID.toString());
+      userDevices.removeWhere((element) => element == deviceId);
+      await usersCollection.doc(userID.toString()).update({
+        'devices': userDevices,
+      });
+      logger.d("Device Removed from User's Device List");
+
+      await devicesCollection.doc(deviceId).delete();
+      logger.d('Device Deleted');
+    }
+  }
+
   Future<List<String>> getDeviceTypes() async {
     final types = await deviceTypesCollection.get();
     final typesList = <String>[];
@@ -73,9 +93,11 @@ class DeviceService {
           await usersCollection.doc(userID).update({
             devicesField: FieldValue.arrayUnion([deviceId]),
           });
-          await devicesCollection
-              .doc(deviceId)
-              .update({userIdField: userID, createdAtByUserField: dateTime});
+          await devicesCollection.doc(deviceId).update({
+            userIdField: userID,
+            createdAtByUserField: dateTime,
+            isActiveField: true,
+          });
         } else {
           scaffoldMessenger(context, 'Wrong ID');
         }

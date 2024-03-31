@@ -31,7 +31,7 @@ class _DevicesList extends ConsumerWidget {
                       onTap: () {
                         show(
                           context,
-                          _DeviceCredentialsPopUP(deviceModel: device),
+                          DeviceCredentialsPopUp(deviceModel: device),
                         );
                       },
                       leading: Assets.icons.manageDeviceIcon.image(

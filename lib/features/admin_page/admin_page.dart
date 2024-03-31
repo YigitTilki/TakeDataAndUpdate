@@ -71,6 +71,12 @@ class _Header extends StatelessWidget {
         height: 20.h,
         color: context.fourthColor,
       ),
+      iconButton: IconButton(
+        onPressed: () {
+          context.router.push(const LoginRoute());
+        },
+        icon: const Icon(Icons.logout),
+      ),
       text: LocaleKeys.adminPage_admin,
     );
   }

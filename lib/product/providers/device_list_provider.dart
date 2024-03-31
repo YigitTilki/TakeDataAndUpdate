@@ -10,6 +10,11 @@ final userDeviceListProvider = FutureProvider.family<List<String>, String>(
     return DeviceService().getUserDevices(userId);
   },
 );
+final deleteDeviceProvider =
+    FutureProvider.family<void, String>((ref, deviceId) async {
+  await DeviceService().deleteDevice(deviceId: deviceId);
+  ref.invalidate(deviceListProvider);
+});
 final deviceListNotifierProvider =
     StateNotifierProvider<UserListNotifier, AsyncValue<List<DeviceModel>>>(
   (ref) => UserListNotifier(),

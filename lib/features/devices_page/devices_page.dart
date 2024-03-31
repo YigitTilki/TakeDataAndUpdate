@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/search_text_field.dart';
 import 'package:take_data_and_update_project/features/devices_page/add_device_button.dart';
+import 'package:take_data_and_update_project/features/devices_page/device_credentials_pop_up.dart';
+import 'package:take_data_and_update_project/features/devices_page/devices_page_mixin.dart';
 import 'package:take_data_and_update_project/features/users_page/widgets/app_divider.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
@@ -14,11 +15,9 @@ import 'package:take_data_and_update_project/product/providers/device_list_provi
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
 import 'package:take_data_and_update_project/product/util/show_dialog.dart';
-import 'package:take_data_and_update_project/product/widgets/buttons/bordered_elevated_button.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
 import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 
-part 'device_credentials_pop_up.dart';
 part 'devices_list.dart';
 
 @RoutePage()
@@ -29,22 +28,14 @@ class DevicesPage extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _DevicesPageState();
 }
 
-class _DevicesPageState extends ConsumerState<DevicesPage> {
-  final TextEditingController searchTextController = TextEditingController();
-
-  @override
-  void dispose() {
-    super.dispose();
-    searchTextController.dispose();
-  }
-
+class _DevicesPageState extends ConsumerState<DevicesPage>
+    with DevicesPageMixin {
   @override
   Widget build(BuildContext context) {
-    final deviceListState = ref.watch(deviceListProvider);
     return Scaffold(
       backgroundColor: context.secondaryColor,
       resizeToAvoidBottomInset: false,
-      floatingActionButton: const AddDeviceFloatingActionButton(),
+      floatingActionButton: const AddDeviceButton(),
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -55,15 +46,7 @@ class _DevicesPageState extends ConsumerState<DevicesPage> {
                 AppSpacer.vertical.space20,
                 SearchTextField(
                   searchTextController: searchTextController,
-                  onChanged: (value) {
-                    if (deviceListState is AsyncData<List<DeviceModel>>) {
-                      ref.read(deviceListNotifierProvider.notifier).filterUsers(
-                            value,
-                            deviceListState.value.toList(),
-                          );
-                      ref.invalidate(deviceListProvider);
-                    }
-                  },
+                  onChanged: searchOnChanged,
                 ),
                 AppSpacer.vertical.space5,
                 const AppDivider(),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/auth_text_form_field.dart';
-import 'package:take_data_and_update_project/features/devices_page/devices_page_mixin.dart';
+import 'package:take_data_and_update_project/features/devices_page/add_devices_mixin.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/service/devices_service.dart';
@@ -13,16 +13,16 @@ import 'package:take_data_and_update_project/product/widgets/containers/custom_h
 import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 import 'package:take_data_and_update_project/product/widgets/text/medium_text.dart';
 
-class AddDeviceFloatingActionButton extends ConsumerStatefulWidget {
-  const AddDeviceFloatingActionButton({super.key});
+class AddDeviceButton extends ConsumerStatefulWidget {
+  const AddDeviceButton({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _AddDeviceFloatingActionButtonState();
+      _AddDeviceButtonState();
 }
 
-class _AddDeviceFloatingActionButtonState
-    extends ConsumerState<AddDeviceFloatingActionButton> with AddDevicesMixin {
+class _AddDeviceButtonState extends ConsumerState<AddDeviceButton>
+    with AddDevicesMixin {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
@@ -37,52 +37,50 @@ class _AddDeviceFloatingActionButtonState
               builder: (context, states) {
                 return Padding(
                   padding: MediaQuery.of(context).viewInsets,
-                  child: Form(
-                    child: Container(
-                      decoration: Decorations.borderContainerDecoration(
-                        context.secondaryColor,
-                        context.primaryColor,
-                      ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            AppSpacer.vertical.space20,
-                            const _Header(),
-                            AppSpacer.vertical.space10,
-                            _DeviceIdFormField(
-                              deviceIdController: deviceIdController,
+                  child: Container(
+                    decoration: Decorations.borderContainerDecoration(
+                      context.secondaryColor,
+                      context.primaryColor,
+                    ),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          AppSpacer.vertical.space20,
+                          const _Header(),
+                          AppSpacer.vertical.space10,
+                          _DeviceIdFormField(
+                            deviceIdController: deviceIdController,
+                          ),
+                          AppSpacer.vertical.space10,
+                          DropdownButton(
+                            underline: Container(
+                              height: 2.h,
+                              color: context.fourthColor,
                             ),
-                            AppSpacer.vertical.space10,
-                            DropdownButton(
-                              underline: Container(
-                                height: 2.h,
-                                color: context.fourthColor,
-                              ),
-                              borderRadius: BorderRadius.circular(15.sp),
-                              hint: const MediumText(
-                                value: LocaleKeys.devicesPage_selectType,
-                              ),
-                              onChanged: (onChanged) {
-                                states(() {
-                                  deviceType = onChanged;
-                                });
-                              },
-                              value: deviceType,
-                              items: typeList.map((e) {
-                                return DropdownMenuItem(
-                                  value: e,
-                                  child: MediumText(value: e),
-                                );
-                              }).toList(),
+                            borderRadius: BorderRadius.circular(15.sp),
+                            hint: const MediumText(
+                              value: LocaleKeys.devicesPage_selectType,
                             ),
-                            AppSpacer.vertical.space10,
-                            BorderedElevatedButton(
-                              onPressed: elevatedButtonProcess,
-                              text: LocaleKeys.devicesPage_addDevice,
-                            ),
-                            AppSpacer.vertical.space30,
-                          ],
-                        ),
+                            onChanged: (onChanged) {
+                              states(() {
+                                deviceType = onChanged;
+                              });
+                            },
+                            value: deviceType,
+                            items: typeList.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: MediumText(value: e),
+                              );
+                            }).toList(),
+                          ),
+                          AppSpacer.vertical.space10,
+                          BorderedElevatedButton(
+                            onPressed: elevatedButtonProcess,
+                            text: LocaleKeys.devicesPage_addDevice,
+                          ),
+                          AppSpacer.vertical.space20,
+                        ],
                       ),
                     ),
                   ),

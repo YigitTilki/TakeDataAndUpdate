@@ -1,8 +1,26 @@
-part of 'devices_page.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:take_data_and_update_project/features/devices_page/config_device_mixin.dart';
+import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
+import 'package:take_data_and_update_project/product/constants/project_padding.dart';
+import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
+import 'package:take_data_and_update_project/product/models/device_model.dart';
+import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/product/widgets/buttons/bordered_elevated_button.dart';
+import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 
-class _DeviceCredentialsPopUP extends StatelessWidget {
-  const _DeviceCredentialsPopUP({required this.deviceModel});
+class DeviceCredentialsPopUp extends ConsumerStatefulWidget {
+  const DeviceCredentialsPopUp({required this.deviceModel, super.key});
   final DeviceModel deviceModel;
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _DeviceCredentialsPopUpState();
+}
+
+class _DeviceCredentialsPopUpState extends ConsumerState<DeviceCredentialsPopUp>
+    with ConfigDeviceMixin {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -12,100 +30,115 @@ class _DeviceCredentialsPopUP extends StatelessWidget {
       shape: Decorations.popUpDecoration(
         context.fourthColor,
       ),
-      content: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      content: _Content(widget: widget),
+      actions: [
+        _actions(),
+      ],
+    );
+  }
+
+  Column _actions() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _PopUpText(
-              device1: LocaleKeys.devicesPage_deviceIdPopUp,
-              device2: deviceModel.id!,
+            Expanded(
+              child: BorderedElevatedButton(
+                onPressed: updateButtonProcess,
+                text: LocaleKeys.devicesPage_updateDevice,
+              ),
             ),
-            Divider(
-              color: context.fourthColor,
+            AppSpacer.horizontal.space10,
+            Expanded(
+              child: BorderedElevatedButton(
+                onPressed: deleteButtonProcess,
+                text: LocaleKeys.devicesPage_deleteDevice,
+              ),
             ),
-            _PopUpText(
-              device1: LocaleKeys.devicesPage_deviceTypePopUp,
-              device2: deviceModel.type!,
-            ),
-            Divider(
-              color: context.fourthColor,
-            ),
-            _PopUpText(
-              device1: LocaleKeys.devicesPage_createdDateByAdminPopUp,
-              device2: deviceModel.createdAtByAdmin ?? 'Unassigned',
-            ),
-            Divider(
-              color: context.fourthColor,
-            ),
-            _PopUpText(
-              device1: LocaleKeys.devicesPage_isDeviceActivePopUp,
-              device2: deviceModel.isActive!
-                  ? LocaleKeys.devicesPage_active
-                  : LocaleKeys.devicesPage_passive,
-            ),
-            Divider(
-              color: context.fourthColor,
-            ),
-            if (deviceModel.isActive!)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _PopUpText(
-                    device1: LocaleKeys.devicesPage_createdDateByUserPopUp,
-                    device2: deviceModel.createdAtByUser!,
-                  ),
-                  Divider(
-                    color: context.fourthColor,
-                  ),
-                  _PopUpText(
-                    device1: LocaleKeys.devicesPage_userIdPopUP,
-                    device2: deviceModel.userId!,
-                  ),
-                  Divider(
-                    color: context.fourthColor,
-                  ),
-                ],
-              )
-            else
-              const SizedBox.shrink(),
-            AppSpacer.vertical.space10,
           ],
         ),
-      ),
-      actions: [
-        Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+        AppSpacer.vertical.space5,
+        if (widget.deviceModel.isActive!)
+          BorderedElevatedButton(
+            onPressed: getUserCredentialsButtonProcess,
+            text: LocaleKeys.devicesPage_getUserCredentials,
+          )
+        else
+          const SizedBox.shrink(),
+      ],
+    );
+  }
+}
+
+class _Content extends StatelessWidget {
+  const _Content({
+    required this.widget,
+  });
+
+  final DeviceCredentialsPopUp widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _PopUpText(
+            device1: LocaleKeys.devicesPage_deviceIdPopUp,
+            device2: widget.deviceModel.id!,
+          ),
+          Divider(
+            color: context.fourthColor,
+          ),
+          _PopUpText(
+            device1: LocaleKeys.devicesPage_deviceTypePopUp,
+            device2: widget.deviceModel.type!,
+          ),
+          Divider(
+            color: context.fourthColor,
+          ),
+          _PopUpText(
+            device1: LocaleKeys.devicesPage_createdDateByAdminPopUp,
+            device2: widget.deviceModel.createdAtByAdmin!,
+          ),
+          Divider(
+            color: context.fourthColor,
+          ),
+          _PopUpText(
+            device1: LocaleKeys.devicesPage_deviceStatusPopUp,
+            device2: widget.deviceModel.isActive!
+                ? LocaleKeys.devicesPage_active
+                : LocaleKeys.devicesPage_passive,
+          ),
+          Divider(
+            color: context.fourthColor,
+          ),
+          if (widget.deviceModel.isActive!)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  //TODO: is it necessary
-                  child: BorderedElevatedButton(
-                    onPressed: () {},
-                    text: LocaleKeys.devicesPage_updateDevice,
-                  ),
+                _PopUpText(
+                  device1: LocaleKeys.devicesPage_createdDateByUserPopUp,
+                  device2: widget.deviceModel.createdAtByUser!,
                 ),
-                AppSpacer.horizontal.space10,
-                Expanded(
-                  //TODO: is it necessary
-                  child: BorderedElevatedButton(
-                    onPressed: () {},
-                    text: LocaleKeys.devicesPage_deleteDevice,
-                  ),
+                Divider(
+                  color: context.fourthColor,
+                ),
+                _PopUpText(
+                  device1: LocaleKeys.devicesPage_userIdPopUP,
+                  device2: widget.deviceModel.userId!,
+                ),
+                Divider(
+                  color: context.fourthColor,
                 ),
               ],
-            ),
-            AppSpacer.vertical.space5,
-            if (deviceModel.isActive!)
-              BorderedElevatedButton(
-                onPressed: () {},
-                text: LocaleKeys.devicesPage_getUserCredentials,
-              )
-            else
-              const SizedBox.shrink(),
-          ],
-        ),
-      ],
+            )
+          else
+            const SizedBox.shrink(),
+          AppSpacer.vertical.space10,
+        ],
+      ),
     );
   }
 }
@@ -126,7 +159,7 @@ class _PopUpText extends StatelessWidget {
         text: device1.tr(),
         style: context.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
         children: [
-          TextSpan(text: device2, style: context.bodySmall),
+          TextSpan(text: device2.tr(), style: context.bodySmall),
         ],
       ),
     );

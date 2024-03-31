@@ -106,13 +106,14 @@
         "deviceIdPopUp": "Device Id :\n  ",
         "deviceTypePopUp": "Device Type :\n  ",
         "createdDateByAdminPopUp": "Created Date By Admin :\n  ",
-        "isDeviceActivePopUp": "Is Device Active :\n  ",
+        "deviceStatusPopUp": "Device Status :\n  ",
         "createdDateByUserPopUp": "Created Date By User :\n  ",
         "userIdPopUP": "User Id :\n  ",
         "active": "Active",
         "passive": "Passive",
         "updateDevice": "Update Device",
         "deleteDevice": "Delete Device",
-        "getUserCredentials": "Get User Credentials"
+        "getUserCredentials": "Get User Credentials",
+        "unassigned": "Unassigned"
     }
 }
