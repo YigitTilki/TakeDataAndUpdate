@@ -16,6 +16,7 @@ abstract class BaseAuthRepository {
   });
   Future<List<UserModel>> getUsers();
   Future<UserModel?> getUser({required String email});
+  Future<UserModel?> getUserWithId({required String id});
 
   Future<void> deleteUser({
     required String id,

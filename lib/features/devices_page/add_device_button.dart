@@ -48,7 +48,7 @@ class _AddDeviceButtonState extends ConsumerState<AddDeviceButton>
                           AppSpacer.vertical.space20,
                           const _Header(),
                           AppSpacer.vertical.space10,
-                          _DeviceIdFormField(
+                          DeviceIdFormField(
                             deviceIdController: deviceIdController,
                           ),
                           AppSpacer.vertical.space10,
@@ -95,9 +95,10 @@ class _AddDeviceButtonState extends ConsumerState<AddDeviceButton>
   }
 }
 
-class _DeviceIdFormField extends StatelessWidget {
-  const _DeviceIdFormField({
+class DeviceIdFormField extends StatelessWidget {
+  const DeviceIdFormField({
     required this.deviceIdController,
+    super.key,
   });
 
   final TextEditingController deviceIdController;

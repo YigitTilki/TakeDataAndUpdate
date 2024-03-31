@@ -162,4 +162,27 @@ class AuthRepository extends BaseAuthRepository {
       logger.d('Error : $e');
     }
   }
+
+  @override
+  Future<UserModel?> getUserWithId({required String id}) async {
+    try {
+      final user = await usersCollection.where(idField, isEqualTo: id).get();
+      if (user.docs.isNotEmpty) {
+        final userModel = const UserModel().copyWith(
+          firstName: user.docs.first[firstNameField].toString(),
+          lastName: user.docs.first[lastNameField].toString(),
+          password: user.docs.first[passwordField].toString(),
+          email: user.docs.first[emailField].toString(),
+          id: user.docs.first[idField].toString(),
+          devices: (user.docs.first[devicesField] as Iterable<dynamic>?)
+              ?.map((device) => device.toString())
+              .toList(),
+        );
+        return userModel;
+      }
+    } catch (exception) {
+      logger.d(exception);
+    }
+    return null;
+  }
 }

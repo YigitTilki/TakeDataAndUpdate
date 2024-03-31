@@ -37,28 +37,15 @@ class _DeviceCredentialsPopUpState extends ConsumerState<DeviceCredentialsPopUp>
     );
   }
 
-  Column _actions() {
-    return Column(
+  Row _actions() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: BorderedElevatedButton(
-                onPressed: updateButtonProcess,
-                text: LocaleKeys.devicesPage_updateDevice,
-              ),
-            ),
-            AppSpacer.horizontal.space10,
-            Expanded(
-              child: BorderedElevatedButton(
-                onPressed: deleteButtonProcess,
-                text: LocaleKeys.devicesPage_deleteDevice,
-              ),
-            ),
-          ],
+        BorderedElevatedButton(
+          onPressed: deleteButtonProcess,
+          text: LocaleKeys.devicesPage_deleteDevice,
         ),
-        AppSpacer.vertical.space5,
+        AppSpacer.horizontal.space10,
         if (widget.deviceModel.isActive!)
           BorderedElevatedButton(
             onPressed: getUserCredentialsButtonProcess,
@@ -84,30 +71,30 @@ class _Content extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _PopUpText(
-            device1: LocaleKeys.devicesPage_deviceIdPopUp,
-            device2: widget.deviceModel.id!,
+          PopUpText(
+            text1: LocaleKeys.devicesPage_deviceIdPopUp,
+            text2: widget.deviceModel.id!,
           ),
           Divider(
             color: context.fourthColor,
           ),
-          _PopUpText(
-            device1: LocaleKeys.devicesPage_deviceTypePopUp,
-            device2: widget.deviceModel.type!,
+          PopUpText(
+            text1: LocaleKeys.devicesPage_deviceTypePopUp,
+            text2: widget.deviceModel.type!,
           ),
           Divider(
             color: context.fourthColor,
           ),
-          _PopUpText(
-            device1: LocaleKeys.devicesPage_createdDateByAdminPopUp,
-            device2: widget.deviceModel.createdAtByAdmin!,
+          PopUpText(
+            text1: LocaleKeys.devicesPage_createdDateByAdminPopUp,
+            text2: widget.deviceModel.createdAtByAdmin!,
           ),
           Divider(
             color: context.fourthColor,
           ),
-          _PopUpText(
-            device1: LocaleKeys.devicesPage_deviceStatusPopUp,
-            device2: widget.deviceModel.isActive!
+          PopUpText(
+            text1: LocaleKeys.devicesPage_deviceStatusPopUp,
+            text2: widget.deviceModel.isActive!
                 ? LocaleKeys.devicesPage_active
                 : LocaleKeys.devicesPage_passive,
           ),
@@ -118,16 +105,16 @@ class _Content extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _PopUpText(
-                  device1: LocaleKeys.devicesPage_createdDateByUserPopUp,
-                  device2: widget.deviceModel.createdAtByUser!,
+                PopUpText(
+                  text1: LocaleKeys.devicesPage_createdDateByUserPopUp,
+                  text2: widget.deviceModel.createdAtByUser!,
                 ),
                 Divider(
                   color: context.fourthColor,
                 ),
-                _PopUpText(
-                  device1: LocaleKeys.devicesPage_userIdPopUP,
-                  device2: widget.deviceModel.userId!,
+                PopUpText(
+                  text1: LocaleKeys.devicesPage_userIdPopUP,
+                  text2: widget.deviceModel.userId!,
                 ),
                 Divider(
                   color: context.fourthColor,
@@ -143,23 +130,24 @@ class _Content extends StatelessWidget {
   }
 }
 
-class _PopUpText extends StatelessWidget {
-  const _PopUpText({
-    required this.device1,
-    required this.device2,
+class PopUpText extends StatelessWidget {
+  const PopUpText({
+    required this.text1,
+    required this.text2,
+    super.key,
   });
 
-  final String device2;
-  final String device1;
+  final String text2;
+  final String text1;
 
   @override
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        text: device1.tr(),
+        text: text1.tr(),
         style: context.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
         children: [
-          TextSpan(text: device2.tr(), style: context.bodySmall),
+          TextSpan(text: text2.tr(), style: context.bodySmall),
         ],
       ),
     );
