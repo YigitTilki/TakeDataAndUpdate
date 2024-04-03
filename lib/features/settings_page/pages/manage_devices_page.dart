@@ -18,6 +18,7 @@ import 'package:take_data_and_update_project/product/util/show_dialog.dart';
 import 'package:take_data_and_update_project/product/widgets/buttons/bordered_elevated_button.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
 import 'package:take_data_and_update_project/product/widgets/decorations.dart';
+import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 
 @RoutePage()
 class ManageDevicesPage extends ConsumerStatefulWidget {
@@ -31,6 +32,9 @@ class ManageDevicesPage extends ConsumerStatefulWidget {
 
 class _ManageDevicesPageState extends ConsumerState<ManageDevicesPage>
     with ManageDevicesMixin {
+  final TextEditingController updateDeviceNameController =
+      TextEditingController();
+  @override
   @override
   Widget build(BuildContext context) {
     final deviceList =
@@ -110,135 +114,271 @@ class _ManageDevicesPageState extends ConsumerState<ManageDevicesPage>
             Expanded(
               child: deviceList.when(
                 data: (devices) {
-                  return ListView.builder(
-                    itemCount: devices.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return FutureBuilder<DeviceModel?>(
-                        future: DeviceService().getDevice(devices[index]),
-                        builder: (
-                          BuildContext context,
-                          AsyncSnapshot<DeviceModel?> snapshot,
-                        ) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator();
-                          } else if (snapshot.hasError) {
-                            return Text(
-                              'Error: ${snapshot.error}',
-                            );
-                          } else {
-                            final deviceModel = snapshot.data;
-                            return Padding(
-                              padding: ProjectPadding.symHNormal() +
-                                  ProjectPadding.symVXSmall(),
-                              child: Container(
-                                height: 60.h,
-                                decoration: ShapeDecoration(
-                                  color: context.fourthColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.sp),
-                                    side: BorderSide(
-                                      color: context.primaryColor,
-                                      width: 2.sp,
-                                    ),
-                                  ),
-                                ),
-                                child: Center(
-                                  child: ListTile(
-                                    onTap: () {
-                                      show(
-                                        context,
-                                        AlertDialog(
-                                          actionsAlignment:
-                                              MainAxisAlignment.center,
-                                          contentPadding:
-                                              ProjectPadding.symHXXLarge() +
-                                                  ProjectPadding.topXXLarge(),
-                                          shape: Decorations.popUpDecoration(
-                                            context.fourthColor,
-                                          ),
-                                          content: SingleChildScrollView(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                PopUpText(
-                                                  text1: LocaleKeys
-                                                      .devicesPage_deviceIdPopUp,
-                                                  text2: deviceModel.id!,
-                                                ),
-                                                Divider(
-                                                  color: context.fourthColor,
-                                                ),
-                                                PopUpText(
-                                                  text1: LocaleKeys
-                                                      .devicesPage_deviceTypePopUp,
-                                                  text2: deviceModel.type!,
-                                                ),
-                                                Divider(
-                                                  color: context.fourthColor,
-                                                ),
-                                                PopUpText(
-                                                  text1: LocaleKeys
-                                                      .devicesPage_createdDateByAdminPopUp,
-                                                  text2: deviceModel
-                                                      .createdAtByAdmin!,
-                                                ),
-                                                Divider(
-                                                  color: context.fourthColor,
-                                                ),
-                                                PopUpText(
-                                                  text1: LocaleKeys
-                                                      .devicesPage_deviceStatusPopUp,
-                                                  text2: deviceModel.isActive!
-                                                      ? LocaleKeys
-                                                          .devicesPage_active
-                                                      : LocaleKeys
-                                                          .devicesPage_passive,
-                                                ),
-                                                Divider(
-                                                  color: context.fourthColor,
-                                                ),
-                                                PopUpText(
-                                                  text1: LocaleKeys
-                                                      .devicesPage_createdDateByUserPopUp,
-                                                  text2: deviceModel
-                                                      .createdAtByUser!,
-                                                ),
-                                                Divider(
-                                                  color: context.fourthColor,
-                                                ),
-                                                PopUpText(
-                                                  text1: LocaleKeys
-                                                      .devicesPage_userIdPopUP,
-                                                  text2: deviceModel.userId!,
-                                                ),
-                                                Divider(
-                                                  color: context.fourthColor,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    leading:
-                                        Assets.icons.manageDeviceIcon.image(
-                                      width: iconSize.w,
-                                      height: iconSize.h,
-                                    ),
-                                    title: Text(
-                                      deviceModel!.deviceName!,
-                                    ),
-                                    subtitle: const Text('Coni'),
-                                  ),
-                                ),
-                              ),
-                            );
-                          }
-                        },
-                      );
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      ref.invalidate(userDeviceListProvider);
                     },
+                    child: ListView.builder(
+                      itemCount: devices.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return FutureBuilder<DeviceModel?>(
+                          future: DeviceService().getDevice(devices[index]),
+                          builder: (
+                            BuildContext context,
+                            AsyncSnapshot<DeviceModel?> snapshot,
+                          ) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else if (snapshot.hasError) {
+                              return Text(
+                                'Error: ${snapshot.error}',
+                              );
+                            } else {
+                              final deviceModel = snapshot.data;
+                              return Padding(
+                                padding: ProjectPadding.symHNormal() +
+                                    ProjectPadding.symVXSmall(),
+                                child: Container(
+                                  height: 60.h,
+                                  decoration: ShapeDecoration(
+                                    color: context.fourthColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.sp),
+                                      side: BorderSide(
+                                        color: context.primaryColor,
+                                        width: 2.sp,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: ListTile(
+                                      onTap: () {
+                                        show(
+                                          context,
+                                          AlertDialog(
+                                            actionsAlignment:
+                                                MainAxisAlignment.center,
+                                            contentPadding:
+                                                ProjectPadding.symHXXLarge() +
+                                                    ProjectPadding.topXXLarge(),
+                                            shape: Decorations.popUpDecoration(
+                                              context.fourthColor,
+                                            ),
+                                            content: SingleChildScrollView(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  PopUpText(
+                                                    text1: LocaleKeys
+                                                        .devicesPage_deviceIdPopUp,
+                                                    text2: deviceModel.id!,
+                                                  ),
+                                                  Divider(
+                                                    color: context.fourthColor,
+                                                  ),
+                                                  PopUpText(
+                                                    text1: LocaleKeys
+                                                        .devicesPage_deviceTypePopUp,
+                                                    text2: deviceModel.type!,
+                                                  ),
+                                                  Divider(
+                                                    color: context.fourthColor,
+                                                  ),
+                                                  PopUpText(
+                                                    text1: LocaleKeys
+                                                        .devicesPage_createdDateByAdminPopUp,
+                                                    text2: deviceModel
+                                                        .createdAtByAdmin!,
+                                                  ),
+                                                  Divider(
+                                                    color: context.fourthColor,
+                                                  ),
+                                                  PopUpText(
+                                                    text1: LocaleKeys
+                                                        .devicesPage_deviceStatusPopUp,
+                                                    text2: deviceModel.isActive!
+                                                        ? LocaleKeys
+                                                            .devicesPage_active
+                                                        : LocaleKeys
+                                                            .devicesPage_passive,
+                                                  ),
+                                                  Divider(
+                                                    color: context.fourthColor,
+                                                  ),
+                                                  PopUpText(
+                                                    text1: LocaleKeys
+                                                        .devicesPage_createdDateByUserPopUp,
+                                                    text2: deviceModel
+                                                        .createdAtByUser!,
+                                                  ),
+                                                  Divider(
+                                                    color: context.fourthColor,
+                                                  ),
+                                                  PopUpText(
+                                                    text1: LocaleKeys
+                                                        .devicesPage_userIdPopUP,
+                                                    text2: deviceModel.userId!,
+                                                  ),
+                                                  Divider(
+                                                    color: context.fourthColor,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            actions: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Expanded(
+                                                    child:
+                                                        BorderedElevatedButton(
+                                                      onPressed: () async {
+                                                        await showModalBottomSheet<
+                                                            Widget>(
+                                                          context: context,
+                                                          isScrollControlled:
+                                                              true,
+                                                          builder: (
+                                                            BuildContext
+                                                                context,
+                                                          ) {
+                                                            return Form(
+                                                              key: formKey,
+                                                              child: Padding(
+                                                                padding:
+                                                                    MediaQuery
+                                                                        .of(
+                                                                  context,
+                                                                ).viewInsets,
+                                                                child:
+                                                                    Container(
+                                                                  decoration:
+                                                                      Decorations
+                                                                          .borderContainerDecoration(
+                                                                    context
+                                                                        .secondaryColor,
+                                                                    context
+                                                                        .primaryColor,
+                                                                  ),
+                                                                  child:
+                                                                      SingleChildScrollView(
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        AppSpacer
+                                                                            .vertical
+                                                                            .space20,
+                                                                        const _Header2(),
+                                                                        AppSpacer
+                                                                            .vertical
+                                                                            .space10,
+                                                                        AuthTextFormField(
+                                                                          hintText:
+                                                                              'Update Device Name',
+                                                                          validator:
+                                                                              (value) {
+                                                                            if (value!.length <= 3 ||
+                                                                                value.isEmpty) {
+                                                                              return 'İsim 2 haneden uzun olmalıdır';
+                                                                            }
+                                                                            return null;
+                                                                          },
+                                                                          controller:
+                                                                              updateDeviceNameController,
+                                                                          keyboardType:
+                                                                              TextInputType.text,
+                                                                        ),
+                                                                        AppSpacer
+                                                                            .vertical
+                                                                            .space10,
+                                                                        BorderedElevatedButton(
+                                                                          onPressed:
+                                                                              () async {
+                                                                            await DeviceService().updateDeviceName(
+                                                                              deviceModel.id.toString(),
+                                                                              updateDeviceNameController.text,
+                                                                            );
+                                                                            if (!mounted) {
+                                                                              return;
+                                                                            }
+                                                                            await context.router.pop();
+                                                                            ref.invalidate(
+                                                                              userDeviceListProvider,
+                                                                            );
+                                                                          },
+                                                                          text:
+                                                                              'Update Device Name',
+                                                                        ),
+                                                                        AppSpacer
+                                                                            .vertical
+                                                                            .space20,
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        );
+                                                      },
+                                                      text:
+                                                          'Update Device Name',
+                                                    ),
+                                                  ),
+                                                  AppSpacer.horizontal.space10,
+                                                  Expanded(
+                                                    child:
+                                                        BorderedElevatedButton(
+                                                      onPressed: () async {
+                                                        scaffoldMessenger(
+                                                          context,
+                                                          'Device Deleted From Your Devices',
+                                                        );
+                                                        await DeviceService()
+                                                            .deleteDeviceFromUser(
+                                                          deviceId: deviceModel
+                                                              .id
+                                                              .toString(),
+                                                        );
+                                                        if (!mounted) return;
+                                                        await context.router
+                                                            .pop();
+                                                        ref.invalidate(
+                                                          userDeviceListProvider,
+                                                        );
+                                                      },
+                                                      text: 'Delete Device',
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                      leading:
+                                          Assets.icons.manageDeviceIcon.image(
+                                        width: iconSize.w,
+                                        height: iconSize.h,
+                                      ),
+                                      title: Text(
+                                        deviceModel!.deviceName!,
+                                      ),
+                                      subtitle: const Text('Coni'),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        );
+                      },
+                    ),
                   );
                 },
                 loading: () => Scaffold(

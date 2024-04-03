@@ -18,6 +18,16 @@ class DeviceService {
     }
   }
 
+  Future<void> updateDeviceName(String deviceId, String newDeviceName) async {
+    try {
+      await devicesCollection
+          .doc(deviceId)
+          .update({deviceNameField: newDeviceName});
+    } catch (exception) {
+      print(exception);
+    }
+  }
+
   Future<DeviceModel?> getDevice(String deviceId) async {
     try {
       final querySnapshot = await devicesCollection.doc(deviceId).get();
@@ -92,6 +102,24 @@ class DeviceService {
       await devicesCollection.doc(deviceId).delete();
       logger.d('Device Deleted');
     }
+  }
+
+  Future<void> deleteDeviceFromUser({required String deviceId}) async {
+    final deviceData = await devicesCollection.doc(deviceId).get();
+    final userID = deviceData[userIdField];
+
+    final userDevices = await getUserDevices(userID.toString());
+    userDevices.removeWhere((element) => element == deviceId);
+    await usersCollection.doc(userID.toString()).update({
+      devicesField: userDevices,
+    });
+    await devicesCollection.doc(deviceId).update({
+      userIdField: null,
+      isActiveField: false,
+      deviceNameField: null,
+      createdAtByUserField: null,
+    });
+    logger.d("Device Removed from User's Device List");
   }
 
   Future<List<String>> getDeviceTypes() async {
