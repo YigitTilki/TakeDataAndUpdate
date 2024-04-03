@@ -18,6 +18,33 @@ class DeviceService {
     }
   }
 
+  Future<DeviceModel?> getDevice(String deviceId) async {
+    try {
+      final querySnapshot = await devicesCollection.doc(deviceId).get();
+
+      if (querySnapshot.exists) {
+        final data = querySnapshot.data() as Map<String, dynamic>?;
+        if (data != null) {
+          final deviceModel = DeviceModel(
+            id: data[idField].toString(),
+            userId: data[userIdField].toString(),
+            type: data[typeField].toString(),
+            createdAtByAdmin: data[createdAtByAdminField].toString(),
+            createdAtByUser: data[createdAtByUserField].toString(),
+            deviceName: data[deviceNameField].toString(),
+            isActive: data[isActiveField] as bool?,
+          );
+          return deviceModel;
+        } else {
+          logger.d('null değer');
+        }
+      }
+    } catch (error) {
+      logger.d('Error during getDevices : $error');
+    }
+    return null;
+  }
+
   Future<List<DeviceModel>> getDevices() async {
     try {
       final querySnapshot = await devicesCollection.get();
@@ -80,6 +107,7 @@ class DeviceService {
   Future<void> verifyDeviceId(
     String deviceId,
     String userID,
+    String deviceName,
     BuildContext context,
   ) async {
     try {
@@ -96,6 +124,7 @@ class DeviceService {
           await devicesCollection.doc(deviceId).update({
             userIdField: userID,
             createdAtByUserField: dateTime,
+            deviceNameField: deviceName,
             isActiveField: true,
           });
         } else {

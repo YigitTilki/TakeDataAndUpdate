@@ -15,6 +15,7 @@ final deleteDeviceProvider =
   await DeviceService().deleteDevice(deviceId: deviceId);
   ref.invalidate(deviceListProvider);
 });
+
 final deviceListNotifierProvider =
     StateNotifierProvider<UserListNotifier, AsyncValue<List<DeviceModel>>>(
   (ref) => UserListNotifier(),

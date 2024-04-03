@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:take_data_and_update_project/features/settings_page/pages/manage_devices_page.dart';
@@ -9,6 +10,7 @@ import 'package:take_data_and_update_project/product/util/wifi_connector.dart';
 mixin ManageDevicesMixin on ConsumerState<ManageDevicesPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController deviceIdController = TextEditingController();
+  final TextEditingController deviceNameController = TextEditingController();
 
   @override
   void initState() {
@@ -20,14 +22,31 @@ mixin ManageDevicesMixin on ConsumerState<ManageDevicesPage> {
   void dispose() {
     super.dispose();
     deviceIdController.dispose();
+    deviceNameController.dispose();
+  }
+
+  void clearControllers() {
+    deviceIdController.clear();
+    deviceNameController.clear();
   }
 
   Future<void> elevatedButtonProcess() async {
-    await DeviceService()
-        .verifyDeviceId(deviceIdController.text, widget.userModel.id!, context);
-    ref
-      ..invalidate(userDeviceListProvider)
-      ..invalidate(deviceListProvider)
-      ..invalidate(userListProvider);
+    if (!formKey.currentState!.validate()) {
+      return debugPrint('Olmadı');
+    } else {
+      await DeviceService().verifyDeviceId(
+        deviceIdController.text,
+        widget.userModel.id!,
+        deviceNameController.text,
+        context,
+      );
+      ref
+        ..invalidate(userDeviceListProvider)
+        ..invalidate(deviceListProvider)
+        ..invalidate(userListProvider);
+    }
+    if (!mounted) return;
+    await context.router.pop();
+    clearControllers();
   }
 }
