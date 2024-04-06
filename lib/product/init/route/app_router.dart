@@ -9,6 +9,7 @@ import 'package:take_data_and_update_project/features/forgot_password/pages/ente
 import 'package:take_data_and_update_project/features/forgot_password/pages/forgot_password_page/forgot_password_page.dart';
 import 'package:take_data_and_update_project/features/forgot_password/pages/reset_password_page/reset_password_page.dart';
 import 'package:take_data_and_update_project/features/home_page/home_page.dart';
+import 'package:take_data_and_update_project/features/my_devices_page/my_devices_page.dart';
 import 'package:take_data_and_update_project/features/settings_page/pages/change_language_page/change_language_page.dart';
 import 'package:take_data_and_update_project/features/settings_page/pages/change_theme_page/change_theme_page.dart';
 import 'package:take_data_and_update_project/features/settings_page/pages/edit_user_page/edit_user_page.dart';
@@ -40,5 +41,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: VerifyEmailRoute.page),
         AutoRoute(page: ManageDevicesRoute.page),
         AutoRoute(page: DevicesRoute.page),
+        AutoRoute(page: MyDevicesRoute.page),
       ];
 }

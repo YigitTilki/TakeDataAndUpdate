@@ -135,8 +135,8 @@ class _ManageDevices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingsContainerWidget(
-      onPressed: () {
-        context.router.push(ManageDevicesRoute(userModel: userModel));
+      onPressed: () async {
+        await context.router.push(ManageDevicesRoute(userModel: userModel));
       },
       title: LocaleKeys.settingsPage_manageDevices,
       asset: Assets.icons.manageDeviceIcon,

@@ -10,6 +10,12 @@ final userDeviceListProvider = FutureProvider.family<List<String>, String>(
     return DeviceService().getUserDevices(userId);
   },
 );
+final getDeviceProvider = FutureProvider.family<DeviceModel?, String>(
+  (ref, deviceId) async {
+    final deviceModel = await DeviceService().getDevice(deviceId);
+    return deviceModel;
+  },
+);
 final deleteDeviceProvider =
     FutureProvider.family<void, String>((ref, deviceId) async {
   await DeviceService().deleteDevice(deviceId: deviceId);

@@ -13,3 +13,16 @@ Future<dynamic> show(
     },
   );
 }
+
+Future<dynamic> showBottom({
+  required BuildContext context,
+  required Widget widget,
+}) {
+  return showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (context) {
+      return widget;
+    },
+  );
+}

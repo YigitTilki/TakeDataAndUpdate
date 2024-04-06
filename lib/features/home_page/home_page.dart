@@ -45,9 +45,10 @@ class HomePage extends StatelessWidget {
                 userModel: userModel,
               ),
               AppSpacer.vertical.space30,
-              const _MyDevices(
+              _MyDevices(
                 bigContainerWidth: bigContainerWidth,
                 bigContainerHeight: bigContainerHeight,
+                userModel: userModel,
               ),
               AppSpacer.vertical.space30,
               const _AlertBox(

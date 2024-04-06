@@ -35,6 +35,14 @@ class $AssetsIconsGen {
   AssetGenImage get forgotPasswordIcon =>
       const AssetGenImage('assets/icons/forgotPasswordIcon.png');
 
+  /// File path: assets/icons/humidityIcon.png
+  AssetGenImage get humidityIcon =>
+      const AssetGenImage('assets/icons/humidityIcon.png');
+
+  /// File path: assets/icons/humidityTemperatureIcon.png
+  AssetGenImage get humidityTemperatureIcon =>
+      const AssetGenImage('assets/icons/humidityTemperatureIcon.png');
+
   /// File path: assets/icons/logOutIcon.png
   AssetGenImage get logOutIcon =>
       const AssetGenImage('assets/icons/logOutIcon.png');
@@ -74,6 +82,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/starsIcon.svg
   SvgGenImage get starsIcon => const SvgGenImage('assets/icons/starsIcon.svg');
 
+  /// File path: assets/icons/temperatureIcon.png
+  AssetGenImage get temperatureIcon =>
+      const AssetGenImage('assets/icons/temperatureIcon.png');
+
   /// File path: assets/icons/updateProfileIcon.png
   AssetGenImage get updateProfileIcon =>
       const AssetGenImage('assets/icons/updateProfileIcon.png');
@@ -93,6 +105,8 @@ class $AssetsIconsGen {
         changeLanguageIcon,
         changeThemeIcon,
         forgotPasswordIcon,
+        humidityIcon,
+        humidityTemperatureIcon,
         logOutIcon,
         manageDeviceIcon,
         noProfilePhotoIcon,
@@ -103,6 +117,7 @@ class $AssetsIconsGen {
         processor,
         settingsIcon,
         starsIcon,
+        temperatureIcon,
         updateProfileIcon,
         usersIcon,
         versionControlIcon

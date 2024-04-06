@@ -92,6 +92,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    MyDevicesRoute.name: (routeData) {
+      final args = routeData.argsAs<MyDevicesRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: MyDevicesPage(
+          userModel: args.userModel,
+          key: args.key,
+        ),
+      );
+    },
     RegisterRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -381,6 +391,44 @@ class ManageDevicesRouteArgs {
   @override
   String toString() {
     return 'ManageDevicesRouteArgs{userModel: $userModel, key: $key}';
+  }
+}
+
+/// generated route for
+/// [MyDevicesPage]
+class MyDevicesRoute extends PageRouteInfo<MyDevicesRouteArgs> {
+  MyDevicesRoute({
+    required UserModel userModel,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          MyDevicesRoute.name,
+          args: MyDevicesRouteArgs(
+            userModel: userModel,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'MyDevicesRoute';
+
+  static const PageInfo<MyDevicesRouteArgs> page =
+      PageInfo<MyDevicesRouteArgs>(name);
+}
+
+class MyDevicesRouteArgs {
+  const MyDevicesRouteArgs({
+    required this.userModel,
+    this.key,
+  });
+
+  final UserModel userModel;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'MyDevicesRouteArgs{userModel: $userModel, key: $key}';
   }
 }
 
