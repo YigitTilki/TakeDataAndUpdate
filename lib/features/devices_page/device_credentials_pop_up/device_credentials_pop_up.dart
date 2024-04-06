@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:take_data_and_update_project/features/devices_page/config_device_mixin.dart';
+import 'package:take_data_and_update_project/features/devices_page/device_credentials_pop_up/config_device_mixin.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';

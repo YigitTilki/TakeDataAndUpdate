@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:take_data_and_update_project/features/settings_page/pages/edit_user_page.dart';
+import 'package:take_data_and_update_project/features/settings_page/pages/edit_user_page/edit_user_page.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';

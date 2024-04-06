@@ -1,4 +1,4 @@
-part of '../pages/change_theme_page.dart';
+part of '../change_theme_page.dart';
 
 class ChangeThemeContainer extends StatelessWidget {
   const ChangeThemeContainer({

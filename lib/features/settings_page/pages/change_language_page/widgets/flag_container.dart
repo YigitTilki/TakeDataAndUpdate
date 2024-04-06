@@ -1,4 +1,4 @@
-part of '../pages/change_language_page.dart';
+part of '../change_language_page.dart';
 
 class _FlagContainer extends StatelessWidget {
   const _FlagContainer({

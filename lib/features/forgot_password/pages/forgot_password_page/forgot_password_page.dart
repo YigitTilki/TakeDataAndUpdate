@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:take_data_and_update_project/features/auth/widgets/email_field.dart';
-import 'package:take_data_and_update_project/features/forgot_password/mixins/forgot_password_mixin.dart';
+import 'package:take_data_and_update_project/features/forgot_password/pages/forgot_password_page/forgot_password_mixin.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';

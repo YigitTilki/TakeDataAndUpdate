@@ -14,7 +14,7 @@ import 'package:take_data_and_update_project/product/widgets/containers/custom_h
 import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 import 'package:take_data_and_update_project/product/widgets/text/medium_text.dart';
 
-part '../widgets/theme_changer_container.dart';
+part 'widgets/theme_changer_container.dart';
 
 @RoutePage()
 class ChangeThemePage extends ConsumerWidget {

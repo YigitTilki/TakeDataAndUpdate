@@ -12,7 +12,7 @@ import 'package:take_data_and_update_project/product/util/extensions/build_conte
 import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
 import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 
-part '../widgets/flag_container.dart';
+part 'widgets/flag_container.dart';
 
 @RoutePage()
 class ChangeLanguagePage extends StatelessWidget {
