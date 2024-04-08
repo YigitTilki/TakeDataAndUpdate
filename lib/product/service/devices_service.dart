@@ -74,25 +74,18 @@ class DeviceService {
     }
   }
 
-  Future<List<DataModel>> getDeviceData(String deviceId) async {
+  Stream<List<DataModel>> streamDeviceData(String deviceId, String dateTime) {
     try {
-      final querySnapshot = await devicesCollection
-          .doc(deviceId)
-          .collection(MyDateTime().getDate())
-          .get();
-      final dataList = <DataModel>[];
-
-      for (final doc in querySnapshot.docs) {
-        final data = DataModel.fromJson(doc.data());
-        dataList.add(data);
-      }
-
-      logger.d(dataList);
-
-      return dataList;
+      final query =
+          devicesCollection.doc(deviceId).collection(dateTime).snapshots();
+      return query.map(
+        (querySnapshot) => querySnapshot.docs
+            .map((doc) => DataModel.fromJson(doc.data()))
+            .toList(),
+      );
     } catch (error) {
-      logger.d('Error during getDevices : $error');
-      return [];
+      logger.d('Error during streamDeviceData : $error');
+      return Stream.value([]); // Hata durumunda boş bir stream döndür
     }
   }
 

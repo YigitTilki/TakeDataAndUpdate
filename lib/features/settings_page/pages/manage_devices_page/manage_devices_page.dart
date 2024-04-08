@@ -44,7 +44,7 @@ class _ManageDevicesPageState extends ConsumerState<ManageDevicesPage>
         body: SafeArea(
           child: Column(
             children: [
-              AppSpacer.vertical.space5,
+              AppSpacer.vertical.space10,
               const _Header(),
               AppSpacer.vertical.space10,
               Expanded(

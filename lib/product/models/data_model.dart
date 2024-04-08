@@ -9,18 +9,18 @@ class DataModel extends Equatable {
   factory DataModel.fromJson(Map<String, dynamic> json) {
     return DataModel(
       hour: json['hour'] as String?,
-      temp: json['temp'] as String?,
+      temp: json['temp'] as int?,
     );
   }
   final String? hour;
-  final String? temp;
+  final int? temp;
 
   @override
   List<Object?> get props => [hour, temp];
 
   DataModel copyWith({
     String? hour,
-    String? temp,
+    int? temp,
   }) {
     return DataModel(
       hour: hour ?? this.hour,

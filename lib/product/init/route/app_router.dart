@@ -18,7 +18,6 @@ import 'package:take_data_and_update_project/features/settings_page/pages/manage
 import 'package:take_data_and_update_project/features/settings_page/settings_page.dart';
 import 'package:take_data_and_update_project/features/splash_page/splash_page.dart';
 import 'package:take_data_and_update_project/features/users_page/users_page.dart';
-import 'package:take_data_and_update_project/product/models/data_model.dart';
 import 'package:take_data_and_update_project/product/models/device_model.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 
