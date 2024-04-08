@@ -3,6 +3,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:take_data_and_update_project/features/auth/login_page/login_page.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
@@ -14,7 +15,7 @@ import 'package:take_data_and_update_project/product/util/wifi_connector.dart';
 mixin LoginPageMixin on ConsumerState<LoginPage> {
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
-  GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -39,8 +40,8 @@ mixin LoginPageMixin on ConsumerState<LoginPage> {
 
     if (isAdmin) {
       await context.router.push(const AdminRoute());
-    } else if (!formKeyLogin.currentState!.validate()) {
-      debugPrint('Olmadı');
+    } else if (!formKey.currentState!.validate()) {
+      Logger().d('Login Page Validate Error');
     } else {
       await AuthRepository().signInUser(
         userModel: user,

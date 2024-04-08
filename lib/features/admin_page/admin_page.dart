@@ -6,11 +6,14 @@ import 'package:take_data_and_update_project/product/init/languages/locale_keys.
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/util/asset/assets.gen.dart';
 import 'package:take_data_and_update_project/product/util/extensions/build_context_extension.dart';
+import 'package:take_data_and_update_project/product/util/show_dialog.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/home_container.dart';
 import 'package:take_data_and_update_project/product/widgets/pop_scope.dart';
+import 'package:take_data_and_update_project/product/widgets/pop_ups/go_login_page.dart';
 import 'package:take_data_and_update_project/product/widgets/text/large_text.dart';
 
+part 'widgets/devices_container.dart';
 part 'widgets/users_container.dart';
 
 @RoutePage()
@@ -23,36 +26,15 @@ class AdminPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: context.secondaryColor,
         body: SafeArea(
-          child: Center(
-            child: SizedBox(
-              width: 340.w,
-              height: 600.h,
-              child: Column(
-                children: [
-                  const _Header(),
-                  AppSpacer.vertical.space20,
-                  const _UsersContainer(),
-                  AppSpacer.vertical.space20,
-                  GestureDetector(
-                    onTap: () {
-                      context.router.push(const DevicesRoute());
-                    },
-                    child: HomeContainer(
-                      width: 180,
-                      height: 140,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Assets.icons.manageDeviceIcon.image(width: 80.w),
-                          AppSpacer.vertical.space20,
-                          const LargeText(value: LocaleKeys.usersPage_devices),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          child: Column(
+            children: [
+              AppSpacer.vertical.space10,
+              const _Header(),
+              AppSpacer.vertical.space20,
+              const _UsersContainer(),
+              AppSpacer.vertical.space20,
+              const _DevicesContainer(),
+            ],
           ),
         ),
       ),
@@ -73,7 +55,7 @@ class _Header extends StatelessWidget {
       ),
       iconButton: IconButton(
         onPressed: () {
-          context.router.push(const LoginRoute());
+          show(context, const GoLoginPagePopUp());
         },
         icon: const Icon(Icons.logout),
       ),

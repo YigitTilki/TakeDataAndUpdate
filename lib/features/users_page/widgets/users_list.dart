@@ -24,7 +24,7 @@ class _UsersList extends ConsumerWidget {
           ref: ref,
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => Assets.lottie.loading.lottie(height: 50.h),
       error: (error, stack) => Text('Error: $error'),
     );
   }

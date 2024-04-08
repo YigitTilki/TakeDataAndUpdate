@@ -18,6 +18,8 @@ import 'package:take_data_and_update_project/product/util/show_dialog.dart';
 import 'package:take_data_and_update_project/product/widgets/containers/custom_header.dart';
 import 'package:take_data_and_update_project/product/widgets/refresh_indicator.dart';
 
+part 'widgets/user_device_list.dart';
+
 @RoutePage()
 class ManageDevicesPage extends ConsumerStatefulWidget {
   const ManageDevicesPage({required this.userModel, super.key});
@@ -30,15 +32,10 @@ class ManageDevicesPage extends ConsumerStatefulWidget {
 
 class _ManageDevicesPageState extends ConsumerState<ManageDevicesPage>
     with ManageDevicesMixin {
-  final TextEditingController updateDeviceNameController =
-      TextEditingController();
-  @override
   @override
   Widget build(BuildContext context) {
     final deviceList =
         ref.watch(userDeviceListProvider(widget.userModel.id.toString()));
-
-    const iconSize = 25;
 
     return MyRefreshIndicator(
       child: Scaffold(
@@ -53,74 +50,9 @@ class _ManageDevicesPageState extends ConsumerState<ManageDevicesPage>
               Expanded(
                 child: deviceList.when(
                   data: (devices) {
-                    return ListView.builder(
-                      itemCount: devices.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return FutureBuilder<DeviceModel?>(
-                          future: DeviceService().getDevice(devices[index]),
-                          builder: (
-                            BuildContext context,
-                            AsyncSnapshot<DeviceModel?> snapshot,
-                          ) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            } else if (snapshot.hasError) {
-                              return Text(
-                                'Error: ${snapshot.error}',
-                              );
-                            } else {
-                              final deviceModel = snapshot.data;
-                              return Padding(
-                                padding: ProjectPadding.symHNormal() +
-                                    ProjectPadding.symVXSmall(),
-                                child: Container(
-                                  height: 60.h,
-                                  decoration: ShapeDecoration(
-                                    color: context.fourthColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.sp),
-                                      side: BorderSide(
-                                        color: context.primaryColor,
-                                        width: 2.sp,
-                                      ),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: ListTile(
-                                      onTap: () {
-                                        show(
-                                          context,
-                                          UserDeviceCredentialsPopUp(
-                                            deviceModel: deviceModel,
-                                          ),
-                                        );
-                                      },
-                                      leading:
-                                          Assets.icons.manageDeviceIcon.image(
-                                        width: iconSize.w,
-                                        height: iconSize.h,
-                                      ),
-                                      title: Text(
-                                        deviceModel!.deviceName!,
-                                      ),
-                                      subtitle: const Text('Coni'),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                          },
-                        );
-                      },
-                    );
+                    return _DevicesList(devices: devices);
                   },
-                  loading: () => Scaffold(
-                    backgroundColor: context.secondaryColor,
-                    body: const Center(child: CircularProgressIndicator()),
-                  ),
+                  loading: () => Assets.lottie.loading.lottie(height: 50.h),
                   error: (error, stackTrace) => Text('Error: $error'),
                 ),
               ),
@@ -135,7 +67,6 @@ class _ManageDevicesPageState extends ConsumerState<ManageDevicesPage>
 class _FloatingActionButton extends StatelessWidget {
   const _FloatingActionButton({
     required this.widget,
-    super.key,
   });
 
   final ManageDevicesPage widget;

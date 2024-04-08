@@ -140,12 +140,16 @@ class $AssetsImagesGen {
 class $AssetsLottieGen {
   const $AssetsLottieGen();
 
+  /// File path: assets/lottie/loading.json
+  LottieGenImage get loading =>
+      const LottieGenImage('assets/lottie/loading.json');
+
   /// File path: assets/lottie/splashCat.json
   LottieGenImage get splashCat =>
       const LottieGenImage('assets/lottie/splashCat.json');
 
   /// List of all assets
-  List<LottieGenImage> get values => [splashCat];
+  List<LottieGenImage> get values => [loading, splashCat];
 }
 
 class $AssetsTranslationsGen {

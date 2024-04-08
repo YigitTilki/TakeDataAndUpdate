@@ -1,7 +1,7 @@
 part of '../admin_page.dart';
 
-class _UsersContainer extends StatelessWidget {
-  const _UsersContainer();
+class _DevicesContainer extends StatelessWidget {
+  const _DevicesContainer();
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class _UsersContainer extends StatelessWidget {
     const gestureContainerHeight = 140;
     return GestureDetector(
       onTap: () {
-        context.router.push(const UsersRoute());
+        context.router.push(const DevicesRoute());
       },
       child: HomeContainer(
         width: gestureContainerWidth,
@@ -18,12 +18,9 @@ class _UsersContainer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Assets.icons.adminUsersIcon.image(
-              width: iconSize.w,
-              height: iconSize.h,
-            ),
-            AppSpacer.horizontal.space20,
-            const LargeText(value: LocaleKeys.adminPage_users),
+            Assets.icons.manageDeviceIcon.image(width: iconSize.w),
+            AppSpacer.vertical.space20,
+            const LargeText(value: LocaleKeys.usersPage_devices),
           ],
         ),
       ),

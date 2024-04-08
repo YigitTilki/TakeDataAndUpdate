@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:take_data_and_update_project/product/enums/firebase_enums.dart';
+import 'package:take_data_and_update_project/product/models/data_model.dart';
 import 'package:take_data_and_update_project/product/models/device_model.dart';
 import 'package:take_data_and_update_project/product/util/date_time.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
@@ -67,6 +68,28 @@ class DeviceService {
       }
 
       return deviceList;
+    } catch (error) {
+      logger.d('Error during getDevices : $error');
+      return [];
+    }
+  }
+
+  Future<List<DataModel>> getDeviceData(String deviceId) async {
+    try {
+      final querySnapshot = await devicesCollection
+          .doc(deviceId)
+          .collection(MyDateTime().getDate())
+          .get();
+      final dataList = <DataModel>[];
+
+      for (final doc in querySnapshot.docs) {
+        final data = DataModel.fromJson(doc.data());
+        dataList.add(data);
+      }
+
+      logger.d(dataList);
+
+      return dataList;
     } catch (error) {
       logger.d('Error during getDevices : $error');
       return [];

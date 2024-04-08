@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/product/constants/app_spacer.dart';
 import 'package:take_data_and_update_project/product/constants/project_padding.dart';
+import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/models/device_model.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
 import 'package:take_data_and_update_project/product/providers/device_list_provider.dart';
@@ -48,8 +49,8 @@ class MyDevicesPage extends ConsumerWidget {
                           final deviceModel = snapshot.data;
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
+                            return Center(
+                              child: Assets.lottie.loading.lottie(height: 50.h),
                             );
                           } else if (snapshot.hasError) {
                             return Text(
@@ -57,32 +58,41 @@ class MyDevicesPage extends ConsumerWidget {
                             );
                           } else {
                             return Padding(
-                              padding: const EdgeInsets.all(8),
+                              padding: ProjectPadding.symHXXSmall() +
+                                  ProjectPadding.symVXSmall(),
                               child: Container(
+                                padding: ProjectPadding.symVLarge(),
                                 decoration:
                                     Decorations.borderContainerDecoration(
                                   context.fourthColor,
                                   context.primaryColor,
                                 ),
-                                padding: ProjectPadding.allLarge(),
-                                child: Row(
-                                  children: [
-                                    if (deviceModel!.type == 'Temperature')
-                                      Assets.icons.temperatureIcon
-                                          .image(width: 80.w)
-                                    else if (deviceModel.type == 'Humidity')
-                                      Assets.icons.humidityIcon
-                                          .image(width: 80.w)
-                                    else
-                                      Assets.icons.humidityTemperatureIcon
-                                          .image(width: 80.w),
-                                    AppSpacer.horizontal.space15,
-                                    Text(
+                                child: Center(
+                                  child: ListTile(
+                                    onTap: () async {
+                                      await context.router.push(
+                                        ChosenDeviceRoute(
+                                          deviceModel: deviceModel,
+                                        ),
+                                      );
+                                    },
+                                    leading: deviceModel!.type == 'Temperature'
+                                        ? Assets.icons.temperatureIcon.image()
+                                        : deviceModel.type == 'Humidity'
+                                            ? Assets.icons.humidityIcon.image()
+                                            : Assets
+                                                .icons.humidityTemperatureIcon
+                                                .image(),
+                                    title: Text(
                                       deviceModel.deviceName.toString(),
-                                      style: context.displaySmall,
+                                      style: context.headlineLarge,
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                  ],
+                                    trailing: Text(
+                                      deviceModel.type.toString(),
+                                      style: context.titleSmall,
+                                    ),
+                                  ),
                                 ),
                               ),
                             );
@@ -93,7 +103,7 @@ class MyDevicesPage extends ConsumerWidget {
                   ),
                 );
               },
-              loading: () => const Center(child: CircularProgressIndicator()),
+              loading: () => Assets.lottie.loading.lottie(height: 50.h),
               error: (error, stackTrace) => Text('Error: $error'),
             ),
           ],

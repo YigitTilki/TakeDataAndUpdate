@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:take_data_and_update_project/product/base/base_app_theme.dart';
 import 'package:take_data_and_update_project/product/util/asset/fonts.gen.dart';
+import 'package:take_data_and_update_project/product/widgets/decorations.dart';
 
 class BlueTheme implements CustomAppTheme {
   //Dark Theme Colors
@@ -228,9 +229,6 @@ class BlueTheme implements CustomAppTheme {
 
   @override
   DialogTheme get dialogTheme => DialogTheme(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.sp),
-          side: BorderSide(width: 4.w, color: fourthColor),
-        ),
+        shape: Decorations.popUpDecoration(fourthColor),
       );
 }

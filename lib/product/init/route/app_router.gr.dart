@@ -33,6 +33,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ChangeThemePage(),
       );
     },
+    ChosenDeviceRoute.name: (routeData) {
+      final args = routeData.argsAs<ChosenDeviceRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ChosenDevicePage(
+          args.deviceModel,
+          key: args.key,
+        ),
+      );
+    },
     DevicesRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -194,6 +204,44 @@ class ChangeThemeRoute extends PageRouteInfo<void> {
   static const String name = 'ChangeThemeRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ChosenDevicePage]
+class ChosenDeviceRoute extends PageRouteInfo<ChosenDeviceRouteArgs> {
+  ChosenDeviceRoute({
+    required DeviceModel deviceModel,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ChosenDeviceRoute.name,
+          args: ChosenDeviceRouteArgs(
+            deviceModel: deviceModel,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ChosenDeviceRoute';
+
+  static const PageInfo<ChosenDeviceRouteArgs> page =
+      PageInfo<ChosenDeviceRouteArgs>(name);
+}
+
+class ChosenDeviceRouteArgs {
+  const ChosenDeviceRouteArgs({
+    required this.deviceModel,
+    this.key,
+  });
+
+  final DeviceModel deviceModel;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ChosenDeviceRouteArgs{deviceModel: $deviceModel, key: $key}';
+  }
 }
 
 /// generated route for

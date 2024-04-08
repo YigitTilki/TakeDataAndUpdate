@@ -41,7 +41,7 @@ class _LoginPageState extends ConsumerState<LoginPage> with LoginPageMixin {
         backgroundColor: context.secondaryColor,
         body: SafeArea(
           child: Form(
-            key: formKeyLogin,
+            key: formKey,
             child: SingleChildScrollView(
               child: Column(
                 children: [

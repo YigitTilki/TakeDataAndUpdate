@@ -24,7 +24,10 @@ class _RememberMeForgotPasswordState extends State<_RememberMeForgotPassword> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          ///RememberMe Button
           _rememberMe(widget.onChanged, widget.value),
+
+          ///ForgotPassword Button
           AppTextButton(
             text: LocaleKeys.loginPage_forgotPassWord,
             onPressed: () {

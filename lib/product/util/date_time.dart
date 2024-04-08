@@ -9,4 +9,11 @@ class MyDateTime {
     final formattedTime = timeFormatter.format(now);
     return '$formattedDate $formattedTime';
   }
+
+  String getDate() {
+    final dateFormatter = DateFormat('dd-MM-yyyy');
+    final now = DateTime.now();
+    final formattedDate = dateFormatter.format(now);
+    return formattedDate;
+  }
 }

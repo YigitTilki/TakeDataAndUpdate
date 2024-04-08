@@ -53,7 +53,7 @@ class _DevicesList extends ConsumerWidget {
           ),
         );
       },
-      orElse: () => const Center(child: CircularProgressIndicator()),
+      orElse: () => Assets.lottie.loading.lottie(height: 50.h),
     );
   }
 
