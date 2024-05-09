@@ -34,11 +34,11 @@ mixin AddUserDeviceMixin on ConsumerState<AddUserDeviceButton> {
     if (!formKey.currentState!.validate()) {
       return debugPrint('Olmadı');
     } else {
-      await DeviceService().verifyDeviceId(
-        deviceIdController.text,
-        widget.userModel.id!,
-        deviceNameController.text,
-        context,
+      await DeviceService().setDeviceToUser(
+        deviceId: deviceIdController.text,
+        userID: widget.userModel.id!,
+        deviceName: deviceNameController.text,
+        context: context,
       );
       ref
         ..invalidate(userDeviceListProvider)

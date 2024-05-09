@@ -24,6 +24,7 @@ enum FirebaseFields {
   createdAtByUser,
   createdAtByAdmin,
   isActive,
+  hour,
   devices;
 
   String get field => name;
@@ -50,3 +51,4 @@ String get deviceNameField => FirebaseFields.deviceName.field;
 String get createdAtByUserField => FirebaseFields.createdAtByUser.field;
 String get createdAtByAdminField => FirebaseFields.createdAtByAdmin.field;
 String get isActiveField => FirebaseFields.isActive.field;
+String get hourField => FirebaseFields.hour.field;

@@ -20,8 +20,8 @@ mixin UpdateDeviceNamePopUpMixin on ConsumerState<UpdateDeviceNamePopUp> {
   Future<void> elevatedButtonProcess() async {
     scaffoldMessenger(context, 'Device Name Updated');
     await DeviceService().updateDeviceName(
-      widget.deviceModel.id.toString(),
-      updateDeviceNameController.text,
+      deviceId: widget.deviceModel.id.toString(),
+      newDeviceName: updateDeviceNameController.text,
     );
     if (!mounted) return;
     await context.router.pop();

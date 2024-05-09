@@ -76,7 +76,8 @@
         "userAdded": "Kullanıcı Eklendi",
         "emailExist": "E-Posta Kullanılıyor",
         "emailCantBeUsed": "Bu E-Posta Kullanılamaz",
-        "deleted": "Silindi"
+        "deleted": "Silindi",
+        "wrongId": "ID Yanlış"
     },
     "forgotPassword": {
         "sendEmailToResetPassword": "Şifre Sıfırlamak için E-Posta Gönder",
@@ -114,6 +115,9 @@
         "updateDevice": "Cihazı Güncelle",
         "deleteDevice": "Cihazi Sil",
         "getUserCredentials": "Kullanıcı Bilgilerine\nEriş",
-        "unassigned": "Atanmadı"
+        "unassigned": "Atanmadı",
+        "hour": "Saat",
+        "temperature": "Sıcaklık",
+        "humidity": "Nem"
     }
 }

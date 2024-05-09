@@ -1,3 +1,5 @@
+import 'package:logger/logger.dart';
+
 class VersionManager {
   VersionManager({required this.deviceValue, required this.databaseValue});
 
@@ -18,3 +20,5 @@ class VersionManager {
     return deviceNumber < databaseNumber;
   }
 }
+
+final Logger logger = Logger();

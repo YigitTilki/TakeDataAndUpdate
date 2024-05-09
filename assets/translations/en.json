@@ -76,7 +76,8 @@
         "userAdded": "User Added",
         "emailExist": "Email Exist",
         "emailCantBeUsed": "Email Can't be Used",
-        "deleted": "Deleted"
+        "deleted": "Deleted",
+        "wrongId": "Wrong Id"
     },
     "forgotPassword": {
         "sendEmailToResetPassword": "Send Email to Reset Password",
@@ -114,6 +115,9 @@
         "updateDevice": "Update Device",
         "deleteDevice": "Delete Device",
         "getUserCredentials": "Get User Credentials",
-        "unassigned": "Unassigned"
+        "unassigned": "Unassigned",
+        "hour": "Hour",
+        "temperature": "Temp",
+        "humidity": "Humidity"
     }
 }

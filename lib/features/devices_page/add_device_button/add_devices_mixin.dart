@@ -28,7 +28,7 @@ mixin AddDevicesMixin on ConsumerState<AddDeviceButton> {
       await context.router.pop();
     } else {
       await DeviceService().addDevice(
-        DeviceModel(
+        deviceModel: DeviceModel(
           id: deviceIdController.text,
           type: deviceType,
           isActive: false,

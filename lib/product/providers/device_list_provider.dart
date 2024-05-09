@@ -1,18 +1,19 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:take_data_and_update_project/product/models/device_model.dart';
 import 'package:take_data_and_update_project/product/service/devices_service.dart';
+import 'package:take_data_and_update_project/product/util/date_time.dart';
 
 final deviceListProvider = FutureProvider<List<DeviceModel>>((ref) async {
   return DeviceService().getDevices();
 });
 final userDeviceListProvider = FutureProvider.family<List<String>, String>(
   (ref, userId) async {
-    return DeviceService().getUserDevices(userId);
+    return DeviceService().getUserDevices(userId: userId);
   },
 );
 final getDeviceProvider = FutureProvider.family<DeviceModel?, String>(
   (ref, deviceId) async {
-    final deviceModel = await DeviceService().getDevice(deviceId);
+    final deviceModel = await DeviceService().getDevice(deviceId: deviceId);
     return deviceModel;
   },
 );
@@ -21,6 +22,8 @@ final deleteDeviceProvider =
   await DeviceService().deleteDevice(deviceId: deviceId);
   ref.invalidate(deviceListProvider);
 });
+final selectedDateProvider =
+    StateProvider<String>((ref) => MyDateTime().getDate());
 
 final deviceListNotifierProvider =
     StateNotifierProvider<UserListNotifier, AsyncValue<List<DeviceModel>>>(

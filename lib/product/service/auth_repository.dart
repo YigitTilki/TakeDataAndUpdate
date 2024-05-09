@@ -1,16 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:take_data_and_update_project/product/base/base_auth_repository.dart';
 import 'package:take_data_and_update_project/product/enums/firebase_enums.dart';
 import 'package:take_data_and_update_project/product/init/languages/locale_keys.g.dart';
 import 'package:take_data_and_update_project/product/init/route/app_router.dart';
 import 'package:take_data_and_update_project/product/models/user_model.dart';
+import 'package:take_data_and_update_project/product/util/version_manager.dart';
 import 'package:take_data_and_update_project/product/widgets/scaffold_messengers.dart';
 
 class AuthRepository extends BaseAuthRepository {
-  Logger logger = Logger();
-
   @override
   Future<List<UserModel>> getUsers() async {
     try {
@@ -23,8 +21,8 @@ class AuthRepository extends BaseAuthRepository {
       }
 
       return userList;
-    } catch (error) {
-      logger.d('Error during getUsers : $error');
+    } catch (e) {
+      logger.d('Error during getUsers : $e');
       return [];
     }
   }
@@ -35,20 +33,12 @@ class AuthRepository extends BaseAuthRepository {
       final user =
           await usersCollection.where(emailField, isEqualTo: email).get();
       if (user.docs.isNotEmpty) {
-        final userModel = const UserModel().copyWith(
-          firstName: user.docs.first[firstNameField].toString(),
-          lastName: user.docs.first[lastNameField].toString(),
-          password: user.docs.first[passwordField].toString(),
-          email: user.docs.first[emailField].toString(),
-          id: user.docs.first[idField].toString(),
-          devices: (user.docs.first[devicesField] as Iterable<dynamic>?)
-              ?.map((device) => device.toString())
-              .toList(),
-        );
+        //TODO: control
+        final userModel = UserModel.fromJson(user as Map<String, dynamic>);
         return userModel;
       }
-    } catch (exception) {
-      logger.d(exception);
+    } catch (e) {
+      logger.d('Error during getUser : $e');
     }
     return null;
   }
@@ -65,17 +55,12 @@ class AuthRepository extends BaseAuthRepository {
           .get();
 
       if (result.docs.isNotEmpty) {
-        userModel = userModel.copyWith(
-          firstName: result.docs.first[firstNameField].toString(),
-          lastName: result.docs.first[lastNameField].toString(),
-          id: result.docs.first[idField].toString(),
-          devices: (result.docs.first[devicesField] as Iterable<dynamic>?)
-              ?.map((device) => device.toString())
-              .toList(),
-        );
+        final userData = result.docs.first.data()! as Map<String, dynamic>;
+        userModel = UserModel.fromJson(userData);
         if (!context.mounted) return;
 
         await context.router.push(HomeRoute(userModel: userModel));
+        logger.d('Signed In');
       } else {
         if (!context.mounted) return;
 
@@ -84,8 +69,8 @@ class AuthRepository extends BaseAuthRepository {
           LocaleKeys.scaffoldMessages_wrongEmailAndPassword,
         );
       }
-    } catch (error) {
-      logger.d('Error during sign-in: $error');
+    } catch (e) {
+      logger.d('Error during sign-in: $e');
     }
   }
 
@@ -102,13 +87,11 @@ class AuthRepository extends BaseAuthRepository {
 
       if (passwordFetch.docs.isNotEmpty) {
         await usersCollection.doc(userModel.id).set(userMap);
-        logger.d('User Added');
         if (!context.mounted) return;
-
         await context.router.replace(HomeRoute(userModel: userModel));
+        logger.d('Signed Up');
       } else {
         if (!context.mounted) return;
-
         scaffoldMessenger(
           context,
           LocaleKeys.scaffoldMessages_wrongPassword,
@@ -121,11 +104,16 @@ class AuthRepository extends BaseAuthRepository {
 
   @override
   Future<bool> isEmailExists({required String eMail}) async {
-    final query =
-        await usersCollection.where(emailField, isEqualTo: eMail).get();
+    try {
+      final query =
+          await usersCollection.where(emailField, isEqualTo: eMail).get();
 
-    if (query.docs.isNotEmpty) return true;
-    return false;
+      if (query.docs.isNotEmpty) return true;
+      return false;
+    } on Exception catch (e) {
+      logger.d('Error during isEmailExist: $e');
+      return true;
+    }
   }
 
   @override
@@ -141,11 +129,16 @@ class AuthRepository extends BaseAuthRepository {
 
   @override
   Future<bool> isAdmin({required String password}) async {
-    final value =
-        await adminCollection.where(passwordField, isEqualTo: password).get();
-    if (value.docs.isNotEmpty) {
-      return true;
-    } else {
+    try {
+      final value =
+          await adminCollection.where(passwordField, isEqualTo: password).get();
+      if (value.docs.isNotEmpty) {
+        return true;
+      } else {
+        return false;
+      }
+    } on Exception catch (e) {
+      logger.d('Errors  in isAdmin : $e');
       return false;
     }
   }
@@ -159,7 +152,7 @@ class AuthRepository extends BaseAuthRepository {
       await usersCollection.doc(userModel.id).update(userModel.toMap());
       logger.d('User Updated');
     } catch (e) {
-      logger.d('Error : $e');
+      logger.d('Error during updateUser : $e');
     }
   }
 
@@ -168,20 +161,12 @@ class AuthRepository extends BaseAuthRepository {
     try {
       final user = await usersCollection.where(idField, isEqualTo: id).get();
       if (user.docs.isNotEmpty) {
-        final userModel = const UserModel().copyWith(
-          firstName: user.docs.first[firstNameField].toString(),
-          lastName: user.docs.first[lastNameField].toString(),
-          password: user.docs.first[passwordField].toString(),
-          email: user.docs.first[emailField].toString(),
-          id: user.docs.first[idField].toString(),
-          devices: (user.docs.first[devicesField] as Iterable<dynamic>?)
-              ?.map((device) => device.toString())
-              .toList(),
-        );
+        //TODO: control
+        final userModel = UserModel.fromJson(user as Map<String, dynamic>);
         return userModel;
       }
-    } catch (exception) {
-      logger.d(exception);
+    } catch (e) {
+      logger.d('Error during getUserWithId:  $e');
     }
     return null;
   }

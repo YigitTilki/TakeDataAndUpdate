@@ -11,7 +11,7 @@ class MyDateTime {
   }
 
   String getDate() {
-    final dateFormatter = DateFormat('dd-MM-yyyy');
+    final dateFormatter = DateFormat('dd.MM.yyyy');
     final now = DateTime.now();
     final formattedDate = dateFormatter.format(now);
     return formattedDate;

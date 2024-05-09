@@ -41,7 +41,8 @@ class MyDevicesPage extends ConsumerWidget {
                     itemCount: devices.length,
                     itemBuilder: (BuildContext context, int index) {
                       return FutureBuilder(
-                        future: DeviceService().getDevice(devices[index]),
+                        future:
+                            DeviceService().getDevice(deviceId: devices[index]),
                         builder: (
                           BuildContext context,
                           AsyncSnapshot<DeviceModel?> snapshot,
