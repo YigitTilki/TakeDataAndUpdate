@@ -5,7 +5,7 @@ class _DevicesContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const iconSize = 80;
+    const iconSize = 60;
     const gestureContainerWidth = 180;
     const gestureContainerHeight = 140;
     return GestureDetector(

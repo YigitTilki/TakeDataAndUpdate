@@ -89,7 +89,7 @@ class _MainContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 230.w,
-      height: 50.h,
+      height: 55.h,
       decoration: Decorations.borderContainerDecoration(
         context.primaryColor,
         context.fourthColor,

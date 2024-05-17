@@ -31,7 +31,6 @@ class _DevicesList extends StatelessWidget {
                 padding:
                     ProjectPadding.symHNormal() + ProjectPadding.symVXSmall(),
                 child: Container(
-                  height: 60.h,
                   decoration: ShapeDecoration(
                     color: context.fourthColor,
                     shape: RoundedRectangleBorder(

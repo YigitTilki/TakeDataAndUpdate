@@ -21,7 +21,6 @@ class _DevicesList extends ConsumerWidget {
                 padding:
                     ProjectPadding.symHXXSmall() + ProjectPadding.symVXSmall(),
                 child: Container(
-                  height: 60.h,
                   decoration: Decorations.borderContainerDecoration(
                     context.fourthColor,
                     context.primaryColor,

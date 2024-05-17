@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:take_data_and_update_project/features/admin_page/admin_page.dart';
+import 'package:take_data_and_update_project/features/alert_box_page/alert_box_page.dart';
 import 'package:take_data_and_update_project/features/auth/login_page/login_page.dart';
 import 'package:take_data_and_update_project/features/auth/register_page/register_page.dart';
 import 'package:take_data_and_update_project/features/auth/register_page/verify_email_page.dart';
@@ -45,5 +46,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: DevicesRoute.page),
         AutoRoute(page: MyDevicesRoute.page),
         AutoRoute(page: ChosenDeviceRoute.page),
+        AutoRoute(page: AlertBoxRoute.page),
       ];
 }

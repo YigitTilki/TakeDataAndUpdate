@@ -30,11 +30,11 @@ class AuthRepository extends BaseAuthRepository {
   @override
   Future<UserModel?> getUser({required String email}) async {
     try {
-      final user =
+      final userQuery =
           await usersCollection.where(emailField, isEqualTo: email).get();
-      if (user.docs.isNotEmpty) {
-        //TODO: control
-        final userModel = UserModel.fromJson(user as Map<String, dynamic>);
+      if (userQuery.docs.isNotEmpty) {
+        final userData = userQuery.docs.first.data()! as Map<String, dynamic>;
+        final userModel = UserModel.fromJson(userData);
         return userModel;
       }
     } catch (e) {
@@ -161,8 +161,8 @@ class AuthRepository extends BaseAuthRepository {
     try {
       final user = await usersCollection.where(idField, isEqualTo: id).get();
       if (user.docs.isNotEmpty) {
-        //TODO: control
-        final userModel = UserModel.fromJson(user as Map<String, dynamic>);
+        final userData = user.docs.first.data()! as Map<String, dynamic>;
+        final userModel = UserModel.fromJson(userData);
         return userModel;
       }
     } catch (e) {

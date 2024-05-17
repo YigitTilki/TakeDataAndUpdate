@@ -68,30 +68,27 @@ class _UserList extends StatelessWidget {
           return Padding(
             padding: ProjectPadding.symHXXSmall() + ProjectPadding.symVXSmall(),
             child: Container(
-              height: 60.h,
               decoration: Decorations.borderContainerDecoration(
                 context.fourthColor,
                 context.primaryColor,
               ),
-              child: Center(
-                child: ListTile(
-                  onTap: () {
-                    show(
-                      context,
-                      _UserListPopUp(
-                        userModel: userModel,
-                        ref: ref,
-                      ),
-                    );
-                  },
-                  leading: Assets.icons.usersIcon.image(
-                    width: iconSize.w,
-                    height: iconSize.h,
-                    color: context.primaryColor,
-                  ),
-                  title: Text('${userModel.firstName} ${userModel.lastName}'),
-                  subtitle: Text(userModel.email ?? ''),
+              child: ListTile(
+                onTap: () {
+                  show(
+                    context,
+                    _UserListPopUp(
+                      userModel: userModel,
+                      ref: ref,
+                    ),
+                  );
+                },
+                leading: Assets.icons.usersIcon.image(
+                  width: iconSize.w,
+                  height: iconSize.h,
+                  color: context.primaryColor,
                 ),
+                title: Text('${userModel.firstName} ${userModel.lastName}'),
+                subtitle: Text(userModel.email ?? ''),
               ),
             ),
           );

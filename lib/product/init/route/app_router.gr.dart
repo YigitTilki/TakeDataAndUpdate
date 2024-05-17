@@ -21,6 +21,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AdminPage(),
       );
     },
+    AlertBoxRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AlertBoxPage(),
+      );
+    },
     ChangeLanguageRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -174,6 +180,20 @@ class AdminRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AdminRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AlertBoxPage]
+class AlertBoxRoute extends PageRouteInfo<void> {
+  const AlertBoxRoute({List<PageRouteInfo>? children})
+      : super(
+          AlertBoxRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AlertBoxRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
