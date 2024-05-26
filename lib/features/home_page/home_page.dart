@@ -11,7 +11,6 @@ import 'package:take_data_and_update_project/product/widgets/containers/home_con
 import 'package:take_data_and_update_project/product/widgets/pop_scope.dart';
 import 'package:take_data_and_update_project/product/widgets/text/large_text.dart';
 
-part 'widgets/alert_box.dart';
 part 'widgets/my_devices.dart';
 part 'widgets/rate_us.dart';
 part 'widgets/settings.dart';
@@ -34,40 +33,37 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: context.secondaryColor,
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppSpacer.vertical.space30,
-              _UserInfoContainer(
-                bigContainerWidth: bigContainerWidth,
-                smallContainerHeight: smallContainerHeight,
-                userModel: userModel,
-              ),
-              AppSpacer.vertical.space30,
-              _MyDevices(
-                bigContainerWidth: bigContainerWidth,
-                bigContainerHeight: bigContainerHeight,
-                userModel: userModel,
-              ),
-              AppSpacer.vertical.space30,
-              const _AlertBox(
-                bigContainerWidth: bigContainerWidth,
-                smallContainerHeight: smallContainerHeight,
-              ),
-              AppSpacer.vertical.space30,
-              _Settings(
-                userModel: userModel,
-                mediumContainerWidth: mediumContainerWidth,
-                smallContainerHeight: smallContainerHeight,
-              ),
-              AppSpacer.vertical.space30,
-              const _RateUs(
-                smallContainerWidth: smallContainerWidth,
-                smallContainerHeight: smallContainerHeight,
-              ),
-              AppSpacer.vertical.space30,
-            ],
+        body: SafeArea(
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppSpacer.vertical.space10,
+                _UserInfoContainer(
+                  bigContainerWidth: bigContainerWidth,
+                  smallContainerHeight: smallContainerHeight,
+                  userModel: userModel,
+                ),
+                AppSpacer.vertical.space30,
+                _MyDevices(
+                  bigContainerWidth: bigContainerWidth,
+                  bigContainerHeight: bigContainerHeight,
+                  userModel: userModel,
+                ),
+                AppSpacer.vertical.space30,
+                _Settings(
+                  userModel: userModel,
+                  mediumContainerWidth: mediumContainerWidth,
+                  smallContainerHeight: smallContainerHeight,
+                ),
+                AppSpacer.vertical.space30,
+                const _RateUs(
+                  smallContainerWidth: smallContainerWidth,
+                  smallContainerHeight: smallContainerHeight,
+                ),
+                AppSpacer.vertical.space30,
+              ],
+            ),
           ),
         ),
       ),

@@ -38,18 +38,12 @@ class SettingsPage extends StatelessWidget {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                _ChangeTheme(),
                 _ChangeLanguage(),
-                _NotificationSettings(),
               ],
             ),
             AppSpacer.vertical.space20,
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _ChangeTheme(),
-                _LogOut(),
-              ],
-            ),
+            const _LogOut(),
           ],
         ),
       ),
@@ -96,19 +90,6 @@ class _ChangeTheme extends StatelessWidget {
       },
       title: LocaleKeys.settingsPage_changeTheme,
       asset: Assets.icons.changeThemeIcon,
-    );
-  }
-}
-
-class _NotificationSettings extends StatelessWidget {
-  const _NotificationSettings();
-
-  @override
-  Widget build(BuildContext context) {
-    return SettingsContainerWidget(
-      onPressed: () {},
-      title: LocaleKeys.settingsPage_notificationSettings,
-      asset: Assets.icons.notificationSettingsIcon,
     );
   }
 }
