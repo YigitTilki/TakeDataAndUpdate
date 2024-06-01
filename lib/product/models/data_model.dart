@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 
 class DataModel extends Equatable {
   const DataModel({
+    this.date,
+    this.time,
     this.device_id,
     this.temp1,
     this.humidity,
@@ -13,22 +15,38 @@ class DataModel extends Equatable {
       device_id: json['device_id'] as String?,
       temp1: json['temp1'] as double?,
       humidity: json['humidity'] as int?,
+      date: json['date'] as String?,
+      time: json['time'] as String?,
     );
   }
   final String? device_id;
+  final String? date;
+  final String? time;
   final double? temp1;
   final int? humidity;
 
   @override
-  List<Object?> get props => [device_id, temp1, humidity];
+  List<Object?> get props {
+    return [
+      device_id,
+      date,
+      time,
+      temp1,
+      humidity,
+    ];
+  }
 
   DataModel copyWith({
     String? device_id,
+    String? date,
+    String? time,
     double? temp1,
     int? humidity,
   }) {
     return DataModel(
       device_id: device_id ?? this.device_id,
+      date: date ?? this.date,
+      time: time ?? this.time,
       temp1: temp1 ?? this.temp1,
       humidity: humidity ?? this.humidity,
     );
@@ -39,47 +57,8 @@ class DataModel extends Equatable {
       'device_id': device_id,
       'temp1': temp1,
       'humidity': humidity,
+      'date': date,
+      'time': time,
     };
   }
 }
-/* class DataModel extends Equatable {
-  const DataModel({
-    this.hour,
-    this.temp,
-    this.humidity,
-  });
-
-  factory DataModel.fromJson(Map<String, dynamic> json) {
-    return DataModel(
-      hour: json['hour'] as String?,
-      temp: json['temp'] as int?,
-      humidity: json['humidity'] as int?,
-    );
-  }
-  final String? hour;
-  final int? temp;
-  final int? humidity;
-
-  @override
-  List<Object?> get props => [hour, temp, humidity];
-
-  DataModel copyWith({
-    String? hour,
-    int? temp,
-    int? humidity,
-  }) {
-    return DataModel(
-      hour: hour ?? this.hour,
-      temp: temp ?? this.temp,
-      humidity: humidity ?? this.humidity,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'hour': hour,
-      'temp': temp,
-      'humidity': humidity,
-    };
-  }
-} */

@@ -120,7 +120,7 @@ class _GridView extends StatelessWidget {
                             index,
                           ),
                 subtitle: Text(
-                  '${LocaleKeys.devicesPage_hour.tr()}: ${deviceData![index].device_id}',
+                  '${LocaleKeys.devicesPage_hour.tr()}: ${deviceData![index].time}',
                   style:
                       context.bodyLarge!.copyWith(fontWeight: FontWeight.w300),
                 ),
